@@ -1,3 +1,103 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | KRYONIX</title>
+  <link rel="icon" type="image/png" href="images/icon.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#dc2626">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="KRYONIX Admin">
+  <link rel="apple-touch-icon" href="images/icon-192.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          },
+          colors: {
+            dark: {
+              bg: '#07070a',
+              card: '#0e0e13',
+              card2: '#131318',
+              border: '#1c1c26',
+              hover: '#191920'
+            },
+            red: {
+              accent: '#dc2626',
+              bright: '#ef4444',
+              dim: '#991b1b',
+              glow: 'rgba(220,38,38,.12)',
+              glow2: 'rgba(220,38,38,.06)'
+            },
+            muted: {
+              1: '#a1a1aa',
+              2: '#71717a',
+              3: '#52525b',
+              4: '#3f3f46'
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root{--bg:#07070a;--card:#0e0e13;--border:#1c1c26;--red:#dc2626;--red-bright:#ef4444;--red-glow:rgba(220,38,38,.12);--red-glow2:rgba(220,38,38,.06)}
+    *{scrollbar-width:thin;scrollbar-color:#1c1c26 transparent}
+    body{background:var(--bg);color:#e4e4e7;font-family:'Space Grotesk',sans-serif}
+    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#1c1c26;border-radius:4px}
+    .nav-item{position:relative;transition:all .25s;border-left:3px solid transparent}.nav-item:hover{background:var(--red-glow2);color:#fca5a5}.nav-item.active{background:var(--red-glow);color:var(--red-bright);border-left-color:var(--red)}.nav-item.active .nav-icon{color:var(--red-bright)}
+    .mob-nav{transition:all .2s}.mob-nav.active{background:var(--red-glow);color:var(--red-bright)}
+    .admin-table th{text-align:left;padding:.85rem 1rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:#52525b;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace}
+    .admin-table td{padding:.8rem 1rem;border-bottom:1px solid #131318;font-size:.85rem}.admin-table tr:hover td{background:var(--red-glow2)}.admin-table tr:last-child td{border-bottom:none}
+    .modal-backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(8px)}
+    .toast{position:fixed;bottom:2rem;right:2rem;padding:.9rem 1.4rem;border-radius:10px;font-size:.85rem;font-weight:600;z-index:9999;transform:translateY(120px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1)}.toast.show{transform:translateY(0);opacity:1}
+    .toast.success{background:#14532d;color:#86efac;border:1px solid #22c55e}.toast.error{background:#7f1d1d;color:#fca5a5;border:1px solid #ef4444}
+    .status-badge{font-size:.65rem;padding:3px 9px;border-radius:9999px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
+    .source-badge{font-size:.6rem;padding:2px 7px;border-radius:9999px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:.03em}
+    .source-buyer{background:rgba(220,38,38,.08);color:#fca5a5;border:1px solid rgba(220,38,38,.2)}.source-admin{background:rgba(251,191,36,.08);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
+    .stat-card{position:relative;overflow:hidden;transition:all .3s}.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:0;transition:opacity .3s}.stat-card:hover::before{opacity:1}.stat-card:hover{border-color:rgba(220,38,38,.25);transform:translateY(-2px)}
+    .quick-action{transition:all .25s;cursor:pointer;overflow:hidden;position:relative}.quick-action::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(220,38,38,.05),transparent);opacity:0;transition:opacity .25s}.quick-action:hover::after{opacity:1}.quick-action:hover{border-color:rgba(220,38,38,.3);transform:translateY(-3px);box-shadow:0 8px 25px rgba(220,38,38,.08)}
+    .partner-logo{width:36px;height:36px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,.02);border:1px solid var(--border);padding:4px;flex-shrink:0}
+    .img-preview-bar{background:rgba(220,38,38,.04);border:1px dashed rgba(220,38,38,.25);border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:10px}
+    .img-preview-bar img{height:48px;border-radius:6px;object-fit:cover;border:1px solid var(--border)}
+    .img-btn{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--border);color:#52525b;cursor:pointer;transition:all .15s;flex-shrink:0}.img-btn:hover{background:var(--red-glow);color:var(--red-bright);border-color:rgba(220,38,38,.3)}
+    .qris-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;align-items:center;gap:14px;transition:all .2s}.qris-card:hover{border-color:rgba(220,38,38,.3);background:var(--red-glow2)}.qris-card img{width:64px;height:64px;border-radius:10px;object-fit:contain;background:rgba(255,255,255,.02);border:1px solid var(--border);flex-shrink:0}
+    .qris-cmd-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:8px;font-size:11px;font-family:'JetBrains Mono',monospace;background:var(--red-glow2);border:1px solid rgba(220,38,38,.15);color:#fca5a5;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}.qris-cmd-chip:hover{background:var(--red-glow);border-color:rgba(220,38,38,.4);transform:translateY(-1px)}
+    .drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:30}.drawer-overlay.open{display:block}
+    .drawer-panel{position:fixed;top:0;left:0;bottom:0;width:280px;background:var(--card);border-right:1px solid var(--border);z-index:31;transform:translateX(-100%);transition:transform .3s cubic-bezier(.16,1,.3,1);overflow-y:auto}.drawer-panel.open{transform:translateX(0)}
+    select{background-color:var(--card);color:#e4e4e7}select option{background:#0e0e13;color:#e4e4e7;padding:4px 8px}
+    .dp-form-bar{background:rgba(220,38,38,.04);border-top:1px solid rgba(220,38,38,.2);display:none;animation:fadeUp .2s ease}.dp-form-bar.open{display:block}
+    .dp-form-bar label{display:block;font-size:10px;font-family:'JetBrains Mono',monospace;color:#52525b;margin-bottom:3px;text-transform:uppercase;letter-spacing:.03em}
+    .dp-form-bar input[type="text"],.dp-form-bar input[type="number"]{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:.8rem;color:#e4e4e7;outline:none;transition:border-color .15s}.dp-form-bar input:focus{border-color:var(--red)}
+    .chat-bubble{max-width:75%;animation:fadeUp .25s ease}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes pulse-red{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{box-shadow:0 0 0 8px rgba(220,38,38,0)}}.badge-pulse{animation:pulse-red 2s infinite}
+    .dash-recent-row{transition:all .15s}.dash-recent-row:hover{background:var(--red-glow2)}
+    .glow-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .glow-dot.green{background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.5)}.glow-dot.yellow{background:#eab308;box-shadow:0 0 8px rgba(234,179,8,.5)}.glow-dot.red{background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.5)}.glow-dot.gray{background:#52525b}
+    input[type="text"]:focus,input[type="url"]:focus,input[type="number"]:focus,textarea:focus{border-color:var(--red)!important;outline:none}
+    .linked-badge{display:inline-flex;align-items:center;gap:4px;font-size:.6rem;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-weight:600;background:rgba(220,38,38,.08);color:#fca5a5;border:1px solid rgba(220,38,38,.15)}
+  </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+  <div id="drawerOverlay" class="drawer-overlay" onclick="closeDrawer()"></div>
+  <div id="drawerPanel" class="drawer-panel md:hidden">
+    <div class="h-14 flex items-center justify-between px-4 border-b border-dark-border">
+      <div class="flex items-center gap-2">
+        <img src="https://i.pinimg.com/736x/89/75/5d/89755dd7321afe2c3295a39df24e8309.jpg" alt="" class="w-6 h-6 rounded object-contain">
+        <span class="font-bold text-sm tracking-wide text-red-accent">KRYONIX</span>
+      </div>
+      <button onclick="closeDrawer()" class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-2 hover:text-white transition">
+        <i class="fas fa-times text-sm"></i>
       </button>
     </div>
     <div class="py-4 space-y-1 px-3">
@@ -198,3 +298,1472 @@
             <div class="grid grid-cols-2 gap-4">
               <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Paket</label><input type="text" id="dpPackage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
               <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Harga</label><input type="number" id="dpPrice" required min="1" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
+            </div>
+            <div class="flex items-center gap-2"><input type="checkbox" id="dpVisible" checked class="accent-red-500 w-4 h-4"><label for="dpVisible" class="text-sm text-muted-2 cursor-pointer">Publik</label></div>
+            <div class="flex justify-end gap-3 pt-4">
+              <button type="button" onclick="closeDoneModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button>
+              <button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="qrisModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 modal-backdrop" onclick="closeQrisModal()"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
+      <div class="bg-dark-card border border-dark-border rounded-2xl shadow-2xl p-6 m-4">
+        <h3 id="qrisModalTitle" class="text-xl font-bold text-white mb-6">Tambah QRIS</h3>
+        <form id="qrisForm" onsubmit="handleQrisSubmit(event)">
+          <input type="hidden" id="qrisEditId">
+          <div class="space-y-4">
+            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Perintah</label><input type="text" id="qrisCommand" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-red-accent font-mono text-lg" placeholder="/pay1"><p class="text-[10px] text-muted-4 mt-1">Harus diawali <code class="text-red-accent/60">/</code></p></div>
+            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Label</label><input type="text" id="qrisLabel" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
+            <div>
+              <label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Gambar QRIS</label>
+              <div id="qrisFormPreview" class="hidden mb-3 p-3 rounded-xl bg-dark-bg border border-dark-border"><img id="qrisFormImg" class="max-h-40 mx-auto rounded-lg" alt="QRIS preview"></div>
+              <input type="file" id="qrisFormFile" accept="image/*" class="hidden">
+              <button type="button" onclick="document.getElementById('qrisFormFile').click()" class="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-sm text-muted-2 hover:text-white hover:border-red-accent transition flex items-center justify-center gap-2"><i class="fas fa-upload"></i> Upload</button>
+            </div>
+          </div>
+          <div class="flex justify-end gap-3 pt-4">
+            <button type="button" onclick="closeQrisModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button>
+            <button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="orderDetailPanel" class="hidden fixed inset-0 z-40">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeOrderDetail()"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-full md:max-w-2xl bg-dark-bg border-l border-dark-border flex flex-col shadow-2xl">
+      <div class="flex-shrink-0 border-b border-dark-border p-4 flex items-center justify-between bg-dark-card">
+        <div>
+          <div class="text-[10px] font-mono text-muted-3 tracking-wider">ORDER #<span id="detailOrderId">-</span></div>
+          <div class="font-bold text-base mt-0.5 text-white" id="detailBuyerName">-</div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="showDpForm()" class="h-9 px-3 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 hover:bg-green-500/20 transition text-xs font-semibold gap-1.5"><i class="fas fa-check-circle"></i><span class="hidden sm:inline">Done Pay</span></button>
+          <a id="detailWaLink" href="#" target="_blank" class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400"><i class="fab fa-whatsapp text-lg"></i></a>
+          <button onclick="closeOrderDetail()" class="w-9 h-9 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-2"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <div class="flex-shrink-0 p-4 border-b border-dark-border overflow-y-auto" style="max-height:35vh">
+        <h4 class="text-[10px] font-mono text-muted-3 uppercase tracking-wider mb-3">Rincian</h4>
+        <div class="bg-dark-card border border-dark-border rounded-xl p-4 space-y-3 text-sm">
+          <div class="flex justify-between"><span class="text-muted-3">Produk</span><span class="font-bold text-white" id="detailProduct">-</span></div>
+          <div class="flex justify-between"><span class="text-muted-3">Harga</span><span class="font-mono text-green-400" id="detailPrice">-</span></div>
+          <div class="flex justify-between"><span class="text-muted-3">WhatsApp</span><a id="detailWaText" href="#" target="_blank" class="font-mono text-cyan-400 hover:underline">-</a></div>
+          <div class="flex justify-between"><span class="text-muted-3">Catatan</span><span class="text-muted-1 text-right max-w-[60%]" id="detailNote">-</span></div>
+          <div class="flex justify-between"><span class="text-muted-3">Tanggal</span><span class="font-mono text-muted-2" id="detailDate">-</span></div>
+          <div class="flex justify-between items-center"><span class="text-muted-3">Status</span><select id="detailStatus" onchange="updateOrderStatusFromPanel()" class="text-xs font-mono px-3 py-1 rounded-lg border border-dark-border bg-dark-bg text-white outline-none cursor-pointer"><option value="pending">Pending</option><option value="processing">Processing</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></div>
+        </div>
+      </div>
+      <div class="flex-1 min-h-0 flex flex-col overflow-hidden">
+        <div class="flex-shrink-0 px-4 pt-3 pb-2"><h4 class="text-[10px] font-mono text-muted-3 uppercase tracking-wider"><i class="fas fa-comments mr-1"></i> Chat</h4></div>
+        <div id="chatMessages" class="flex-1 overflow-y-auto px-4 pb-4 space-y-3"><div class="text-center text-muted-3 text-sm py-8">Kosong.</div></div>
+      </div>
+      <div id="qrisQuickBar" class="hidden flex-shrink-0 border-t border-dark-border px-4 py-2 bg-dark-card/80">
+        <div class="flex items-center gap-2 overflow-x-auto" id="qrisQuickBarInner"><span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span></div>
+      </div>
+      <div id="dpFormBar" class="dp-form-bar flex-shrink-0">
+        <div class="px-4 pt-3 pb-1 flex items-center gap-2"><i class="fas fa-check-circle text-green-400 text-sm"></i><span class="text-xs font-bold text-green-400 font-mono">DONE PAYMENT</span><span class="text-[10px] text-muted-4 font-mono ml-1">-&gt; Otomatis terhubung ke order ini</span><button onclick="hideDpForm()" class="ml-auto w-7 h-7 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-3 text-xs"><i class="fas fa-times"></i></button></div>
+        <div class="px-4 pb-3 grid grid-cols-2 gap-3">
+          <div><label>Nick</label><input type="text" id="dpChatBuyer" class="text-sm"></div>
+          <div><label>Produk</label><input type="text" id="dpChatProduct" class="text-sm"></div>
+          <div><label>Paket</label><input type="text" id="dpChatPkg" class="text-sm" placeholder="1 Bulan"></div>
+          <div><label>Harga</label><input type="number" id="dpChatPrice" class="text-sm"></div>
+        </div>
+        <div class="px-4 pb-3 flex items-center gap-3">
+          <label class="flex items-center gap-2 text-xs text-muted-2 cursor-pointer"><input type="checkbox" id="dpChatVisible" checked class="accent-red-500 w-3.5 h-3.5">Publik</label>
+          <button onclick="submitDpFromChat()" class="ml-auto px-4 py-1.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg text-xs transition"><i class="fas fa-check mr-1"></i>Simpan &amp; Link</button>
+        </div>
+      </div>
+      <div class="flex-shrink-0 border-t border-dark-border p-4 bg-dark-card space-y-2">
+        <div id="chatImagePreview" class="hidden img-preview-bar">
+          <img id="chatPreviewImg" src="" alt="Preview">
+          <div class="flex-1 min-w-0"><div class="text-xs text-muted-2 truncate" id="chatPreviewName">-</div></div>
+          <button onclick="clearChatImage()" class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 flex-shrink-0"><i class="fas fa-times text-[10px]"></i></button>
+        </div>
+        <input type="file" id="chatImageInput" accept="image/*" class="hidden">
+        <div class="flex gap-2">
+          <button onclick="document.getElementById('chatImageInput').click()" class="img-btn"><i class="fas fa-image"></i></button>
+          <input type="text" id="chatInput" class="flex-1 bg-dark-bg border border-dark-border rounded-xl px-4 py-2.5 text-white text-sm placeholder-muted-4" placeholder="Ketik pesan atau /command...">
+          <button onclick="sendChat('admin')" class="px-5 py-2.5 bg-red-accent hover:bg-red-bright text-white font-bold rounded-xl transition flex items-center gap-2 text-sm"><i class="fas fa-paper-plane text-xs"></i><span class="hidden sm:inline">Kirim</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imageLightbox" class="hidden fixed inset-0 z-[999] bg-black/95 flex items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
+    <button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white"><i class="fas fa-times"></i></button>
+    <img id="lightboxImg" class="max-w-full max-h-[90vh] rounded-xl object-contain" onclick="event.stopPropagation()" alt="Lightbox">
+  </div>
+  <div id="toast" class="toast"></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import { getDatabase, ref, push, set, update, remove, onValue, get, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
+
+    const fc = {
+      apiKey: "AIzaSyBHPvQ6Bt9f6U3wqDz3CG71HNpcFq3RZRI",
+      authDomain: "kryonix-7c55e.firebaseapp.com",
+      databaseURL: "https://kryonix-7c55e-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "kryonix-7c55e",
+      storageBucket: "kryonix-7c55e.firebasestorage.app",
+      messagingSenderId: "917095112473",
+      appId: "1:917095112473:web:dd4120a14724e6e6a02f88",
+      measurementId: "G-9Y77T2V6H7"
+    };
+
+    const app = initializeApp(fc);
+    const db = getDatabase(app);
+
+    const DI = { hosting: 'https://picsum.photos/seed/kry-hosting/600/400', vps: 'https://picsum.photos/seed/kry-vps/600/400', domain: 'https://picsum.photos/seed/kry-domain/600/400', game: 'https://picsum.photos/seed/kry-game/600/400', dedicated: 'https://picsum.photos/seed/kry-dedi/600/400', other: 'https://picsum.photos/seed/kry-other/600/400' };
+    const CC = { hosting: 'text-green-400', vps: 'text-cyan-400', domain: 'text-purple-400', game: 'text-green-400', dedicated: 'text-cyan-400', other: 'text-purple-400' };
+    const PCI = { infrastructure: 'fa-server', payment: 'fa-credit-card', security: 'fa-shield-alt', cdn: 'fa-bolt', domain: 'fa-globe', game: 'fa-gamepad', other: 'fa-star' };
+    const PCC = { infrastructure: 'text-cyan-400', payment: 'text-green-400', security: 'text-purple-400', cdn: 'text-yellow-400', domain: 'text-blue-400', game: 'text-pink-400', other: 'text-gray-400' };
+    const SS = { pending: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20', processing: 'bg-blue-500/10 text-blue-400 border-blue-500/20', completed: 'bg-green-500/10 text-green-400 border-green-500/20', cancelled: 'bg-red-500/10 text-red-400 border-red-500/20' };
+    const HT = { dashboard: 'Dashboard', products: 'Product Management', orders: 'Order Management', testimoni: 'Moderasi Testimoni', donepayment: 'Done Payment', partners: 'Partner Management', settings: 'General Settings' };
+    const TAB_KEYS = ['dashboard', 'products', 'orders', 'testimoni', 'donepayment', 'partners', 'settings'];
+
+    let toastTimer = null;
+    let imgStore = {};
+    let epc = {};
+    let eptc = {};
+    let edc = {};
+    let aTR = {};
+    let cTF = 'all';
+    let qC = {};
+    let qR = {};
+    let qFD = { image: null };
+    let currentChatOrderId = null;
+    let currentChatImage = null;
+    let DD = { products: {}, orders: {}, partners: {}, testimoni: {}, donePayments: {} };
+
+    function showToast(message, type) {
+      type = type || 'success';
+      if (toastTimer) clearTimeout(toastTimer);
+      const el = document.getElementById('toast');
+      el.textContent = message;
+      el.className = 'toast ' + type + ' show';
+      toastTimer = setTimeout(function () { el.classList.remove('show'); }, 3500);
+    }
+
+    function esc(text) {
+      if (text === null || text === undefined) return '';
+      const div = document.createElement('div');
+      div.textContent = String(text);
+      return div.innerHTML;
+    }
+
+    function escLines(text) {
+      return esc(text).replace(/\n/g, '<br>');
+    }
+
+    function nTs(value) {
+      return typeof value === 'number' ? value : 0;
+    }
+
+    function fTime(ts) {
+      if (typeof ts !== 'number') return '-';
+      const d = new Date(ts);
+      return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) + ' ' + d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function fTimeS(ts) {
+      if (typeof ts !== 'number') return '-';
+      const d = new Date(ts);
+      return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }) + ' ' + d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function formatCurrency(value) {
+      return 'Rp' + (Number(value) || 0).toLocaleString('id-ID');
+    }
+
+    function cleanWa(value) {
+      const digits = String(value || '').replace(/\D/g, '');
+      if (!digits) return '';
+      if (digits.startsWith('62')) return digits;
+      if (digits.startsWith('0')) return '62' + digits.slice(1);
+      if (digits.startsWith('8')) return '62' + digits;
+      return digits;
+    }
+
+    function getWaLink(value) {
+      const clean = cleanWa(value);
+      return clean ? 'https://wa.me/' + clean : '#';
+    }
+
+    function getOrderPrice(order) {
+      const candidates = [order && order.price, order && order.totalPrice, order && order.productPrice, order && order.amount];
+      for (let i = 0; i < candidates.length; i++) {
+        const num = Number(candidates[i]);
+        if (num > 0) return num;
+      }
+      return 0;
+    }
+
+    function getOrderNote(order) {
+      return order && (order.note || order.notes || order.message || order.requirement || order.requirements || order.description || '-');
+    }
+
+    function getMessageEntries(chat) {
+      return Object.keys(chat || {})
+        .map(function (key) { return { id: key, data: chat[key] || {} }; })
+        .sort(function (a, b) { return nTs(a.data.timestamp) - nTs(b.data.timestamp); });
+    }
+
+    function findDonePaymentByOrderId(orderId) {
+      const entries = DD.donePayments || {};
+      for (const id in entries) {
+        if (entries[id] && entries[id].orderId === orderId) {
+          return Object.assign({ id: id }, entries[id]);
+        }
+      }
+      return null;
+    }
+
+    function compressImage(file, maxWidth, quality) {
+      maxWidth = maxWidth || 800;
+      quality = quality || 0.7;
+      return new Promise(function (resolve, reject) {
+        if (!file) { reject('No file'); return; }
+        if (file.size > 8 * 1024 * 1024) { reject('Max 8MB'); return; }
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const img = new Image();
+          img.onload = function () {
+            let width = img.width;
+            let height = img.height;
+            if (width > maxWidth) {
+              height = (maxWidth / width) * height;
+              width = maxWidth;
+            }
+            if (height > 900) {
+              width = (900 / height) * width;
+              height = 900;
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = Math.max(1, Math.round(width));
+            canvas.height = Math.max(1, Math.round(height));
+            canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.onerror = function () { reject('Gagal load gambar'); };
+          img.src = event.target.result;
+        };
+        reader.onerror = function () { reject('Gagal baca file'); };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('dashClock').textContent = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' - ' + now.toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function initHeader() {
+      const name = sessionStorage.getItem('kryonix_admin_name') || sessionStorage.getItem('admin_name') || 'Admin';
+      const role = (sessionStorage.getItem('kryonix_admin_role') || sessionStorage.getItem('admin_role') || 'ADMIN').toUpperCase();
+      document.getElementById('headerName').textContent = name;
+      document.getElementById('headerRole').textContent = role;
+      document.getElementById('headerAvatar').textContent = name.charAt(0).toUpperCase();
+    }
+
+    window.viewImage = function (key) {
+      if (!imgStore[key]) return;
+      document.getElementById('lightboxImg').src = imgStore[key];
+      document.getElementById('imageLightbox').classList.remove('hidden');
+    };
+
+    window.closeLightbox = function () {
+      document.getElementById('imageLightbox').classList.add('hidden');
+    };
+
+    window.openDrawer = function () {
+      document.getElementById('drawerOverlay').classList.add('open');
+      document.getElementById('drawerPanel').classList.add('open');
+    };
+
+    window.closeDrawer = function () {
+      document.getElementById('drawerOverlay').classList.remove('open');
+      document.getElementById('drawerPanel').classList.remove('open');
+    };
+
+    window.switchTab = function (tab) {
+      document.querySelectorAll('.tab-content').forEach(function (el) { el.classList.add('hidden'); });
+      const tabEl = document.getElementById('tab-' + tab);
+      if (tabEl) tabEl.classList.remove('hidden');
+
+      document.querySelectorAll('aside .nav-item').forEach(function (el) { el.classList.remove('active'); });
+      const idx = TAB_KEYS.indexOf(tab);
+      const navItems = document.querySelectorAll('aside .nav-item');
+      if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
+
+      document.querySelectorAll('.mob-nav').forEach(function (el) { el.classList.remove('active'); });
+      const mobItem = document.querySelector('[data-mob="' + tab + '"]');
+      if (mobItem) mobItem.classList.add('active');
+
+      document.getElementById('headerTitle').textContent = HT[tab] || 'Admin';
+      if (tab === 'settings') loadSettings();
+    };
+
+    window.doLogout = function () {
+      sessionStorage.clear();
+      window.location.href = 'login-admin.html';
+    };
+
+    function updateDash() {
+      const products = DD.products || {};
+      const orders = DD.orders || {};
+      const testi = DD.testimoni || {};
+      const donePayments = DD.donePayments || {};
+
+      let totalProducts = 0;
+      let totalStock = 0;
+      Object.keys(products).forEach(function (key) {
+        totalProducts += 1;
+        totalStock += Number(products[key].stock || 0);
+      });
+      document.getElementById('d-stat-products').textContent = totalProducts;
+      document.getElementById('d-stat-stock').textContent = totalStock;
+
+      let totalOrders = 0;
+      let needReply = 0;
+      Object.keys(orders).forEach(function (key) {
+        totalOrders += 1;
+        const order = orders[key] || {};
+        const entries = getMessageEntries(order.chat);
+        const last = entries.length ? entries[entries.length - 1].data : null;
+        if (!last || last.sender === 'buyer') needReply += 1;
+      });
+      document.getElementById('d-stat-orders').textContent = totalOrders;
+      document.getElementById('d-stat-pending').textContent = needReply;
+
+      let revenue = 0;
+      let doneCount = 0;
+      Object.keys(donePayments).forEach(function (key) {
+        revenue += Number(donePayments[key].price || 0);
+        doneCount += 1;
+      });
+      document.getElementById('d-stat-revenue').textContent = formatCurrency(revenue);
+      document.getElementById('d-stat-dpcount').textContent = doneCount;
+
+      let testiTotal = 0;
+      let testiPending = 0;
+      let ratingSum = 0;
+      Object.keys(testi).forEach(function (key) {
+        testiTotal += 1;
+        ratingSum += Number(testi[key].rating || 0);
+        if (testi[key].approved === false) testiPending += 1;
+      });
+      document.getElementById('d-stat-rating').textContent = testiTotal ? (ratingSum / testiTotal).toFixed(1) : '0.0';
+      document.getElementById('d-stat-testicount').textContent = testiTotal;
+      document.getElementById('d-stat-testi-pending').textContent = testiPending;
+
+      const recentOrders = Object.keys(orders)
+        .map(function (key) { return { key: key, value: orders[key] }; })
+        .sort(function (a, b) { return nTs(b.value.createdAt) - nTs(a.value.createdAt); })
+        .slice(0, 5);
+
+      const recentEl = document.getElementById('dashRecentOrders');
+      if (!recentOrders.length) {
+        recentEl.innerHTML = '<div class="px-5 py-8 text-center text-muted-3 text-sm">Belum ada pesanan.</div>';
+      } else {
+        recentEl.innerHTML = '';
+        recentOrders.forEach(function (item) {
+          const order = item.value || {};
+          const stateClass = SS[order.status] || SS.pending;
+          const dot = order.status === 'completed' ? 'green' : order.status === 'cancelled' ? 'red' : order.status === 'processing' ? 'yellow' : 'gray';
+          const row = document.createElement('div');
+          row.className = 'dash-recent-row px-5 py-3 flex items-center gap-4 cursor-pointer';
+          row.setAttribute('data-do', item.key);
+          row.innerHTML =
+            '<div class="glow-dot ' + dot + '"></div>' +
+            '<div class="flex-1 min-w-0">' +
+            '<div class="text-sm font-semibold text-white truncate">' + esc(order.buyerName || '-') + '</div>' +
+            '<div class="text-xs text-muted-3 truncate">' + esc(order.productTitle || '-') + '</div>' +
+            '</div>' +
+            '<span class="status-badge border ' + stateClass + ' flex-shrink-0">' + esc(order.status || 'pending') + '</span>' +
+            '<span class="text-[10px] text-muted-3 font-mono flex-shrink-0 hidden sm:block">' + fTimeS(order.createdAt) + '</span>';
+          recentEl.appendChild(row);
+        });
+      }
+
+      const stockAlertEl = document.getElementById('dashStockAlert');
+      const lowStock = Object.keys(products)
+        .filter(function (key) { return Number(products[key].stock || 0) <= 5; })
+        .map(function (key) { return { key: key, value: products[key] }; })
+        .slice(0, 5);
+      if (!lowStock.length) {
+        stockAlertEl.innerHTML = '<div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-check-circle text-green-500 mr-1"></i>Semua stok aman.</div>';
+      } else {
+        stockAlertEl.innerHTML = '';
+        lowStock.forEach(function (item) {
+          const product = item.value || {};
+          const outOfStock = Number(product.stock || 0) <= 0;
+          const row = document.createElement('div');
+          row.className = 'flex items-center gap-3 py-2';
+          row.innerHTML =
+            '<div class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (CC[product.category] || '') + ' flex-shrink-0"><i class="fas ' + (product.icon || 'fa-box') + ' text-[10px]"></i></div>' +
+            '<div class="flex-1 min-w-0"><div class="text-xs text-white truncate">' + esc(product.title) + '</div></div>' +
+            '<span class="text-xs font-mono font-bold ' + (outOfStock ? 'text-red-400' : 'text-yellow-400') + ' flex-shrink-0">' + (outOfStock ? 'HABIS' : esc(product.stock)) + '</span>';
+          stockAlertEl.appendChild(row);
+        });
+      }
+    }
+
+    function renderQrisQuickBar() {
+      const bar = document.getElementById('qrisQuickBar');
+      const inner = document.getElementById('qrisQuickBarInner');
+      const commands = Object.keys(qC);
+      if (!commands.length) {
+        bar.classList.add('hidden');
+        return;
+      }
+      bar.classList.remove('hidden');
+      inner.innerHTML = '<span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span>';
+      commands.sort().forEach(function (command) {
+        const qris = qC[command];
+        const btn = document.createElement('button');
+        btn.className = 'qris-cmd-chip';
+        btn.textContent = command;
+        btn.setAttribute('data-qs', command);
+        btn.title = qris.label || command;
+        inner.appendChild(btn);
+      });
+    }
+
+    function renderQrisList() {
+      const list = document.getElementById('qrisList');
+      const ids = Object.keys(qR);
+      if (!ids.length) {
+        list.innerHTML = '<div class="text-center py-8 text-muted-3"><i class="fas fa-qrcode text-3xl mb-3 text-muted-4 block"></i><p class="text-sm">Belum ada QRIS.</p></div>';
+        return;
+      }
+      list.innerHTML = '';
+      ids.sort(function (a, b) { return (qR[a].command || '').localeCompare(qR[b].command || ''); });
+      ids.forEach(function (id) {
+        const q = qR[id];
+        const card = document.createElement('div');
+        card.className = 'qris-card';
+        const imageHtml = q.image
+          ? '<img src="' + esc(q.image) + '" alt="' + esc(q.label || q.command || 'QRIS') + '">'
+          : '<div class="w-16 h-16 rounded-lg border border-dark-border flex items-center justify-center text-muted-4 flex-shrink-0"><i class="fas fa-qrcode text-xl"></i></div>';
+        card.innerHTML =
+          imageHtml +
+          '<div class="flex-1 min-w-0">' +
+          '<div class="flex items-center gap-2 mb-0.5">' +
+          '<code class="text-sm font-mono text-red-accent font-bold">' + esc(q.command || '-') + '</code>' +
+          '<span class="text-muted-4">-</span>' +
+          '<span class="text-sm text-muted-1 truncate">' + esc(q.label || '-') + '</span>' +
+          '</div></div>' +
+          '<div class="flex items-center gap-1 flex-shrink-0">' +
+          '<button data-qe="' + id + '" class="text-cyan-400 hover:text-cyan-300 p-2 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button>' +
+          '<button data-qd="' + id + '" class="text-red-400 hover:text-red-300 p-2 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button>' +
+          '</div>';
+        list.appendChild(card);
+      });
+    }
+
+    function loadQris() {
+      onValue(ref(db, 'settings/qris_commands'), function (snap) {
+        const raw = snap.val();
+        qC = {};
+        qR = {};
+        if (raw) {
+          Object.keys(raw).forEach(function (id) {
+            const qris = raw[id];
+            qR[id] = qris;
+            const command = String(qris.command || '').toLowerCase().trim();
+            if (command) qC[command] = qris;
+          });
+        }
+        renderQrisList();
+        renderQrisQuickBar();
+      });
+    }
+
+    async function loadSettings() {
+      try {
+        const snap = await get(ref(db, 'settings/tos'));
+        document.getElementById('tos-input').value = snap.exists() ? String(snap.val()) : '';
+      } catch (error) {
+        showToast('Gagal memuat settings.', 'error');
+      }
+    }
+
+    window.saveSettings = async function () {
+      try {
+        await set(ref(db, 'settings/tos'), document.getElementById('tos-input').value.trim());
+        showToast('Settings disimpan!');
+      } catch (error) {
+        showToast('Gagal simpan settings.', 'error');
+      }
+    };
+
+    window.openQrisModal = function (isEdit, editId, data) {
+      document.getElementById('qrisModal').classList.remove('hidden');
+      document.getElementById('qrisModalTitle').textContent = isEdit ? 'Edit QRIS' : 'Tambah QRIS';
+      document.getElementById('qrisForm').reset();
+      document.getElementById('qrisEditId').value = '';
+      document.getElementById('qrisFormPreview').classList.add('hidden');
+      qFD = { image: null };
+      if (isEdit && data) {
+        document.getElementById('qrisEditId').value = editId || '';
+        document.getElementById('qrisCommand').value = data.command || '';
+        document.getElementById('qrisLabel').value = data.label || '';
+        if (data.image) {
+          qFD.image = data.image;
+          document.getElementById('qrisFormImg').src = data.image;
+          document.getElementById('qrisFormPreview').classList.remove('hidden');
+        }
+      }
+    };
+
+    window.closeQrisModal = function () {
+      document.getElementById('qrisModal').classList.add('hidden');
+    };
+
+    window.deleteQris = async function (id) {
+      if (!confirm('Hapus QRIS ini?')) return;
+      try {
+        await remove(ref(db, 'settings/qris_commands/' + id));
+        showToast('QRIS dihapus.');
+      } catch (error) {
+        showToast('Gagal hapus QRIS.', 'error');
+      }
+    };
+
+    window.handleQrisSubmit = async function (event) {
+      event.preventDefault();
+      const id = document.getElementById('qrisEditId').value;
+      const command = document.getElementById('qrisCommand').value.trim().toLowerCase();
+      const label = document.getElementById('qrisLabel').value.trim();
+      if (!command.startsWith('/')) {
+        showToast('Perintah harus diawali /', 'error');
+        return;
+      }
+      if (!qFD.image && !id) {
+        showToast('Upload gambar QRIS dulu.', 'error');
+        return;
+      }
+      let duplicate = false;
+      Object.keys(qR).forEach(function (qId) {
+        if ((qR[qId].command || '').toLowerCase() === command && qId !== id) duplicate = true;
+      });
+      if (duplicate) {
+        showToast('Perintah QRIS sudah ada.', 'error');
+        return;
+      }
+      try {
+        const data = { command: command, label: label };
+        if (qFD.image) data.image = qFD.image;
+        if (id) {
+          await update(ref(db, 'settings/qris_commands/' + id), data);
+          showToast('QRIS diupdate!');
+        } else {
+          data.createdAt = serverTimestamp();
+          await set(push(ref(db, 'settings/qris_commands')), data);
+          showToast('QRIS ditambahkan!');
+        }
+        closeQrisModal();
+      } catch (error) {
+        showToast('Gagal simpan QRIS.', 'error');
+      }
+    };
+
+    window.quickSendQris = async function (command) {
+      if (!currentChatOrderId) return;
+      const qris = qC[command];
+      if (!qris || !qris.image) return;
+      try {
+        await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), {
+          sender: 'admin',
+          text: 'Pembayaran via ' + (qris.label || command) + '. Scan QRIS berikut:',
+          image: qris.image,
+          timestamp: serverTimestamp()
+        });
+        showToast('QRIS terkirim!');
+      } catch (error) {
+        showToast('Gagal kirim QRIS.', 'error');
+      }
+    };
+
+    window.openProductModal = function (isEdit, data) {
+      document.getElementById('productModal').classList.remove('hidden');
+      document.getElementById('productModalTitle').textContent = isEdit ? 'Edit Product' : 'Add New Product';
+      if (isEdit && data) {
+        document.getElementById('prodId').value = data.id;
+        document.getElementById('prodTitle').value = data.title || '';
+        document.getElementById('prodCat').value = data.category || 'other';
+        document.getElementById('prodPrice').value = data.price || '';
+        document.getElementById('prodStock').value = data.stock || 0;
+        document.getElementById('prodImage').value = data.image || '';
+        document.getElementById('prodDesc').value = data.description || '';
+        document.getElementById('prodFeatures').value = (data.features || []).join(', ');
+        document.getElementById('prodIcon').value = data.icon || '';
+      } else {
+        document.getElementById('productForm').reset();
+        document.getElementById('prodId').value = '';
+      }
+    };
+
+    window.closeProductModal = function () {
+      document.getElementById('productModal').classList.add('hidden');
+    };
+
+    window.handleProductSubmit = async function (event) {
+      event.preventDefault();
+      const id = document.getElementById('prodId').value;
+      const cat = document.getElementById('prodCat').value;
+      const data = {
+        title: document.getElementById('prodTitle').value.trim(),
+        category: cat,
+        price: parseInt(document.getElementById('prodPrice').value, 10) || 0,
+        stock: parseInt(document.getElementById('prodStock').value, 10) || 0,
+        image: document.getElementById('prodImage').value.trim() || DI[cat],
+        description: document.getElementById('prodDesc').value.trim(),
+        features: document.getElementById('prodFeatures').value.split(',').map(function (f) { return f.trim(); }).filter(Boolean),
+        icon: document.getElementById('prodIcon').value.trim() || 'fa-box',
+        color: CC[cat] || 'text-purple-400'
+      };
+      try {
+        if (id) {
+          await update(ref(db, 'products/' + id), data);
+          showToast('Produk diupdate!');
+        } else {
+          data.createdAt = serverTimestamp();
+          await set(push(ref(db, 'products')), data);
+          showToast('Produk ditambahkan!');
+        }
+        closeProductModal();
+      } catch (error) {
+        showToast('Gagal simpan produk.', 'error');
+      }
+    };
+
+    window.deleteProduct = async function (id) {
+      if (!confirm('Hapus produk ini?')) return;
+      try {
+        await remove(ref(db, 'products/' + id));
+        showToast('Produk dihapus.');
+      } catch (error) {
+        showToast('Gagal hapus produk.', 'error');
+      }
+    };
+
+    window.quickStock = async function (id, current, delta) {
+      const next = Number(current || 0) + Number(delta || 0);
+      if (next < 0) return;
+      try {
+        await update(ref(db, 'products/' + id), { stock: next });
+        showToast('Stok -> ' + next);
+      } catch (error) {
+        showToast('Gagal update stok.', 'error');
+      }
+    };
+
+    window.openPartnerModal = function (isEdit, data) {
+      document.getElementById('partnerModal').classList.remove('hidden');
+      document.getElementById('partnerModalTitle').textContent = isEdit ? 'Edit Partner' : 'Add Partner';
+      if (isEdit && data) {
+        document.getElementById('ptId').value = data.id;
+        document.getElementById('ptName').value = data.name || '';
+        document.getElementById('ptLogo').value = data.logo || '';
+        document.getElementById('ptCat').value = data.category || 'other';
+        document.getElementById('ptIcon').value = data.icon || '';
+        document.getElementById('ptWebsite').value = data.website || '';
+        document.getElementById('ptDesc').value = data.description || '';
+      } else {
+        document.getElementById('partnerForm').reset();
+        document.getElementById('ptId').value = '';
+      }
+    };
+
+    window.closePartnerModal = function () {
+      document.getElementById('partnerModal').classList.add('hidden');
+    };
+
+    window.handlePartnerSubmit = async function (event) {
+      event.preventDefault();
+      const id = document.getElementById('ptId').value;
+      const cat = document.getElementById('ptCat').value;
+      const data = {
+        name: document.getElementById('ptName').value.trim(),
+        logo: document.getElementById('ptLogo').value.trim(),
+        category: cat,
+        icon: document.getElementById('ptIcon').value.trim() || PCI[cat] || 'fa-star',
+        website: document.getElementById('ptWebsite').value.trim(),
+        description: document.getElementById('ptDesc').value.trim()
+      };
+      try {
+        if (id) {
+          await update(ref(db, 'partners/' + id), data);
+          showToast('Partner diupdate!');
+        } else {
+          data.createdAt = serverTimestamp();
+          await set(push(ref(db, 'partners')), data);
+          showToast('Partner ditambahkan!');
+        }
+        closePartnerModal();
+      } catch (error) {
+        showToast('Gagal simpan partner.', 'error');
+      }
+    };
+
+    window.deletePartner = async function (id) {
+      if (!confirm('Hapus partner ini?')) return;
+      try {
+        await remove(ref(db, 'partners/' + id));
+        showToast('Partner dihapus.');
+      } catch (error) {
+        showToast('Gagal hapus partner.', 'error');
+      }
+    };
+
+    window.filterTestimoni = function (filter) {
+      cTF = filter;
+      document.querySelectorAll('.testi-filter').forEach(function (el) {
+        el.className = 'testi-filter px-4 py-2 rounded-lg text-xs font-semibold ' + (el.getAttribute('data-tf') === filter ? 'bg-red-accent/10 border border-red-accent/20 text-red-accent' : 'bg-dark-card border border-dark-border text-muted-2') + ' transition';
+      });
+      renderTesti();
+    };
+
+    function renderTesti() {
+      const tbody = document.getElementById('testi-tbody');
+      tbody.innerHTML = '';
+      const raw = aTR || {};
+      if (!Object.keys(raw).length) {
+        tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Belum ada testimoni.</td></tr>';
+        return;
+      }
+      let items = Object.keys(raw)
+        .map(function (key) { return { key: key, value: raw[key] }; })
+        .sort(function (a, b) { return nTs(b.value.createdAt) - nTs(a.value.createdAt); });
+
+      if (cTF === 'pending') items = items.filter(function (item) { return item.value.approved === false; });
+      if (cTF === 'approved') items = items.filter(function (item) { return item.value.approved !== false; });
+
+      if (!items.length) {
+        tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Tidak ada data.</td></tr>';
+        return;
+      }
+
+      items.forEach(function (item) {
+        const testi = item.value || {};
+        const approved = testi.approved !== false;
+        let stars = '';
+        for (let i = 1; i <= 5; i++) stars += '<i class="fas fa-star text-[10px] ' + (i <= Number(testi.rating || 0) ? 'text-yellow-400' : 'text-muted-4') + '"></i>';
+        const stateClass = approved ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20';
+        const stateText = approved ? 'APPROVED' : 'PENDING';
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td><div class="min-w-0"><div class="flex items-center gap-2 mb-0.5"><span class="font-bold text-sm text-white truncate">' + esc(testi.name || 'Anonim') + '</span><span class="source-badge source-buyer">BUYER</span></div><div class="text-xs text-muted-3 truncate max-w-[260px]">' + esc(testi.text || '') + '</div></div></td>' +
+          '<td class="text-center"><div class="flex justify-center gap-0.5">' + stars + '</div></td>' +
+          '<td class="text-center"><button data-tt="' + item.key + ',' + approved + '" class="status-badge border ' + stateClass + ' cursor-pointer hover:opacity-80 transition">' + stateText + '</button></td>' +
+          '<td class="text-center"><button data-td="' + item.key + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.toggleTestiApproval = async function (id, current) {
+      try {
+        await update(ref(db, 'testimonials/' + id), { approved: !current });
+        showToast(current ? 'Testimoni disembunyikan.' : 'Testimoni ditampilkan.');
+      } catch (error) {
+        showToast('Gagal update testimoni.', 'error');
+      }
+    };
+
+    window.deleteTesti = async function (id) {
+      if (!confirm('Hapus testimoni?')) return;
+      try {
+        await remove(ref(db, 'testimonials/' + id));
+        showToast('Testimoni dihapus.');
+      } catch (error) {
+        showToast('Gagal hapus testimoni.', 'error');
+      }
+    };
+
+    window.openDoneModal = function (isEdit, data) {
+      document.getElementById('doneModal').classList.remove('hidden');
+      if (isEdit && data) {
+        document.getElementById('dpId').value = data.id;
+        document.getElementById('dpBuyer').value = data.buyerName || '';
+        document.getElementById('dpProduct').value = data.product || '';
+        document.getElementById('dpPackage').value = data.pkg || '';
+        document.getElementById('dpPrice').value = data.price || '';
+        document.getElementById('dpVisible').checked = data.visible !== false;
+      } else {
+        document.getElementById('doneForm').reset();
+        document.getElementById('dpId').value = '';
+        document.getElementById('dpVisible').checked = true;
+      }
+    };
+
+    window.closeDoneModal = function () {
+      document.getElementById('doneModal').classList.add('hidden');
+    };
+
+    window.handleDoneSubmit = async function (event) {
+      event.preventDefault();
+      const id = document.getElementById('dpId').value;
+      const price = parseInt(document.getElementById('dpPrice').value, 10);
+      if (!price || price <= 0) {
+        showToast('Harga harus lebih dari 0.', 'error');
+        return;
+      }
+      const data = {
+        buyerName: document.getElementById('dpBuyer').value.trim(),
+        product: document.getElementById('dpProduct').value.trim(),
+        pkg: document.getElementById('dpPackage').value.trim(),
+        price: price,
+        visible: document.getElementById('dpVisible').checked,
+        manual: true
+      };
+      try {
+        if (id) {
+          await update(ref(db, 'done_payments/' + id), data);
+          showToast('Done payment diupdate!');
+        } else {
+          data.createdAt = serverTimestamp();
+          await set(push(ref(db, 'done_payments')), data);
+          showToast('Done payment ditambahkan!');
+        }
+        closeDoneModal();
+      } catch (error) {
+        showToast('Gagal simpan done payment.', 'error');
+      }
+    };
+
+    window.toggleDoneVisible = async function (id, current) {
+      try {
+        await update(ref(db, 'done_payments/' + id), { visible: !current });
+        showToast('Visibility diupdate.');
+      } catch (error) {
+        showToast('Gagal update visibility.', 'error');
+      }
+    };
+
+    window.deleteDone = async function (id) {
+      if (!confirm('Hapus data done payment ini?')) return;
+      try {
+        await remove(ref(db, 'done_payments/' + id));
+        showToast('Done payment dihapus.');
+      } catch (error) {
+        showToast('Gagal hapus done payment.', 'error');
+      }
+    };
+
+    window.openDpChat = function (orderId) {
+      switchTab('orders');
+      setTimeout(function () { openOrderDetail(orderId); }, 150);
+    };
+
+    function renderChatMessages(chat) {
+      const wrap = document.getElementById('chatMessages');
+      const entries = getMessageEntries(chat);
+      if (!entries.length) {
+        wrap.innerHTML = '<div class="text-center text-muted-3 text-sm py-8">Kosong.</div>';
+        return;
+      }
+      wrap.innerHTML = '';
+      entries.forEach(function (entry) {
+        const msg = entry.data || {};
+        const isAdmin = msg.sender === 'admin';
+        const key = currentChatOrderId + '-' + entry.id;
+        if (msg.image) imgStore[key] = msg.image;
+
+        const row = document.createElement('div');
+        row.className = 'flex ' + (isAdmin ? 'justify-end' : 'justify-start');
+
+        let imageHtml = '';
+        if (msg.image) {
+          imageHtml = '<div class="mt-2"><img src="' + esc(msg.image) + '" alt="Chat image" class="rounded-xl border border-dark-border max-w-[220px] cursor-zoom-in" onclick="viewImage(\'' + esc(key) + '\')"></div>';
+        }
+
+        row.innerHTML =
+          '<div class="chat-bubble rounded-2xl px-4 py-3 border ' + (isAdmin ? 'bg-red-accent/10 border-red-accent/20 text-white' : 'bg-dark-card border-dark-border text-muted-1') + '">' +
+          '<div class="flex items-center gap-2 mb-1.5">' +
+          '<span class="source-badge ' + (isAdmin ? 'source-admin' : 'source-buyer') + '">' + (isAdmin ? 'ADMIN' : 'BUYER') + '</span>' +
+          '<span class="text-[10px] font-mono text-muted-3">' + fTimeS(msg.timestamp) + '</span>' +
+          '</div>' +
+          (msg.text ? '<div class="text-sm leading-relaxed whitespace-normal break-words">' + escLines(msg.text) + '</div>' : '') +
+          imageHtml +
+          '</div>';
+        wrap.appendChild(row);
+      });
+      wrap.scrollTop = wrap.scrollHeight;
+    }
+
+    function updateOrderDetailView(orderId) {
+      const order = DD.orders[orderId];
+      if (!order) {
+        closeOrderDetail();
+        return;
+      }
+      document.getElementById('detailOrderId').textContent = orderId.slice(-6).toUpperCase();
+      document.getElementById('detailBuyerName').textContent = order.buyerName || '-';
+      document.getElementById('detailProduct').textContent = order.productTitle || '-';
+      document.getElementById('detailPrice').textContent = formatCurrency(getOrderPrice(order));
+      document.getElementById('detailNote').textContent = getOrderNote(order);
+      document.getElementById('detailDate').textContent = fTime(order.createdAt);
+      document.getElementById('detailStatus').value = order.status || 'pending';
+
+      const wa = cleanWa(order.buyerWhatsapp || '');
+      const waText = document.getElementById('detailWaText');
+      const waLink = document.getElementById('detailWaLink');
+      waText.textContent = wa || '-';
+      waText.href = wa ? getWaLink(wa) : '#';
+      waLink.href = wa ? getWaLink(wa) : '#';
+
+      renderChatMessages(order.chat || {});
+      renderQrisQuickBar();
+    }
+
+    window.openOrderDetail = function (orderId) {
+      if (!DD.orders[orderId]) {
+        showToast('Order tidak ditemukan.', 'error');
+        return;
+      }
+      currentChatOrderId = orderId;
+      document.getElementById('orderDetailPanel').classList.remove('hidden');
+      clearChatImage();
+      hideDpForm();
+      updateOrderDetailView(orderId);
+      setTimeout(function () { document.getElementById('chatInput').focus(); }, 100);
+    };
+
+    window.closeOrderDetail = function () {
+      currentChatOrderId = null;
+      document.getElementById('orderDetailPanel').classList.add('hidden');
+      hideDpForm();
+      clearChatImage();
+      document.getElementById('chatInput').value = '';
+    };
+
+    window.updateOrderStatusFromPanel = async function () {
+      if (!currentChatOrderId) return;
+      const status = document.getElementById('detailStatus').value;
+      try {
+        await update(ref(db, 'orders/' + currentChatOrderId), { status: status });
+        showToast('Status order diupdate.');
+      } catch (error) {
+        showToast('Gagal update status.', 'error');
+      }
+    };
+
+    window.showDpForm = function () {
+      if (!currentChatOrderId) return;
+      const order = DD.orders[currentChatOrderId] || {};
+      const existing = findDonePaymentByOrderId(currentChatOrderId);
+      document.getElementById('dpChatBuyer').value = existing ? (existing.buyerName || '') : (order.buyerName || '');
+      document.getElementById('dpChatProduct').value = existing ? (existing.product || '') : (order.productTitle || '');
+      document.getElementById('dpChatPkg').value = existing ? (existing.pkg || '') : (order.package || order.plan || '');
+      document.getElementById('dpChatPrice').value = existing ? (existing.price || 0) : getOrderPrice(order);
+      document.getElementById('dpChatVisible').checked = existing ? existing.visible !== false : true;
+      document.getElementById('dpFormBar').classList.add('open');
+    };
+
+    window.hideDpForm = function () {
+      document.getElementById('dpFormBar').classList.remove('open');
+    };
+
+    window.submitDpFromChat = async function () {
+      if (!currentChatOrderId) return;
+      const buyerName = document.getElementById('dpChatBuyer').value.trim();
+      const product = document.getElementById('dpChatProduct').value.trim();
+      const pkg = document.getElementById('dpChatPkg').value.trim();
+      const price = parseInt(document.getElementById('dpChatPrice').value, 10);
+      const visible = document.getElementById('dpChatVisible').checked;
+      if (!buyerName || !product || !price || price <= 0) {
+        showToast('Lengkapi buyer, produk, dan harga.', 'error');
+        return;
+      }
+
+      const existing = findDonePaymentByOrderId(currentChatOrderId);
+      try {
+        let doneId = existing ? existing.id : '';
+        const data = {
+          buyerName: buyerName,
+          product: product,
+          pkg: pkg,
+          price: price,
+          visible: visible,
+          orderId: currentChatOrderId,
+          manual: false,
+          linkedAt: serverTimestamp()
+        };
+
+        if (existing) {
+          await update(ref(db, 'done_payments/' + existing.id), data);
+        } else {
+          const newRef = push(ref(db, 'done_payments'));
+          doneId = newRef.key;
+          data.createdAt = serverTimestamp();
+          await set(newRef, data);
+        }
+
+        await update(ref(db, 'orders/' + currentChatOrderId), {
+          status: 'completed',
+          donePaymentId: doneId
+        });
+
+        await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), {
+          sender: 'admin',
+          text: 'Pembayaran sudah dikonfirmasi. Terima kasih!',
+          timestamp: serverTimestamp()
+        });
+
+        hideDpForm();
+        showToast('Done payment berhasil ditautkan.');
+      } catch (error) {
+        showToast('Gagal simpan done payment.', 'error');
+      }
+    };
+
+    window.clearChatImage = function () {
+      currentChatImage = null;
+      document.getElementById('chatImagePreview').classList.add('hidden');
+      document.getElementById('chatPreviewImg').src = '';
+      document.getElementById('chatPreviewName').textContent = '-';
+    };
+
+    window.sendChat = async function (sender) {
+      sender = sender || 'admin';
+      if (!currentChatOrderId) {
+        showToast('Pilih order dulu.', 'error');
+        return;
+      }
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      const normalized = text.toLowerCase();
+
+      if (!text && !currentChatImage) {
+        showToast('Tulis pesan atau pilih gambar.', 'error');
+        return;
+      }
+
+      if (sender === 'admin' && !currentChatImage) {
+        if (normalized === '/donepayment') {
+          input.value = '';
+          showDpForm();
+          return;
+        }
+        if (qC[normalized]) {
+          input.value = '';
+          await quickSendQris(normalized);
+          return;
+        }
+      }
+
+      try {
+        const payload = {
+          sender: sender,
+          text: text || '',
+          timestamp: serverTimestamp()
+        };
+        if (currentChatImage) {
+          payload.image = currentChatImage.data;
+          if (!payload.text) payload.text = sender === 'admin' ? 'Mengirim gambar.' : 'Gambar';
+        }
+
+        await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), payload);
+        if (sender === 'admin') {
+          const currentOrder = DD.orders[currentChatOrderId];
+          if (!currentOrder || !currentOrder.status || currentOrder.status === 'pending') {
+            await update(ref(db, 'orders/' + currentChatOrderId), { status: 'processing' });
+          }
+        }
+        input.value = '';
+        clearChatImage();
+      } catch (error) {
+        showToast('Gagal kirim chat.', 'error');
+      }
+    };
+
+    window.deleteOrder = async function (id) {
+      if (!confirm('Hapus order ini?')) return;
+      try {
+        await remove(ref(db, 'orders/' + id));
+        if (currentChatOrderId === id) closeOrderDetail();
+        showToast('Order dihapus.');
+      } catch (error) {
+        showToast('Gagal hapus order.', 'error');
+      }
+    };
+
+    function renderOrders(raw) {
+      const tbody = document.getElementById('orders-tbody');
+      tbody.innerHTML = '';
+      const rows = raw ? Object.keys(raw).map(function (key) { return { key: key, value: raw[key] }; }).sort(function (a, b) { return nTs(b.value.createdAt) - nTs(a.value.createdAt); }) : [];
+      if (!rows.length) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Belum ada pesanan.</td></tr>';
+        return;
+      }
+
+      let needReply = 0;
+      rows.forEach(function (item) {
+        const order = item.value || {};
+        const messages = getMessageEntries(order.chat);
+        const last = messages.length ? messages[messages.length - 1].data : null;
+        if (!last || last.sender === 'buyer') needReply += 1;
+
+        let buyerMessageCount = 0;
+        messages.forEach(function (entry) { if (entry.data.sender === 'buyer') buyerMessageCount += 1; });
+
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td class="font-bold text-sm text-white">' + esc(order.buyerName || '-') + '</td>' +
+          '<td class="text-sm text-muted-2">' + esc(order.productTitle || '-') + '</td>' +
+          '<td class="text-sm font-mono text-muted-3">' + esc(order.buyerWhatsapp || '-') + '</td>' +
+          '<td class="text-center"><span class="status-badge border ' + (SS[order.status] || SS.pending) + '">' + esc(order.status || 'pending') + '</span></td>' +
+          '<td class="text-center"><button data-oc="' + item.key + '" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments"></i> Chat' + (buyerMessageCount ? '<span class="w-4 h-4 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center">' + buyerMessageCount + '</span>' : '') + '</button></td>' +
+          '<td class="text-center whitespace-nowrap"><button data-odp="' + item.key + '" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-500/10 border border-green-500/20 text-green-400 hover:bg-green-500/20 transition mr-1"><i class="fas fa-check-circle"></i> Done</button><button data-od="' + item.key + '" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 transition"><i class="fas fa-trash"></i></button></td>';
+        tbody.appendChild(tr);
+      });
+
+      const badgeValue = needReply > 99 ? '99+' : String(needReply);
+      const desktopBadge = document.getElementById('orderBadge');
+      const mobileBadge = document.getElementById('orderBadgeMob');
+      if (needReply > 0) {
+        desktopBadge.classList.remove('hidden');
+        mobileBadge.classList.remove('hidden');
+        desktopBadge.textContent = badgeValue;
+        mobileBadge.textContent = badgeValue;
+      } else {
+        desktopBadge.classList.add('hidden');
+        mobileBadge.classList.add('hidden');
+      }
+    }
+
+    onValue(ref(db, 'products'), function (snap) {
+      const raw = snap.val();
+      const tbody = document.getElementById('products-tbody');
+      tbody.innerHTML = '';
+      DD.products = raw || {};
+      epc = {};
+
+      let total = 0;
+      let stock = 0;
+      let empty = 0;
+      const categories = {};
+
+      if (!raw) {
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-muted-3">Belum ada produk.</td></tr>';
+      } else {
+        Object.keys(raw).forEach(function (key) {
+          const product = raw[key] || {};
+          total += 1;
+          stock += Number(product.stock || 0);
+          if (Number(product.stock || 0) <= 0) empty += 1;
+          if (product.category) categories[product.category] = true;
+          epc[key] = Object.assign({ id: key }, product);
+
+          const outOfStock = Number(product.stock || 0) <= 0;
+          const stockBadge = outOfStock
+            ? '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold text-red-400 bg-red-500/10 border border-red-500/20">HABIS <button data-ps="' + key + ',0,1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>'
+            : '<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold text-green-400 bg-green-500/10 border border-green-500/20">' + esc(product.stock) + ' <button data-ps="' + key + ',' + Number(product.stock || 0) + ',-1" class="hover:text-white"><i class="fas fa-minus text-[10px]"></i></button> <button data-ps="' + key + ',' + Number(product.stock || 0) + ',1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>';
+
+          const tr = document.createElement('tr');
+          tr.innerHTML =
+            '<td><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (product.color || '') + ' flex-shrink-0"><i class="fas ' + (product.icon || 'fa-box') + '"></i></div><div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(product.title || '-') + '</div><div class="text-xs text-muted-3 truncate max-w-[180px]">' + esc(product.description || '') + '</div></div></div></td>' +
+            '<td><span class="px-2 py-1 rounded text-xs bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(product.category || '-') + '</span></td>' +
+            '<td class="text-right font-mono text-sm text-white">' + formatCurrency(product.price || 0) + '</td>' +
+            '<td class="text-center">' + stockBadge + '</td>' +
+            '<td class="text-center whitespace-nowrap"><button data-pe="' + key + '" class="text-cyan-400 hover:text-cyan-300 p-1"><i class="fas fa-edit"></i></button> <button data-pd="' + key + '" class="text-red-400 hover:text-red-300 p-1"><i class="fas fa-trash"></i></button></td>';
+          tbody.appendChild(tr);
+        });
+      }
+
+      document.getElementById('stat-total').textContent = total;
+      document.getElementById('stat-stock').textContent = stock;
+      document.getElementById('stat-empty').textContent = empty;
+      document.getElementById('stat-cats').textContent = Object.keys(categories).length;
+      updateDash();
+    });
+
+    onValue(ref(db, 'partners'), function (snap) {
+      const raw = snap.val();
+      const tbody = document.getElementById('partners-tbody');
+      tbody.innerHTML = '';
+      DD.partners = raw || {};
+      eptc = {};
+
+      let total = 0;
+      let infra = 0;
+      let payment = 0;
+      let other = 0;
+
+      if (!raw) {
+        tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Belum ada partner.</td></tr>';
+      } else {
+        Object.keys(raw).forEach(function (key) {
+          const partner = raw[key] || {};
+          total += 1;
+          if (partner.category === 'infrastructure') infra += 1;
+          else if (partner.category === 'payment') payment += 1;
+          else other += 1;
+
+          eptc[key] = Object.assign({ id: key }, partner);
+          const icon = partner.icon || PCI[partner.category] || 'fa-star';
+          const color = PCC[partner.category] || 'text-muted-2';
+          const logoHtml = partner.logo
+            ? '<img src="' + esc(partner.logo) + '" class="partner-logo" alt="' + esc(partner.name || 'Partner') + '">'
+            : '<div class="partner-logo flex items-center justify-center"><i class="fas ' + icon + ' ' + color + ' text-sm"></i></div>';
+
+          const tr = document.createElement('tr');
+          tr.innerHTML =
+            '<td><div class="flex items-center gap-3">' + logoHtml + '<div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(partner.name || '-') + '</div><div class="text-xs text-muted-3 truncate max-w-[150px]">' + esc(partner.description || '') + '</div></div></div></td>' +
+            '<td><span class="px-2 py-0.5 rounded text-[10px] bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(partner.category || '-') + '</span></td>' +
+            '<td>' + (partner.website ? '<a href="' + esc(partner.website) + '" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-xs font-mono truncate block max-w-[120px]">' + esc(String(partner.website).replace(/^https?:\/\//, '')) + '</a>' : '<span class="text-muted-4 text-xs">-</span>') + '</td>' +
+            '<td class="text-center whitespace-nowrap"><button data-pce="' + key + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button> <button data-pcd="' + key + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
+          tbody.appendChild(tr);
+        });
+      }
+
+      document.getElementById('stat-partners').textContent = total;
+      document.getElementById('stat-infra').textContent = infra;
+      document.getElementById('stat-payment').textContent = payment;
+      document.getElementById('stat-other').textContent = other;
+      updateDash();
+    });
+
+    onValue(ref(db, 'testimonials'), function (snap) {
+      const raw = snap.val();
+      DD.testimoni = raw || {};
+      aTR = raw || {};
+
+      let total = 0;
+      let approved = 0;
+      let pending = 0;
+      if (raw) {
+        Object.keys(raw).forEach(function (key) {
+          total += 1;
+          if (raw[key].approved !== false) approved += 1;
+          else pending += 1;
+        });
+      }
+
+      document.getElementById('stat-testi-total').textContent = total;
+      document.getElementById('stat-testi-approved').textContent = approved;
+      document.getElementById('stat-testi-pending').textContent = pending;
+
+      const badgeValue = pending > 99 ? '99+' : String(pending);
+      const badgeDesktop = document.getElementById('testiPendingBadge');
+      const badgeMobile = document.getElementById('testiPendingBadgeMob');
+      if (pending > 0) {
+        badgeDesktop.classList.remove('hidden');
+        badgeMobile.classList.remove('hidden');
+        badgeDesktop.textContent = badgeValue;
+        badgeMobile.textContent = badgeValue;
+      } else {
+        badgeDesktop.classList.add('hidden');
+        badgeMobile.classList.add('hidden');
+      }
+
+      renderTesti();
+      updateDash();
+    });
+
+    onValue(ref(db, 'done_payments'), function (snap) {
+      const raw = snap.val();
+      const tbody = document.getElementById('dp-tbody');
+      tbody.innerHTML = '';
+      DD.donePayments = raw || {};
+      edc = {};
+
+      let total = 0;
+      let revenue = 0;
+      let visible = 0;
+
+      if (!raw) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Belum ada data.</td></tr>';
+      } else {
+        Object.keys(raw)
+          .map(function (key) { return { key: key, value: raw[key] }; })
+          .sort(function (a, b) { return nTs(b.value.createdAt) - nTs(a.value.createdAt); })
+          .forEach(function (item) {
+            const done = item.value || {};
+            const id = item.key;
+            total += 1;
+            revenue += Number(done.price || 0);
+            if (done.visible !== false) visible += 1;
+            edc[id] = Object.assign({ id: id }, done);
+
+            const linked = !!done.orderId;
+            const linkHtml = linked
+              ? '<button data-dc="' + done.orderId + '" class="inline-flex items-center gap-1.5 px-2.5 rounded-lg text-[11px] font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments text-[10px]"></i> Chat</button>'
+              : '<span class="text-[10px] text-muted-4 font-mono">MANUAL</span>';
+            const stateClass = done.visible !== false ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-muted-4/10 text-muted-3 border-muted-4/20';
+
+            const tr = document.createElement('tr');
+            tr.innerHTML =
+              '<td class="font-bold text-sm text-white">' + esc(done.buyerName || '-') + '</td>' +
+              '<td class="text-sm text-muted-1">' + esc(done.product || '-') + '</td>' +
+              '<td class="text-right font-mono text-sm text-green-400">' + formatCurrency(done.price || 0) + '</td>' +
+              '<td class="text-center">' + linkHtml + '</td>' +
+              '<td class="text-center"><button data-dtv="' + id + ',' + (done.visible !== false) + '" class="status-badge border ' + stateClass + ' cursor-pointer hover:opacity-80 transition">' + (done.visible !== false ? 'YA' : 'TIDAK') + '</button></td>' +
+              '<td class="text-center whitespace-nowrap"><button data-de="' + id + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button> <button data-dd="' + id + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
+            tbody.appendChild(tr);
+          });
+      }
+
+      document.getElementById('stat-dp-total').textContent = total;
+      document.getElementById('stat-dp-revenue').textContent = formatCurrency(revenue);
+      document.getElementById('stat-dp-visible').textContent = visible;
+      updateDash();
+    });
+
+    onValue(ref(db, 'orders'), function (snap) {
+      const raw = snap.val();
+      DD.orders = raw || {};
+      renderOrders(raw);
+      updateDash();
+      if (currentChatOrderId) {
+        if (DD.orders[currentChatOrderId]) updateOrderDetailView(currentChatOrderId);
+        else closeOrderDetail();
+      }
+    });
+
+    document.getElementById('dashRecentOrders').addEventListener('click', function (event) {
+      const row = event.target.closest('[data-do]');
+      if (!row) return;
+      switchTab('orders');
+      setTimeout(function () { openOrderDetail(row.getAttribute('data-do')); }, 150);
+    });
+
+    document.getElementById('qrisList').addEventListener('click', function (event) {
+      const editBtn = event.target.closest('[data-qe]');
+      const deleteBtn = event.target.closest('[data-qd]');
+      if (editBtn) {
+        const id = editBtn.getAttribute('data-qe');
+        if (qR[id]) openQrisModal(true, id, qR[id]);
+      }
+      if (deleteBtn) deleteQris(deleteBtn.getAttribute('data-qd'));
+    });
+
+    document.getElementById('qrisQuickBarInner').addEventListener('click', function (event) {
+      const btn = event.target.closest('[data-qs]');
+      if (btn) quickSendQris(btn.getAttribute('data-qs'));
+    });
+
+    document.getElementById('qrisFormFile').addEventListener('change', async function (event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        qFD.image = await compressImage(file, 700, 0.68);
+        document.getElementById('qrisFormImg').src = qFD.image;
+        document.getElementById('qrisFormPreview').classList.remove('hidden');
+      } catch (error) {
+        showToast(typeof error === 'string' ? error : 'Gagal upload QRIS.', 'error');
+      }
+      event.target.value = '';
+    });
+
+    document.getElementById('products-tbody').addEventListener('click', function (event) {
+      const editBtn = event.target.closest('[data-pe]');
+      const deleteBtn = event.target.closest('[data-pd]');
+      const stockBtn = event.target.closest('[data-ps]');
+      if (editBtn) openProductModal(true, epc[editBtn.getAttribute('data-pe')]);
+      if (deleteBtn) deleteProduct(deleteBtn.getAttribute('data-pd'));
+      if (stockBtn) {
+        const parts = stockBtn.getAttribute('data-ps').split(',');
+        quickStock(parts[0], parseInt(parts[1], 10), parseInt(parts[2], 10));
+      }
+    });
+
+    document.getElementById('partners-tbody').addEventListener('click', function (event) {
+      const editBtn = event.target.closest('[data-pce]');
+      const deleteBtn = event.target.closest('[data-pcd]');
+      if (editBtn) openPartnerModal(true, eptc[editBtn.getAttribute('data-pce')]);
+      if (deleteBtn) deletePartner(deleteBtn.getAttribute('data-pcd'));
+    });
+
+    document.getElementById('testi-tbody').addEventListener('click', function (event) {
+      const toggleBtn = event.target.closest('[data-tt]');
+      const deleteBtn = event.target.closest('[data-td]');
+      if (toggleBtn) {
+        const parts = toggleBtn.getAttribute('data-tt').split(',');
+        toggleTestiApproval(parts[0], parts[1] === 'true');
+      }
+      if (deleteBtn) deleteTesti(deleteBtn.getAttribute('data-td'));
+    });
+
+    document.getElementById('dp-tbody').addEventListener('click', function (event) {
+      const editBtn = event.target.closest('[data-de]');
+      const deleteBtn = event.target.closest('[data-dd]');
+      const toggleBtn = event.target.closest('[data-dtv]');
+      const chatBtn = event.target.closest('[data-dc]');
+      if (editBtn) openDoneModal(true, edc[editBtn.getAttribute('data-de')]);
+      if (deleteBtn) deleteDone(deleteBtn.getAttribute('data-dd'));
+      if (toggleBtn) {
+        const parts = toggleBtn.getAttribute('data-dtv').split(',');
+        toggleDoneVisible(parts[0], parts[1] === 'true');
+      }
+      if (chatBtn) openDpChat(chatBtn.getAttribute('data-dc'));
+    });
+
+    document.getElementById('orders-tbody').addEventListener('click', function (event) {
+      const chatBtn = event.target.closest('[data-oc]');
+      const doneBtn = event.target.closest('[data-odp]');
+      const deleteBtn = event.target.closest('[data-od]');
+      if (chatBtn) openOrderDetail(chatBtn.getAttribute('data-oc'));
+      if (doneBtn) {
+        const orderId = doneBtn.getAttribute('data-odp');
+        openOrderDetail(orderId);
+        setTimeout(function () { showDpForm(); }, 120);
+      }
+      if (deleteBtn) deleteOrder(deleteBtn.getAttribute('data-od'));
+    });
+
+    document.getElementById('chatImageInput').addEventListener('change', async function (event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        const image = await compressImage(file, 900, 0.72);
+        currentChatImage = { data: image, name: file.name };
+        document.getElementById('chatPreviewImg').src = image;
+        document.getElementById('chatPreviewName').textContent = file.name;
+        document.getElementById('chatImagePreview').classList.remove('hidden');
+      } catch (error) {
+        showToast(typeof error === 'string' ? error : 'Gagal upload gambar.', 'error');
+      }
+      event.target.value = '';
+    });
+
+    document.getElementById('chatInput').addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        sendChat('admin');
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        if (!document.getElementById('imageLightbox').classList.contains('hidden')) closeLightbox();
+        else if (!document.getElementById('productModal').classList.contains('hidden')) closeProductModal();
+        else if (!document.getElementById('partnerModal').classList.contains('hidden')) closePartnerModal();
+        else if (!document.getElementById('doneModal').classList.contains('hidden')) closeDoneModal();
+        else if (!document.getElementById('qrisModal').classList.contains('hidden')) closeQrisModal();
+        else if (!document.getElementById('orderDetailPanel').classList.contains('hidden')) closeOrderDetail();
+        else if (document.getElementById('drawerPanel').classList.contains('open')) closeDrawer();
+      }
+    });
+
+    if (sessionStorage.getItem('kryonix_admin') !== 'granted') {
+      window.location.href = 'login-admin.html';
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+    initHeader();
+    loadQris();
+    switchTab('dashboard');
+  </script>
+</body>
+</html>
