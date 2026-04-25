@@ -3,39 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel | KRYONIX</title>
+  <title>Owner Panel | KRYONIX</title>
   <link rel="icon" type="image/png" href="images/icon.png">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#dc2626">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="KRYONIX Admin">
+  <meta name="apple-mobile-web-app-title" content="KRYONIX Owner">
   <link rel="apple-touch-icon" href="images/icon-192.png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script>
     tailwind.config={darkMode:'class',theme:{extend:{
       fontFamily:{sans:['Space Grotesk','sans-serif'],mono:['JetBrains Mono','monospace']},
-      colors:{dark:{bg:'#07070a',card:'#0e0e13',card2:'#131318',border:'#1c1c26',hover:'#191920'},red:{accent:'#dc2626',bright:'#ef4444',dim:'#991b1b',glow:'rgba(220,38,38,.12)',glow2:'rgba(220,38,38,.06)'},muted:{1:'#a1a1aa',2:'#71717a',3:'#52525b',4:'#3f3f46'}}
+      colors:{dark:{bg:'#06060a',card:'#0d0d12',card2:'#121217',border:'#1a1a24',hover:'#18181f'},
+        red:{accent:'#dc2626',bright:'#ef4444',dim:'#991b1b',glow:'rgba(220,38,38,.12)',glow2:'rgba(220,38,38,.06)'},
+        gold:{accent:'#d97706',bright:'#f59e0b',dim:'#92400e',glow:'rgba(217,119,6,.12)',glow2:'rgba(217,119,6,.06)'},
+        muted:{1:'#a1a1aa',2:'#71717a',3:'#52525b',4:'#3f3f46'}}
     }}}
   </script>
   <style>
-    :root{--bg:#07070a;--card:#0e0e13;--border:#1c1c26;--red:#dc2626;--red-bright:#ef4444;--red-glow:rgba(220,38,38,.12);--red-glow2:rgba(220,38,38,.06)}
-    *{scrollbar-width:thin;scrollbar-color:#1c1c26 transparent}
+    :root{--bg:#06060a;--card:#0d0d12;--border:#1a1a24;--red:#dc2626;--gold:#d97706}
+    *{scrollbar-width:thin;scrollbar-color:#1a1a24 transparent}
     body{background:var(--bg);color:#e4e4e7;font-family:'Space Grotesk',sans-serif}
-    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#1c1c26;border-radius:4px}
-    .nav-item{position:relative;transition:all .25s;border-left:3px solid transparent}.nav-item:hover{background:var(--red-glow2);color:#fca5a5}.nav-item.active{background:var(--red-glow);color:var(--red-bright);border-left-color:var(--red)}.nav-item.active .nav-icon{color:var(--red-bright)}
+    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#1a1a24;border-radius:4px}
+    .nav-item{position:relative;transition:all .25s;border-left:3px solid transparent}
+    .nav-item:hover{background:var(--red-glow2);color:#fca5a5}
+    .nav-item.active{background:var(--red-glow);color:var(--red-bright);border-left-color:var(--red)}
+    .nav-item.owner-sep{pointer-events:none;border-left-color:transparent!important;background:transparent!important}
     .mob-nav{transition:all .2s}.mob-nav.active{background:var(--red-glow);color:var(--red-bright)}
     .admin-table th{text-align:left;padding:.85rem 1rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:#52525b;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace}
-    .admin-table td{padding:.8rem 1rem;border-bottom:1px solid #131318;font-size:.85rem}.admin-table tr:hover td{background:var(--red-glow2)}.admin-table tr:last-child td{border-bottom:none}
-    .modal-backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(8px)}
+    .admin-table td{padding:.8rem 1rem;border-bottom:1px solid #111116;font-size:.85rem}
+    .admin-table tr:hover td{background:var(--red-glow2)}.admin-table tr:last-child td{border-bottom:none}
+    .modal-backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(8px)}
     .toast{position:fixed;bottom:2rem;right:2rem;padding:.9rem 1.4rem;border-radius:10px;font-size:.85rem;font-weight:600;z-index:9999;transform:translateY(120px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1)}.toast.show{transform:translateY(0);opacity:1}
     .toast.success{background:#14532d;color:#86efac;border:1px solid #22c55e}.toast.error{background:#7f1d1d;color:#fca5a5;border:1px solid #ef4444}
-    .status-badge{font-size:.65rem;padding:3px 9px;border-radius:9999px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
-    .source-badge{font-size:.6rem;padding:2px 7px;border-radius:9999px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:.03em}
-    .source-buyer{background:rgba(220,38,38,.08);color:#fca5a5;border:1px solid rgba(220,38,38,.2)}.source-admin{background:rgba(251,191,36,.08);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
+    .status-badge{font-size:.65rem;padding:3px 9px;border-radius:9999px;font-weight:700;font-family:'JetBrains Mono',monospace}
+    .source-badge{font-size:.6rem;padding:2px 7px;border-radius:9999px;font-weight:700;font-family:'JetBrains Mono',monospace}
+    .source-buyer{background:rgba(220,38,38,.08);color:#fca5a5;border:1px solid rgba(220,38,38,.2)}
     .stat-card{position:relative;overflow:hidden;transition:all .3s}.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:0;transition:opacity .3s}.stat-card:hover::before{opacity:1}.stat-card:hover{border-color:rgba(220,38,38,.25);transform:translateY(-2px)}
+    .stat-card.gold::before{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
     .quick-action{transition:all .25s;cursor:pointer;overflow:hidden;position:relative}.quick-action::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(220,38,38,.05),transparent);opacity:0;transition:opacity .25s}.quick-action:hover::after{opacity:1}.quick-action:hover{border-color:rgba(220,38,38,.3);transform:translateY(-3px);box-shadow:0 8px 25px rgba(220,38,38,.08)}
     .partner-logo{width:36px;height:36px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,.02);border:1px solid var(--border);padding:4px;flex-shrink:0}
     .img-preview-bar{background:rgba(220,38,38,.04);border:1px dashed rgba(220,38,38,.25);border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:10px}
@@ -45,10 +53,10 @@
     .qris-cmd-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:8px;font-size:11px;font-family:'JetBrains Mono',monospace;background:var(--red-glow2);border:1px solid rgba(220,38,38,.15);color:#fca5a5;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}.qris-cmd-chip:hover{background:var(--red-glow);border-color:rgba(220,38,38,.4);transform:translateY(-1px)}
     .drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:30}.drawer-overlay.open{display:block}
     .drawer-panel{position:fixed;top:0;left:0;bottom:0;width:280px;background:var(--card);border-right:1px solid var(--border);z-index:31;transform:translateX(-100%);transition:transform .3s cubic-bezier(.16,1,.3,1);overflow-y:auto}.drawer-panel.open{transform:translateX(0)}
-    select{background-color:var(--card);color:#e4e4e7}select option{background:#0e0e13;color:#e4e4e7;padding:4px 8px}
+    select{background-color:var(--card);color:#e4e4e7}select option{background:#0d0d12;color:#e4e4e7}
     .dp-form-bar{background:rgba(220,38,38,.04);border:1px solid rgba(220,38,38,.2);border-radius:12px;padding:12px;display:none;animation:fadeUp .2s ease}.dp-form-bar.open{display:block}
     .dp-form-bar label{display:block;font-size:10px;font-family:'JetBrains Mono',monospace;color:#52525b;margin-bottom:3px;text-transform:uppercase;letter-spacing:.03em}
-    .dp-form-bar input[type="text"],.dp-form-bar input[type="number"]{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:.8rem;color:#e4e4e7;outline:none;transition:border-color .15s}.dp-form-bar input:focus{border-color:var(--red)}
+    .dp-form-bar input[type="text"],.dp-form-bar input[type="number"]{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:.8rem;color:#e4e4e7;outline:none}.dp-form-bar input:focus{border-color:var(--red)}
     .chat-bubble{max-width:75%;animation:fadeUp .25s ease}
     @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
     @keyframes pulse-red{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{box-shadow:0 0 0 8px rgba(220,38,38,0)}}.badge-pulse{animation:pulse-red 2s infinite}
@@ -57,92 +65,107 @@
     .glow-dot.green{background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.5)}.glow-dot.yellow{background:#eab308;box-shadow:0 0 8px rgba(234,179,8,.5)}.glow-dot.red{background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.5)}.glow-dot.gray{background:#52525b}
     input[type="text"]:focus,input[type="url"]:focus,input[type="number"]:focus,textarea:focus{border-color:var(--red)!important;outline:none}
     .linked-badge{display:inline-flex;align-items:center;gap:4px;font-size:.6rem;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-weight:600;background:rgba(220,38,38,.08);color:#fca5a5;border:1px solid rgba(220,38,38,.15)}
+    .pw-cell{font-family:'JetBrains Mono',monospace;letter-spacing:.05em;cursor:pointer;transition:color .15s}.pw-cell:hover{color:#ef4444}
+    .avatar-circle{display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;overflow:hidden}
+    .warn-dot{width:6px;height:6px;border-radius:50%;background:#eab308;flex-shrink:0}
+    .owner-badge{display:inline-flex;align-items:center;gap:3px;font-size:.55rem;padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:700;background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.2)}
   </style>
 </head>
 <body class="flex h-screen overflow-hidden">
 
-  <!-- Mobile Drawer -->
   <div id="drawerOverlay" class="drawer-overlay" onclick="closeDrawer()"></div>
   <div id="drawerPanel" class="drawer-panel md:hidden">
     <div class="h-14 flex items-center justify-between px-4 border-b border-dark-border">
-      <div class="flex items-center gap-2"><img src="https://i.pinimg.com/736x/89/75/5d/89755dd7321afe2c3295a39df24e8309.jpg" alt="" class="w-6 h-6 rounded object-contain"><span class="font-bold text-sm tracking-wide text-red-accent">KRYONIX</span></div>
+      <div class="flex items-center gap-2"><img src="https://i.pinimg.com/736x/89/75/5d/89755dd7321afe2c3295a39df24e8309.jpg" alt="" class="w-6 h-6 rounded object-contain"><span class="font-bold text-sm tracking-wide text-gold-accent">KRYONIX</span></div>
       <button onclick="closeDrawer()" class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-2 hover:text-white transition"><i class="fas fa-times text-sm"></i></button>
     </div>
     <div class="py-4 space-y-1 px-3">
       <button onclick="switchTab('dashboard');closeDrawer()" class="mob-nav active w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="dashboard"><i class="fas fa-th-large w-5"></i> Dashboard</button>
       <button onclick="switchTab('products');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="products"><i class="fas fa-box w-5"></i> Products</button>
       <button onclick="switchTab('orders');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2 relative" data-mob="orders"><i class="fas fa-receipt w-5"></i> Orders<span id="orderBadgeMob" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center badge-pulse">0</span></button>
+      <button onclick="switchTab('partners');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="partners"><i class="fas fa-handshake w-5"></i> Partners</button>
       <button onclick="switchTab('testimoni');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2 relative" data-mob="testimoni"><i class="fas fa-star w-5"></i> Testimoni<span id="testiPendingBadgeMob" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">0</span></button>
       <button onclick="switchTab('donepayment');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="donepayment"><i class="fas fa-check-circle w-5"></i> Done Payment</button>
-      <button onclick="switchTab('partners');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="partners"><i class="fas fa-handshake w-5"></i> Partners</button>
+      <div class="pt-2 pb-1"><span class="text-[9px] font-mono text-gold-accent/50 tracking-widest uppercase px-4">Owner Controls</span></div>
+      <button onclick="switchTab('admins');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="admins"><i class="fas fa-users-cog w-5"></i> Kelola Admin</button>
+      <button onclick="switchTab('warnings');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="warnings"><i class="fas fa-exclamation-triangle w-5"></i> Warnings</button>
       <button onclick="switchTab('settings');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="settings"><i class="fas fa-cog w-5"></i> Settings</button>
     </div>
     <div class="px-3 pt-3 border-t border-dark-border space-y-1">
-      <button onclick="doLogout()" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-400 hover:text-red-bright hover:bg-red-accent/10 transition text-sm w-full"><i class="fas fa-sign-out-alt"></i> Logout</button>
-      <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-3 hover:text-white hover:bg-red-glow2 transition text-sm"><i class="fas fa-home"></i> Home</a>
+      <button onclick="doLogout()" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-400 hover:text-red-bright hover:bg-red-accent/8 transition text-sm w-full"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-3 hover:text-white transition text-sm"><i class="fas fa-home"></i> Store</a>
     </div>
   </div>
 
-  <!-- Desktop Sidebar -->
   <aside class="w-[260px] bg-dark-card border-r border-dark-border hidden md:flex flex-col z-20 flex-shrink-0">
     <div class="h-[72px] flex items-center px-6 border-b border-dark-border">
-      <div class="w-9 h-9 rounded-xl bg-red-accent/10 border border-red-accent/20 flex items-center justify-center mr-3 flex-shrink-0"><img src="https://i.pinimg.com/736x/89/75/5d/89755dd7321afe2c3295a39df24e8309.jpg" alt="KRYONIX" class="w-6 h-6 rounded object-contain"></div>
-      <div><span class="font-bold text-base tracking-wide block leading-tight">KRYONIX</span><span class="text-[10px] font-mono text-muted-3 tracking-widest">ADMIN PANEL</span></div>
+      <div class="w-9 h-9 rounded-xl bg-gold-accent/10 border border-gold-accent/20 flex items-center justify-center mr-3 flex-shrink-0"><img src="https://i.pinimg.com/736x/89/75/5d/89755dd7321afe2c3295a39df24e8309.jpg" alt="KRYONIX" class="w-6 h-6 rounded object-contain"></div>
+      <div><span class="font-bold text-base tracking-wide block leading-tight">KRYONIX</span><span class="text-[10px] font-mono text-gold-accent/70 tracking-widest">OWNER PANEL</span></div>
     </div>
     <div class="flex-1 py-5 space-y-1 px-3 overflow-y-auto">
-      <button onclick="switchTab('dashboard')" class="nav-item active w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-th-large w-5 nav-icon text-sm"></i> Dashboard</button>
-      <button onclick="switchTab('products')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-box w-5 nav-icon text-sm"></i> Products</button>
-      <button onclick="switchTab('orders')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm relative"><i class="fas fa-receipt w-5 nav-icon text-sm"></i> Orders<span id="orderBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center badge-pulse">0</span></button>
-      <button onclick="switchTab('testimoni')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm relative"><i class="fas fa-star w-5 nav-icon text-sm"></i> Testimoni<span id="testiPendingBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">0</span></button>
-      <button onclick="switchTab('donepayment')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-check-circle w-5 nav-icon text-sm"></i> Done Payment</button>
-      <button onclick="switchTab('partners')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-handshake w-5 nav-icon text-sm"></i> Partners</button>
-      <div class="my-3 border-t border-dark-border"></div>
-      <button onclick="switchTab('settings')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-cog w-5 nav-icon text-sm"></i> Settings</button>
+      <button onclick="switchTab('dashboard')" class="nav-item active w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-th-large w-5 text-sm"></i> Dashboard</button>
+      <button onclick="switchTab('products')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-box w-5 text-sm"></i> Products</button>
+      <button onclick="switchTab('orders')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm relative"><i class="fas fa-receipt w-5 text-sm"></i> Orders<span id="orderBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center badge-pulse">0</span></button>
+      <button onclick="switchTab('partners')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-handshake w-5 text-sm"></i> Partners</button>
+      <button onclick="switchTab('testimoni')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm relative"><i class="fas fa-star w-5 text-sm"></i> Testimoni<span id="testiPendingBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">0</span></button>
+      <button onclick="switchTab('donepayment')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-check-circle w-5 text-sm"></i> Done Payment</button>
+      <div class="nav-item owner-sep my-3 border-t border-dark-border"></div>
+      <div class="px-4 mb-2"><span class="text-[9px] font-mono text-gold-accent/50 tracking-widest uppercase">Owner Controls</span></div>
+      <button onclick="switchTab('admins')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-users-cog w-5 text-sm"></i> Kelola Admin</button>
+      <button onclick="switchTab('warnings')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-exclamation-triangle w-5 text-sm"></i> Warnings</button>
+      <div class="nav-item owner-sep my-3 border-t border-dark-border"></div>
+      <button onclick="switchTab('settings')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-cog w-5 text-sm"></i> Settings</button>
     </div>
     <div class="p-3 border-t border-dark-border space-y-1">
       <button onclick="doLogout()" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-red-400 hover:text-red-bright transition text-sm"><i class="fas fa-sign-out-alt w-5 text-sm"></i> Logout</button>
-      <a href="index.html" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-3 hover:text-white transition text-sm cursor-pointer"><i class="fas fa-home w-5 text-sm"></i> Back to Home</a>
+      <a href="index.html" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-3 hover:text-white transition text-sm cursor-pointer"><i class="fas fa-home w-5 text-sm"></i> View Store</a>
     </div>
   </aside>
 
-  <!-- Main Content -->
   <main class="flex-1 flex flex-col relative z-10 overflow-hidden">
     <header class="h-14 border-b border-dark-border flex items-center justify-between px-5 bg-dark-bg/80 backdrop-blur-sm flex-shrink-0">
       <div class="flex items-center gap-3">
-        <button onclick="openDrawer()" class="md:hidden w-9 h-9 rounded-lg bg-dark-card border border-dark-border flex items-center justify-center text-muted-2 hover:text-white transition"><i class="fas fa-bars text-sm"></i></button>
+        <button onclick="openDrawer()" class="md:hidden w-9 h-9 rounded-lg bg-dark-card border border-dark-border flex items-center justify-center text-muted-2"><i class="fas fa-bars text-sm"></i></button>
         <h1 id="headerTitle" class="text-sm font-semibold text-white hidden md:block">Dashboard</h1>
       </div>
       <div class="flex items-center gap-3">
         <div class="hidden sm:flex items-center gap-2 text-xs text-muted-3"><div class="glow-dot green"></div><span class="font-mono">ONLINE</span></div>
-        <div class="flex items-center gap-2.5 bg-dark-card border border-dark-border rounded-lg px-3 py-1.5">
-          <div id="headerAvatar" class="w-7 h-7 rounded-full bg-red-accent/15 border border-red-accent/20 text-red-accent text-[10px] font-bold flex items-center justify-center">A</div>
-          <div class="hidden sm:block"><div id="headerName" class="text-xs font-semibold text-white leading-tight">Admin</div><div id="headerRole" class="text-[9px] font-mono text-muted-4 tracking-wider">ADMIN</div></div>
+        <div class="flex items-center gap-2.5 bg-dark-card border border-gold-accent/20 rounded-lg px-3 py-1.5">
+          <div id="headerAvatar" class="w-7 h-7 rounded-full bg-gold-accent/15 border border-gold-accent/20 avatar-circle text-gold-accent text-[10px] font-bold">?</div>
+          <div class="hidden sm:block"><div id="headerName" class="text-xs font-semibold text-white leading-tight">Loading...</div><div class="text-[9px] font-mono text-gold-accent tracking-wider">OWNER</div></div>
         </div>
       </div>
     </header>
 
     <div class="flex-1 overflow-y-auto">
 
-      <!-- ═══ DASHBOARD ═══ -->
+      <!-- DASHBOARD -->
       <div id="tab-dashboard" class="tab-content p-5 md:p-8">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-3">
-          <div><h2 class="text-2xl font-bold text-white">Overview</h2><p class="text-sm text-muted-3 mt-1">Pemantauan singkat semua aktivitas toko.</p></div>
+          <div><h2 class="text-2xl font-bold text-white">Owner Overview</h2><p class="text-sm text-muted-3 mt-1">Pantau seluruh aktivitas toko dan admin.</p></div>
           <div class="text-xs font-mono text-muted-3 bg-dark-card border border-dark-border px-3 py-1.5 rounded-lg" id="dashClock">--:--:--</div>
         </div>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-red-accent/10 border border-red-accent/15 flex items-center justify-center"><i class="fas fa-box text-red-accent text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Products</span></div><div class="text-3xl font-bold text-white" id="d-stat-products">0</div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-stock" class="text-red-bright font-mono">0</span> total stok</div></div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-red-accent/10 border border-red-accent/15 flex items-center justify-center"><i class="fas fa-box text-red-accent text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Products</span></div><div class="text-3xl font-bold text-white" id="d-stat-products">0</div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-stock" class="text-red-bright font-mono">0</span> stok</div></div>
           <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/15 flex items-center justify-center"><i class="fas fa-receipt text-yellow-500 text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Orders</span></div><div class="text-3xl font-bold text-white" id="d-stat-orders">0</div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-pending" class="text-yellow-400 font-mono">0</span> perlu balas</div></div>
-          <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/15 flex items-center justify-center"><i class="fas fa-money-bill-wave text-green-500 text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Revenue</span></div><div class="text-2xl font-bold text-white" id="d-stat-revenue">Rp0</div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-dpcount" class="text-green-400 font-mono">0</span> transaksi done</div></div>
-          <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/15 flex items-center justify-center"><i class="fas fa-star text-cyan-400 text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Reviews</span></div><div class="flex items-end gap-2"><div class="text-3xl font-bold text-white" id="d-stat-rating">0.0</div><div class="text-yellow-400 text-sm mb-1"><i class="fas fa-star"></i></div></div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-testicount" class="text-cyan-400 font-mono">0</span> testimoni total</div></div>
+          <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/15 flex items-center justify-center"><i class="fas fa-money-bill-wave text-green-500 text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Revenue</span></div><div class="text-2xl font-bold text-white" id="d-stat-revenue">Rp0</div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-dpcount" class="text-green-400 font-mono">0</span> done</div></div>
+          <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/15 flex items-center justify-center"><i class="fas fa-star text-cyan-400 text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Rating</span></div><div class="flex items-end gap-2"><div class="text-3xl font-bold text-white" id="d-stat-rating">0.0</div><div class="text-yellow-400 text-sm mb-1"><i class="fas fa-star"></i></div></div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-testicount" class="text-cyan-400 font-mono">0</span> testi</div></div>
+        </div>
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="stat-card gold bg-dark-card border border-gold-accent/15 rounded-xl p-4"><div class="text-[10px] font-mono text-muted-3 uppercase mb-1"><i class="fas fa-crown text-gold-accent/60 mr-1"></i>Admin Aktif</div><div id="d-stat-admins" class="text-2xl font-bold text-white">0</div></div>
+          <div class="stat-card gold bg-dark-card border border-gold-accent/15 rounded-xl p-4"><div class="text-[10px] font-mono text-muted-3 uppercase mb-1"><i class="fas fa-exclamation-triangle text-gold-accent/60 mr-1"></i>Warnings</div><div id="d-stat-warnings" class="text-2xl font-bold text-yellow-400">0</div></div>
+          <div class="stat-card gold bg-dark-card border border-gold-accent/15 rounded-xl p-4"><div class="text-[10px] font-mono text-muted-3 uppercase mb-1"><i class="fas fa-ban text-red-accent/40 mr-1"></i>Nonaktif</div><div id="d-stat-disabled" class="text-2xl font-bold text-red-400">0</div></div>
         </div>
         <div class="mb-8"><h3 class="text-xs font-mono text-muted-3 uppercase tracking-wider mb-4">Navigasi Cepat</h3>
-          <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
-            <div onclick="switchTab('products')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-red-accent/10 border border-red-accent/10 flex items-center justify-center"><i class="fas fa-box text-red-accent text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Products</span></div>
-            <div onclick="switchTab('orders')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/10 flex items-center justify-center"><i class="fas fa-comments text-purple-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Chat Order</span></div>
-            <div onclick="switchTab('testimoni')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/10 flex items-center justify-center"><i class="fas fa-clipboard-check text-yellow-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Review Testi</span></div>
-            <div onclick="switchTab('donepayment')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/10 flex items-center justify-center"><i class="fas fa-check-circle text-green-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Done Pay</span></div>
-            <div onclick="switchTab('partners')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/10 flex items-center justify-center"><i class="fas fa-handshake text-cyan-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Partners</span></div>
-            <div onclick="switchTab('settings')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-muted-4/50 border border-muted-4/30 flex items-center justify-center"><i class="fas fa-cog text-muted-2 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Settings</span></div>
+          <div class="grid grid-cols-4 md:grid-cols-8 gap-3">
+            <div onclick="switchTab('products')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-3 flex flex-col items-center gap-1.5 text-center"><div class="w-9 h-9 rounded-xl bg-red-accent/8 border border-red-accent/10 flex items-center justify-center"><i class="fas fa-box text-red-accent text-xs"></i></div><span class="text-[10px] text-muted-1 font-medium">Products</span></div>
+            <div onclick="switchTab('orders')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-3 flex flex-col items-center gap-1.5 text-center"><div class="w-9 h-9 rounded-xl bg-purple-500/8 border border-purple-500/10 flex items-center justify-center"><i class="fas fa-comments text-purple-400 text-xs"></i></div><span class="text-[10px] text-muted-1 font-medium">Chat</span></div>
+            <div onclick="switchTab('partners')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-3 flex flex-col items-center gap-1.5 text-center"><div class="w-9 h-9 rounded-xl bg-cyan-500/8 border border-cyan-500/10 flex items-center justify-center"><i class="fas fa-handshake text-cyan-400 text-xs"></i></div><span class="text-[10px] text-muted-1 font-medium">Partners</span></div>
+            <div onclick="switchTab('testimoni')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-3 flex flex-col items-center gap-1.5 text-center"><div class="w-9 h-9 rounded-xl bg-yellow-500/8 border border-yellow-500/10 flex items-center justify-center"><i class="fas fa-clipboard-check text-yellow-400 text-xs"></i></div><span class="text-[10px] text-muted-1 font-medium">Testi</span></div>
+            <div onclick="switchTab('donepayment')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-3 flex flex-col items-center gap-1.5 text-center"><div class="w-9 h-9 rounded-xl bg-green-500/8 border border-green-500/10 flex items-center justify-center"><i class="fas fa-check-circle text-green-400 text-xs"></i></div><span class="text-[10px] text-muted-1 font-medium">Done</span></div>
+            <div onclick="switchTab('admins')" class="quick-action bg-dark-card border border-gold-accent/15 rounded-xl p-3 flex flex-col items-center gap-1.5 text-center"><div class="w-9 h-9 rounded-xl bg-gold-accent/8 border border-gold-accent/10 flex items-center justify-center"><i class="fas fa-users-cog text-gold-accent text-xs"></i></div><span class="text-[10px] text-muted-1 font-medium">Admin</span></div>
+            <div onclick="switchTab('warnings')" class="quick-action bg-dark-card border border-gold-accent/15 rounded-xl p-3 flex flex-col items-center gap-1.5 text-center"><div class="w-9 h-9 rounded-xl bg-gold-accent/8 border border-gold-accent/10 flex items-center justify-center"><i class="fas fa-exclamation-triangle text-gold-accent text-xs"></i></div><span class="text-[10px] text-muted-1 font-medium">Warn</span></div>
+            <div onclick="switchTab('settings')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-3 flex flex-col items-center gap-1.5 text-center"><div class="w-9 h-9 rounded-xl bg-muted-4/50 border border-muted-4/30 flex items-center justify-center"><i class="fas fa-cog text-muted-2 text-xs"></i></div><span class="text-[10px] text-muted-1 font-medium">Set</span></div>
           </div>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -151,56 +174,71 @@
             <div id="dashRecentOrders" class="divide-y divide-dark-border"><div class="px-5 py-8 text-center text-muted-3 text-sm"><i class="fas fa-spinner fa-spin mr-2"></i>Memuat...</div></div>
           </div>
           <div class="space-y-5">
-            <div class="bg-dark-card border border-dark-border rounded-xl p-5"><h3 class="text-sm font-semibold text-white flex items-center gap-2 mb-4"><i class="fas fa-exclamation-triangle text-yellow-500 text-xs"></i> Stok Alert</h3><div id="dashStockAlert" class="space-y-2"><div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-spinner fa-spin mr-1"></i>Memuat...</div></div></div>
-            <div class="bg-dark-card border border-dark-border rounded-xl p-5"><h3 class="text-sm font-semibold text-white flex items-center gap-2 mb-4"><i class="fas fa-clock text-yellow-400 text-xs"></i> Testimoni Pending</h3><div class="text-3xl font-bold text-white mb-1" id="d-stat-testi-pending">0</div><button onclick="switchTab('testimoni')" class="text-[11px] text-muted-3 hover:text-red-accent transition font-mono mt-2">REVIEW NOW →</button></div>
+            <div class="bg-dark-card border border-dark-border rounded-xl p-5"><h3 class="text-sm font-semibold text-white flex items-center gap-2 mb-4"><i class="fas fa-exclamation-triangle text-yellow-500 text-xs"></i> Stok Alert</h3><div id="dashStockAlert" class="space-y-2"><div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-spinner fa-spin mr-1"></i></div></div></div>
+            <div class="bg-dark-card border border-dark-border rounded-xl p-5"><h3 class="text-sm font-semibold text-white flex items-center gap-2 mb-4"><i class="fas fa-handshake text-cyan-400 text-xs"></i> Partners</h3><div class="text-3xl font-bold text-white mb-1" id="d-stat-partners">0</div><div class="text-xs text-muted-3" id="d-stat-partner-cats">-</div></div>
+            <div class="bg-dark-card border border-dark-border rounded-xl p-5"><h3 class="text-sm font-semibold text-white flex items-center gap-2 mb-4"><i class="fas fa-clock text-yellow-400 text-xs"></i> Testi Pending</h3><div class="text-3xl font-bold text-white mb-1" id="d-stat-testi-pending">0</div><button onclick="switchTab('testimoni')" class="text-[11px] text-muted-3 hover:text-red-accent transition font-mono mt-2">REVIEW →</button></div>
           </div>
         </div>
       </div>
 
-      <!-- ═══ PRODUCTS ═══ -->
+      <!-- PRODUCTS -->
       <div id="tab-products" class="tab-content hidden p-5 md:p-8">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Product Management</h2><p class="text-sm text-muted-3 mt-1">Kelola katalog hosting dan layanan.</p></div><button onclick="openProductModal()" class="bg-red-accent hover:bg-red-bright text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition shadow-lg shadow-red-accent/15 text-sm"><i class="fas fa-plus text-xs"></i> Add Product</button></div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total Produk</div><div id="stat-total" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total Stok</div><div id="stat-stock" class="text-2xl font-bold text-green-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Stok Habis</div><div id="stat-empty" class="text-2xl font-bold text-red-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Kategori</div><div id="stat-cats" class="text-2xl font-bold text-cyan-400">0</div></div></div>
-        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Product Info</th><th>Category</th><th class="text-right">Price</th><th class="text-center">Stock</th><th class="text-center">Actions</th></tr></thead><tbody id="products-tbody"><tr><td colspan="5" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</td></tr></tbody></table></div></div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total</div><div id="stat-total" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Stok</div><div id="stat-stock" class="text-2xl font-bold text-green-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Habis</div><div id="stat-empty" class="text-2xl font-bold text-red-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Kategori</div><div id="stat-cats" class="text-2xl font-bold text-cyan-400">0</div></div></div>
+        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Product</th><th>Category</th><th class="text-right">Price</th><th class="text-center">Stock</th><th class="text-center">Actions</th></tr></thead><tbody id="products-tbody"><tr><td colspan="5" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
-      <!-- ═══ ORDERS ═══ -->
+      <!-- ORDERS -->
       <div id="tab-orders" class="tab-content hidden p-5 md:p-8">
-        <div class="mb-8"><h2 class="text-2xl font-bold text-white">Order Management</h2><p class="text-sm text-muted-3 mt-1">Klik order untuk chat. Gunakan tombol <span class="inline-flex items-center gap-1 text-green-400/80 bg-green-500/10 px-2 py-0.5 rounded text-[11px] font-mono font-bold"><i class="fas fa-check-circle text-[10px]"></i> Done Pay</span> atau ketik <code class="text-red-accent/80 bg-red-accent/10 px-1.5 py-0.5 rounded text-[11px] font-mono">/donepayment</code>.</p></div>
-        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Buyer</th><th>Product</th><th>WhatsApp</th><th class="text-center">Status</th><th class="text-center">Chat</th><th class="text-center">Actions</th></tr></thead><tbody id="orders-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</td></tr></tbody></table></div></div>
+        <div class="mb-8"><h2 class="text-2xl font-bold text-white">Order Management</h2><p class="text-sm text-muted-3 mt-1">Klik order untuk chat. Gunakan tombol <span class="inline-flex items-center gap-1 text-green-400/80 bg-green-500/8 px-2 py-0.5 rounded text-[11px] font-mono font-bold"><i class="fas fa-check-circle text-[10px]"></i> Done Pay</span> atau ketik <code class="text-red-accent/80 bg-red-accent/8 px-1.5 py-0.5 rounded text-[11px] font-mono">/donepayment</code>.</p></div>
+        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Buyer</th><th>Product</th><th>WhatsApp</th><th class="text-center">Status</th><th class="text-center">Chat</th><th class="text-center">Del</th></tr></thead><tbody id="orders-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
-      <!-- ═══ TESTIMONI ═══ -->
+      <!-- PARTNERS -->
+      <div id="tab-partners" class="tab-content hidden p-5 md:p-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Partner Management</h2></div><button onclick="openPartnerModal()" class="bg-red-accent hover:bg-red-bright text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition shadow-lg shadow-red-accent/15 text-sm"><i class="fas fa-plus text-xs"></i> Add Partner</button></div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total</div><div id="stat-partners" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Infra</div><div id="stat-infra" class="text-2xl font-bold text-cyan-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Payment</div><div id="stat-payment" class="text-2xl font-bold text-green-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Lainnya</div><div id="stat-other" class="text-2xl font-bold text-purple-400">0</div></div></div>
+        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Partner</th><th>Category</th><th>Website</th><th class="text-center">Actions</th></tr></thead><tbody id="partners-tbody"><tr><td colspan="4" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
+      </div>
+
+      <!-- TESTIMONI -->
       <div id="tab-testimoni" class="tab-content hidden p-5 md:p-8">
         <div class="mb-8"><h2 class="text-2xl font-bold text-white">Moderasi Testimoni</h2><p class="text-sm text-muted-3 mt-1">Hanya approve/reject dari buyer.</p></div>
         <div class="flex gap-2 mb-6"><button onclick="filterTestimoni('all')" class="testi-filter active px-4 py-2 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/20 text-red-accent transition" data-tf="all">Semua</button><button onclick="filterTestimoni('pending')" class="testi-filter px-4 py-2 rounded-lg text-xs font-semibold bg-dark-card border border-dark-border text-muted-2 transition" data-tf="pending">Pending</button><button onclick="filterTestimoni('approved')" class="testi-filter px-4 py-2 rounded-lg text-xs font-semibold bg-dark-card border border-dark-border text-muted-2 transition" data-tf="approved">Approved</button></div>
-        <div class="grid grid-cols-3 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total Masuk</div><div id="stat-testi-total" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Disetujui</div><div id="stat-testi-approved" class="text-2xl font-bold text-green-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Menunggu</div><div id="stat-testi-pending" class="text-2xl font-bold text-yellow-400">0</div></div></div>
-        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Review</th><th class="text-center">Rating</th><th class="text-center">Status</th><th class="text-center">Actions</th></tr></thead><tbody id="testi-tbody"><tr><td colspan="4" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</td></tr></tbody></table></div></div>
+        <div class="grid grid-cols-3 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total</div><div id="stat-testi-total" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Approved</div><div id="stat-testi-approved" class="text-2xl font-bold text-green-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Pending</div><div id="stat-testi-pending" class="text-2xl font-bold text-yellow-400">0</div></div></div>
+        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Review</th><th class="text-center">Rating</th><th class="text-center">Status</th><th class="text-center">Del</th></tr></thead><tbody id="testi-tbody"><tr><td colspan="4" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
-      <!-- ═══ DONE PAYMENT ═══ -->
+      <!-- DONE PAYMENT -->
       <div id="tab-donepayment" class="tab-content hidden p-5 md:p-8">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Done Payment</h2><p class="text-sm text-muted-3 mt-1"><span class="linked-badge">LINKED</span> = dari chat order. Klik Chat untuk lanjut.</p></div><button onclick="openDoneModal()" class="bg-dark-card border border-dark-border hover:border-muted-4 text-muted-2 hover:text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition text-sm"><i class="fas fa-plus text-xs"></i> Add Manual</button></div>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Transaksi</div><div id="stat-dp-total" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Revenue</div><div id="stat-dp-revenue" class="text-2xl font-bold text-green-400">Rp0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Publik</div><div id="stat-dp-visible" class="text-2xl font-bold text-cyan-400">0</div></div></div>
-        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Buyer</th><th>Produk</th><th class="text-right">Harga</th><th class="text-center">Link</th><th class="text-center">Tampil</th><th class="text-center">Actions</th></tr></thead><tbody id="dp-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</td></tr></tbody></table></div></div>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Done Payment</h2><p class="text-sm text-muted-3 mt-1"><span class="linked-badge">LINKED</span> = dari chat order.</p></div><button onclick="openDoneModal()" class="bg-dark-card border border-dark-border hover:border-muted-4 text-muted-2 hover:text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition text-sm"><i class="fas fa-plus text-xs"></i> Add Manual</button></div>
+        <div class="grid grid-cols-3 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Transaksi</div><div id="stat-dp-total" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Revenue</div><div id="stat-dp-revenue" class="text-2xl font-bold text-green-400">Rp0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Publik</div><div id="stat-dp-visible" class="text-2xl font-bold text-cyan-400">0</div></div></div>
+        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Buyer</th><th>Produk</th><th class="text-right">Harga</th><th class="text-center">Link</th><th class="text-center">Tampil</th><th class="text-center">Actions</th></tr></thead><tbody id="dp-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
-      <!-- ═══ PARTNERS ═══ -->
-      <div id="tab-partners" class="tab-content hidden p-5 md:p-8">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Partner Management</h2><p class="text-sm text-muted-3 mt-1">Kelola mitra dan partner teknologi.</p></div><button onclick="openPartnerModal()" class="bg-red-accent hover:bg-red-bright text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition shadow-lg shadow-red-accent/15 text-sm"><i class="fas fa-plus text-xs"></i> Add Partner</button></div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total Partner</div><div id="stat-partners" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Infrastructure</div><div id="stat-infra" class="text-2xl font-bold text-cyan-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Payment</div><div id="stat-payment" class="text-2xl font-bold text-green-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Lainnya</div><div id="stat-other" class="text-2xl font-bold text-purple-400">0</div></div></div>
-        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Partner</th><th>Category</th><th>Website</th><th class="text-center">Actions</th></tr></thead><tbody id="partners-tbody"><tr><td colspan="4" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</td></tr></tbody></table></div></div>
+      <!-- KELOLA ADMIN -->
+      <div id="tab-admins" class="tab-content hidden p-5 md:p-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+          <div><h2 class="text-2xl font-bold text-white">Kelola Akun Admin</h2><p class="text-sm text-muted-3 mt-1">CRUD admin, lihat username & password, photo profile, umur.</p></div>
+          <button onclick="openAdminModal()" class="bg-gold-accent hover:bg-gold-bright text-black font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition shadow-lg shadow-gold-accent/15 text-sm"><i class="fas fa-user-plus text-xs"></i> Tambah Admin</button>
+        </div>
+        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Admin</th><th>Umur</th><th>Username</th><th>Password</th><th class="text-center">Warning</th><th class="text-center">Status</th><th class="text-center">Actions</th></tr></thead><tbody id="admins-tbody"><tr><td colspan="7" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
-      <!-- ═══ SETTINGS ═══ -->
+      <!-- WARNINGS -->
+      <div id="tab-warnings" class="tab-content hidden p-5 md:p-8">
+        <div class="mb-8"><h2 class="text-2xl font-bold text-white">Riwayat Peringatan</h2><p class="text-sm text-muted-3 mt-1">Semua warning yang pernah dikirim ke admin.</p></div>
+        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Waktu</th><th>Owner</th><th>Kepada Admin</th><th>Isi Peringatan</th></tr></thead><tbody id="warnings-tbody"><tr><td colspan="4" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
+      </div>
+
+      <!-- SETTINGS -->
       <div id="tab-settings" class="tab-content hidden p-5 md:p-8">
         <div class="max-w-3xl">
           <h2 class="text-2xl font-bold text-white mb-6">General Settings</h2>
           <div class="bg-dark-card border border-dark-border rounded-xl p-6 mb-6"><h3 class="text-lg font-bold mb-4 text-red-accent">Terms of Service (ToS)</h3><textarea id="tos-input" class="w-full bg-dark-bg border border-dark-border rounded-lg p-4 text-sm text-muted-1 font-mono h-48 resize-none" placeholder="Masukkan text ToS..."></textarea><button onclick="saveSettings()" class="mt-4 px-6 py-2.5 bg-red-accent hover:bg-red-bright text-white rounded-lg transition font-bold text-sm">Save Changes</button></div>
           <div class="bg-dark-card border border-dark-border rounded-xl p-6">
-            <div class="flex items-center justify-between mb-2"><h3 class="text-lg font-bold text-red-accent"><i class="fas fa-qrcode mr-2"></i>QRIS Payment Commands</h3><button onclick="openQrisModal()" class="px-3 py-1.5 bg-red-accent hover:bg-red-bright text-white font-bold rounded-lg text-xs transition"><i class="fas fa-plus mr-1"></i>Tambah</button></div>
-            <p class="text-sm text-muted-3 mb-5">Ketik perintah di chat order untuk auto-kirim gambar QRIS.</p>
-            <div id="qrisList" class="space-y-3"><div class="text-center py-6 text-muted-3 text-sm"><i class="fas fa-spinner fa-spin mr-1"></i>Memuat...</div></div>
+            <div class="flex items-center justify-between mb-2"><h3 class="text-lg font-bold text-red-accent"><i class="fas fa-qrcode mr-2"></i>QRIS Commands</h3><button onclick="openQrisModal()" class="px-3 py-1.5 bg-red-accent hover:bg-red-bright text-white font-bold rounded-lg text-xs transition"><i class="fas fa-plus mr-1"></i>Tambah</button></div>
+            <div id="qrisList" class="space-y-3 mt-4"><div class="text-center py-6 text-muted-3 text-sm"><i class="fas fa-spinner fa-spin mr-1"></i></div></div>
           </div>
         </div>
       </div>
@@ -208,1038 +246,384 @@
     </div>
   </main>
 
-  <!-- ═══ MODAL: PRODUCT ═══ -->
-  <div id="productModal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 modal-backdrop" onclick="closeProductModal()"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg">
-      <div class="bg-dark-card border border-dark-border rounded-2xl shadow-2xl p-6 m-4 max-h-[90vh] overflow-y-auto">
-        <h3 id="productModalTitle" class="text-xl font-bold text-white mb-6">Add New Product</h3>
-        <form id="productForm" onsubmit="handleProductSubmit(event)">
-          <input type="hidden" id="prodId">
-          <div class="space-y-4">
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Title</label><input type="text" id="prodTitle" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div class="grid grid-cols-2 gap-4">
-              <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Category</label><select id="prodCat" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="hosting">Hosting</option><option value="vps">VPS</option><option value="domain">Domain</option><option value="game">Game Server</option><option value="dedicated">Dedicated</option><option value="other">Other</option></select></div>
-              <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Price (IDR)</label><input type="number" id="prodPrice" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            </div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Stock</label><input type="number" id="prodStock" required min="0" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Image URL</label><input type="url" id="prodImage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><p class="text-[10px] text-muted-4 mt-1">Kosongkan = default.</p></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Description</label><textarea id="prodDesc" required rows="2" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Features (koma)</label><textarea id="prodFeatures" rows="3" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Icon</label><input type="text" id="prodIcon" placeholder="fa-server" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div class="flex justify-end gap-3 mt-6">
-              <button type="button" onclick="closeProductModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Cancel</button>
-              <button type="submit" class="px-6 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Save</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <!-- MODAL: Product -->
+  <div id="productModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeProductModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4 max-h-[90vh] overflow-y-auto"><h3 id="productModalTitle" class="text-xl font-bold text-white mb-6">Add Product</h3><form id="productForm" onsubmit="handleProductSubmit(event)"><input type="hidden" id="prodId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Title</label><input type="text" id="prodTitle" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Category</label><select id="prodCat" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="hosting">Hosting</option><option value="vps">VPS</option><option value="domain">Domain</option><option value="game">Game Server</option><option value="dedicated">Dedicated</option><option value="other">Other</option></select></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Price (IDR)</label><input type="number" id="prodPrice" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Stock</label><input type="number" id="prodStock" required min="0" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Image URL</label><input type="url" id="prodImage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Description</label><textarea id="prodDesc" required rows="2" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Features (koma)</label><textarea id="prodFeatures" rows="3" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Icon</label><input type="text" id="prodIcon" placeholder="fa-server" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="flex justify-end gap-3 mt-6"><button type="button" onclick="closeProductModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Cancel</button><button type="submit" class="px-6 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Save</button></div></div></form></div></div></div>
 
-  <!-- ═══ MODAL: PARTNER ═══ -->
-  <div id="partnerModal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 modal-backdrop" onclick="closePartnerModal()"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg">
-      <div class="bg-dark-card border border-dark-border rounded-2xl shadow-2xl p-6 m-4 max-h-[90vh] overflow-y-auto">
-        <h3 id="partnerModalTitle" class="text-xl font-bold text-white mb-6">Add Partner</h3>
-        <form id="partnerForm" onsubmit="handlePartnerSubmit(event)">
-          <input type="hidden" id="ptId">
-          <div class="space-y-4">
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nama</label><input type="text" id="ptName" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Logo URL</label><input type="url" id="ptLogo" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div class="grid grid-cols-2 gap-4">
-              <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Category</label><select id="ptCat" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="infrastructure">Infrastructure</option><option value="payment">Payment</option><option value="security">Security</option><option value="cdn">CDN</option><option value="domain">Domain</option><option value="game">Game Panel</option><option value="other">Other</option></select></div>
-              <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Icon</label><input type="text" id="ptIcon" placeholder="fa-server" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            </div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Website</label><input type="url" id="ptWebsite" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Description</label><textarea id="ptDesc" rows="2" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div>
-            <div class="flex justify-end gap-3 pt-4">
-              <button type="button" onclick="closePartnerModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Cancel</button>
-              <button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Save</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <!-- MODAL: Partner -->
+  <div id="partnerModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closePartnerModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4 max-h-[90vh] overflow-y-auto"><h3 id="partnerModalTitle" class="text-xl font-bold text-white mb-6">Add Partner</h3><form id="partnerForm" onsubmit="handlePartnerSubmit(event)"><input type="hidden" id="ptId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nama</label><input type="text" id="ptName" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Logo URL</label><input type="url" id="ptLogo" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Category</label><select id="ptCat" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="infrastructure">Infrastructure</option><option value="payment">Payment</option><option value="security">Security</option><option value="cdn">CDN</option><option value="domain">Domain</option><option value="game">Game Panel</option><option value="other">Other</option></select></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Icon</label><input type="text" id="ptIcon" placeholder="fa-server" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Website</label><input type="url" id="ptWebsite" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Description</label><textarea id="ptDesc" rows="2" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closePartnerModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Cancel</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Save</button></div></div></form></div></div></div>
 
-  <!-- ═══ MODAL: DONE PAYMENT ═══ -->
-  <div id="doneModal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 modal-backdrop" onclick="closeDoneModal()"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-      <div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4">
-        <h3 class="text-xl font-bold text-white mb-2">Add Done Payment Manual</h3>
-        <p class="text-xs text-muted-3 mb-5"><i class="fas fa-info-circle mr-1"></i>Manual = tanpa link order.</p>
-        <form id="doneForm" onsubmit="handleDoneSubmit(event)">
-          <input type="hidden" id="dpId">
-          <div class="space-y-4">
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nick Buyer</label><input type="text" id="dpBuyer" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Produk</label><input type="text" id="dpProduct" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div class="grid grid-cols-2 gap-4">
-              <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Paket</label><input type="text" id="dpPackage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-              <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Harga</label><input type="number" id="dpPrice" required min="1" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            </div>
-            <div class="flex items-center gap-2"><input type="checkbox" id="dpVisible" checked class="accent-red-500 w-4 h-4"><label for="dpVisible" class="text-sm text-muted-2 cursor-pointer">Publik</label></div>
-            <div class="flex justify-end gap-3 pt-4">
-              <button type="button" onclick="closeDoneModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button>
-              <button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <!-- MODAL: Done Payment -->
+  <div id="doneModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeDoneModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 class="text-xl font-bold text-white mb-2">Add Done Payment Manual</h3><p class="text-xs text-muted-3 mb-5"><i class="fas fa-info-circle mr-1"></i>Manual = tanpa link order.</p><form id="doneForm" onsubmit="handleDoneSubmit(event)"><input type="hidden" id="dpId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nick Buyer</label><input type="text" id="dpBuyer" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Produk</label><input type="text" id="dpProduct" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Paket</label><input type="text" id="dpPackage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Harga</label><input type="number" id="dpPrice" required min="1" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div class="flex items-center gap-2"><input type="checkbox" id="dpVisible" checked class="accent-red-500 w-4 h-4"><label for="dpVisible" class="text-sm text-muted-2 cursor-pointer">Publik</label></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeDoneModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div></div></form></div></div></div>
 
-  <!-- ═══ MODAL: QRIS ═══ -->
-  <div id="qrisModal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 modal-backdrop" onclick="closeQrisModal()"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-      <div class="bg-dark-card border border-dark-border rounded-2xl shadow-2xl p-6 m-4">
-        <h3 id="qrisModalTitle" class="text-xl font-bold text-white mb-6">Tambah QRIS</h3>
-        <form id="qrisForm" onsubmit="handleQrisSubmit(event)">
-          <input type="hidden" id="qrisEditId">
-          <div class="space-y-4">
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Perintah</label><input type="text" id="qrisCommand" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-red-accent font-mono text-lg" placeholder="/pay1"><p class="text-[10px] text-muted-4 mt-1">Harus diawali <code class="text-red-accent/60">/</code></p></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Label</label><input type="text" id="qrisLabel" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div>
-              <label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Gambar QRIS</label>
-              <div id="qrisFormPreview" class="hidden mb-3 p-3 rounded-xl bg-dark-bg border border-dark-border"><img id="qrisFormImg" class="max-h-40 mx-auto rounded-lg"></div>
-              <input type="file" id="qrisFormFile" accept="image/*" class="hidden">
-              <button type="button" onclick="document.getElementById('qrisFormFile').click()" class="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-sm text-muted-2 hover:text-white hover:border-red-accent transition flex items-center justify-center gap-2"><i class="fas fa-upload"></i> Upload</button>
-            </div>
-          </div>
-          <div class="flex justify-end gap-3 pt-4">
-            <button type="button" onclick="closeQrisModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button>
-            <button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <!-- MODAL: QRIS -->
+  <div id="qrisModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeQrisModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 id="qrisModalTitle" class="text-xl font-bold text-white mb-6">Tambah QRIS</h3><form id="qrisForm" onsubmit="handleQrisSubmit(event)"><input type="hidden" id="qrisEditId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Perintah</label><input type="text" id="qrisCommand" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-red-accent font-mono text-lg" placeholder="/pay1"><p class="text-[10px] text-muted-4 mt-1">Harus diawali <code class="text-red-accent/60">/</code></p></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Label</label><input type="text" id="qrisLabel" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Gambar QRIS</label><div id="qrisFormPreview" class="hidden mb-3 p-3 rounded-xl bg-dark-bg border border-dark-border"><img id="qrisFormImg" class="max-h-40 mx-auto rounded-lg"></div><input type="file" id="qrisFormFile" accept="image/*" class="hidden"><button type="button" onclick="document.getElementById('qrisFormFile').click()" class="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-sm text-muted-2 hover:text-white hover:border-red-accent transition flex items-center justify-center gap-2"><i class="fas fa-upload"></i> Upload</button></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeQrisModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div></div></form></div></div></div>
 
-  <!-- ═══ ORDER DETAIL PANEL ═══ -->
+  <!-- MODAL: Admin -->
+  <div id="adminModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeAdminModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 id="adminModalTitle" class="text-xl font-bold text-white mb-6">Tambah Admin</h3><form id="adminForm" onsubmit="handleAdminSubmit(event)"><input type="hidden" id="admId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nama Lengkap</label><input type="text" id="admName" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Umur</label><input type="number" id="admAge" required min="16" max="99" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Photo URL</label><input type="url" id="admPhoto" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><p class="text-[10px] text-muted-4 mt-1">Opsional</p></div></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Username Login</label><input type="text" id="admUsername" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm font-mono" placeholder="admin_raka"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Password Login</label><input type="text" id="admPassword" required minlength="4" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm font-mono" placeholder="passwordnya"></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeAdminModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-gold-accent hover:bg-gold-bright text-black font-bold text-sm">Simpan</button></div></div></form></div></div></div>
+
+  <!-- MODAL: Warning -->
+  <div id="warningModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeWarningModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i>Kirim Peringatan</h3><p id="warningTargetName" class="text-sm text-muted-2 mb-5">Untuk admin: -</p><form id="warningForm" onsubmit="handleWarningSubmit(event)"><input type="hidden" id="warnAdminId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Isi Peringatan</label><textarea id="warnText" required rows="4" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white text-sm resize-none" placeholder="Deskripsikan kesalahan..."></textarea></div><div class="flex justify-end gap-3"><button type="button" onclick="closeWarningModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-sm"><i class="fas fa-exclamation-triangle mr-1"></i>Kirim</button></div></div></form></div></div></div>
+
+  <!-- ORDER DETAIL PANEL -->
   <div id="orderDetailPanel" class="hidden fixed inset-0 z-40">
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeOrderDetail()"></div>
     <div class="absolute right-0 top-0 bottom-0 w-full md:max-w-2xl bg-dark-bg border-l border-dark-border flex flex-col shadow-2xl">
-      <!-- Header -->
       <div class="flex-shrink-0 border-b border-dark-border p-4 flex items-center justify-between bg-dark-card">
-        <div>
-          <div class="text-[10px] font-mono text-muted-3 tracking-wider">ORDER #<span id="detailOrderId">-</span></div>
-          <div class="font-bold text-base mt-0.5 text-white" id="detailBuyerName">-</div>
-        </div>
+        <div><div class="text-[10px] font-mono text-muted-3 tracking-wider">ORDER #<span id="detailOrderId">-</span></div><div class="font-bold text-base mt-0.5 text-white" id="detailBuyerName">-</div></div>
         <div class="flex items-center gap-2">
           <button onclick="showDpForm()" class="h-9 px-3 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 hover:bg-green-500/20 transition text-xs font-semibold gap-1.5"><i class="fas fa-check-circle"></i><span class="hidden sm:inline">Done Pay</span></button>
           <a id="detailWaLink" href="#" target="_blank" class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400"><i class="fab fa-whatsapp text-lg"></i></a>
           <button onclick="closeOrderDetail()" class="w-9 h-9 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-2"><i class="fas fa-times"></i></button>
         </div>
       </div>
-      <!-- Detail Info -->
-      <div class="flex-shrink-0 p-4 border-b border-dark-border overflow-y-auto" style="max-height:35vh">
-        <h4 class="text-[10px] font-mono text-muted-3 uppercase tracking-wider mb-3">Rincian</h4>
-        <div class="bg-dark-card border border-dark-border rounded-xl p-4 space-y-3 text-sm">
-          <div class="flex justify-between"><span class="text-muted-3">Produk</span><span class="font-bold text-white" id="detailProduct">-</span></div>
-          <div class="flex justify-between"><span class="text-muted-3">Harga</span><span class="font-mono text-green-400" id="detailPrice">-</span></div>
-          <div class="flex justify-between"><span class="text-muted-3">WhatsApp</span><a id="detailWaText" href="#" target="_blank" class="font-mono text-cyan-400 hover:underline">-</a></div>
-          <div class="flex justify-between"><span class="text-muted-3">Catatan</span><span class="text-muted-1 text-right max-w-[60%]" id="detailNote">-</span></div>
-          <div class="flex justify-between"><span class="text-muted-3">Tanggal</span><span class="font-mono text-muted-2" id="detailDate">-</span></div>
-          <div class="flex justify-between items-center"><span class="text-muted-3">Status</span><select id="detailStatus" onchange="updateOrderStatusFromPanel()" class="text-xs font-mono px-3 py-1 rounded-lg border border-dark-border bg-dark-bg text-white outline-none cursor-pointer"><option value="pending">Pending</option><option value="processing">Processing</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></div>
-        </div>
+      <div class="flex-1 flex flex-col min-h-0 overflow-hidden">
+        <div class="flex-shrink-0 p-4 border-b border-dark-border overflow-y-auto" style="max-height:35vh"><h4 class="text-[10px] font-mono text-muted-3 uppercase tracking-wider mb-3">Rincian</h4><div class="bg-dark-card border border-dark-border rounded-xl p-4 space-y-3 text-sm"><div class="flex justify-between"><span class="text-muted-3">Produk</span><span class="font-bold text-white" id="detailProduct">-</span></div><div class="flex justify-between"><span class="text-muted-3">Harga</span><span class="font-mono text-green-400" id="detailPrice">-</span></div><div class="flex justify-between"><span class="text-muted-3">WhatsApp</span><a id="detailWaText" href="#" target="_blank" class="font-mono text-cyan-400 hover:underline">-</a></div><div class="flex justify-between"><span class="text-muted-3">Catatan</span><span class="text-muted-1 text-right max-w-[60%]" id="detailNote">-</span></div><div class="flex justify-between"><span class="text-muted-3">Tanggal</span><span class="font-mono text-muted-2" id="detailDate">-</span></div><div class="flex justify-between items-center"><span class="text-muted-3">Status</span><select id="detailStatus" onchange="updateOrderStatusFromPanel()" class="text-xs font-mono px-3 py-1 rounded-lg border border-dark-border bg-dark-bg text-white outline-none cursor-pointer"><option value="pending">Pending</option><option value="processing">Processing</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></div></div></div>
+        <div class="flex-1 min-h-0 flex flex-col overflow-hidden"><div class="flex-shrink-0 px-4 pt-3 pb-2"><h4 class="text-[10px] font-mono text-muted-3 uppercase tracking-wider"><i class="fas fa-comments mr-1"></i> Chat</h4></div><div id="chatMessages" class="flex-1 overflow-y-auto px-4 pb-4 space-y-3"><div class="text-center text-muted-3 text-sm py-8">-</div></div></div>
       </div>
-      <!-- Chat Area -->
-      <div class="flex-1 min-h-0 flex flex-col overflow-hidden">
-        <div class="flex-shrink-0 px-4 pt-3 pb-2"><h4 class="text-[10px] font-mono text-muted-3 uppercase tracking-wider"><i class="fas fa-comments mr-1"></i> Chat</h4></div>
-        <div id="chatMessages" class="flex-1 overflow-y-auto px-4 pb-4 space-y-3"><div class="text-center text-muted-3 text-sm py-8">Kosong.</div></div>
-      </div>
-      <!-- QRIS Quick Bar -->
-      <div id="qrisQuickBar" class="hidden flex-shrink-0 border-t border-dark-border px-4 py-2 bg-dark-card/80">
-        <div class="flex items-center gap-2 overflow-x-auto" id="qrisQuickBarInner"><span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span></div>
-      </div>
-      <!-- Done Payment Form (in-chat) -->
-      <div id="dpFormBar" class="dp-form-bar flex-shrink-0 border-t border-dark-border">
-        <div class="px-4 pt-3 pb-1 flex items-center gap-2"><i class="fas fa-check-circle text-green-400 text-sm"></i><span class="text-xs font-bold text-green-400 font-mono">DONE PAYMENT</span><span class="text-[10px] text-muted-4 font-mono ml-1">→ Otomatis terhubung ke order ini</span><button onclick="hideDpForm()" class="ml-auto w-7 h-7 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-3 text-xs"><i class="fas fa-times"></i></button></div>
-        <div class="px-4 pb-3 grid grid-cols-2 gap-3">
-          <div><label>Nick</label><input type="text" id="dpChatBuyer" class="text-sm"></div>
-          <div><label>Produk</label><input type="text" id="dpChatProduct" class="text-sm"></div>
-          <div><label>Paket</label><input type="text" id="dpChatPkg" class="text-sm" placeholder="1 Bulan"></div>
-          <div><label>Harga</label><input type="number" id="dpChatPrice" class="text-sm"></div>
-        </div>
-        <div class="px-4 pb-3 flex items-center gap-3">
-          <label class="flex items-center gap-2 text-xs text-muted-2 cursor-pointer"><input type="checkbox" id="dpChatVisible" checked class="accent-red-500 w-3.5 h-3.5">Publik</label>
-          <button onclick="submitDpFromChat()" class="ml-auto px-4 py-1.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg text-xs transition"><i class="fas fa-check mr-1"></i>Simpan & Link</button>
-        </div>
-      </div>
-      <!-- Chat Input -->
+      <div id="qrisQuickBar" class="hidden flex-shrink-0 border-t border-dark-border px-4 py-2 bg-dark-card/80"><div class="flex items-center gap-2 overflow-x-auto" id="qrisQuickBarInner"><span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span></div></div>
+      <div id="dpFormBar" class="dp-form-bar flex-shrink-0 border-t border-dark-border"><div class="px-4 pt-3 pb-1 flex items-center gap-2"><i class="fas fa-check-circle text-green-400 text-sm"></i><span class="text-xs font-bold text-green-400 font-mono">DONE PAYMENT</span><button onclick="hideDpForm()" class="ml-auto w-7 h-7 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-3 text-xs"><i class="fas fa-times"></i></button></div><div class="px-4 pb-3 grid grid-cols-2 gap-3"><div><label>Nick</label><input type="text" id="dpChatBuyer" class="text-sm"></div><div><label>Produk</label><input type="text" id="dpChatProduct" class="text-sm"></div><div><label>Paket</label><input type="text" id="dpChatPkg" class="text-sm" placeholder="1 Bulan"></div><div><label>Harga</label><input type="number" id="dpChatPrice" class="text-sm"></div></div><div class="px-4 pb-3 flex items-center gap-3"><label class="flex items-center gap-2 text-xs text-muted-2 cursor-pointer"><input type="checkbox" id="dpChatVisible" checked class="accent-green-500 w-3.5 h-3.5">Publik</label><button onclick="submitDpFromChat()" class="ml-auto px-4 py-1.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg text-xs transition"><i class="fas fa-check mr-1"></i>Simpan & Link</button></div></div>
       <div class="flex-shrink-0 border-t border-dark-border p-4 bg-dark-card space-y-2">
-        <div id="chatImagePreview" class="hidden img-preview-bar">
-          <img id="chatPreviewImg" src="">
-          <div class="flex-1 min-w-0"><div class="text-xs text-muted-2 truncate" id="chatPreviewName">-</div></div>
-          <button onclick="clearChatImage()" class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 flex-shrink-0"><i class="fas fa-times text-[10px]"></i></button>
-        </div>
+        <div id="chatImagePreview" class="hidden img-preview-bar"><img id="chatPreviewImg" src=""><div class="flex-1 min-w-0"><div class="text-xs text-muted-2 truncate" id="chatPreviewName">-</div></div><button onclick="clearChatImage()" class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 flex-shrink-0"><i class="fas fa-times text-[10px]"></i></button></div>
         <input type="file" id="chatImageInput" accept="image/*" class="hidden">
-        <div class="flex gap-2">
-          <button onclick="document.getElementById('chatImageInput').click()" class="img-btn"><i class="fas fa-image"></i></button>
-          <input type="text" id="chatInput" class="flex-1 bg-dark-bg border border-dark-border rounded-xl px-4 py-2.5 text-white text-sm placeholder-muted-4" placeholder="Ketik pesan atau /command...">
-          <button onclick="sendChat('admin')" class="px-5 py-2.5 bg-red-accent hover:bg-red-bright text-white font-bold rounded-xl transition flex items-center gap-2 text-sm"><i class="fas fa-paper-plane text-xs"></i><span class="hidden sm:inline">Kirim</span></button>
-        </div>
+        <div class="flex gap-2"><button onclick="document.getElementById('chatImageInput').click()" class="img-btn"><i class="fas fa-image"></i></button><input type="text" id="chatInput" class="flex-1 bg-dark-bg border border-dark-border rounded-xl px-4 py-2.5 text-white text-sm placeholder-muted-4" placeholder="Ketik pesan atau /donepayment ..."><button onclick="sendChat('admin')" class="px-5 py-2.5 bg-red-accent hover:bg-red-bright text-white font-bold rounded-xl transition flex items-center gap-2 text-sm"><i class="fas fa-paper-plane text-xs"></i><span class="hidden sm:inline">Kirim</span></button></div>
       </div>
     </div>
   </div>
 
-  <!-- Lightbox -->
-  <div id="imageLightbox" class="hidden fixed inset-0 z-[999] bg-black/95 flex items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
-    <button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white"><i class="fas fa-times"></i></button>
-    <img id="lightboxImg" class="max-w-full max-h-[90vh] rounded-xl object-contain" onclick="event.stopPropagation()">
-  </div>
+  <div id="imageLightbox" class="hidden fixed inset-0 z-[999] bg-black/95 flex items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()"><button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white"><i class="fas fa-times"></i></button><img id="lightboxImg" class="max-w-full max-h-[90vh] rounded-xl object-contain" onclick="event.stopPropagation()"></div>
   <div id="toast" class="toast"></div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
     import { getDatabase, ref, push, set, update, remove, onValue, get, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
 
-    /* ═══ Firebase Config ═══ */
-    const fc = {
-      apiKey: "AIzaSyBHPvQ6Bt9f6U3wqDz3CG71HNpcFq3RZRI",
-      authDomain: "kryonix-7c55e.firebaseapp.com",
-      databaseURL: "https://kryonix-7c55e-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "kryonix-7c55e",
-      storageBucket: "kryonix-7c55e.firebasestorage.app",
-      messagingSenderId: "917095112473",
-      appId: "1:917095112473:web:dd4120a14724e6e6a02f88",
-      measurementId: "G-9Y77T2V6H7"
-    };
-    const app = initializeApp(fc);
-    const db = getDatabase(app);
+    const fc = { apiKey: "AIzaSyBHPvQ6Bt9f6U3wqDz3CG71HNpcFq3RZRI", authDomain: "kryonix-7c55e.firebaseapp.com", databaseURL: "https://kryonix-7c55e-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "kryonix-7c55e", storageBucket: "kryonix-7c55e.firebasestorage.app", messagingSenderId: "917095112473", appId: "1:917095112473:web:dd4120a14724e6e6a02f88" };
+    const app = initializeApp(fc), db = getDatabase(app);
 
-    /* ═══ Constants ═══ */
     const DI = { hosting: 'https://picsum.photos/seed/kry-hosting/600/400', vps: 'https://picsum.photos/seed/kry-vps/600/400', domain: 'https://picsum.photos/seed/kry-domain/600/400', game: 'https://picsum.photos/seed/kry-game/600/400', dedicated: 'https://picsum.photos/seed/kry-dedi/600/400', other: 'https://picsum.photos/seed/kry-other/600/400' };
     const CC = { hosting: 'text-green-400', vps: 'text-cyan-400', domain: 'text-purple-400', game: 'text-green-400', dedicated: 'text-cyan-400', other: 'text-purple-400' };
     const PCI = { infrastructure: 'fa-server', payment: 'fa-credit-card', security: 'fa-shield-alt', cdn: 'fa-bolt', domain: 'fa-globe', game: 'fa-gamepad', other: 'fa-star' };
     const PCC = { infrastructure: 'text-cyan-400', payment: 'text-green-400', security: 'text-purple-400', cdn: 'text-yellow-400', domain: 'text-blue-400', game: 'text-pink-400', other: 'text-gray-400' };
     const SS = { pending: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20', processing: 'bg-blue-500/10 text-blue-400 border-blue-500/20', completed: 'bg-green-500/10 text-green-400 border-green-500/20', cancelled: 'bg-red-500/10 text-red-400 border-red-500/20' };
 
-    /* ═══ Utilities ═══ */
+    /* AUTH */
+    if (sessionStorage.getItem('kryonix_role') !== 'owner' || sessionStorage.getItem('kryonix_admin') !== 'granted') { window.location.href = 'login-admin.html'; }
+
     var toastTimer = null;
-    function showToast(m, t) {
-      t = t || 'success';
-      if (toastTimer) clearTimeout(toastTimer);
-      var el = document.getElementById('toast');
-      el.textContent = m;
-      el.className = 'toast ' + t + ' show';
-      toastTimer = setTimeout(function () { el.classList.remove('show'); }, 3500);
-    }
-    function fTime(ts) {
-      if (!ts || typeof ts !== 'number') return '-';
-      var d = new Date(ts);
-      return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) + ' ' + d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-    }
-    function fTimeS(ts) {
-      if (!ts || typeof ts !== 'number') return '-';
-      var d = new Date(ts);
-      return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }) + ' ' + d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-    }
-    function esc(t) {
-      if (!t) return '';
-      var d = document.createElement('div');
-      d.textContent = String(t);
-      return d.innerHTML;
-    }
-    function compressImage(f, mw, q) {
-      mw = mw || 800;
-      q = q || 0.7;
-      return new Promise(function (ok, no) {
-        if (!f) { no('No file'); return; }
-        if (f.size > 8 * 1024 * 1024) { no('Max 8MB'); return; }
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          var img = new Image();
-          img.onload = function () {
-            var c = document.createElement('canvas'), w = img.width, h = img.height;
-            if (w > mw) { h = (mw / w) * h; w = mw; }
-            if (h > 800) { w = (800 / h) * w; h = 800; }
-            c.width = Math.max(1, Math.round(w));
-            c.height = Math.max(1, Math.round(h));
-            c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-            ok(c.toDataURL('image/jpeg', q));
-          };
-          img.onerror = function () { no('Gagal load gambar'); };
-          img.src = e.target.result;
-        };
-        reader.onerror = function () { no('Gagal baca file'); };
-        reader.readAsDataURL(f);
-      });
-    }
+    function showToast(m, t) { t = t || 'success'; if (toastTimer) clearTimeout(toastTimer); var el = document.getElementById('toast'); el.textContent = m; el.className = 'toast ' + t + ' show'; toastTimer = setTimeout(function () { el.classList.remove('show'); }, 3500); }
+    function fTime(ts) { if (!ts || typeof ts !== 'number') return '-'; var d = new Date(ts); return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) + ' ' + d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }); }
+    function fTimeS(ts) { if (!ts || typeof ts !== 'number') return '-'; var d = new Date(ts); return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }) + ' ' + d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }); }
+    function esc(t) { if (!t) return ''; var d = document.createElement('div'); d.textContent = String(t); return d.innerHTML; }
+    function compressImage(f, mw, q) { mw = mw || 800; q = q || 0.7; return new Promise(function (ok, no) { if (!f) { no('No file'); return; } if (f.size > 8 * 1024 * 1024) { no('Max 8MB'); return; } var reader = new FileReader(); reader.onload = function (e) { var img = new Image(); img.onload = function () { var c = document.createElement('canvas'), w = img.width, h = img.height; if (w > mw) { h = (mw / w) * h; w = mw; } if (h > 800) { w = (800 / h) * w; h = 800; } c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h)); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); ok(c.toDataURL('image/jpeg', q)); }; img.onerror = function () { no('Gagal'); }; img.src = e.target.result; }; reader.onerror = function () { no('Gagal'); }; reader.readAsDataURL(f); }); }
     var imgStore = {};
-    window.viewImage = function (k) {
-      if (imgStore[k]) {
-        document.getElementById('lightboxImg').src = imgStore[k];
-        document.getElementById('imageLightbox').classList.remove('hidden');
-      }
-    };
+    window.viewImage = function (k) { if (imgStore[k]) { document.getElementById('lightboxImg').src = imgStore[k]; document.getElementById('imageLightbox').classList.remove('hidden'); } };
     window.closeLightbox = function () { document.getElementById('imageLightbox').classList.add('hidden'); };
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
 
-    /* ═══ Auth Guard ═══ */
-    if (sessionStorage.getItem('kryonix_admin') !== 'granted') {
-      window.location.href = 'login-admin.html';
-    }
+    function updateClock() { var n = new Date(); document.getElementById('dashClock').textContent = n.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' \u2014 ' + n.toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }); }
+    updateClock(); setInterval(updateClock, 1000);
+    window.openDrawer = function () { document.getElementById('drawerOverlay').classList.add('open'); document.getElementById('drawerPanel').classList.add('open'); };
+    window.closeDrawer = function () { document.getElementById('drawerOverlay').classList.remove('open'); document.getElementById('drawerPanel').classList.remove('open'); };
 
-    /* ═══ Clock ═══ */
-    function updateClock() {
-      var n = new Date();
-      document.getElementById('dashClock').textContent = n.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' \u2014 ' + n.toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
-
-    /* ═══ Drawer ═══ */
-    window.openDrawer = function () {
-      document.getElementById('drawerOverlay').classList.add('open');
-      document.getElementById('drawerPanel').classList.add('open');
-    };
-    window.closeDrawer = function () {
-      document.getElementById('drawerOverlay').classList.remove('open');
-      document.getElementById('drawerPanel').classList.remove('open');
-    };
-
-    /* ═══ Tab Switching ═══ */
-    var HT = { dashboard: 'Dashboard', products: 'Product Management', orders: 'Order Management', testimoni: 'Moderasi Testimoni', donepayment: 'Done Payment', partners: 'Partner Management', settings: 'General Settings' };
-    var TAB_MAP = [0, 1, 2, 3, 4, 5, null, 6]; // dashboard,products,orders,testimoni,donepayment,partners,(divider),settings
-    var TAB_KEYS = ['dashboard', 'products', 'orders', 'testimoni', 'donepayment', 'partners', null, 'settings'];
-
+    var HT = { dashboard: 'Owner Overview', products: 'Product Management', orders: 'Order Management', partners: 'Partner Management', testimoni: 'Moderasi Testimoni', donepayment: 'Done Payment', admins: 'Kelola Admin', warnings: 'Riwayat Warnings', settings: 'General Settings' };
+    var TAB_KEYS = ['dashboard', 'products', 'orders', 'partners', 'testimoni', 'donepayment', null, 'admins', 'warnings', null, 'settings'];
     window.switchTab = function (tab) {
       document.querySelectorAll('.tab-content').forEach(function (el) { el.classList.add('hidden'); });
       var tabEl = document.getElementById('tab-' + tab);
       if (tabEl) tabEl.classList.remove('hidden');
-      // Desktop nav highlight
       document.querySelectorAll('aside .nav-item').forEach(function (el) { el.classList.remove('active'); });
       var idx = TAB_KEYS.indexOf(tab);
-      if (idx >= 0) {
-        var navItems = document.querySelectorAll('aside .nav-item');
-        if (navItems[idx]) navItems[idx].classList.add('active');
-      }
-      // Mobile nav highlight
+      if (idx >= 0) { var navItems = document.querySelectorAll('aside .nav-item'); if (navItems[idx]) navItems[idx].classList.add('active'); }
       document.querySelectorAll('.mob-nav').forEach(function (el) { el.classList.remove('active'); });
       var mb = document.querySelector('[data-mob="' + tab + '"]');
       if (mb) mb.classList.add('active');
-      document.getElementById('headerTitle').textContent = HT[tab] || 'Admin';
+      document.getElementById('headerTitle').textContent = HT[tab] || 'Owner';
       if (tab === 'settings') loadSettings();
     };
-
     window.doLogout = function () { sessionStorage.clear(); window.location.href = 'login-admin.html'; };
 
-    /* ═══ QRIS Commands ═══ */
-    var qC = {}, qR = {}, qFD = { image: null };
+    /* Owner data */
+    var ownerData = {};
+    onValue(ref(db, 'owners/' + sessionStorage.getItem('kryonix_uid')), function (s) {
+      var u = s.val();
+      if (!u) { showToast('Akun tidak ditemukan.', 'error'); setTimeout(function () { window.location.href = 'login-admin.html'; }, 1500); return; }
+      ownerData = u;
+      var av = document.getElementById('headerAvatar');
+      if (u.photoUrl) { av.innerHTML = '<img src="' + esc(u.photoUrl) + '" class="w-full h-full rounded-full object-cover">'; } else { av.textContent = (u.name || '?').charAt(0).toUpperCase(); }
+      document.getElementById('headerName').textContent = u.name || '-';
+    });
 
+    /* ═══ QRIS ═══ */
+    var qC = {}, qR = {}, qFD = { image: null };
     function loadQris() {
       onValue(ref(db, "settings/qris_commands"), function (s) {
-        var r = s.val();
-        qC = {};
-        qR = {};
-        if (r) {
-          Object.keys(r).forEach(function (id) {
-            var q = r[id];
-            qR[id] = q;
-            var c = (q.command || '').toLowerCase().trim();
-            if (c) qC[c] = q;
-          });
-        }
-        renderQrisList();
-        renderQrisQuickBar();
+        var r = s.val(); qC = {}; qR = {};
+        if (r) Object.keys(r).forEach(function (id) { var q = r[id]; qR[id] = q; var c = (q.command || '').toLowerCase().trim(); if (c) qC[c] = q; });
+        renderQrisList(); renderQrisQuickBar();
       });
     }
-
     function renderQrisList() {
-      var l = document.getElementById('qrisList');
-      var ids = Object.keys(qR);
-      if (!ids.length) {
-        l.innerHTML = '<div class="text-center py-8 text-muted-3"><i class="fas fa-qrcode text-3xl mb-3 text-muted-4 block"></i><p class="text-sm">Belum ada QRIS.</p></div>';
-        return;
-      }
+      var l = document.getElementById('qrisList'), ids = Object.keys(qR);
+      if (!ids.length) { l.innerHTML = '<div class="text-center py-8 text-muted-3"><i class="fas fa-qrcode text-3xl mb-3 text-muted-4 block"></i><p class="text-sm">Kosong.</p></div>'; return; }
       l.innerHTML = '';
       ids.sort(function (a, b) { return (qR[a].command || '').localeCompare(qR[b].command || ''); });
       ids.forEach(function (id) {
-        var q = qR[id];
-        var c = document.createElement('div');
-        c.className = 'qris-card';
-        var imgH = q.image
-          ? '<img src="' + esc(q.image) + '">'
-          : '<div class="w-16 h-16 rounded-lg border border-dark-border flex items-center justify-center text-muted-4 flex-shrink-0"><i class="fas fa-qrcode text-xl"></i></div>';
-        c.innerHTML = imgH +
-          '<div class="flex-1 min-w-0">' +
-          '<div class="flex items-center gap-2 mb-0.5">' +
-          '<code class="text-sm font-mono text-red-accent font-bold">' + esc(q.command || '-') + '</code>' +
-          '<span class="text-muted-4">\u2014</span>' +
-          '<span class="text-sm text-muted-1 truncate">' + esc(q.label || '-') + '</span>' +
-          '</div></div>' +
-          '<div class="flex items-center gap-1 flex-shrink-0">' +
-          '<button data-qe="' + id + '" class="text-cyan-400 hover:text-cyan-300 p-2 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button>' +
-          '<button data-qd="' + id + '" class="text-red-400 hover:text-red-300 p-2 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button>' +
-          '</div>';
+        var q = qR[id], c = document.createElement('div'); c.className = 'qris-card';
+        var ih = q.image ? '<img src="' + esc(q.image) + '">' : '<div class="w-16 h-16 rounded-lg border border-dark-border flex items-center justify-center text-muted-4 flex-shrink-0"><i class="fas fa-qrcode text-xl"></i></div>';
+        c.innerHTML = ih + '<div class="flex-1 min-w-0"><div class="flex items-center gap-2 mb-0.5"><code class="text-sm font-mono text-red-accent font-bold">' + esc(q.command || '-') + '</code><span class="text-muted-4">\u2014</span><span class="text-sm text-muted-1 truncate">' + esc(q.label || '-') + '</span></div></div><div class="flex items-center gap-1 flex-shrink-0"><button data-qe="' + id + '" class="text-cyan-400 hover:text-cyan-300 p-2 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-qd="' + id + '" class="text-red-400 hover:text-red-300 p-2 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></div>';
         l.appendChild(c);
       });
     }
-
     document.getElementById('qrisList').addEventListener('click', function (e) {
-      var eb = e.target.closest('[data-qe]');
-      var db2 = e.target.closest('[data-qd]');
+      var eb = e.target.closest('[data-qe]'), db2 = e.target.closest('[data-qd]');
       if (eb) { var id = eb.getAttribute('data-qe'); if (qR[id]) openQrisModal(true, id, qR[id]); }
       if (db2) deleteQris(db2.getAttribute('data-qd'));
     });
-
     function renderQrisQuickBar() {
-      var b = document.getElementById('qrisQuickBar');
-      var i = document.getElementById('qrisQuickBarInner');
-      var cs = Object.keys(qC);
+      var b = document.getElementById('qrisQuickBar'), i = document.getElementById('qrisQuickBarInner'), cs = Object.keys(qC);
       if (!cs.length) { b.classList.add('hidden'); return; }
       b.classList.remove('hidden');
       i.innerHTML = '<span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span>';
-      cs.forEach(function (c) {
-        var q = qC[c];
-        var ch = document.createElement('button');
-        ch.className = 'qris-cmd-chip';
-        ch.textContent = c;
-        ch.setAttribute('data-qs', c);
-        ch.title = q.label || c;
-        i.appendChild(ch);
-      });
+      cs.forEach(function (c) { var ch = document.createElement('button'); ch.className = 'qris-cmd-chip'; ch.textContent = c; ch.setAttribute('data-qs', c); ch.title = qC[c].label || c; i.appendChild(ch); });
     }
-
-    document.getElementById('qrisQuickBarInner').addEventListener('click', function (e) {
-      var c = e.target.closest('[data-qs]');
-      if (c) quickSendQris(c.getAttribute('data-qs'));
-    });
-
-    window.openQrisModal = function (isE, eId, data) {
-      document.getElementById('qrisModal').classList.remove('hidden');
-      document.getElementById('qrisModalTitle').textContent = isE ? 'Edit QRIS' : 'Tambah QRIS';
-      document.getElementById('qrisForm').reset();
-      document.getElementById('qrisEditId').value = '';
-      document.getElementById('qrisFormPreview').classList.add('hidden');
-      qFD = { image: null };
-      if (isE && data) {
-        document.getElementById('qrisEditId').value = eId || '';
-        document.getElementById('qrisCommand').value = data.command || '';
-        document.getElementById('qrisLabel').value = data.label || '';
-        if (data.image) {
-          qFD.image = data.image;
-          document.getElementById('qrisFormImg').src = data.image;
-          document.getElementById('qrisFormPreview').classList.remove('hidden');
-        }
-      }
-    };
+    document.getElementById('qrisQuickBarInner').addEventListener('click', function (e) { var c = e.target.closest('[data-qs]'); if (c) quickSendQris(c.getAttribute('data-qs')); });
+    window.openQrisModal = function (isE, eId, data) { document.getElementById('qrisModal').classList.remove('hidden'); document.getElementById('qrisModalTitle').textContent = isE ? 'Edit QRIS' : 'Tambah QRIS'; document.getElementById('qrisForm').reset(); document.getElementById('qrisEditId').value = ''; document.getElementById('qrisFormPreview').classList.add('hidden'); qFD = { image: null }; if (isE && data) { document.getElementById('qrisEditId').value = eId || ''; document.getElementById('qrisCommand').value = data.command || ''; document.getElementById('qrisLabel').value = data.label || ''; if (data.image) { qFD.image = data.image; document.getElementById('qrisFormImg').src = data.image; document.getElementById('qrisFormPreview').classList.remove('hidden'); } } };
     window.closeQrisModal = function () { document.getElementById('qrisModal').classList.add('hidden'); };
-    window.deleteQris = async function (id) {
-      if (!confirm('Hapus QRIS ini?')) return;
-      try { await remove(ref(db, 'settings/qris_commands/' + id)); showToast('QRIS dihapus.'); }
-      catch (e) { showToast('Gagal.', 'error'); }
-    };
+    window.deleteQris = async function (id) { if (!confirm('Hapus?')) return; try { await remove(ref(db, 'settings/qris_commands/' + id)); showToast('Dihapus.'); } catch (e) { showToast('Gagal.', 'error'); } };
+    document.getElementById('qrisFormFile').addEventListener('change', async function (e) { var f = e.target.files[0]; if (!f) return; try { qFD.image = await compressImage(f, 600, 0.6); document.getElementById('qrisFormImg').src = qFD.image; document.getElementById('qrisFormPreview').classList.remove('hidden'); } catch (er) { showToast(typeof er === 'string' ? er : 'Gagal.', 'error'); } e.target.value = ''; });
+    window.handleQrisSubmit = async function (e) { e.preventDefault(); var id = document.getElementById('qrisEditId').value, cmd = document.getElementById('qrisCommand').value.trim(), lbl = document.getElementById('qrisLabel').value.trim(); if (!cmd.startsWith('/')) { showToast('Harus diawali /', 'error'); return; } if (!qFD.image && !id) { showToast('Upload gambar.', 'error'); return; } var nc = cmd.toLowerCase(), dup = false; for (var r in qR) { if ((qR[r].command || '').toLowerCase() === nc && r !== id) { dup = true; break; } } if (dup) { showToast('Sudah ada.', 'error'); return; } try { var d = { command: nc, label: lbl }; if (qFD.image) d.image = qFD.image; if (!id) d.createdAt = serverTimestamp(); if (id) { await update(ref(db, 'settings/qris_commands/' + id), d); showToast('Diupdate!'); } else { await set(push(ref(db, 'settings/qris_commands')), d); showToast('Ditambahkan!'); } closeQrisModal(); } catch (er) { showToast('Gagal.', 'error'); } };
+    window.quickSendQris = async function (cmd) { if (!currentChatOrderId) return; var q = qC[cmd]; if (!q || !q.image) return; try { await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender: 'admin', text: '\uD83D\uDCB0 Pembayaran via ' + (q.label || cmd) + '. Scan QRIS:', image: q.image, timestamp: serverTimestamp() }); showToast('QRIS terkirim!'); } catch (e) { showToast('Gagal.', 'error'); } };
 
-    document.getElementById('qrisFormFile').addEventListener('change', async function (e) {
-      var f = e.target.files[0];
-      if (!f) return;
-      try {
-        qFD.image = await compressImage(f, 600, 0.6);
-        document.getElementById('qrisFormImg').src = qFD.image;
-        document.getElementById('qrisFormPreview').classList.remove('hidden');
-      } catch (er) { showToast(typeof er === 'string' ? er : 'Gagal upload.', 'error'); }
-      e.target.value = '';
-    });
-
-    window.handleQrisSubmit = async function (e) {
-      e.preventDefault();
-      var id = document.getElementById('qrisEditId').value;
-      var cmd = document.getElementById('qrisCommand').value.trim();
-      var lbl = document.getElementById('qrisLabel').value.trim();
-      if (!cmd.startsWith('/')) { showToast('Harus diawali /', 'error'); return; }
-      if (!qFD.image && !id) { showToast('Upload gambar QRIS.', 'error'); return; }
-      var nc = cmd.toLowerCase();
-      var dup = false;
-      for (var r in qR) {
-        if ((qR[r].command || '').toLowerCase() === nc && r !== id) { dup = true; break; }
-      }
-      if (dup) { showToast('Perintah sudah ada.', 'error'); return; }
-      try {
-        var d = { command: nc, label: lbl };
-        if (qFD.image) d.image = qFD.image;
-        if (!id) d.createdAt = serverTimestamp();
-        if (id) {
-          await update(ref(db, 'settings/qris_commands/' + id), d);
-          showToast('QRIS diupdate!');
-        } else {
-          await set(push(ref(db, 'settings/qris_commands')), d);
-          showToast('QRIS ditambahkan!');
-        }
-        closeQrisModal();
-      } catch (er) { showToast('Gagal simpan.', 'error'); }
-    };
-
-    window.quickSendQris = async function (cmd) {
-      if (!currentChatOrderId) return;
-      var q = qC[cmd];
-      if (!q || !q.image) return;
-      try {
-        await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), {
-          sender: 'admin',
-          text: '\uD83D\uDCB0 Pembayaran via ' + (q.label || cmd) + '. Scan QRIS:',
-          image: q.image,
-          timestamp: serverTimestamp()
-        });
-        showToast('QRIS terkirim!');
-      } catch (e) { showToast('Gagal kirim.', 'error'); }
-    };
-
-    /* ═══ Dashboard Data Cache ═══ */
-    var DD = { products: {}, orders: {}, partners: {}, testimoni: {}, donePayments: {} };
+    /* ═══ DASHBOARD DATA ═══ */
+    var DD = { products: {}, orders: {}, partners: {}, testimoni: {}, donePayments: {}, admins: {}, warnings: [] };
 
     function updateDash() {
-      var p = DD.products, o = DD.orders, t = DD.testimoni, dp = DD.donePayments;
-
-      // Products stats
-      var tp = Object.keys(p).length, ts = 0;
-      Object.values(p).forEach(function (x) { ts += (x.stock || 0); });
-      document.getElementById('d-stat-products').textContent = tp;
-      document.getElementById('d-stat-stock').textContent = ts;
-
-      // Orders stats
+      var p = DD.products, o = DD.orders, pa = DD.partners, t = DD.testimoni, dp = DD.donePayments, a = DD.admins, w = DD.warnings;
+      var tp = Object.keys(p).length, ts = 0; Object.values(p).forEach(function (x) { ts += (x.stock || 0); });
+      document.getElementById('d-stat-products').textContent = tp; document.getElementById('d-stat-stock').textContent = ts;
       var to2 = Object.keys(o).length, nr = 0;
-      Object.values(o).forEach(function (x) {
-        var last = false;
-        if (x.chat) {
-          var ck = Object.keys(x.chat);
-          if (ck.length > 0 && x.chat[ck[ck.length - 1]].sender === 'buyer') last = true;
-        }
-        if (last || !x.chat || Object.keys(x.chat).length === 0) nr++;
-      });
-      document.getElementById('d-stat-orders').textContent = to2;
-      document.getElementById('d-stat-pending').textContent = nr;
+      Object.values(o).forEach(function (x) { var last = false; if (x.chat) { var ck = Object.keys(x.chat); if (ck.length > 0 && x.chat[ck[ck.length - 1]].sender === 'buyer') last = true; } if (last || !x.chat || Object.keys(x.chat).length === 0) nr++; });
+      document.getElementById('d-stat-orders').textContent = to2; document.getElementById('d-stat-pending').textContent = nr;
+      var rev = 0, dc = 0; Object.values(dp).forEach(function (x) { rev += (x.price || 0); dc++; });
+      document.getElementById('d-stat-revenue').textContent = 'Rp' + rev.toLocaleString('id-ID'); document.getElementById('d-stat-dpcount').textContent = dc;
+      var tt = Object.keys(t).length, sr = 0, pn = 0; Object.values(t).forEach(function (x) { sr += (x.rating || 0); if (x.approved === false) pn++; });
+      document.getElementById('d-stat-rating').textContent = tt > 0 ? (sr / tt).toFixed(1) : '0.0'; document.getElementById('d-stat-testicount').textContent = tt; document.getElementById('d-stat-testi-pending').textContent = pn;
+      var pc = Object.keys(pa).length, pcc = {}; Object.values(pa).forEach(function (x) { if (x.category) pcc[x.category] = (pcc[x.category] || 0) + 1; });
+      document.getElementById('d-stat-partners').textContent = pc; document.getElementById('d-stat-partner-cats').textContent = Object.keys(pcc).map(function (c) { return c + ': ' + pcc[c]; }).join(', ') || '-';
+      var ac = Object.keys(a).length, ad = 0;
+      Object.values(a).forEach(function (x) { if (x.disabled) ad++; });
+      document.getElementById('d-stat-admins').textContent = ac - ad;
+      document.getElementById('d-stat-warnings').textContent = Array.isArray(w) ? w.length : 0;
+      document.getElementById('d-stat-disabled').textContent = ad;
 
-      // Revenue stats
-      var rev = 0, dc = 0;
-      Object.values(dp).forEach(function (x) { rev += (x.price || 0); dc++; });
-      document.getElementById('d-stat-revenue').textContent = 'Rp' + rev.toLocaleString('id-ID');
-      document.getElementById('d-stat-dpcount').textContent = dc;
-
-      // Reviews stats
-      var tt = Object.keys(t).length, sr = 0, pn = 0;
-      Object.values(t).forEach(function (x) { sr += (x.rating || 0); if (x.approved === false) pn++; });
-      document.getElementById('d-stat-rating').textContent = tt > 0 ? (sr / tt).toFixed(1) : '0.0';
-      document.getElementById('d-stat-testicount').textContent = tt;
-      document.getElementById('d-stat-testi-pending').textContent = pn;
-
-      // Recent orders
+      /* Recent orders */
       var re = document.getElementById('dashRecentOrders');
-      if (!Object.keys(o).length) {
-        re.innerHTML = '<div class="px-5 py-8 text-center text-muted-3 text-sm">Belum ada pesanan.</div>';
-      } else {
-        var so = Object.keys(o).map(function (k) { return { k: k, v: o[k] }; })
-          .sort(function (a, b) { return (b.v.createdAt || 0) - (a.v.createdAt || 0); })
-          .slice(0, 5);
+      if (!Object.keys(o).length) { re.innerHTML = '<div class="px-5 py-8 text-center text-muted-3 text-sm">Kosong.</div>'; }
+      else {
+        var so = Object.keys(o).map(function (k) { return { k: k, v: o[k] }; }).sort(function (a, b) { return (b.v.createdAt || 0) - (a.v.createdAt || 0); }).slice(0, 5);
         re.innerHTML = '';
         so.forEach(function (i) {
-          var x = i.v;
-          var ss2 = SS[x.status] || SS.pending;
-          var dot = x.status === 'completed' ? 'green' : x.status === 'cancelled' ? 'red' : x.status === 'processing' ? 'yellow' : 'gray';
-          var r = document.createElement('div');
-          r.className = 'dash-recent-row px-5 py-3 flex items-center gap-4 cursor-pointer';
-          r.setAttribute('data-do', i.k);
-          r.innerHTML =
-            '<div class="glow-dot ' + dot + '"></div>' +
-            '<div class="flex-1 min-w-0">' +
-            '<div class="text-sm font-semibold text-white truncate">' + esc(x.buyerName || '-') + '</div>' +
-            '<div class="text-xs text-muted-3 truncate">' + esc(x.productTitle || '-') + '</div>' +
-            '</div>' +
-            '<span class="status-badge border ' + ss2 + ' flex-shrink-0">' + (x.status || 'pending') + '</span>' +
-            '<span class="text-[10px] text-muted-3 font-mono flex-shrink-0 hidden sm:block">' + fTimeS(x.createdAt) + '</span>';
+          var x = i.v, ss2 = SS[x.status] || SS.pending, dot = x.status === 'completed' ? 'green' : x.status === 'cancelled' ? 'red' : x.status === 'processing' ? 'yellow' : 'gray';
+          var r = document.createElement('div'); r.className = 'dash-recent-row px-5 py-3 flex items-center gap-4 cursor-pointer'; r.setAttribute('data-do', i.k);
+          r.innerHTML = '<div class="glow-dot ' + dot + '"></div><div class="flex-1 min-w-0"><div class="text-sm font-semibold text-white truncate">' + esc(x.buyerName || '-') + '</div><div class="text-xs text-muted-3 truncate">' + esc(x.productTitle || '-') + '</div></div><span class="status-badge border ' + ss2 + ' flex-shrink-0">' + (x.status || 'pending') + '</span><span class="text-[10px] text-muted-3 font-mono flex-shrink-0 hidden sm:block">' + fTimeS(x.createdAt) + '</span>';
           re.appendChild(r);
         });
       }
 
-      // Stock alerts
-      var se = document.getElementById('dashStockAlert');
-      var ls = Object.keys(p).filter(function (k) { return (p[k].stock || 0) <= 5; }).map(function (k) { return { k: k, v: p[k] }; });
-      if (!ls.length) {
-        se.innerHTML = '<div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-check-circle text-green-500 mr-1"></i>Semua stok aman.</div>';
-      } else {
+      /* Stock alert */
+      var se = document.getElementById('dashStockAlert'), ls = Object.keys(p).filter(function (k) { return (p[k].stock || 0) <= 5; }).map(function (k) { return { k: k, v: p[k] }; });
+      if (!ls.length) { se.innerHTML = '<div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-check-circle text-green-500 mr-1"></i>Aman</div>'; }
+      else {
         se.innerHTML = '';
         ls.slice(0, 5).forEach(function (i) {
-          var x = i.v, isO = (x.stock || 0) <= 0;
-          var r = document.createElement('div');
-          r.className = 'flex items-center gap-3 py-2';
-          r.innerHTML =
-            '<div class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (CC[x.category] || '') + ' flex-shrink-0"><i class="fas ' + (x.icon || 'fa-box') + ' text-[10px]"></i></div>' +
-            '<div class="flex-1 min-w-0"><div class="text-xs text-white truncate">' + esc(x.title) + '</div></div>' +
-            '<span class="text-xs font-mono font-bold ' + (isO ? 'text-red-400' : 'text-yellow-400') + ' flex-shrink-0">' + (isO ? 'HABIS' : x.stock) + '</span>';
+          var x = i.v, isO = (x.stock || 0) <= 0, r = document.createElement('div'); r.className = 'flex items-center gap-3 py-2';
+          r.innerHTML = '<div class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (CC[x.category] || '') + ' flex-shrink-0"><i class="fas ' + (x.icon || 'fa-box') + ' text-[10px]"></i></div><div class="flex-1 min-w-0"><div class="text-xs text-white truncate">' + esc(x.title) + '</div></div><span class="text-xs font-mono font-bold ' + (isO ? 'text-red-400' : 'text-yellow-400') + ' flex-shrink-0">' + (isO ? 'HABIS' : x.stock) + '</span>';
           se.appendChild(r);
         });
       }
     }
-
-    document.getElementById('dashRecentOrders').addEventListener('click', function (e) {
-      var r = e.target.closest('[data-do]');
-      if (r) { switchTab('orders'); setTimeout(function () { openOrderDetail(r.getAttribute('data-do')); }, 150); }
-    });
+    document.getElementById('dashRecentOrders').addEventListener('click', function (e) { var r = e.target.closest('[data-do]'); if (r) { switchTab('orders'); setTimeout(function () { openOrderDetail(r.getAttribute('data-do')); }, 100); } });
 
     /* ═══ PRODUCTS ═══ */
     var epc = {};
-
-    window.openProductModal = function (isE, data) {
-      document.getElementById('productModal').classList.remove('hidden');
-      document.getElementById('productModalTitle').textContent = isE ? 'Edit Product' : 'Add New Product';
-      if (isE && data) {
-        document.getElementById('prodId').value = data.id;
-        document.getElementById('prodTitle').value = data.title;
-        document.getElementById('prodCat').value = data.category;
-        document.getElementById('prodPrice').value = data.price;
-        document.getElementById('prodStock').value = data.stock;
-        document.getElementById('prodImage').value = data.image || '';
-        document.getElementById('prodDesc').value = data.description;
-        document.getElementById('prodFeatures').value = (data.features || []).join(', ');
-        document.getElementById('prodIcon').value = data.icon || '';
-      } else {
-        document.getElementById('productForm').reset();
-        document.getElementById('prodId').value = '';
-      }
-    };
+    window.openProductModal = function (isE, data) { document.getElementById('productModal').classList.remove('hidden'); document.getElementById('productModalTitle').textContent = isE ? 'Edit Product' : 'Add New Product'; if (isE && data) { epc[data.id] = data; document.getElementById('prodId').value = data.id; document.getElementById('prodTitle').value = data.title; document.getElementById('prodCat').value = data.category; document.getElementById('prodPrice').value = data.price; document.getElementById('prodStock').value = data.stock; document.getElementById('prodImage').value = data.image || ''; document.getElementById('prodDesc').value = data.description; document.getElementById('prodFeatures').value = (data.features || []).join(', '); document.getElementById('prodIcon').value = data.icon || ''; } else { document.getElementById('productForm').reset(); document.getElementById('prodId').value = ''; } };
     window.closeProductModal = function () { document.getElementById('productModal').classList.add('hidden'); };
-
-    window.handleProductSubmit = async function (e) {
-      e.preventDefault();
-      var id = document.getElementById('prodId').value;
-      var cat = document.getElementById('prodCat').value;
-      var feat = document.getElementById('prodFeatures').value.split(',').map(function (f) { return f.trim(); }).filter(Boolean);
-      var d = {
-        title: document.getElementById('prodTitle').value,
-        category: cat,
-        price: parseInt(document.getElementById('prodPrice').value),
-        stock: parseInt(document.getElementById('prodStock').value),
-        image: document.getElementById('prodImage').value || DI[cat],
-        description: document.getElementById('prodDesc').value,
-        features: feat,
-        icon: document.getElementById('prodIcon').value || 'fa-box',
-        color: CC[cat] || 'text-purple-400'
-      };
-      try {
-        if (id) {
-          await update(ref(db, 'products/' + id), d);
-          showToast('Produk diupdate!');
-        } else {
-          d.createdAt = serverTimestamp();
-          await set(push(ref(db, 'products')), d);
-          showToast('Produk ditambahkan!');
-        }
-        closeProductModal();
-      } catch (er) { showToast('Gagal simpan.', 'error'); }
-    };
-
-    window.deleteProduct = async function (id) {
-      if (!confirm('Hapus produk ini?')) return;
-      try { await remove(ref(db, 'products/' + id)); showToast('Produk dihapus.'); }
-      catch (e) { showToast('Gagal.', 'error'); }
-    };
-
-    window.quickStock = async function (id, c, d) {
-      var n = c + d;
-      if (n < 0) return;
-      try { await update(ref(db, 'products/' + id), { stock: n }); showToast('Stok \u2192 ' + n); }
-      catch (e) { showToast('Gagal.', 'error'); }
-    };
-
-    document.getElementById('products-tbody').addEventListener('click', function (e) {
-      var eb = e.target.closest('[data-pe]');
-      var db2 = e.target.closest('[data-pd]');
-      var sb = e.target.closest('[data-ps]');
-      if (eb) openProductModal(true, epc[eb.getAttribute('data-pe')]);
-      if (db2) deleteProduct(db2.getAttribute('data-pd'));
-      if (sb) { var p = sb.getAttribute('data-ps').split(','); quickStock(p[0], parseInt(p[1]), parseInt(p[2])); }
-    });
-
+    window.handleProductSubmit = async function (e) { e.preventDefault(); var id = document.getElementById('prodId').value, cat = document.getElementById('prodCat').value, feat = document.getElementById('prodFeatures').value.split(',').map(function (f) { return f.trim(); }).filter(Boolean); var d = { title: document.getElementById('prodTitle').value, category: cat, price: parseInt(document.getElementById('prodPrice').value), stock: parseInt(document.getElementById('prodStock').value), image: document.getElementById('prodImage').value || DI[cat], description: document.getElementById('prodDesc').value, features: feat, icon: document.getElementById('prodIcon').value || 'fa-box', color: CC[cat] || 'text-purple-400' }; try { if (id) { await update(ref(db, 'products/' + id), d); showToast('Diupdate!'); } else { d.createdAt = serverTimestamp(); await set(push(ref(db, 'products')), d); showToast('Ditambahkan!'); } closeProductModal(); } catch (er) { showToast('Gagal.', 'error'); } };
+    window.deleteProduct = async function (id) { if (!confirm('Hapus?')) return; try { await remove(ref(db, 'products/' + id)); showToast('Dihapus.'); } catch (e) { showToast('Gagal.', 'error'); } };
+    window.quickStock = async function (id, c, d) { var n = c + d; if (n < 0) return; try { await update(ref(db, 'products/' + id), { stock: n }); showToast('Stok \u2192 ' + n); } catch (e) { showToast('Gagal.', 'error'); } };
+    document.getElementById('products-tbody').addEventListener('click', function (e) { var eb = e.target.closest('[data-pe]'), db2 = e.target.closest('[data-pd]'), sb = e.target.closest('[data-ps]'); if (eb) openProductModal(true, epc[eb.getAttribute('data-pe')]); if (db2) deleteProduct(db2.getAttribute('data-pd')); if (sb) { var p = sb.getAttribute('data-ps').split(','); quickStock(p[0], parseInt(p[1]), parseInt(p[2])); } });
     onValue(ref(db, 'products'), function (s) {
-      var tb = document.getElementById('products-tbody');
-      tb.innerHTML = '';
-      var r = s.val();
-      DD.products = r || {};
-      var tp = 0, ts = 0, te = 0, cats = {};
-      if (!r) {
-        tb.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-muted-3">Belum ada produk.</td></tr>';
-      } else {
-        Object.keys(r).forEach(function (k) {
-          var d = r[k];
-          tp++; ts += (d.stock || 0);
-          if ((d.stock || 0) <= 0) te++;
-          if (d.category) cats[d.category] = true;
-          epc[k] = { id: k, title: d.title, category: d.category, price: d.price, stock: d.stock, image: d.image, description: d.description, features: d.features || [], icon: d.icon, color: d.color };
-
-          var oos = (d.stock || 0) <= 0;
-          var sb;
-          if (oos) {
-            sb = '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold text-red-400 bg-red-500/10 border border-red-500/20">HABIS <button data-ps="' + k + ',0,1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>';
-          } else {
-            sb = '<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold text-green-400 bg-green-500/10 border border-green-500/20">' + d.stock +
-              ' <button data-ps="' + k + ',' + d.stock + ',-1" class="hover:text-white"><i class="fas fa-minus text-[10px]"></i></button>' +
-              ' <button data-ps="' + k + ',' + d.stock + ',1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>';
-          }
-
-          var tr = document.createElement('tr');
-          tr.innerHTML =
-            '<td><div class="flex items-center gap-3">' +
-            '<div class="w-10 h-10 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (d.color || '') + ' flex-shrink-0"><i class="fas ' + (d.icon || 'fa-box') + '"></i></div>' +
-            '<div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(d.title) + '</div>' +
-            '<div class="text-xs text-muted-3 truncate max-w-[180px]">' + esc(d.description) + '</div></div></div></td>' +
-            '<td><span class="px-2 py-1 rounded text-xs bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(d.category) + '</span></td>' +
-            '<td class="text-right font-mono text-sm text-white">Rp' + (d.price || 0).toLocaleString('id-ID') + '</td>' +
-            '<td class="text-center">' + sb + '</td>' +
-            '<td class="text-center whitespace-nowrap">' +
-            '<button data-pe="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1"><i class="fas fa-edit"></i></button> ' +
-            '<button data-pd="' + k + '" class="text-red-400 hover:text-red-300 p-1"><i class="fas fa-trash"></i></button></td>';
-          tb.appendChild(tr);
-        });
-      }
-      document.getElementById('stat-total').textContent = tp;
-      document.getElementById('stat-stock').textContent = ts;
-      document.getElementById('stat-empty').textContent = te;
-      document.getElementById('stat-cats').textContent = Object.keys(cats).length;
-      updateDash();
+      var tb = document.getElementById('products-tbody'); tb.innerHTML = ''; var r = s.val(); DD.products = r || {}; var tp = 0, ts = 0, te = 0, cats = {};
+      if (!r) { tb.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-muted-3">Kosong.</td></tr>'; }
+      else { Object.keys(r).forEach(function (k) { var d = r[k]; tp++; ts += (d.stock || 0); if ((d.stock || 0) <= 0) te++; if (d.category) cats[d.category] = true; epc[k] = { id: k, title: d.title, category: d.category, price: d.price, stock: d.stock, image: d.image, description: d.description, features: d.features || [], icon: d.icon, color: d.color }; var oos = (d.stock || 0) <= 0; var sb = oos ? '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold text-red-400 bg-red-500/10 border border-red-500/20">HABIS <button data-ps="' + k + ',0,1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>' : '<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold text-green-400 bg-green-500/10 border border-green-500/20">' + d.stock + ' <button data-ps="' + k + ',' + d.stock + ',-1" class="hover:text-white"><i class="fas fa-minus text-[10px]"></i></button> <button data-ps="' + k + ',' + d.stock + ',1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>'; var tr = document.createElement('tr'); tr.innerHTML = '<td><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (d.color || '') + ' flex-shrink-0"><i class="fas ' + (d.icon || 'fa-box') + '"></i></div><div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(d.title) + '</div><div class="text-xs text-muted-3 truncate max-w-[180px]">' + esc(d.description) + '</div></div></div></td><td><span class="px-2 py-1 rounded text-xs bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(d.category) + '</span></td><td class="text-right font-mono text-sm text-white">Rp' + (d.price || 0).toLocaleString('id-ID') + '</td><td class="text-center">' + sb + '</td><td class="text-center whitespace-nowrap"><button data-pe="' + k + '" class="text-cyan-400 hover:text-cyan-300 mx-1 p-1"><i class="fas fa-edit"></i></button><button data-pd="' + k + '" class="text-red-400 hover:text-red-300 mx-1 p-1"><i class="fas fa-trash"></i></button></td>'; tb.appendChild(tr); }); }
+      document.getElementById('stat-total').textContent = tp; document.getElementById('stat-stock').textContent = ts; document.getElementById('stat-empty').textContent = te; document.getElementById('stat-cats').textContent = Object.keys(cats).length; updateDash();
     });
 
     /* ═══ PARTNERS ═══ */
     var eptc = {};
-
-    window.openPartnerModal = function (isE, data) {
-      document.getElementById('partnerModal').classList.remove('hidden');
-      document.getElementById('partnerModalTitle').textContent = isE ? 'Edit Partner' : 'Add Partner';
-      if (isE && data) {
-        document.getElementById('ptId').value = data.id;
-        document.getElementById('ptName').value = data.name;
-        document.getElementById('ptLogo').value = data.logo || '';
-        document.getElementById('ptCat').value = data.category;
-        document.getElementById('ptIcon').value = data.icon || '';
-        document.getElementById('ptWebsite').value = data.website || '';
-        document.getElementById('ptDesc').value = data.description || '';
-      } else {
-        document.getElementById('partnerForm').reset();
-        document.getElementById('ptId').value = '';
-      }
-    };
+    window.openPartnerModal = function (isE, data) { document.getElementById('partnerModal').classList.remove('hidden'); document.getElementById('partnerModalTitle').textContent = isE ? 'Edit Partner' : 'Add Partner'; if (isE && data) { eptc[data.id] = data; document.getElementById('ptId').value = data.id; document.getElementById('ptName').value = data.name; document.getElementById('ptLogo').value = data.logo || ''; document.getElementById('ptCat').value = data.category; document.getElementById('ptIcon').value = data.icon || ''; document.getElementById('ptWebsite').value = data.website || ''; document.getElementById('ptDesc').value = data.description || ''; } else { document.getElementById('partnerForm').reset(); document.getElementById('ptId').value = ''; } };
     window.closePartnerModal = function () { document.getElementById('partnerModal').classList.add('hidden'); };
-
-    window.handlePartnerSubmit = async function (e) {
-      e.preventDefault();
-      var id = document.getElementById('ptId').value;
-      var cat = document.getElementById('ptCat').value;
-      var d = {
-        name: document.getElementById('ptName').value.trim(),
-        logo: document.getElementById('ptLogo').value.trim(),
-        category: cat,
-        icon: document.getElementById('ptIcon').value.trim() || PCI[cat] || 'fa-star',
-        website: document.getElementById('ptWebsite').value.trim(),
-        description: document.getElementById('ptDesc').value.trim()
-      };
-      try {
-        if (id) {
-          await update(ref(db, 'partners/' + id), d);
-          showToast('Partner diupdate!');
-        } else {
-          await set(push(ref(db, 'partners')), d);
-          showToast('Partner ditambahkan!');
-        }
-        closePartnerModal();
-      } catch (er) { showToast('Gagal simpan.', 'error'); }
-    };
-
-    window.deletePartner = async function (id) {
-      if (!confirm('Hapus partner ini?')) return;
-      try { await remove(ref(db, 'partners/' + id)); showToast('Partner dihapus.'); }
-      catch (e) { showToast('Gagal.', 'error'); }
-    };
-
-    document.getElementById('partners-tbody').addEventListener('click', function (e) {
-      var eb = e.target.closest('[data-pce]');
-      var db2 = e.target.closest('[data-pcd]');
-      if (eb) openPartnerModal(true, eptc[eb.getAttribute('data-pce')]);
-      if (db2) deletePartner(db2.getAttribute('data-pcd'));
-    });
-
+    window.handlePartnerSubmit = async function (e) { e.preventDefault(); var id = document.getElementById('ptId').value, cat = document.getElementById('ptCat').value; var d = { name: document.getElementById('ptName').value.trim(), logo: document.getElementById('ptLogo').value.trim(), category: cat, icon: document.getElementById('ptIcon').value.trim() || PCI[cat] || 'fa-star', website: document.getElementById('ptWebsite').value.trim(), description: document.getElementById('ptDesc').value.trim() }; try { if (id) { await update(ref(db, 'partners/' + id), d); showToast('Diupdate!'); } else { await set(push(ref(db, 'partners')), d); showToast('Ditambahkan!'); } closePartnerModal(); } catch (er) { showToast('Gagal.', 'error'); } };
+    window.deletePartner = async function (id) { if (!confirm('Hapus?')) return; try { await remove(ref(db, 'partners/' + id)); showToast('Dihapus.'); } catch (e) { showToast('Gagal.', 'error'); } };
+    document.getElementById('partners-tbody').addEventListener('click', function (e) { var eb = e.target.closest('[data-pce]'), db2 = e.target.closest('[data-pcd]'); if (eb) openPartnerModal(true, eptc[eb.getAttribute('data-pce')]); if (db2) deletePartner(db2.getAttribute('data-pcd')); });
     onValue(ref(db, 'partners'), function (s) {
-      var tb = document.getElementById('partners-tbody');
-      tb.innerHTML = '';
-      var r = s.val();
-      DD.partners = r || {};
-      var total = 0, infra = 0, payment = 0, other = 0;
-      if (!r) {
-        tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Belum ada partner.</td></tr>';
-      } else {
-        Object.keys(r).forEach(function (k) {
-          var p = r[k];
-          total++;
-          if (p.category === 'infrastructure') infra++;
-          else if (p.category === 'payment') payment++;
-          else other++;
-          eptc[k] = { id: k, name: p.name, logo: p.logo, category: p.category, icon: p.icon, website: p.website, description: p.description };
-          var color = PCC[p.category] || 'text-muted-2';
-          var icon = p.icon || PCI[p.category] || 'fa-star';
-          var lh = p.logo
-            ? '<img src="' + esc(p.logo) + '" class="partner-logo">'
-            : '<div class="partner-logo flex items-center justify-center"><i class="fas ' + icon + ' ' + color + ' text-sm"></i></div>';
-          var tr = document.createElement('tr');
-          tr.innerHTML =
-            '<td><div class="flex items-center gap-3">' + lh +
-            '<div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(p.name) + '</div>' +
-            '<div class="text-xs text-muted-3 truncate max-w-[150px]">' + esc(p.description) + '</div></div></div></td>' +
-            '<td><span class="px-2 py-0.5 rounded text-[10px] bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(p.category) + '</span></td>' +
-            '<td>' + (p.website ? '<a href="' + esc(p.website) + '" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-xs font-mono truncate block max-w-[120px]">' + esc(p.website.replace(/^https?:\/\//, '')) + '</a>' : '<span class="text-muted-4 text-xs">-</span>') + '</td>' +
-            '<td class="text-center whitespace-nowrap">' +
-            '<button data-pce="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button> ' +
-            '<button data-pcd="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
-          tb.appendChild(tr);
-        });
-      }
-      document.getElementById('stat-partners').textContent = total;
-      document.getElementById('stat-infra').textContent = infra;
-      document.getElementById('stat-payment').textContent = payment;
-      document.getElementById('stat-other').textContent = other;
-      updateDash();
+      var tb = document.getElementById('partners-tbody'); tb.innerHTML = ''; var r = s.val(); DD.partners = r || {}; var total = 0, infra = 0, payment = 0, other = 0;
+      if (!r) { tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Kosong.</td></tr>'; }
+      else { Object.keys(r).forEach(function (k) { var p = r[k]; total++; if (p.category === 'infrastructure') infra++; else if (p.category === 'payment') payment++; else other++; eptc[k] = { id: k, name: p.name, logo: p.logo, category: p.category, icon: p.icon, website: p.website, description: p.description }; var color = PCC[p.category] || 'text-muted-2', icon = p.icon || PCI[p.category] || 'fa-star'; var lh = p.logo ? '<img src="' + esc(p.logo) + '" class="partner-logo">' : '<div class="partner-logo flex items-center justify-center"><i class="fas ' + icon + ' ' + color + ' text-sm"></i></div>'; var tr = document.createElement('tr'); tr.innerHTML = '<td><div class="flex items-center gap-3">' + lh + '<div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(p.name) + '</div><div class="text-xs text-muted-3 truncate max-w-[150px]">' + esc(p.description) + '</div></div></div></td><td><span class="px-2 py-0.5 rounded text-[10px] bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(p.category) + '</span></td><td>' + (p.website ? '<a href="' + esc(p.website) + '" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-xs font-mono truncate block max-w-[120px]">' + esc(p.website.replace(/^https?:\/\//, '')) + '</a>' : '<span class="text-muted-4 text-xs">-</span>') + '</td><td class="text-center whitespace-nowrap"><button data-pce="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-pcd="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>'; tb.appendChild(tr); }); }
+      document.getElementById('stat-partners').textContent = total; document.getElementById('stat-infra').textContent = infra; document.getElementById('stat-payment').textContent = payment; document.getElementById('stat-other').textContent = other; updateDash();
     });
 
     /* ═══ TESTIMONI ═══ */
     var cTF = 'all', aTR = {};
-
-    window.filterTestimoni = function (f) {
-      cTF = f;
-      document.querySelectorAll('.testi-filter').forEach(function (el) {
-        el.className = 'testi-filter px-4 py-2 rounded-lg text-xs font-semibold ' +
-          (el.getAttribute('data-tf') === f ? 'bg-red-accent/10 border border-red-accent/20 text-red-accent' : 'bg-dark-card border border-dark-border text-muted-2') + ' transition';
-      });
-      renderTesti();
-    };
-
+    window.filterTestimoni = function (f) { cTF = f; document.querySelectorAll('.testi-filter').forEach(function (el) { el.className = 'testi-filter px-4 py-2 rounded-lg text-xs font-semibold ' + (el.getAttribute('data-tf') === f ? 'bg-red-accent/10 border border-red-accent/20 text-red-accent' : 'bg-dark-card border border-dark-border text-muted-2') + ' transition'; }); renderTesti(); };
     function renderTesti() {
-      var tb = document.getElementById('testi-tbody');
-      tb.innerHTML = '';
-      var raw = aTR;
-      if (!raw || !Object.keys(raw).length) {
-        tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Belum ada testimoni.</td></tr>';
-        return;
-      }
-      var sorted = Object.keys(raw).map(function (k) { return { k: k, v: raw[k] }; })
-        .sort(function (a, b) { return (b.v.createdAt || 0) - (a.v.createdAt || 0); });
-
-      var filtered;
-      if (cTF === 'all') {
-        filtered = sorted;
-      } else if (cTF === 'pending') {
-        filtered = sorted.filter(function (i) { return i.v.approved === false; });
-      } else {
-        filtered = sorted.filter(function (i) { return i.v.approved !== false; });
-      }
-
-      if (!filtered.length) {
-        tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Tidak ada data.</td></tr>';
-        return;
-      }
-
+      var tb = document.getElementById('testi-tbody'); tb.innerHTML = ''; var raw = aTR;
+      if (!raw || !Object.keys(raw).length) { tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Kosong.</td></tr>'; return; }
+      var sorted = Object.keys(raw).map(function (k) { return { k: k, v: raw[k] }; }).sort(function (a, b) { return (b.v.createdAt || 0) - (a.v.createdAt || 0); });
+      var filtered = cTF === 'all' ? sorted : cTF === 'pending' ? sorted.filter(function (i) { return i.v.approved === false; }) : sorted.filter(function (i) { return i.v.approved !== false; });
+      if (!filtered.length) { tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Tidak ada.</td></tr>'; return; }
       filtered.forEach(function (item) {
-        var t = item.v, k = item.k;
-        var isA = t.approved !== false;
-        var sH = '';
-        for (var i = 1; i <= 5; i++) sH += '<i class="fas fa-star text-[10px] ' + (i <= (t.rating || 0) ? 'text-yellow-400' : 'text-muted-4') + '"></i>';
-        var vc = isA ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20';
-        var vt = isA ? 'APPROVED' : 'PENDING';
-        var tr = document.createElement('tr');
-        tr.innerHTML =
-          '<td><div class="min-w-0"><div class="flex items-center gap-2 mb-0.5">' +
-          '<span class="font-bold text-sm text-white truncate">' + esc(t.name || 'Anonim') + '</span>' +
-          '<span class="source-badge source-buyer">BUYER</span></div>' +
-          '<div class="text-xs text-muted-3 truncate max-w-[260px]">' + esc(t.text) + '</div></div></td>' +
-          '<td class="text-center"><div class="flex justify-center gap-0.5">' + sH + '</div></td>' +
-          '<td class="text-center"><button data-tt="' + k + ',' + isA + '" class="status-badge border ' + vc + ' cursor-pointer hover:opacity-80 transition">' + vt + '</button></td>' +
-          '<td class="text-center"><button data-td="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
+        var t = item.v, k = item.k, isA = t.approved !== false; var sH = ''; for (var i = 1; i <= 5; i++) sH += '<i class="fas fa-star text-[10px] ' + (i <= (t.rating || 0) ? 'text-yellow-400' : 'text-muted-4') + '"></i>';
+        var vc = isA ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20', vt = isA ? 'APPROVED' : 'PENDING';
+        var tr = document.createElement('tr'); tr.innerHTML = '<td><div class="min-w-0"><div class="flex items-center gap-2 mb-0.5"><span class="font-bold text-sm text-white truncate">' + esc(t.name || 'Anonim') + '</span><span class="source-badge source-buyer">BUYER</span></div><div class="text-xs text-muted-3 truncate max-w-[260px]">' + esc(t.text) + '</div>' + (t.product ? '<div class="text-[10px] text-muted-4 mt-0.5 font-mono">' + esc(t.product) + '</div>' : '') + '</div></td><td class="text-center"><div class="flex justify-center gap-0.5">' + sH + '</div></td><td class="text-center"><button data-tt="' + k + ',' + isA + '" class="status-badge border ' + vc + ' cursor-pointer hover:opacity-80 transition">' + vt + '</button></td><td class="text-center"><button data-td="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
         tb.appendChild(tr);
       });
     }
-
-    window.toggleTestiApproval = async function (id, c) {
-      try {
-        await update(ref(db, 'testimonials/' + id), { approved: !c });
-        showToast(c ? 'Testimoni disembunyikan.' : 'Testimoni ditampilkan.');
-      } catch (e) { showToast('Gagal.', 'error'); }
-    };
-    window.deleteTesti = async function (id) {
-      if (!confirm('Hapus testimoni?')) return;
-      try { await remove(ref(db, 'testimonials/' + id)); showToast('Dihapus.'); }
-      catch (e) { showToast('Gagal.', 'error'); }
-    };
-
-    document.getElementById('testi-tbody').addEventListener('click', function (e) {
-      var tb2 = e.target.closest('[data-tt]');
-      var db2 = e.target.closest('[data-td]');
-      if (tb2) { var p = tb2.getAttribute('data-tt').split(','); toggleTestiApproval(p[0], p[1] === 'true'); }
-      if (db2) deleteTesti(db2.getAttribute('data-td'));
-    });
-
+    window.toggleTestiApproval = async function (id, c) { try { await update(ref(db, 'testimonials/' + id), { approved: !c }); showToast(c ? 'Disembunyikan.' : 'Ditampilkan.'); } catch (e) { showToast('Gagal.', 'error'); } };
+    window.deleteTesti = async function (id) { if (!confirm('Hapus?')) return; try { await remove(ref(db, 'testimonials/' + id)); showToast('Dihapus.'); } catch (e) { showToast('Gagal.', 'error'); } };
+    document.getElementById('testi-tbody').addEventListener('click', function (e) { var tb2 = e.target.closest('[data-tt]'), db2 = e.target.closest('[data-td]'); if (tb2) { var p = tb2.getAttribute('data-tt').split(','); toggleTestiApproval(p[0], p[1] === 'true'); } if (db2) deleteTesti(db2.getAttribute('data-td')); });
     onValue(ref(db, 'testimonials'), function (s) {
-      var raw = s.val();
-      DD.testimoni = raw || {};
-      aTR = raw || {};
-      var total = 0, approved = 0, pending = 0;
+      var raw = s.val(); DD.testimoni = raw || {}; aTR = raw || {}; var total = 0, approved = 0, pending = 0;
       if (raw) Object.values(raw).forEach(function (t) { total++; if (t.approved !== false) approved++; else pending++; });
-      document.getElementById('stat-testi-total').textContent = total;
-      document.getElementById('stat-testi-approved').textContent = approved;
-      document.getElementById('stat-testi-pending').textContent = pending;
-      var bv = pending > 99 ? '99+' : String(pending);
-      var bd = document.getElementById('testiPendingBadge');
-      var bm = document.getElementById('testiPendingBadgeMob');
-      if (pending > 0) { bd.classList.remove('hidden'); bd.textContent = bv; bm.classList.remove('hidden'); bm.textContent = bv; }
-      else { bd.classList.add('hidden'); bm.classList.add('hidden'); }
-      renderTesti();
-      updateDash();
+      document.getElementById('stat-testi-total').textContent = total; document.getElementById('stat-testi-approved').textContent = approved; document.getElementById('stat-testi-pending').textContent = pending;
+      var bv = pending > 99 ? '99+' : String(pending); var bd = document.getElementById('testiPendingBadge'), bm = document.getElementById('testiPendingBadgeMob');
+      if (pending > 0) { bd.classList.remove('hidden'); bd.textContent = bv; bm.classList.remove('hidden'); bm.textContent = bv; } else { bd.classList.add('hidden'); bm.classList.add('hidden'); }
+      renderTesti(); updateDash();
     });
 
-    /* ═══ DONE PAYMENTS ═══ */
+    /* ═══ DONE PAYMENT ═══ */
     var edc = {};
-
-    window.openDoneModal = function (isE, data) {
-      document.getElementById('doneModal').classList.remove('hidden');
-      if (isE && data) {
-        document.getElementById('dpId').value = data.id;
-        document.getElementById('dpBuyer').value = data.buyerName;
-        document.getElementById('dpProduct').value = data.product;
-        document.getElementById('dpPackage').value = data.pkg || '';
-        document.getElementById('dpPrice').value = data.price;
-        document.getElementById('dpVisible').checked = data.visible !== false;
-      } else {
-        document.getElementById('doneForm').reset();
-        document.getElementById('dpId').value = '';
-        document.getElementById('dpVisible').checked = true;
-      }
-    };
+    window.openDoneModal = function (isE, data) { document.getElementById('doneModal').classList.remove('hidden'); if (isE && data) { document.getElementById('dpId').value = data.id; document.getElementById('dpBuyer').value = data.buyerName; document.getElementById('dpProduct').value = data.product; document.getElementById('dpPackage').value = data.pkg || ''; document.getElementById('dpPrice').value = data.price; document.getElementById('dpVisible').checked = data.visible !== false; } else { document.getElementById('doneForm').reset(); document.getElementById('dpId').value = ''; document.getElementById('dpVisible').checked = true; } };
     window.closeDoneModal = function () { document.getElementById('doneModal').classList.add('hidden'); };
-
-    window.handleDoneSubmit = async function (e) {
-      e.preventDefault();
-      var id = document.getElementById('dpId').value;
-      var price = parseInt(document.getElementById('dpPrice').value);
-      if (!price || price <= 0) { showToast('Harga harus > 0.', 'error'); return; }
-      var d = {
-        buyerName: document.getElementById('dpBuyer').value.trim(),
-        product: document.getElementById('dpProduct').value.trim(),
-        pkg: document.getElementById('dpPackage').value.trim(),
-        price: price,
-        visible: document.getElementById('dpVisible').checked,
-        manual: true
-      };
-      try {
-        if (id) {
-          await update(ref(db, 'done_payments/' + id), d);
-          showToast('Diupdate!');
-        } else {
-          d.createdAt = serverTimestamp();
-          await set(push(ref(db, 'done_payments')), d);
-          showToast('Done payment ditambahkan (manual).');
-        }
-        closeDoneModal();
-      } catch (er) { showToast('Gagal.', 'error'); }
-    };
-
-    window.toggleDoneVisible = async function (id, c) {
-      try { await update(ref(db, 'done_payments/' + id), { visible: !c }); showToast('Visibility diupdate.'); }
-      catch (e) { showToast('Gagal.', 'error'); }
-    };
-
-    window.deleteDone = async function (id) {
-      if (!confirm('Hapus?')) return;
-      try { await remove(ref(db, 'done_payments/' + id)); showToast('Dihapus.'); }
-      catch (e) { showToast('Gagal.', 'error'); }
-    };
-
-    window.openDpChat = function (oId) {
-      switchTab('orders');
-      setTimeout(function () { openOrderDetail(oId); }, 150);
-    };
-
-    document.getElementById('dp-tbody').addEventListener('click', function (e) {
-      var eb = e.target.closest('[data-de]');
-      var db2 = e.target.closest('[data-dd]');
-      var tb2 = e.target.closest('[data-dtv]');
-      var cb = e.target.closest('[data-dc]');
-      if (eb) openDoneModal(true, edc[eb.getAttribute('data-de')]);
-      if (db2) deleteDone(db2.getAttribute('data-dd'));
-      if (tb2) { var p = tb2.getAttribute('data-dtv').split(','); toggleDoneVisible(p[0], p[1] === 'true'); }
-      if (cb) openDpChat(cb.getAttribute('data-dc'));
-    });
-
+    window.handleDoneSubmit = async function (e) { e.preventDefault(); var id = document.getElementById('dpId').value, price = parseInt(document.getElementById('dpPrice').value); if (!price || price <= 0) { showToast('Harga > 0.', 'error'); return; } var d = { buyerName: document.getElementById('dpBuyer').value.trim(), product: document.getElementById('dpProduct').value.trim(), pkg: document.getElementById('dpPackage').value.trim(), price: price, visible: document.getElementById('dpVisible').checked, manual: true }; try { if (id) { await update(ref(db, 'done_payments/' + id), d); showToast('Diupdate!'); } else { d.createdAt = serverTimestamp(); await set(push(ref(db, 'done_payments')), d); showToast('Ditambahkan (manual).'); } closeDoneModal(); } catch (e) { showToast('Gagal.', 'error'); } };
+    window.toggleDoneVisible = async function (id, c) { try { await update(ref(db, 'done_payments/' + id), { visible: !c }); } catch (e) { showToast('Gagal.', 'error'); } };
+    window.deleteDone = async function (id) { if (!confirm('Hapus?')) return; try { await remove(ref(db, 'done_payments/' + id)); showToast('Dihapus.'); } catch (e) { showToast('Gagal.', 'error'); } };
+    window.openDpChat = function (oId) { switchTab('orders'); setTimeout(function () { openOrderDetail(oId); }, 150); };
+    document.getElementById('dp-tbody').addEventListener('click', function (e) { var eb = e.target.closest('[data-de]'), db2 = e.target.closest('[data-dd]'), tb2 = e.target.closest('[data-dtv]'), cb = e.target.closest('[data-dc]'); if (eb) openDoneModal(true, edc[eb.getAttribute('data-de')]); if (db2) deleteDone(db2.getAttribute('data-dd')); if (tb2) { var p = tb2.getAttribute('data-dtv').split(','); toggleDoneVisible(p[0], p[1] === 'true'); } if (cb) openDpChat(cb.getAttribute('data-dc')); });
     onValue(ref(db, 'done_payments'), function (s) {
-      var tb = document.getElementById('dp-tbody');
-      tb.innerHTML = '';
-      var raw = s.val();
-      DD.donePayments = raw || {};
-      var total = 0, revenue = 0, visible = 0;
-      if (!raw) {
-        tb.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Belum ada data.</td></tr>';
-      } else {
-        var sorted = Object.keys(raw).map(function (k) { return { k: k, val: raw[k] }; })
-          .sort(function (a, b) { return (b.val.createdAt || 0) - (a.val.createdAt || 0); });
-        sorted.forEach(function (item) {
-          var d = item.val, k = item.key;
-          total++; revenue += (d.price || 0);
-          var vis = d.visible !== false;
-          if (vis) visible++;
-          edc[k] = { id: k, buyerName: d.buyerName, product: d.product, pkg: d.pkg, price: d.price, visible: vis, orderId: d.orderId };
-          var hasO = !!d.orderId;
-          var linkH = hasO
-            ? '<button data-dc="' + d.orderId + '" class="inline-flex items-center gap-1.5 px-2.5 rounded-lg text-[11px] font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments text-[10px]"></i> Chat</button>'
-            : '<span class="text-[10px] text-muted-4 font-mono">MANUAL</span>';
-          var vc = vis ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-muted-4/10 text-muted-3 border-muted-4/20';
-          var tr = document.createElement('tr');
-          tr.innerHTML =
-            '<td class="font-bold text-sm text-white">' + esc(d.buyerName) + '</td>' +
-            '<td class="text-sm text-muted-1">' + esc(d.product) + '</td>' +
-            '<td class="text-right font-mono text-sm text-green-400">Rp' + (d.price || 0).toLocaleString('id-ID') + '</td>' +
-            '<td class="text-center">' + linkH + '</td>' +
-            '<td class="text-center"><button data-dtv="' + k + ',' + vis + '" class="status-badge border ' + vc + ' cursor-pointer hover:opacity-80 transition">' + (vis ? 'YA' : 'TIDAK') + '</button></td>' +
-            '<td class="text-center whitespace-nowrap">' +
-            '<button data-de="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button> ' +
-            '<button data-dd="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
-          tb.appendChild(tr);
-        });
-      }
-      document.getElementById('stat-dp-total').textContent = total;
-      document.getElementById('stat-dp-revenue').textContent = 'Rp' + revenue.toLocaleString('id-ID');
-      document.getElementById('stat-dp-visible').textContent = visible;
-      updateDash();
+      var tb = document.getElementById('dp-tbody'); tb.innerHTML = ''; var raw = s.val(); DD.donePayments = raw || {}; var total = 0, revenue = 0, visible = 0;
+      if (!raw) { tb.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Kosong.</td></tr>'; }
+      else { var sorted = Object.keys(raw).map(function (k) { return { k: k, val: raw[k] }; }).sort(function (a, b) { return (b.val.createdAt || 0) - (a.val.createdAt || 0); }); sorted.forEach(function (item) {
+        var d = item.val, k = item.k;
+        total++; revenue += (d.price || 0); var vis = d.visible !== false; if (vis) visible++; edc[k] = { id: k, buyerName: d.buyerName, product: d.product, pkg: d.pkg, price: d.price, visible: vis, orderId: d.orderId }; var hasO = !!d.orderId; var linkH = hasO ? '<button data-dc="' + d.orderId + '" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments text-[10px]"></i> Chat</button>' : '<span class="text-[10px] text-muted-4 font-mono">MANUAL</span>'; var vc = vis ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-muted-4/10 text-muted-3 border-muted-4/20'; var tr = document.createElement('tr'); tr.innerHTML = '<td class="font-bold text-sm text-white">' + esc(d.buyerName) + '</td><td class="text-sm text-muted-1">' + esc(d.product) + '</td><td class="text-right font-mono text-sm text-green-400">Rp' + (d.price || 0).toLocaleString('id-ID') + '</td><td class="text-center">' + linkH + '</td><td class="text-center"><button data-dtv="' + k + ',' + vis + '" class="status-badge border ' + vc + ' cursor-pointer hover:opacity-80 transition">' + (vis ? 'YA' : 'TIDAK') + '</button></td><td class="text-center whitespace-nowrap"><button data-de="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-dd="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>'; tb.appendChild(tr);
+      }); }
+      document.getElementById('stat-dp-total').textContent = total; document.getElementById('stat-dp-revenue').textContent = 'Rp' + revenue.toLocaleString('id-ID'); document.getElementById('stat-dp-visible').textContent = visible; updateDash();
     });
 
     /* ═══ ORDERS ═══ */
     onValue(ref(db, 'orders'), function (s) {
-      var tb = document.getElementById('orders-tbody');
-      tb.innerHTML = '';
-      var raw = s.val();
-      DD.orders = raw || {};
-      var nr = 0;
-      if (!raw) {
-        tb.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Belum ada pesanan.</td></tr>';
-      } else {
-        var sorted = Object.keys(raw).map(function (k) { return { k: k, val: raw[k] }; })
-          .sort(function (a, b) { return (b.val.createdAt || 0) - (a.val.createdAt || 0); });
-        sorted.forEach(function (item) {
-          var o = item.val, k = item.key;
-          var last = false;
-          if (o.chat) {
-            var ck = Object.keys(o.chat);
-            if (ck.length > 0 && o.chat[ck[ck.length - 1]].sender === 'buyer') last = true;
-          }
-          if (last || !o.chat || Object.keys(o.chat).length === 0) nr++;
-          var ss2 = SS[o.status] || SS.pending;
-          var bmc = 0;
-          if (o.chat) Object.values(o.chat).forEach(function (m) { if (m.sender === 'buyer') bmc++; });
-          var tr = document.createElement('tr');
-          tr.innerHTML =
-            '<td class="font-bold text-sm text-white">' + esc(o.buyerName) + '</td>' +
-            '<td class="text-sm text-muted-2">' + esc(o.productTitle) + '</td>' +
-            '<td class="text-sm font-mono text-muted-3">' + esc(o.buyerWhatsapp) + '</td>' +
-            '<td class="text-center"><span class="status-badge border ' + ss2 + '">' + (o.status || 'pending') + '</span></td>' +
-            '<td class="text-center"><button data-oc="' + k + '" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition">' +
-            '<i class="fas fa-comments"></i> Chat' +
-            (bmc ? '<span class="w-4 h-4 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center">' + bmc + '</span>' : '') +
-            '</button></td>' +
-            '<
+      var tb = document.getElementById('orders-tbody'); tb.innerHTML = ''; var raw = s.val(); DD.orders = raw || {}; var nr = 0;
+      if (!raw) { tb.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Kosong.</td></tr>'; }
+      else { var sorted = Object.keys(raw).map(function (k) { return { k: k, val: raw[k] }; }).sort(function (a, b) { return (b.val.createdAt || 0) - (a.val.createdAt || 0); }); sorted.forEach(function (item) {
+        var o = item.val, k = item.k;
+        var last = false; if (o.chat) { var ck = Object.keys(o.chat); if (ck.length > 0 && o.chat[ck[ck.length - 1]].sender === 'buyer') last = true; } if (last || !o.chat || Object.keys(o.chat).length === 0) nr++; var ss2 = SS[o.status] || SS.pending; var bmc = 0; if (o.chat) Object.values(o.chat).forEach(function (m) { if (m.sender === 'buyer') bmc++; }); var tr = document.createElement('tr'); tr.innerHTML = '<td class="font-bold text-sm text-white">' + esc(o.buyerName) + '</td><td class="text-sm text-muted-2">' + esc(o.productTitle) + '</td><td class="text-sm font-mono text-muted-3">' + esc(o.buyerWhatsapp) + '</td><td class="text-center"><span class="status-badge border ' + ss2 + '">' + (o.status || 'pending') + '</span></td><td class="text-center"><button data-oc="' + k + '" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments"></i> Chat' + (bmc ? '<span class="w-4 h-4 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center">' + bmc + '</span>' : '') + '</button></td><td class="text-center"><button data-od="' + k + '" class="text-red-400 hover:text-red-300 p-1"><i class="fas fa-trash"></i></button></td>'; tb.appendChild(tr);
+      }); }
+      var bv = nr > 99 ? '99+' : String(nr); var bd = document.getElementById('orderBadge'), bm = document.getElementById('orderBadgeMob');
+      if (nr > 0) { bd.classList.remove('hidden'); bd.textContent = bv; bm.classList.remove('hidden'); bm.textContent = bv; } else { bd.classList.add('hidden'); bm.classList.add('hidden'); }
+      updateDash();
+    });
+    document.getElementById('orders-tbody').addEventListener('click', function (e) { var cb = e.target.closest('[data-oc]'), db2 = e.target.closest('[data-od]'); if (cb) openOrderDetail(cb.getAttribute('data-oc')); if (db2) { if (!confirm('Hapus?')) return; var k = db2.getAttribute('data-od'); if (k === currentChatOrderId) closeOrderDetail(); remove(ref(db, 'orders/' + k)).then(function () { showToast('Dihapus.'); }).catch(function () { showToast('Gagal.', 'error'); }); } });
+    window.updateOrderStatusFromPanel = async function () { if (!currentChatOrderId) return; try { await update(ref(db, 'orders/' + currentChatOrderId), { status: document.getElementById('detailStatus').value }); showToast('Status diupdate!'); } catch (e) { showToast('Gagal.', 'error'); } };
+
+    /* ═══ ORDER CHAT ═══ */
+    var currentChatOrderId = null, unsubO = null, unsubC = null, pendingChatImage = null, cachedOD = {};
+    window.openOrderDetail = function (orderId) {
+      if (unsubO) { unsubO(); unsubO = null; } if (unsubC) { unsubC(); unsubC = null; }
+      currentChatOrderId = orderId; cachedOD = {};
+      document.getElementById('orderDetailPanel').classList.remove('hidden');
+      document.getElementById('chatMessages').innerHTML = '<div class="text-center text-muted-3 text-sm py-8"><i class="fas fa-spinner fa-spin mr-1"></i></div>';
+      document.getElementById('chatInput').value = ''; clearChatImage(); hideDpForm(); renderQrisQuickBar();
+      unsubO = onValue(ref(db, 'orders/' + orderId), function (snap) {
+        var o = snap.val(); if (!o) { closeOrderDetail(); showToast('Order dihapus.', 'error'); return; }
+        cachedOD = { buyerName: o.buyerName || '-', productTitle: o.productTitle || '-', price: o.price || 0 };
+        document.getElementById('detailOrderId').textContent = orderId.slice(-6).toUpperCase();
+        document.getElementById('detailBuyerName').textContent = o.buyerName || '-';
+        document.getElementById('detailProduct').textContent = o.productTitle || '-';
+        document.getElementById('detailPrice').textContent = 'Rp ' + (o.price || 0).toLocaleString('id-ID') + '/bln';
+        var wa = o.buyerWhatsapp || '';
+        document.getElementById('detailWaText').textContent = wa; document.getElementById('detailWaText').href = 'https://wa.me/' + wa;
+        document.getElementById('detailWaLink').href = 'https://wa.me/' + wa + '?text=Halo%20' + encodeURIComponent(o.buyerName || '');
+        document.getElementById('detailNote').textContent = o.orderNote || '-';
+        document.getElementById('detailDate').textContent = fTime(o.createdAt);
+        document.getElementById('detailStatus').value = o.status || 'pending';
+      });
+      unsubC = onValue(ref(db, 'orders/' + orderId + '/chat'), function (snap) {
+        var c = document.getElementById('chatMessages'), raw = snap.val(); c.innerHTML = '';
+        if (!raw) { c.innerHTML = '<div class="text-center text-muted-3 text-sm py-8">Kosong.</div>'; return; }
+        var msgs = Object.keys(raw).map(function (mk) { return { key: mk, val: raw[mk] }; }).sort(function (a, b) { return (a.val.timestamp || 0) - (b.val.timestamp || 0); });
+        msgs.forEach(function (m) {
+          var isMe = m.val.sender === 'admin', div = document.createElement('div'); div.className = 'flex ' + (isMe ? 'justify-end' : 'justify-start');
+          var ch = ''; if (m.val.text) ch += '<p class="text-sm text-gray-200 break-words">' + esc(m.val.text) + '</p>';
+          if (m.val.image) { var ik = 'img_' + m.key; imgStore[ik] = m.val.image; ch += '<img src="' + esc(m.val.image) + '" loading="lazy" class="rounded-lg mt-1.5 max-w-[260px] cursor-pointer hover:brightness-110 transition border border-white/5" onclick="viewImage(\'' + ik + '\')">'; }
+          ch += '<p class="text-[10px] ' + (isMe ? 'text-red-accent/40' : 'text-muted-4') + ' mt-1 text-right">' + fTime(m.val.timestamp) + '</p>';
+          div.innerHTML = '<div class="chat-bubble ' + (isMe ? 'bg-red-accent/8 border-red-accent/15' : 'bg-dark-card border-dark-border') + ' border rounded-2xl ' + (isMe ? 'rounded-br-sm' : 'rounded-bl-sm') + ' px-4 py-2.5">' + ch + '</div>';
+          c.appendChild(div);
+        });
+        requestAnimationFrame(function () { requestAnimationFrame(function () { c.scrollTop = c.scrollHeight; }); });
+      });
+    };
+    window.closeOrderDetail = function () { if (unsubO) { unsubO(); unsubO = null; } if (unsubC) { unsubC(); unsubC = null; } currentChatOrderId = null; cachedOD = {}; document.getElementById('orderDetailPanel').classList.add('hidden'); hideDpForm(); };
+    window.showDpForm = function () { if (!currentChatOrderId) return; document.getElementById('dpFormBar').classList.add('open'); document.getElementById('dpChatBuyer').value = cachedOD.buyerName || ''; document.getElementById('dpChatProduct').value = cachedOD.productTitle || ''; document.getElementById('dpChatPrice').value = cachedOD.price || ''; document.getElementById('dpChatPkg').value = '1 Bulan'; document.getElementById('dpChatVisible').checked = true; document.getElementById('chatInput').value = ''; };
+    window.hideDpForm = function () { document.getElementById('dpFormBar').classList.remove('open'); };
+    window.submitDpFromChat = async function () {
+      if (!currentChatOrderId) { showToast('Tidak ada order aktif.', 'error'); return; }
+      var buyer = document.getElementById('dpChatBuyer').value.trim(), product = document.getElementById('dpChatProduct').value.trim(), pkg = document.getElementById('dpChatPkg').value.trim(), price = parseInt(document.getElementById('dpChatPrice').value);
+      if (!buyer || !product || !price || price <= 0) { showToast('Isi data wajib.', 'error'); return; }
+      try {
+        var d = { buyerName: buyer, product: product, pkg: pkg, price: price, visible: document.getElementById('dpChatVisible').checked, orderId: currentChatOrderId, createdAt: serverTimestamp() };
+        await set(push(ref(db, 'done_payments')), d);
+        await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender: 'admin', text: '\u2705 Payment dicatat untuk @' + buyer + ' \u2014 ' + product + ' (' + pkg + ').', timestamp: serverTimestamp() });
+        hideDpForm(); showToast('Done payment disimpan & terhubung!');
+      } catch (e) { showToast('Gagal.', 'error'); }
+    };
+    window.sendChat = async function (sender) {
+      if (!currentChatOrderId) { showToast('Tidak ada order aktif.', 'error'); return; }
+      var input = document.getElementById('chatInput'), text = input.value.trim(), img = pendingChatImage;
+      if (!text && !img) return;
+      if (text.toLowerCase().trim() === '/donepayment') { input.value = ''; showDpForm(); return; }
+      input.value = ''; clearChatImage();
+      try {
+        var cmd = text.toLowerCase().trim();
+        if (cmd.startsWith('/') && qC[cmd]) { var q = qC[cmd]; if (q && q.image) { await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender: 'admin', text: '\uD83D\uDCB0 Pembayaran via ' + (q.label || cmd) + '. Scan QRIS:', image: q.image, timestamp: serverTimestamp() }); showToast('QRIS terkirim!'); return; } }
+        var md = { sender: sender, timestamp: serverTimestamp() }; if (text) md.text = text; if (img) md.image = img;
+        await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), md);
+      } catch (e) { showToast('Gagal kirim.', 'error'); }
+    };
+    document.getElementById('chatInput').addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat('admin'); } });
+    document.getElementById('chatImageInput').addEventListener('change', async function (e) { var f = e.target.files[0]; if (!f) return; try { pendingChatImage = await compressImage(f); document.getElementById('chatPreviewImg').src = pendingChatImage; document.getElementById('chatPreviewName').textContent = f.name; document.getElementById('chatImagePreview').classList.remove('hidden'); } catch (er) { showToast(typeof er === 'string' ? er : 'Gagal.', 'error'); } e.target.value = ''; });
+    window.clearChatImage = function () { pendingChatImage = null; document.getElementById('chatImagePreview').classList.add('hidden'); };
+
+    /* ═══ ADMIN MANAGEMENT ═══ */
+    var eac = {};
+    window.openAdminModal = function (isE, data) { document.getElementById('adminModal').classList.remove('hidden'); document.getElementById('adminModalTitle').textContent = isE ? 'Edit Admin' : 'Tambah Admin'; if (isE && data) { eac[data.id] = data; document.getElementById('admId').value = data.id; document.getElementById('admName').value = data.name; document.getElementById('admAge').value = data.age || ''; document.getElementById('admPhoto').value = data.photoUrl || ''; document.getElementById('admUsername').value = data.username; document.getElementById('admPassword').value = data.password; } else { document.getElementById('adminForm').reset(); document.getElementById('admId').value = ''; } };
+    window.closeAdminModal = function () { document.getElementById('adminModal').classList.add('hidden'); };
+    window.handleAdminSubmit = async function (e) {
+      e.preventDefault();
+      var id = document.getElementById('admId').value;
+      var name = document.getElementById('admName').value.trim();
+      var age = parseInt(document.getElementById('admAge').value);
+      var photo = document.getElementById('admPhoto').value.trim();
+      var username = document.getElementById('admUsername').value.trim().toLowerCase();
+      var password = document.getElementById('admPassword').value;
+      if (username.length < 3) { showToast('Username min. 3 karakter.', 'error'); return; }
+      if (password.length < 4) { showToast('Password min. 4 karakter.', 'error'); return; }
+      try {
+        var os = await get(ref(db, 'owners'));
+        var as = await get(ref(db, 'admins'));
+        var dup = false;
+        if (os.exists()) Object.values(os.val()).forEach(function (o) { if (o.username === username && (!id || id !== Object.keys(os.val()).find(function (k) { return os.val()[k].username === username && k === id; }))) dup = true; });
+        if (as.exists()) Object.keys(as.val()).forEach(function (k) { if (as.val()[k].username === username && k !== id) dup = true; });
+        if (dup) { showToast('Username sudah dipakai.', 'error'); return; }
+        var d = { name: name, age: age || 0, photoUrl: photo, username: username, password: password, disabled: false };
+        if (!id) d.createdAt = Date.now();
+        if (id) { await update(ref(db, 'admins/' + id), d);
