@@ -15,13 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script>
-    tailwind.config={darkMode:'class',theme:{extend:{
-      fontFamily:{sans:['Space Grotesk','sans-serif'],mono:['JetBrains Mono','monospace']},
-      colors:{dark:{bg:'#06060a',card:'#0d0d12',card2:'#121217',border:'#1a1a24',hover:'#18181f'},
-        red:{accent:'#dc2626',bright:'#ef4444',dim:'#991b1b',glow:'rgba(220,38,38,.12)',glow2:'rgba(220,38,38,.06)'},
-        gold:{accent:'#d97706',bright:'#f59e0b',dim:'#92400e',glow:'rgba(217,119,6,.12)',glow2:'rgba(217,119,6,.06)'},
-        muted:{1:'#a1a1aa',2:'#71717a',3:'#52525b',4:'#3f3f46'}}
-    }}}
+    tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Space Grotesk','sans-serif'],mono:['JetBrains Mono','monospace']},colors:{dark:{bg:'#06060a',card:'#0d0d12',card2:'#121217',border:'#1a1a24',hover:'#18181f'},red:{accent:'#dc2626',bright:'#ef4444',dim:'#991b1b',glow:'rgba(220,38,38,.12)',glow2:'rgba(220,38,38,.06)'},gold:{accent:'#d97706',bright:'#f59e0b',dim:'#92400e',glow:'rgba(217,119,6,.12)',glow2:'rgba(217,119,6,.06)'},muted:{1:'#a1a1aa',2:'#71717a',3:'#52525b',4:'#3f3f46'}}}}
   </script>
   <style>
     :root{--bg:#06060a;--card:#0d0d12;--border:#1a1a24;--red:#dc2626;--gold:#d97706}
@@ -29,41 +23,41 @@
     body{background:var(--bg);color:#e4e4e7;font-family:'Space Grotesk',sans-serif}
     ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#1a1a24;border-radius:4px}
     .nav-item{position:relative;transition:all .25s;border-left:3px solid transparent}
-    .nav-item:hover{background:var(--red-glow2);color:#fca5a5}
-    .nav-item.active{background:var(--red-glow);color:var(--red-bright);border-left-color:var(--red)}
+    .nav-item:hover{background:rgba(220,38,38,.06);color:#fca5a5}
+    .nav-item.active{background:rgba(220,38,38,.12);color:#ef4444;border-left-color:#dc2626}
     .nav-item.owner-sep{pointer-events:none;border-left-color:transparent!important;background:transparent!important}
-    .mob-nav{transition:all .2s}.mob-nav.active{background:var(--red-glow);color:var(--red-bright)}
+    .mob-nav{transition:all .2s}.mob-nav.active{background:rgba(220,38,38,.12);color:#ef4444}
     .admin-table th{text-align:left;padding:.85rem 1rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:#52525b;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace}
     .admin-table td{padding:.8rem 1rem;border-bottom:1px solid #111116;font-size:.85rem}
-    .admin-table tr:hover td{background:var(--red-glow2)}.admin-table tr:last-child td{border-bottom:none}
+    .admin-table tr:hover td{background:rgba(220,38,38,.06)}.admin-table tr:last-child td{border-bottom:none}
     .modal-backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(8px)}
     .toast{position:fixed;bottom:2rem;right:2rem;padding:.9rem 1.4rem;border-radius:10px;font-size:.85rem;font-weight:600;z-index:9999;transform:translateY(120px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1)}.toast.show{transform:translateY(0);opacity:1}
     .toast.success{background:#14532d;color:#86efac;border:1px solid #22c55e}.toast.error{background:#7f1d1d;color:#fca5a5;border:1px solid #ef4444}
     .status-badge{font-size:.65rem;padding:3px 9px;border-radius:9999px;font-weight:700;font-family:'JetBrains Mono',monospace}
     .source-badge{font-size:.6rem;padding:2px 7px;border-radius:9999px;font-weight:700;font-family:'JetBrains Mono',monospace}
     .source-buyer{background:rgba(220,38,38,.08);color:#fca5a5;border:1px solid rgba(220,38,38,.2)}
-    .stat-card{position:relative;overflow:hidden;transition:all .3s}.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:0;transition:opacity .3s}.stat-card:hover::before{opacity:1}.stat-card:hover{border-color:rgba(220,38,38,.25);transform:translateY(-2px)}
-    .stat-card.gold::before{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+    .stat-card{position:relative;overflow:hidden;transition:all .3s}.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#dc2626,transparent);opacity:0;transition:opacity .3s}.stat-card:hover::before{opacity:1}.stat-card:hover{border-color:rgba(220,38,38,.25);transform:translateY(-2px)}
+    .stat-card.gold::before{background:linear-gradient(90deg,transparent,#d97706,transparent)}
     .quick-action{transition:all .25s;cursor:pointer;overflow:hidden;position:relative}.quick-action::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(220,38,38,.05),transparent);opacity:0;transition:opacity .25s}.quick-action:hover::after{opacity:1}.quick-action:hover{border-color:rgba(220,38,38,.3);transform:translateY(-3px);box-shadow:0 8px 25px rgba(220,38,38,.08)}
     .partner-logo{width:36px;height:36px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,.02);border:1px solid var(--border);padding:4px;flex-shrink:0}
     .img-preview-bar{background:rgba(220,38,38,.04);border:1px dashed rgba(220,38,38,.25);border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:10px}
     .img-preview-bar img{height:48px;border-radius:6px;object-fit:cover;border:1px solid var(--border)}
-    .img-btn{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--border);color:#52525b;cursor:pointer;transition:all .15s;flex-shrink:0}.img-btn:hover{background:var(--red-glow);color:var(--red-bright);border-color:rgba(220,38,38,.3)}
-    .qris-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;align-items:center;gap:14px;transition:all .2s}.qris-card:hover{border-color:rgba(220,38,38,.3);background:var(--red-glow2)}.qris-card img{width:64px;height:64px;border-radius:10px;object-fit:contain;background:rgba(255,255,255,.02);border:1px solid var(--border);flex-shrink:0}
-    .qris-cmd-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:8px;font-size:11px;font-family:'JetBrains Mono',monospace;background:var(--red-glow2);border:1px solid rgba(220,38,38,.15);color:#fca5a5;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}.qris-cmd-chip:hover{background:var(--red-glow);border-color:rgba(220,38,38,.4);transform:translateY(-1px)}
+    .img-btn{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--border);color:#52525b;cursor:pointer;transition:all .15s;flex-shrink:0}.img-btn:hover{background:rgba(220,38,38,.12);color:#ef4444;border-color:rgba(220,38,38,.3)}
+    .qris-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;align-items:center;gap:14px;transition:all .2s}.qris-card:hover{border-color:rgba(220,38,38,.3);background:rgba(220,38,38,.06)}.qris-card img{width:64px;height:64px;border-radius:10px;object-fit:contain;background:rgba(255,255,255,.02);border:1px solid var(--border);flex-shrink:0}
+    .qris-cmd-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:8px;font-size:11px;font-family:'JetBrains Mono',monospace;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.15);color:#fca5a5;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}.qris-cmd-chip:hover{background:rgba(220,38,38,.12);border-color:rgba(220,38,38,.4);transform:translateY(-1px)}
     .drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:30}.drawer-overlay.open{display:block}
     .drawer-panel{position:fixed;top:0;left:0;bottom:0;width:280px;background:var(--card);border-right:1px solid var(--border);z-index:31;transform:translateX(-100%);transition:transform .3s cubic-bezier(.16,1,.3,1);overflow-y:auto}.drawer-panel.open{transform:translateX(0)}
     select{background-color:var(--card);color:#e4e4e7}select option{background:#0d0d12;color:#e4e4e7}
     .dp-form-bar{background:rgba(220,38,38,.04);border:1px solid rgba(220,38,38,.2);border-radius:12px;padding:12px;display:none;animation:fadeUp .2s ease}.dp-form-bar.open{display:block}
     .dp-form-bar label{display:block;font-size:10px;font-family:'JetBrains Mono',monospace;color:#52525b;margin-bottom:3px;text-transform:uppercase;letter-spacing:.03em}
-    .dp-form-bar input[type="text"],.dp-form-bar input[type="number"]{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:.8rem;color:#e4e4e7;outline:none}.dp-form-bar input:focus{border-color:var(--red)}
+    .dp-form-bar input[type="text"],.dp-form-bar input[type="number"]{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:.8rem;color:#e4e4e7;outline:none}.dp-form-bar input:focus{border-color:#dc2626}
     .chat-bubble{max-width:75%;animation:fadeUp .25s ease}
     @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
     @keyframes pulse-red{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{box-shadow:0 0 0 8px rgba(220,38,38,0)}}.badge-pulse{animation:pulse-red 2s infinite}
-    .dash-recent-row{transition:all .15s}.dash-recent-row:hover{background:var(--red-glow2)}
+    .dash-recent-row{transition:all .15s}.dash-recent-row:hover{background:rgba(220,38,38,.06)}
     .glow-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
     .glow-dot.green{background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.5)}.glow-dot.yellow{background:#eab308;box-shadow:0 0 8px rgba(234,179,8,.5)}.glow-dot.red{background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.5)}.glow-dot.gray{background:#52525b}
-    input[type="text"]:focus,input[type="url"]:focus,input[type="number"]:focus,textarea:focus{border-color:var(--red)!important;outline:none}
+    input[type="text"]:focus,input[type="url"]:focus,input[type="number"]:focus,textarea:focus{border-color:#dc2626!important;outline:none}
     .linked-badge{display:inline-flex;align-items:center;gap:4px;font-size:.6rem;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-weight:600;background:rgba(220,38,38,.08);color:#fca5a5;border:1px solid rgba(220,38,38,.15)}
     .pw-cell{font-family:'JetBrains Mono',monospace;letter-spacing:.05em;cursor:pointer;transition:color .15s}.pw-cell:hover{color:#ef4444}
     .avatar-circle{display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;overflow:hidden}
@@ -72,7 +66,6 @@
   </style>
 </head>
 <body class="flex h-screen overflow-hidden">
-
   <div id="drawerOverlay" class="drawer-overlay" onclick="closeDrawer()"></div>
   <div id="drawerPanel" class="drawer-panel md:hidden">
     <div class="h-14 flex items-center justify-between px-4 border-b border-dark-border">
@@ -136,7 +129,6 @@
         </div>
       </div>
     </header>
-
     <div class="flex-1 overflow-y-auto">
 
       <!-- DASHBOARD -->
@@ -218,10 +210,7 @@
 
       <!-- KELOLA ADMIN -->
       <div id="tab-admins" class="tab-content hidden p-5 md:p-8">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-          <div><h2 class="text-2xl font-bold text-white">Kelola Akun Admin</h2><p class="text-sm text-muted-3 mt-1">CRUD admin, lihat username & password, photo profile, umur.</p></div>
-          <button onclick="openAdminModal()" class="bg-gold-accent hover:bg-gold-bright text-black font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition shadow-lg shadow-gold-accent/15 text-sm"><i class="fas fa-user-plus text-xs"></i> Tambah Admin</button>
-        </div>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Kelola Akun Admin</h2><p class="text-sm text-muted-3 mt-1">CRUD admin, lihat username & password, photo profile, umur.</p></div><button onclick="openAdminModal()" class="bg-gold-accent hover:bg-gold-bright text-black font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition shadow-lg shadow-gold-accent/15 text-sm"><i class="fas fa-user-plus text-xs"></i> Tambah Admin</button></div>
         <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Admin</th><th>Umur</th><th>Username</th><th>Password</th><th class="text-center">Warning</th><th class="text-center">Status</th><th class="text-center">Actions</th></tr></thead><tbody id="admins-tbody"><tr><td colspan="7" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
@@ -281,7 +270,11 @@
         <div class="flex-1 min-h-0 flex flex-col overflow-hidden"><div class="flex-shrink-0 px-4 pt-3 pb-2"><h4 class="text-[10px] font-mono text-muted-3 uppercase tracking-wider"><i class="fas fa-comments mr-1"></i> Chat</h4></div><div id="chatMessages" class="flex-1 overflow-y-auto px-4 pb-4 space-y-3"><div class="text-center text-muted-3 text-sm py-8">-</div></div></div>
       </div>
       <div id="qrisQuickBar" class="hidden flex-shrink-0 border-t border-dark-border px-4 py-2 bg-dark-card/80"><div class="flex items-center gap-2 overflow-x-auto" id="qrisQuickBarInner"><span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span></div></div>
-      <div id="dpFormBar" class="dp-form-bar flex-shrink-0 border-t border-dark-border"><div class="px-4 pt-3 pb-1 flex items-center gap-2"><i class="fas fa-check-circle text-green-400 text-sm"></i><span class="text-xs font-bold text-green-400 font-mono">DONE PAYMENT</span><button onclick="hideDpForm()" class="ml-auto w-7 h-7 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-3 text-xs"><i class="fas fa-times"></i></button></div><div class="px-4 pb-3 grid grid-cols-2 gap-3"><div><label>Nick</label><input type="text" id="dpChatBuyer" class="text-sm"></div><div><label>Produk</label><input type="text" id="dpChatProduct" class="text-sm"></div><div><label>Paket</label><input type="text" id="dpChatPkg" class="text-sm" placeholder="1 Bulan"></div><div><label>Harga</label><input type="number" id="dpChatPrice" class="text-sm"></div></div><div class="px-4 pb-3 flex items-center gap-3"><label class="flex items-center gap-2 text-xs text-muted-2 cursor-pointer"><input type="checkbox" id="dpChatVisible" checked class="accent-green-500 w-3.5 h-3.5">Publik</label><button onclick="submitDpFromChat()" class="ml-auto px-4 py-1.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg text-xs transition"><i class="fas fa-check mr-1"></i>Simpan & Link</button></div></div>
+      <div id="dpFormBar" class="dp-form-bar flex-shrink-0 border-t border-dark-border">
+        <div class="px-4 pt-3 pb-1 flex items-center gap-2"><i class="fas fa-check-circle text-green-400 text-sm"></i><span class="text-xs font-bold text-green-400 font-mono">DONE PAYMENT</span><button onclick="hideDpForm()" class="ml-auto w-7 h-7 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-3 text-xs"><i class="fas fa-times"></i></button></div>
+        <div class="px-4 pb-3 grid grid-cols-2 gap-3"><div><label>Nick</label><input type="text" id="dpChatBuyer" class="text-sm"></div><div><label>Produk</label><input type="text" id="dpChatProduct" class="text-sm"></div><div><label>Paket</label><input type="text" id="dpChatPkg" class="text-sm" placeholder="1 Bulan"></div><div><label>Harga</label><input type="number" id="dpChatPrice" class="text-sm"></div></div>
+        <div class="px-4 pb-3 flex items-center gap-3"><label class="flex items-center gap-2 text-xs text-muted-2 cursor-pointer"><input type="checkbox" id="dpChatVisible" checked class="accent-green-500 w-3.5 h-3.5">Publik</label><button onclick="submitDpFromChat()" class="ml-auto px-4 py-1.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg text-xs transition"><i class="fas fa-check mr-1"></i>Simpan & Link</button></div>
+      </div>
       <div class="flex-shrink-0 border-t border-dark-border p-4 bg-dark-card space-y-2">
         <div id="chatImagePreview" class="hidden img-preview-bar"><img id="chatPreviewImg" src=""><div class="flex-1 min-w-0"><div class="text-xs text-muted-2 truncate" id="chatPreviewName">-</div></div><button onclick="clearChatImage()" class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 flex-shrink-0"><i class="fas fa-times text-[10px]"></i></button></div>
         <input type="file" id="chatImageInput" accept="image/*" class="hidden">
@@ -294,501 +287,186 @@
   <div id="toast" class="toast"></div>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
-    import { getDatabase, ref, push, set, update, remove, onValue, get, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
+    import{initializeApp}from"https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import{getDatabase,ref,push,set,update,remove,onValue,get,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
+    const fc={apiKey:"AIzaSyBHPvQ6Bt9f6U3wqDz3CG71HNpcFq3RZRI",authDomain:"kryonix-7c55e.firebaseapp.com",databaseURL:"https://kryonix-7c55e-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"kryonix-7c55e",storageBucket:"kryonix-7c55e.firebasestorage.app",messagingSenderId:"917095112473",appId:"1:917095112473:web:dd4120a14724e6e6a02f88"};
+    const app=initializeApp(fc),db=getDatabase(app);
+    const DI={hosting:'https://picsum.photos/seed/kry-hosting/600/400',vps:'https://picsum.photos/seed/kry-vps/600/400',domain:'https://picsum.photos/seed/kry-domain/600/400',game:'https://picsum.photos/seed/kry-game/600/400',dedicated:'https://picsum.photos/seed/kry-dedi/600/400',other:'https://picsum.photos/seed/kry-other/600/400'};
+    const CC={hosting:'text-green-400',vps:'text-cyan-400',domain:'text-purple-400',game:'text-green-400',dedicated:'text-cyan-400',other:'text-purple-400'};
+    const PCI={infrastructure:'fa-server',payment:'fa-credit-card',security:'fa-shield-alt',cdn:'fa-bolt',domain:'fa-globe',game:'fa-gamepad',other:'fa-star'};
+    const PCC={infrastructure:'text-cyan-400',payment:'text-green-400',security:'text-purple-400',cdn:'text-yellow-400',domain:'text-blue-400',game:'text-pink-400',other:'text-gray-400'};
+    const SS={pending:'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',processing:'bg-blue-500/10 text-blue-400 border-blue-500/20',completed:'bg-green-500/10 text-green-400 border-green-500/20',cancelled:'bg-red-500/10 text-red-400 border-red-500/20'};
 
-    const fc = { apiKey: "AIzaSyBHPvQ6Bt9f6U3wqDz3CG71HNpcFq3RZRI", authDomain: "kryonix-7c55e.firebaseapp.com", databaseURL: "https://kryonix-7c55e-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "kryonix-7c55e", storageBucket: "kryonix-7c55e.firebasestorage.app", messagingSenderId: "917095112473", appId: "1:917095112473:web:dd4120a14724e6e6a02f88" };
-    const app = initializeApp(fc), db = getDatabase(app);
+    if(sessionStorage.getItem('kryonix_role')!=='owner'||sessionStorage.getItem('kryonix_admin')!=='granted'){window.location.href='login-admin.html';}
 
-    const DI = { hosting: 'https://picsum.photos/seed/kry-hosting/600/400', vps: 'https://picsum.photos/seed/kry-vps/600/400', domain: 'https://picsum.photos/seed/kry-domain/600/400', game: 'https://picsum.photos/seed/kry-game/600/400', dedicated: 'https://picsum.photos/seed/kry-dedi/600/400', other: 'https://picsum.photos/seed/kry-other/600/400' };
-    const CC = { hosting: 'text-green-400', vps: 'text-cyan-400', domain: 'text-purple-400', game: 'text-green-400', dedicated: 'text-cyan-400', other: 'text-purple-400' };
-    const PCI = { infrastructure: 'fa-server', payment: 'fa-credit-card', security: 'fa-shield-alt', cdn: 'fa-bolt', domain: 'fa-globe', game: 'fa-gamepad', other: 'fa-star' };
-    const PCC = { infrastructure: 'text-cyan-400', payment: 'text-green-400', security: 'text-purple-400', cdn: 'text-yellow-400', domain: 'text-blue-400', game: 'text-pink-400', other: 'text-gray-400' };
-    const SS = { pending: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20', processing: 'bg-blue-500/10 text-blue-400 border-blue-500/20', completed: 'bg-green-500/10 text-green-400 border-green-500/20', cancelled: 'bg-red-500/10 text-red-400 border-red-500/20' };
+    var toastTimer=null;
+    function showToast(m,t){t=t||'success';if(toastTimer)clearTimeout(toastTimer);var el=document.getElementById('toast');el.textContent=m;el.className='toast '+t+' show';toastTimer=setTimeout(function(){el.classList.remove('show');},3500);}
+    function fTime(ts){if(!ts||typeof ts!=='number')return'-';var d=new Date(ts);return d.toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})+' '+d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});}
+    function fTimeS(ts){if(!ts||typeof ts!=='number')return'-';var d=new Date(ts);return d.toLocaleDateString('id-ID',{day:'2-digit',month:'short'})+' '+d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});}
+    function esc(t){if(!t)return'';var d=document.createElement('div');d.textContent=String(t);return d.innerHTML;}
+    function toBool(v){return v===true||v==='true';}
+    function compressImage(f,mw,q){mw=mw||800;q=q||0.7;return new Promise(function(ok,no){if(!f){no('No file');return;}if(f.size>8*1024*1024){no('Max 8MB');return;}var reader=new FileReader();reader.onload=function(e){var img=new Image();img.onload=function(){var c=document.createElement('canvas'),w=img.width,h=img.height;if(w>mw){h=(mw/w)*h;w=mw;}if(h>800){w=(800/h)*w;h=800;}c.width=Math.max(1,Math.round(w));c.height=Math.max(1,Math.round(h));c.getContext('2d').drawImage(img,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',q));};img.onerror=function(){no('Gagal');};img.src=e.target.result;};reader.onerror=function(){no('Gagal');};reader.readAsDataURL(f);});}
 
-    /* AUTH */
-    if (sessionStorage.getItem('kryonix_role') !== 'owner' || sessionStorage.getItem('kryonix_admin') !== 'granted') { window.location.href = 'login-admin.html'; }
+    var imgStore={};
+    window.viewImage=function(k){if(imgStore[k]){document.getElementById('lightboxImg').src=imgStore[k];document.getElementById('imageLightbox').classList.remove('hidden');}};
+    window.closeLightbox=function(){document.getElementById('imageLightbox').classList.add('hidden');};
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
 
-    var toastTimer = null;
-    function showToast(m, t) { t = t || 'success'; if (toastTimer) clearTimeout(toastTimer); var el = document.getElementById('toast'); el.textContent = m; el.className = 'toast ' + t + ' show'; toastTimer = setTimeout(function () { el.classList.remove('show'); }, 3500); }
-    function fTime(ts) { if (!ts || typeof ts !== 'number') return '-'; var d = new Date(ts); return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) + ' ' + d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }); }
-    function fTimeS(ts) { if (!ts || typeof ts !== 'number') return '-'; var d = new Date(ts); return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }) + ' ' + d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }); }
-    function esc(t) { if (!t) return ''; var d = document.createElement('div'); d.textContent = String(t); return d.innerHTML; }
-    function compressImage(f, mw, q) { mw = mw || 800; q = q || 0.7; return new Promise(function (ok, no) { if (!f) { no('No file'); return; } if (f.size > 8 * 1024 * 1024) { no('Max 8MB'); return; } var reader = new FileReader(); reader.onload = function (e) { var img = new Image(); img.onload = function () { var c = document.createElement('canvas'), w = img.width, h = img.height; if (w > mw) { h = (mw / w) * h; w = mw; } if (h > 800) { w = (800 / h) * w; h = 800; } c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h)); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); ok(c.toDataURL('image/jpeg', q)); }; img.onerror = function () { no('Gagal'); }; img.src = e.target.result; }; reader.onerror = function () { no('Gagal'); }; reader.readAsDataURL(f); }); }
-    var imgStore = {};
-    window.viewImage = function (k) { if (imgStore[k]) { document.getElementById('lightboxImg').src = imgStore[k]; document.getElementById('imageLightbox').classList.remove('hidden'); } };
-    window.closeLightbox = function () { document.getElementById('imageLightbox').classList.add('hidden'); };
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
+    function updateClock(){var n=new Date();document.getElementById('dashClock').textContent=n.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'})+' \u2014 '+n.toLocaleDateString('id-ID',{weekday:'short',day:'numeric',month:'short',year:'numeric'});}
+    updateClock();setInterval(updateClock,1000);
+    window.openDrawer=function(){document.getElementById('drawerOverlay').classList.add('open');document.getElementById('drawerPanel').classList.add('open');};
+    window.closeDrawer=function(){document.getElementById('drawerOverlay').classList.remove('open');document.getElementById('drawerPanel').classList.remove('open');};
 
-    function updateClock() { var n = new Date(); document.getElementById('dashClock').textContent = n.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' \u2014 ' + n.toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }); }
-    updateClock(); setInterval(updateClock, 1000);
-    window.openDrawer = function () { document.getElementById('drawerOverlay').classList.add('open'); document.getElementById('drawerPanel').classList.add('open'); };
-    window.closeDrawer = function () { document.getElementById('drawerOverlay').classList.remove('open'); document.getElementById('drawerPanel').classList.remove('open'); };
+    var HT={dashboard:'Owner Overview',products:'Product Management',orders:'Order Management',partners:'Partner Management',testimoni:'Moderasi Testimoni',donepayment:'Done Payment',admins:'Kelola Admin',warnings:'Riwayat Warnings',settings:'General Settings'};
+    var TAB_KEYS=['dashboard','products','orders','partners','testimoni','donepayment',null,'admins','warnings',null,'settings'];
+    window.switchTab=function(tab){document.querySelectorAll('.tab-content').forEach(function(el){el.classList.add('hidden');});var tabEl=document.getElementById('tab-'+tab);if(tabEl)tabEl.classList.remove('hidden');document.querySelectorAll('aside .nav-item').forEach(function(el){el.classList.remove('active');});var idx=TAB_KEYS.indexOf(tab);if(idx>=0){var navItems=document.querySelectorAll('aside .nav-item');if(navItems[idx])navItems[idx].classList.add('active');}document.querySelectorAll('.mob-nav').forEach(function(el){el.classList.remove('active');});var mb=document.querySelector('[data-mob="'+tab+'"]');if(mb)mb.classList.add('active');document.getElementById('headerTitle').textContent=HT[tab]||'Owner';if(tab==='settings')loadSettings();};
+    window.doLogout=function(){sessionStorage.clear();window.location.href='login-admin.html';};
 
-    var HT = { dashboard: 'Owner Overview', products: 'Product Management', orders: 'Order Management', partners: 'Partner Management', testimoni: 'Moderasi Testimoni', donepayment: 'Done Payment', admins: 'Kelola Admin', warnings: 'Riwayat Warnings', settings: 'General Settings' };
-    var TAB_KEYS = ['dashboard', 'products', 'orders', 'partners', 'testimoni', 'donepayment', null, 'admins', 'warnings', null, 'settings'];
-    window.switchTab = function (tab) {
-      document.querySelectorAll('.tab-content').forEach(function (el) { el.classList.add('hidden'); });
-      var tabEl = document.getElementById('tab-' + tab);
-      if (tabEl) tabEl.classList.remove('hidden');
-      document.querySelectorAll('aside .nav-item').forEach(function (el) { el.classList.remove('active'); });
-      var idx = TAB_KEYS.indexOf(tab);
-      if (idx >= 0) { var navItems = document.querySelectorAll('aside .nav-item'); if (navItems[idx]) navItems[idx].classList.add('active'); }
-      document.querySelectorAll('.mob-nav').forEach(function (el) { el.classList.remove('active'); });
-      var mb = document.querySelector('[data-mob="' + tab + '"]');
-      if (mb) mb.classList.add('active');
-      document.getElementById('headerTitle').textContent = HT[tab] || 'Owner';
-      if (tab === 'settings') loadSettings();
-    };
-    window.doLogout = function () { sessionStorage.clear(); window.location.href = 'login-admin.html'; };
+    var ownerData={};
+    onValue(ref(db,'owners/'+sessionStorage.getItem('kryonix_uid')),function(s){var u=s.val();if(!u){showToast('Akun tidak ditemukan.','error');setTimeout(function(){window.location.href='login-admin.html';},1500);return;}ownerData=u;var av=document.getElementById('headerAvatar');if(u.photoUrl){av.innerHTML='<img src="'+esc(u.photoUrl)+'" class="w-full h-full rounded-full object-cover">';}else{av.textContent=(u.name||'?').charAt(0).toUpperCase();}document.getElementById('headerName').textContent=u.name||'-';});
 
-    /* Owner data */
-    var ownerData = {};
-    onValue(ref(db, 'owners/' + sessionStorage.getItem('kryonix_uid')), function (s) {
-      var u = s.val();
-      if (!u) { showToast('Akun tidak ditemukan.', 'error'); setTimeout(function () { window.location.href = 'login-admin.html'; }, 1500); return; }
-      ownerData = u;
-      var av = document.getElementById('headerAvatar');
-      if (u.photoUrl) { av.innerHTML = '<img src="' + esc(u.photoUrl) + '" class="w-full h-full rounded-full object-cover">'; } else { av.textContent = (u.name || '?').charAt(0).toUpperCase(); }
-      document.getElementById('headerName').textContent = u.name || '-';
-    });
+    /* QRIS */
+    var qC={},qR={},qFD={image:null};
+    function loadQris(){onValue(ref(db,"settings/qris_commands"),function(s){var r=s.val();qC={};qR={};if(r)Object.keys(r).forEach(function(id){var q=r[id];qR[id]=q;var c=(q.command||'').toLowerCase().trim();if(c)qC[c]=q;});renderQrisList();renderQrisQuickBar();});}
+    function renderQrisList(){var l=document.getElementById('qrisList'),ids=Object.keys(qR);if(!ids.length){l.innerHTML='<div class="text-center py-8 text-muted-3"><i class="fas fa-qrcode text-3xl mb-3 text-muted-4 block"></i><p class="text-sm">Kosong.</p></div>';return;}l.innerHTML='';ids.sort(function(a,b){return(qR[a].command||'').localeCompare(qR[b].command||'');});ids.forEach(function(id){var q=qR[id],c=document.createElement('div');c.className='qris-card';var ih=q.image?'<img src="'+esc(q.image)+'">':'<div class="w-16 h-16 rounded-lg border border-dark-border flex items-center justify-center text-muted-4 flex-shrink-0"><i class="fas fa-qrcode text-xl"></i></div>';c.innerHTML=ih+'<div class="flex-1 min-w-0"><div class="flex items-center gap-2 mb-0.5"><code class="text-sm font-mono text-red-accent font-bold">'+esc(q.command||'-')+'</code><span class="text-muted-4">\u2014</span><span class="text-sm text-muted-1 truncate">'+esc(q.label||'-')+'</span></div></div><div class="flex items-center gap-1 flex-shrink-0"><button data-qe="'+id+'" class="text-cyan-400 hover:text-cyan-300 p-2 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-qd="'+id+'" class="text-red-400 hover:text-red-300 p-2 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></div>';l.appendChild(c);});}
+    document.getElementById('qrisList').addEventListener('click',function(e){var eb=e.target.closest('[data-qe]'),db2=e.target.closest('[data-qd]');if(eb){var id=eb.getAttribute('data-qe');if(qR[id])openQrisModal(true,id,qR[id]);}if(db2)deleteQris(db2.getAttribute('data-qd'));});
+    function renderQrisQuickBar(){var b=document.getElementById('qrisQuickBar'),i=document.getElementById('qrisQuickBarInner'),cs=Object.keys(qC);if(!cs.length){b.classList.add('hidden');return;}b.classList.remove('hidden');i.innerHTML='<span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span>';cs.forEach(function(c){var ch=document.createElement('button');ch.className='qris-cmd-chip';ch.textContent=c;ch.setAttribute('data-qs',c);ch.title=qC[c].label||c;i.appendChild(ch);});}
+    document.getElementById('qrisQuickBarInner').addEventListener('click',function(e){var c=e.target.closest('[data-qs]');if(c)quickSendQris(c.getAttribute('data-qs'));});
+    window.openQrisModal=function(isE,eId,data){document.getElementById('qrisModal').classList.remove('hidden');document.getElementById('qrisModalTitle').textContent=isE?'Edit QRIS':'Tambah QRIS';document.getElementById('qrisForm').reset();document.getElementById('qrisEditId').value='';document.getElementById('qrisFormPreview').classList.add('hidden');qFD={image:null};if(isE&&data){document.getElementById('qrisEditId').value=eId||'';document.getElementById('qrisCommand').value=data.command||'';document.getElementById('qrisLabel').value=data.label||'';if(data.image){qFD.image=data.image;document.getElementById('qrisFormImg').src=data.image;document.getElementById('qrisFormPreview').classList.remove('hidden');}}};
+    window.closeQrisModal=function(){document.getElementById('qrisModal').classList.add('hidden');};
+    window.deleteQris=async function(id){if(!confirm('Hapus?'))return;try{await remove(ref(db,'settings/qris_commands/'+id));showToast('Dihapus.');}catch(e){showToast('Gagal.','error');}};
+    document.getElementById('qrisFormFile').addEventListener('change',async function(e){var f=e.target.files[0];if(!f)return;try{qFD.image=await compressImage(f,600,0.6);document.getElementById('qrisFormImg').src=qFD.image;document.getElementById('qrisFormPreview').classList.remove('hidden');}catch(er){showToast(typeof er==='string'?er:'Gagal.','error');}e.target.value='';});
+    window.handleQrisSubmit=async function(e){e.preventDefault();var id=document.getElementById('qrisEditId').value,cmd=document.getElementById('qrisCommand').value.trim(),lbl=document.getElementById('qrisLabel').value.trim();if(!cmd.startsWith('/')){showToast('Harus diawali /','error');return;}if(!qFD.image&&!id){showToast('Upload gambar.','error');return;}var nc=cmd.toLowerCase(),dup=false;for(var r in qR){if((qR[r].command||'').toLowerCase()===nc&&r!==id){dup=true;break;}}if(dup){showToast('Sudah ada.','error');return;}try{var d={command:nc,label:lbl};if(qFD.image)d.image=qFD.image;if(!id)d.createdAt=serverTimestamp();if(id){await update(ref(db,'settings/qris_commands/'+id),d);showToast('Diupdate!');}else{await set(push(ref(db,'settings/qris_commands')),d);showToast('Ditambahkan!');}closeQrisModal();}catch(er){showToast('Gagal.','error');}};
+    window.quickSendQris=async function(cmd){if(!currentChatOrderId)return;var q=qC[cmd];if(!q||!q.image)return;try{await set(push(ref(db,'orders/'+currentChatOrderId+'/chat')),{sender:'admin',text:'\uD83D\uDCB0 Pembayaran via '+(q.label||cmd)+'. Scan QRIS:',image:q.image,timestamp:serverTimestamp()});showToast('QRIS terkirim!');}catch(e){showToast('Gagal.','error');}};
 
-    /* ═══ QRIS ═══ */
-    var qC = {}, qR = {}, qFD = { image: null };
-    function loadQris() {
-      onValue(ref(db, "settings/qris_commands"), function (s) {
-        var r = s.val(); qC = {}; qR = {};
-        if (r) Object.keys(r).forEach(function (id) { var q = r[id]; qR[id] = q; var c = (q.command || '').toLowerCase().trim(); if (c) qC[c] = q; });
-        renderQrisList(); renderQrisQuickBar();
-      });
-    }
-    function renderQrisList() {
-      var l = document.getElementById('qrisList'), ids = Object.keys(qR);
-      if (!ids.length) { l.innerHTML = '<div class="text-center py-8 text-muted-3"><i class="fas fa-qrcode text-3xl mb-3 text-muted-4 block"></i><p class="text-sm">Kosong.</p></div>'; return; }
-      l.innerHTML = '';
-      ids.sort(function (a, b) { return (qR[a].command || '').localeCompare(qR[b].command || ''); });
-      ids.forEach(function (id) {
-        var q = qR[id], c = document.createElement('div'); c.className = 'qris-card';
-        var ih = q.image ? '<img src="' + esc(q.image) + '">' : '<div class="w-16 h-16 rounded-lg border border-dark-border flex items-center justify-center text-muted-4 flex-shrink-0"><i class="fas fa-qrcode text-xl"></i></div>';
-        c.innerHTML = ih + '<div class="flex-1 min-w-0"><div class="flex items-center gap-2 mb-0.5"><code class="text-sm font-mono text-red-accent font-bold">' + esc(q.command || '-') + '</code><span class="text-muted-4">\u2014</span><span class="text-sm text-muted-1 truncate">' + esc(q.label || '-') + '</span></div></div><div class="flex items-center gap-1 flex-shrink-0"><button data-qe="' + id + '" class="text-cyan-400 hover:text-cyan-300 p-2 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-qd="' + id + '" class="text-red-400 hover:text-red-300 p-2 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></div>';
-        l.appendChild(c);
-      });
-    }
-    document.getElementById('qrisList').addEventListener('click', function (e) {
-      var eb = e.target.closest('[data-qe]'), db2 = e.target.closest('[data-qd]');
-      if (eb) { var id = eb.getAttribute('data-qe'); if (qR[id]) openQrisModal(true, id, qR[id]); }
-      if (db2) deleteQris(db2.getAttribute('data-qd'));
-    });
-    function renderQrisQuickBar() {
-      var b = document.getElementById('qrisQuickBar'), i = document.getElementById('qrisQuickBarInner'), cs = Object.keys(qC);
-      if (!cs.length) { b.classList.add('hidden'); return; }
-      b.classList.remove('hidden');
-      i.innerHTML = '<span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span>';
-      cs.forEach(function (c) { var ch = document.createElement('button'); ch.className = 'qris-cmd-chip'; ch.textContent = c; ch.setAttribute('data-qs', c); ch.title = qC[c].label || c; i.appendChild(ch); });
-    }
-    document.getElementById('qrisQuickBarInner').addEventListener('click', function (e) { var c = e.target.closest('[data-qs]'); if (c) quickSendQris(c.getAttribute('data-qs')); });
-    window.openQrisModal = function (isE, eId, data) { document.getElementById('qrisModal').classList.remove('hidden'); document.getElementById('qrisModalTitle').textContent = isE ? 'Edit QRIS' : 'Tambah QRIS'; document.getElementById('qrisForm').reset(); document.getElementById('qrisEditId').value = ''; document.getElementById('qrisFormPreview').classList.add('hidden'); qFD = { image: null }; if (isE && data) { document.getElementById('qrisEditId').value = eId || ''; document.getElementById('qrisCommand').value = data.command || ''; document.getElementById('qrisLabel').value = data.label || ''; if (data.image) { qFD.image = data.image; document.getElementById('qrisFormImg').src = data.image; document.getElementById('qrisFormPreview').classList.remove('hidden'); } } };
-    window.closeQrisModal = function () { document.getElementById('qrisModal').classList.add('hidden'); };
-    window.deleteQris = async function (id) { if (!confirm('Hapus?')) return; try { await remove(ref(db, 'settings/qris_commands/' + id)); showToast('Dihapus.'); } catch (e) { showToast('Gagal.', 'error'); } };
-    document.getElementById('qrisFormFile').addEventListener('change', async function (e) { var f = e.target.files[0]; if (!f) return; try { qFD.image = await compressImage(f, 600, 0.6); document.getElementById('qrisFormImg').src = qFD.image; document.getElementById('qrisFormPreview').classList.remove('hidden'); } catch (er) { showToast(typeof er === 'string' ? er : 'Gagal.', 'error'); } e.target.value = ''; });
-    window.handleQrisSubmit = async function (e) { e.preventDefault(); var id = document.getElementById('qrisEditId').value, cmd = document.getElementById('qrisCommand').value.trim(), lbl = document.getElementById('qrisLabel').value.trim(); if (!cmd.startsWith('/')) { showToast('Harus diawali /', 'error'); return; } if (!qFD.image && !id) { showToast('Upload gambar.', 'error'); return; } var nc = cmd.toLowerCase(), dup = false; for (var r in qR) { if ((qR[r].command || '').toLowerCase() === nc && r !== id) { dup = true; break; } } if (dup) { showToast('Sudah ada.', 'error'); return; } try { var d = { command: nc, label: lbl }; if (qFD.image) d.image = qFD.image; if (!id) d.createdAt = serverTimestamp(); if (id) { await update(ref(db, 'settings/qris_commands/' + id), d); showToast('Diupdate!'); } else { await set(push(ref(db, 'settings/qris_commands')), d); showToast('Ditambahkan!'); } closeQrisModal(); } catch (er) { showToast('Gagal.', 'error'); } };
-    window.quickSendQris = async function (cmd) { if (!currentChatOrderId) return; var q = qC[cmd]; if (!q || !q.image) return; try { await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender: 'admin', text: '\uD83D\uDCB0 Pembayaran via ' + (q.label || cmd) + '. Scan QRIS:', image: q.image, timestamp: serverTimestamp() }); showToast('QRIS terkirim!'); } catch (e) { showToast('Gagal.', 'error'); } };
+    /* DASHBOARD DATA */
+    var DD={products:{},orders:{},partners:{},testimoni:{},donePayments:{},admins:{},warnings:[]};
+    function updateDash(){var p=DD.products,o=DD.orders,pa=DD.partners,t=DD.testimoni,dp=DD.donePayments,a=DD.admins,w=DD.warnings;var tp=Object.keys(p).length,ts=0;Object.values(p).forEach(function(x){ts+=(x.stock||0);});document.getElementById('d-stat-products').textContent=tp;document.getElementById('d-stat-stock').textContent=ts;var to2=Object.keys(o).length,nr=0;Object.values(o).forEach(function(x){var last=false;if(x.chat){var ck=Object.keys(x.chat);if(ck.length>0&&x.chat[ck[ck.length-1]].sender==='buyer')last=true;}if(last||!x.chat||Object.keys(x.chat).length===0)nr++;});document.getElementById('d-stat-orders').textContent=to2;document.getElementById('d-stat-pending').textContent=nr;var rev=0,dc=0;Object.values(dp).forEach(function(x){rev+=(x.price||0);dc++;});document.getElementById('d-stat-revenue').textContent='Rp'+rev.toLocaleString('id-ID');document.getElementById('d-stat-dpcount').textContent=dc;var tt=Object.keys(t).length,sr=0,pn=0;Object.values(t).forEach(function(x){sr+=(x.rating||0);if(x.approved===false)pn++;});document.getElementById('d-stat-rating').textContent=tt>0?(sr/tt).toFixed(1):'0.0';document.getElementById('d-stat-testicount').textContent=tt;document.getElementById('d-stat-testi-pending').textContent=pn;var pc=Object.keys(pa).length,pcc={};Object.values(pa).forEach(function(x){if(x.category)pcc[x.category]=(pcc[x.category]||0)+1;});document.getElementById('d-stat-partners').textContent=pc;document.getElementById('d-stat-partner-cats').textContent=Object.keys(pcc).map(function(c){return c+': '+pcc[c];}).join(', ')||'-';var ac=Object.keys(a).length,ad=0;Object.values(a).forEach(function(x){if(x.disabled)ad++;});document.getElementById('d-stat-admins').textContent=ac;document.getElementById('d-stat-warnings').textContent=w.length;document.getElementById('d-stat-disabled').textContent=ad;var re=document.getElementById('dashRecentOrders');if(!Object.keys(o).length){re.innerHTML='<div class="px-5 py-8 text-center text-muted-3 text-sm">Kosong.</div>';}else{var so=Object.keys(o).map(function(k){return{k:k,v:o[k]};}).sort(function(a,b){return(b.v.createdAt||0)-(a.v.createdAt||0);}).slice(0,5);re.innerHTML='';so.forEach(function(i){var x=i.v,ss2=SS[x.status]||SS.pending,dot=x.status==='completed'?'green':x.status==='cancelled'?'red':x.status==='processing'?'yellow':'gray';var r=document.createElement('div');r.className='dash-recent-row px-5 py-3 flex items-center gap-4 cursor-pointer';r.setAttribute('data-do',i.k);r.innerHTML='<div class="glow-dot '+dot+'"></div><div class="flex-1 min-w-0"><div class="text-sm font-semibold text-white truncate">'+esc(x.buyerName||'-')+'</div><div class="text-xs text-muted-3 truncate">'+esc(x.productTitle||'-')+'</div></div><span class="status-badge border '+ss2+' flex-shrink-0">'+(x.status||'pending')+'</span><span class="text-[10px] text-muted-3 font-mono flex-shrink-0 hidden sm:block">'+fTimeS(x.createdAt)+'</span>';re.appendChild(r);});}var se=document.getElementById('dashStockAlert'),ls=Object.keys(p).filter(function(k){return(p[k].stock||0)<=5;}).map(function(k){return{k:k,v:p[k]};});if(!ls.length){se.innerHTML='<div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-check-circle text-green-500 mr-1"></i>Aman</div>';}else{se.innerHTML='';ls.slice(0,5).forEach(function(i){var x=i.v,isO=(x.stock||0)<=0,r=document.createElement('div');r.className='flex items-center gap-3 py-2';r.innerHTML='<div class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center '+(CC[x.category]||'')+' flex-shrink-0"><i class="fas '+(x.icon||'fa-box')+' text-[10px]"></i></div><div class="flex-1 min-w-0"><div class="text-xs text-white truncate">'+esc(x.title)+'</div></div><span class="text-xs font-mono font-bold '+(isO?'text-red-400':'text-yellow-400')+' flex-shrink-0">'+(isO?'HABIS':x.stock)+'</span>';se.appendChild(r);});}}
+    document.getElementById('dashRecentOrders').addEventListener('click',function(e){var r=e.target.closest('[data-do]');if(r){switchTab('orders');setTimeout(function(){openOrderDetail(r.getAttribute('data-do'));},100);}});
 
-    /* ═══ DASHBOARD DATA ═══ */
-    var DD = { products: {}, orders: {}, partners: {}, testimoni: {}, donePayments: {}, admins: {}, warnings: {} };
+    /* PRODUCTS */
+    var epc={};
+    window.openProductModal=function(isE,data){document.getElementById('productModal').classList.remove('hidden');document.getElementById('productModalTitle').textContent=isE?'Edit Product':'Add New Product';if(isE&&data){epc[data.id]=data;document.getElementById('prodId').value=data.id;document.getElementById('prodTitle').value=data.title;document.getElementById('prodCat').value=data.category;document.getElementById('prodPrice').value=data.price;document.getElementById('prodStock').value=data.stock;document.getElementById('prodImage').value=data.image||'';document.getElementById('prodDesc').value=data.description;document.getElementById('prodFeatures').value=(data.features||[]).join(', ');document.getElementById('prodIcon').value=data.icon||'';}else{document.getElementById('productForm').reset();document.getElementById('prodId').value='';}};
+    window.closeProductModal=function(){document.getElementById('productModal').classList.add('hidden');};
+    window.handleProductSubmit=async function(e){e.preventDefault();var id=document.getElementById('prodId').value,cat=document.getElementById('prodCat').value,feat=document.getElementById('prodFeatures').value.split(',').map(function(f){return f.trim();}).filter(Boolean);var d={title:document.getElementById('prodTitle').value,category:cat,price:parseInt(document.getElementById('prodPrice').value),stock:parseInt(document.getElementById('prodStock').value),image:document.getElementById('prodImage').value||DI[cat],description:document.getElementById('prodDesc').value,features:feat,icon:document.getElementById('prodIcon').value||'fa-box',color:CC[cat]||'text-purple-400'};try{if(id){await update(ref(db,'products/'+id),d);showToast('Diupdate!');}else{d.createdAt=serverTimestamp();await set(push(ref(db,'products')),d);showToast('Ditambahkan!');}closeProductModal();}catch(er){showToast('Gagal.','error');}};
+    window.deleteProduct=async function(id){if(!confirm('Hapus?'))return;try{await remove(ref(db,'products/'+id));showToast('Dihapus.');}catch(e){showToast('Gagal.','error');}};
+    window.quickStock=async function(id,c,d2){var n=c+d2;if(n<0)return;try{await update(ref(db,'products/'+id),{stock:n});showToast('Stok \u2192 '+n);}catch(e){showToast('Gagal.','error');}};
+    document.getElementById('products-tbody').addEventListener('click',function(e){var eb=e.target.closest('[data-pe]'),db2=e.target.closest('[data-pd]'),sb=e.target.closest('[data-ps]');if(eb)openProductModal(true,epc[eb.getAttribute('data-pe')]);if(db2)deleteProduct(db2.getAttribute('data-pd'));if(sb){var p=sb.getAttribute('data-ps').split(',');quickStock(p[0],parseInt(p[1]),parseInt(p[2]));}});
+    onValue(ref(db,'products'),function(s){var tb=document.getElementById('products-tbody');tb.innerHTML='';var r=s.val();DD.products=r||{};var tp=0,ts=0,te=0,cats={};if(!r){tb.innerHTML='<tr><td colspan="5" class="text-center py-8 text-muted-3">Kosong.</td></tr>';}else{Object.keys(r).forEach(function(k){var d=r[k];tp++;ts+=(d.stock||0);if((d.stock||0)<=0)te++;if(d.category)cats[d.category]=true;epc[k]={id:k,title:d.title,category:d.category,price:d.price,stock:d.stock,image:d.image,description:d.description,features:d.features||[],icon:d.icon,color:d.color};var oos=(d.stock||0)<=0;var sb=oos?'<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold text-red-400 bg-red-500/10 border border-red-500/20">HABIS <button data-ps="'+k+',0,1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>':'<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold text-green-400 bg-green-500/10 border border-green-500/20">'+d.stock+' <button data-ps="'+k+','+d.stock+',-1" class="hover:text-white"><i class="fas fa-minus text-[10px]"></i></button> <button data-ps="'+k+','+d.stock+',1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>';var tr=document.createElement('tr');tr.innerHTML='<td><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center '+(d.color||'')+' flex-shrink-0"><i class="fas '+(d.icon||'fa-box')+'"></i></div><div class="min-w-0"><div class="font-bold text-sm text-white truncate">'+esc(d.title)+'</div><div class="text-xs text-muted-3 truncate max-w-[180px]">'+esc(d.description)+'</div></div></div></td><td><span class="px-2 py-1 rounded text-xs bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">'+esc(d.category)+'</span></td><td class="text-right font-mono text-sm text-white">Rp'+(d.price||0).toLocaleString('id-ID')+'</td><td class="text-center">'+sb+'</td><td class="text-center whitespace-nowrap"><button data-pe="'+k+'" class="text-cyan-400 hover:text-cyan-300 mx-1 p-1"><i class="fas fa-edit"></i></button><button data-pd="'+k+'" class="text-red-400 hover:text-red-300 mx-1 p-1"><i class="fas fa-trash"></i></button></td>';tb.appendChild(tr);});}document.getElementById('stat-total').textContent=tp;document.getElementById('stat-stock').textContent=ts;document.getElementById('stat-empty').textContent=te;document.getElementById('stat-cats').textContent=Object.keys(cats).length;updateDash();});
 
-    function updateDash() {
-      var p = DD.products, o = DD.orders, pa = DD.partners, t = DD.testimoni, dp = DD.donePayments, a = DD.admins, w = DD.warnings;
-      var tp = Object.keys(p).length, ts = 0; Object.values(p).forEach(function (x) { ts += (x.stock || 0); });
-      document.getElementById('d-stat-products').textContent = tp; document.getElementById('d-stat-stock').textContent = ts;
-      var to2 = Object.keys(o).length, nr = 0;
-      Object.values(o).forEach(function (x) { var last = false; if (x.chat) { var ck = Object.keys(x.chat); if (ck.length > 0 && x.chat[ck[ck.length - 1]].sender === 'buyer') last = true; } if (last || !x.chat || Object.keys(x.chat).length === 0) nr++; });
-      document.getElementById('d-stat-orders').textContent = to2; document.getElementById('d-stat-pending').textContent = nr;
-      var rev = 0, dc = 0; Object.values(dp).forEach(function (x) { rev += (x.price || 0); dc++; });
-      document.getElementById('d-stat-revenue').textContent = 'Rp' + rev.toLocaleString('id-ID'); document.getElementById('d-stat-dpcount').textContent = dc;
-      var tt = Object.keys(t).length, sr = 0, pn = 0; Object.values(t).forEach(function (x) { sr += (x.rating || 0); if (x.approved === false) pn++; });
-      document.getElementById('d-stat-rating').textContent = tt > 0 ? (sr / tt).toFixed(1) : '0.0'; document.getElementById('d-stat-testicount').textContent = tt; document.getElementById('d-stat-testi-pending').textContent = pn;
-      var pc = Object.keys(pa).length, pcc = {}; Object.values(pa).forEach(function (x) { if (x.category) pcc[x.category] = (pcc[x.category] || 0) + 1; });
-      document.getElementById('d-stat-partners').textContent = pc; document.getElementById('d-stat-partner-cats').textContent = Object.keys(pcc).map(function (c) { return c + ': ' + pcc[c]; }).join(', ') || '-';
-      var ac = Object.keys(a).length, aw = 0, ad = 0;
-      Object.values(a).forEach(function (x) { if (x.disabled) ad++; });
-      Object.values(w).forEach(function () { aw++; });
-      document.getElementById('d-stat-admins').textContent = ac; document.getElementById('d-stat-warnings').textContent = aw; document.getElementById('d-stat-disabled').textContent = ad;
+    /* PARTNERS */
+    var eptc={};
+    window.openPartnerModal=function(isE,data){document.getElementById('partnerModal').classList.remove('hidden');document.getElementById('partnerModalTitle').textContent=isE?'Edit Partner':'Add Partner';if(isE&&data){eptc[data.id]=data;document.getElementById('ptId').value=data.id;document.getElementById('ptName').value=data.name;document.getElementById('ptLogo').value=data.logo||'';document.getElementById('ptCat').value=data.category;document.getElementById('ptIcon').value=data.icon||'';document.getElementById('ptWebsite').value=data.website||'';document.getElementById('ptDesc').value=data.description||'';}else{document.getElementById('partnerForm').reset();document.getElementById('ptId').value='';}};
+    window.closePartnerModal=function(){document.getElementById('partnerModal').classList.add('hidden');};
+    window.handlePartnerSubmit=async function(e){e.preventDefault();var id=document.getElementById('ptId').value,cat=document.getElementById('ptCat').value;var d={name:document.getElementById('ptName').value.trim(),logo:document.getElementById('ptLogo').value.trim(),category:cat,icon:document.getElementById('ptIcon').value.trim()||PCI[cat]||'fa-star',website:document.getElementById('ptWebsite').value.trim(),description:document.getElementById('ptDesc').value.trim()};try{if(id){await update(ref(db,'partners/'+id),d);showToast('Diupdate!');}else{await set(push(ref(db,'partners')),d);showToast('Ditambahkan!');}closePartnerModal();}catch(er){showToast('Gagal.','error');}};
+    window.deletePartner=async function(id){if(!confirm('Hapus?'))return;try{await remove(ref(db,'partners/'+id));showToast('Dihapus.');}catch(e){showToast('Gagal.','error');}};
+    document.getElementById('partners-tbody').addEventListener('click',function(e){var eb=e.target.closest('[data-pce]'),db2=e.target.closest('[data-pcd]');if(eb)openPartnerModal(true,eptc[eb.getAttribute('data-pce')]);if(db2)deletePartner(db2.getAttribute('data-pcd'));});
+    onValue(ref(db,'partners'),function(s){var tb=document.getElementById('partners-tbody');tb.innerHTML='';var r=s.val();DD.partners=r||{};var total=0,infra=0,payment=0,other=0;if(!r){tb.innerHTML='<tr><td colspan="4" class="text-center py-8 text-muted-3">Kosong.</td></tr>';}else{Object.keys(r).forEach(function(k){var p=r[k];total++;if(p.category==='infrastructure')infra++;else if(p.category==='payment')payment++;else other++;eptc[k]={id:k,name:p.name,logo:p.logo,category:p.category,icon:p.icon,website:p.website,description:p.description};var color=PCC[p.category]||'text-muted-2',icon=p.icon||PCI[p.category]||'fa-star';var lh=p.logo?'<img src="'+esc(p.logo)+'" class="partner-logo">':'<div class="partner-logo flex items-center justify-center"><i class="fas '+icon+' '+color+' text-sm"></i></div>';var tr=document.createElement('tr');tr.innerHTML='<td><div class="flex items-center gap-3">'+lh+'<div class="min-w-0"><div class="font-bold text-sm text-white truncate">'+esc(p.name)+'</div><div class="text-xs text-muted-3 truncate max-w-[150px]">'+esc(p.description)+'</div></div></div></td><td><span class="px-2 py-0.5 rounded text-[10px] bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">'+esc(p.category)+'</span></td><td>'+(p.website?'<a href="'+esc(p.website)+'" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-xs font-mono truncate block max-w-[120px]">'+esc(p.website.replace(/^https?:\/\//,''))+'</a>':'<span class="text-muted-4 text-xs">-</span>')+'</td><td class="text-center whitespace-nowrap"><button data-pce="'+k+'" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-pcd="'+k+'" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';tb.appendChild(tr);});}document.getElementById('stat-partners').textContent=total;document.getElementById('stat-infra').textContent=infra;document.getElementById('stat-payment').textContent=payment;document.getElementById('stat-other').textContent=other;updateDash();});
 
-      /* Recent orders */
-      var re = document.getElementById('dashRecentOrders');
-      if (!Object.keys(o).length) { re.innerHTML = '<div class="px-5 py-8 text-center text-muted-3 text-sm">Kosong.</div>'; }
-      else {
-        var so = Object.keys(o).map(function (k) { return { k: k, v: o[k] }; }).sort(function (a, b) { return (b.v.createdAt || 0) - (a.v.createdAt || 0); }).slice(0, 5);
-        re.innerHTML = '';
-        so.forEach(function (i) {
-          var x = i.v, ss2 = SS[x.status] || SS.pending, dot = x.status === 'completed' ? 'green' : x.status === 'cancelled' ? 'red' : x.status === 'processing' ? 'yellow' : 'gray';
-          var r = document.createElement('div'); r.className = 'dash-recent-row px-5 py-3 flex items-center gap-4 cursor-pointer'; r.setAttribute('data-do', i.k);
-          r.innerHTML = '<div class="glow-dot ' + dot + '"></div><div class="flex-1 min-w-0"><div class="text-sm font-semibold text-white truncate">' + esc(x.buyerName || '-') + '</div><div class="text-xs text-muted-3 truncate">' + esc(x.productTitle || '-') + '</div></div><span class="status-badge border ' + ss2 + ' flex-shrink-0">' + (x.status || 'pending') + '</span><span class="text-[10px] text-muted-3 font-mono flex-shrink-0 hidden sm:block">' + fTimeS(x.createdAt) + '</span>';
-          re.appendChild(r);
-        });
-      }
+    /* TESTIMONI */
+    var cTF='all',aTR={};
+    window.filterTestimoni=function(f){cTF=f;document.querySelectorAll('.testi-filter').forEach(function(el){el.className='testi-filter px-4 py-2 rounded-lg text-xs font-semibold '+(el.getAttribute('data-tf')===f?'bg-red-accent/10 border border-red-accent/20 text-red-accent':'bg-dark-card border border-dark-border text-muted-2')+' transition';});renderTesti();};
+    function renderTesti(){var tb=document.getElementById('testi-tbody');tb.innerHTML='';var raw=aTR;if(!raw||!Object.keys(raw).length){tb.innerHTML='<tr><td colspan="4" class="text-center py-8 text-muted-3">Kosong.</td></tr>';return;}var sorted=Object.keys(raw).map(function(k){return{k:k,v:raw[k]};}).sort(function(a,b){return(b.v.createdAt||0)-(a.v.createdAt||0);});var filtered=cTF==='all'?sorted:cTF==='pending'?sorted.filter(function(i){return i.v.approved===false;}):sorted.filter(function(i){return i.v.approved!==false;});if(!filtered.length){tb.innerHTML='<tr><td colspan="4" class="text-center py-8 text-muted-3">Tidak ada.</td></tr>';return;}filtered.forEach(function(item){var t=item.v,k=item.k,isA=t.approved!==false;var sH='';for(var i=1;i<=5;i++)sH+='<i class="fas fa-star text-[10px] '+(i<=(t.rating||0)?'text-yellow-400':'text-muted-4')+'"></i>';var vc=isA?'bg-green-500/10 text-green-400 border-green-500/20':'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',vt=isA?'APPROVED':'PENDING';var tr=document.createElement('tr');tr.innerHTML='<td><div class="min-w-0"><div class="flex items-center gap-2 mb-0.5"><span class="font-bold text-sm text-white truncate">'+esc(t.name||'Anonim')+'</span><span class="source-badge source-buyer">BUYER</span></div><div class="text-xs text-muted-3 truncate max-w-[260px]">'+esc(t.text)+'</div>'+(t.product?'<div class="text-[10px] text-muted-4 mt-0.5 font-mono">'+esc(t.product)+'</div>':'')+'</div></td><td class="text-center"><div class="flex justify-center gap-0.5">'+sH+'</div></td><td class="text-center"><button data-tt="'+k+','+isA+'" class="status-badge border '+vc+' cursor-pointer hover:opacity-80 transition">'+vt+'</button></td><td class="text-center"><button data-td="'+k+'" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';tb.appendChild(tr);});}
+    window.toggleTestiApproval=async function(id,c){try{await update(ref(db,'testimonials/'+id),{approved:!toBool(c)});showToast(!toBool(c)?'Ditampilkan.':'Disembunyikan.');}catch(e){showToast('Gagal.','error');}};
+    window.deleteTesti=async function(id){if(!confirm('Hapus?'))return;try{await remove(ref(db,'testimonials/'+id));showToast('Dihapus.');}catch(e){showToast('Gagal.','error');}};
+    document.getElementById('testi-tbody').addEventListener('click',function(e){var tb2=e.target.closest('[data-tt]'),db2=e.target.closest('[data-td]');if(tb2){var p=tb2.getAttribute('data-tt').split(',');toggleTestiApproval(p[0],p[1]==='true');}if(db2)deleteTesti(db2.getAttribute('data-td'));});
+    onValue(ref(db,'testimonials'),function(s){var raw=s.val();DD.testimoni=raw||{};aTR=raw||{};var total=0,approved=0,pending=0;if(raw)Object.values(raw).forEach(function(t){total++;if(t.approved!==false)approved++;else pending++;});document.getElementById('stat-testi-total').textContent=total;document.getElementById('stat-testi-approved').textContent=approved;document.getElementById('stat-testi-pending').textContent=pending;var bv=pending>99?'99+':String(pending);var bd=document.getElementById('testiPendingBadge'),bm=document.getElementById('testiPendingBadgeMob');if(pending>0){bd.classList.remove('hidden');bd.textContent=bv;bm.classList.remove('hidden');bm.textContent=bv;}else{bd.classList.add('hidden');bm.classList.add('hidden');}renderTesti();updateDash();});
 
-      /* Stock alert */
-      var se = document.getElementById('dashStockAlert'), ls = Object.keys(p).filter(function (k) { return (p[k].stock || 0) <= 5; }).map(function (k) { return { k: k, v: p[k] }; });
-      if (!ls.length) { se.innerHTML = '<div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-check-circle text-green-500 mr-1"></i>Aman</div>'; }
-      else {
-        se.innerHTML = '';
-        ls.slice(0, 5).forEach(function (i) {
-          var x = i.v, isO = (x.stock || 0) <= 0, r = document.createElement('div'); r.className = 'flex items-center gap-3 py-2';
-          r.innerHTML = '<div class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (CC[x.category] || '') + ' flex-shrink-0"><i class="fas ' + (x.icon || 'fa-box') + ' text-[10px]"></i></div><div class="flex-1 min-w-0"><div class="text-xs text-white truncate">' + esc(x.title) + '</div></div><span class="text-xs font-mono font-bold ' + (isO ? 'text-red-400' : 'text-yellow-400') + ' flex-shrink-0">' + (isO ? 'HABIS' : x.stock) + '</span>';
-          se.appendChild(r);
-        });
-      }
-    }
-    document.getElementById('dashRecentOrders').addEventListener('click', function (e) { var r = e.target.closest('[data-do]'); if (r) { switchTab('orders'); setTimeout(function () { openOrderDetail(r.getAttribute('data-do')); }, 100); } });
+    /* DONE PAYMENT */
+    var edc={};
+    window.openDoneModal=function(isE,data){document.getElementById('doneModal').classList.remove('hidden');if(isE&&data){document.getElementById('dpId').value=data.id;document.getElementById('dpBuyer').value=data.buyerName;document.getElementById('dpProduct').value=data.product;document.getElementById('dpPackage').value=data.pkg||'';document.getElementById('dpPrice').value=data.price;document.getElementById('dpVisible').checked=data.visible!==false;}else{document.getElementById('doneForm').reset();document.getElementById('dpId').value='';document.getElementById('dpVisible').checked=true;}};
+    window.closeDoneModal=function(){document.getElementById('doneModal').classList.add('hidden');};
+    window.handleDoneSubmit=async function(e){e.preventDefault();var id=document.getElementById('dpId').value,price=parseInt(document.getElementById('dpPrice').value);if(!price||price<=0){showToast('Harga > 0.','error');return;}var d={buyerName:document.getElementById('dpBuyer').value.trim(),product:document.getElementById('dpProduct').value.trim(),pkg:document.getElementById('dpPackage').value.trim(),price:price,visible:document.getElementById('dpVisible').checked,manual:true};try{if(id){await update(ref(db,'done_payments/'+id),d);showToast('Diupdate!');}else{d.createdAt=serverTimestamp();await set(push(ref(db,'done_payments')),d);showToast('Ditambahkan (manual).');}closeDoneModal();}catch(e){showToast('Gagal.','error');}};
+    window.toggleDoneVisible=async function(id,c){try{await update(ref(db,'done_payments/'+id),{visible:!toBool(c)});}catch(e){showToast('Gagal.','error');}};
+    window.deleteDone=async function(id){if(!confirm('Hapus?'))return;try{await remove(ref(db,'done_payments/'+id));showToast('Dihapus.');}catch(e){showToast('Gagal.','error');}};
+    window.openDpChat=function(oId){switchTab('orders');setTimeout(function(){openOrderDetail(oId);},150);};
+    document.getElementById('dp-tbody').addEventListener('click',function(e){var eb=e.target.closest('[data-de]'),db2=e.target.closest('[data-dd]'),tb2=e.target.closest('[data-dtv]'),cb=e.target.closest('[data-dc]');if(eb)openDoneModal(true,edc[eb.getAttribute('data-de')]);if(db2)deleteDone(db2.getAttribute('data-dd'));if(tb2){var p=tb2.getAttribute('data-dtv').split(',');toggleDoneVisible(p[0],p[1]==='true');}if(cb)openDpChat(cb.getAttribute('data-dc'));});
+    onValue(ref(db,'done_payments'),function(s){var tb=document.getElementById('dp-tbody');tb.innerHTML='';var raw=s.val();DD.donePayments=raw||{};var total=0,revenue=0,visible=0;if(!raw){tb.innerHTML='<tr><td colspan="6" class="text-center py-8 text-muted-3">Kosong.</td></tr>';}else{var sorted=Object.keys(raw).map(function(k){return{k:k,val:raw[k]};}).sort(function(a,b){return(b.val.createdAt||0)-(a.val.createdAt||0);});sorted.forEach(function(item){var d=item.val,k=item.k;total++;revenue+=(d.price||0);var vis=d.visible!==false;if(vis)visible++;edc[k]={id:k,buyerName:d.buyerName,product:d.product,pkg:d.pkg,price:d.price,visible:vis,orderId:d.orderId};var hasO=!!d.orderId;var linkH=hasO?'<button data-dc="'+d.orderId+'" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments text-[10px]"></i> Chat</button>':'<span class="text-[10px] text-muted-4 font-mono">MANUAL</span>';var vc=vis?'bg-green-500/10 text-green-400 border-green-500/20':'bg-muted-4/10 text-muted-3 border-muted-4/20';var tr=document.createElement('tr');tr.innerHTML='<td class="font-bold text-sm text-white">'+esc(d.buyerName)+'</td><td class="text-sm text-muted-1">'+esc(d.product)+'</td><td class="text-right font-mono text-sm text-green-400">Rp'+(d.price||0).toLocaleString('id-ID')+'</td><td class="text-center">'+linkH+'</td><td class="text-center"><button data-dtv="'+k+','+vis+'" class="status-badge border '+vc+' cursor-pointer hover:opacity-80 transition">'+(vis?'YA':'TIDAK')+'</button></td><td class="text-center whitespace-nowrap"><button data-de="'+k+'" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-dd="'+k+'" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';tb.appendChild(tr);});}document.getElementById('stat-dp-total').textContent=total;document.getElementById('stat-dp-revenue').textContent='Rp'+revenue.toLocaleString('id-ID');document.getElementById('stat-dp-visible').textContent=visible;updateDash();});
 
-    /* ═══ PRODUCTS ═══ */
-    var epc = {};
-    window.openProductModal = function (isE, data) { document.getElementById('productModal').classList.remove('hidden'); document.getElementById('productModalTitle').textContent = isE ? 'Edit Product' : 'Add New Product'; if (isE && data) { epc[data.id] = data; document.getElementById('prodId').value = data.id; document.getElementById('prodTitle').value = data.title; document.getElementById('prodCat').value = data.category; document.getElementById('prodPrice').value = data.price; document.getElementById('prodStock').value = data.stock; document.getElementById('prodImage').value = data.image || ''; document.getElementById('prodDesc').value = data.description; document.getElementById('prodFeatures').value = (data.features || []).join(', '); document.getElementById('prodIcon').value = data.icon || ''; } else { document.getElementById('productForm').reset(); document.getElementById('prodId').value = ''; } };
-    window.closeProductModal = function () { document.getElementById('productModal').classList.add('hidden'); };
-    window.handleProductSubmit = async function (e) { e.preventDefault(); var id = document.getElementById('prodId').value, cat = document.getElementById('prodCat').value, feat = document.getElementById('prodFeatures').value.split(',').map(function (f) { return f.trim(); }).filter(Boolean); var d = { title: document.getElementById('prodTitle').value, category: cat, price: parseInt(document.getElementById('prodPrice').value), stock: parseInt(document.getElementById('prodStock').value), image: document.getElementById('prodImage').value || DI[cat], description: document.getElementById('prodDesc').value, features: feat, icon: document.getElementById('prodIcon').value || 'fa-box', color: CC[cat] || 'text-purple-400' }; try { if (id) { await update(ref(db, 'products/' + id), d); showToast('Diupdate!'); } else { d.createdAt = serverTimestamp(); await set(push(ref(db, 'products')), d); showToast('Ditambahkan!'); } closeProductModal(); } catch (er) { showToast('Gagal.', 'error'); } };
-    window.deleteProduct = async function (id) { if (!confirm('Hapus?')) return; try { await remove(ref(db, 'products/' + id)); showToast('Dihapus.'); } catch (e) { showToast('Gagal.', 'error'); } };
-    window.quickStock = async function (id, c, d) { var n = c + d; if (n < 0) return; try { await update(ref(db, 'products/' + id), { stock: n }); showToast('Stok \u2192 ' + n); } catch (e) { showToast('Gagal.', 'error'); } };
-    document.getElementById('products-tbody').addEventListener('click', function (e) { var eb = e.target.closest('[data-pe]'), db2 = e.target.closest('[data-pd]'), sb = e.target.closest('[data-ps]'); if (eb) openProductModal(true, epc[eb.getAttribute('data-pe')]); if (db2) deleteProduct(db2.getAttribute('data-pd')); if (sb) { var p = sb.getAttribute('data-ps').split(','); quickStock(p[0], parseInt(p[1]), parseInt(p[2])); } });
-    onValue(ref(db, 'products'), function (s) {
-      var tb = document.getElementById('products-tbody'); tb.innerHTML = ''; var r = s.val(); DD.products = r || {}; var tp = 0, ts = 0, te = 0, cats = {};
-      if (!r) { tb.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-muted-3">Kosong.</td></tr>'; }
-      else { Object.keys(r).forEach(function (k) { var d = r[k]; tp++; ts += (d.stock || 0); if ((d.stock || 0) <= 0) te++; if (d.category) cats[d.category] = true; epc[k] = { id: k, title: d.title, category: d.category, price: d.price, stock: d.stock, image: d.image, description: d.description, features: d.features || [], icon: d.icon, color: d.color }; var oos = (d.stock || 0) <= 0; var sb = oos ? '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold text-red-400 bg-red-500/10 border border-red-500/20">HABIS <button data-ps="' + k + ',0,1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>' : '<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold text-green-400 bg-green-500/10 border border-green-500/20">' + d.stock + ' <button data-ps="' + k + ',' + d.stock + ',-1" class="hover:text-white"><i class="fas fa-minus text-[10px]"></i></button> <button data-ps="' + k + ',' + d.stock + ',1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>'; var tr = document.createElement('tr'); tr.innerHTML = '<td><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (d.color || '') + ' flex-shrink-0"><i class="fas ' + (d.icon || 'fa-box') + '"></i></div><div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(d.title) + '</div><div class="text-xs text-muted-3 truncate max-w-[180px]">' + esc(d.description) + '</div></div></div></td><td><span class="px-2 py-1 rounded text-xs bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(d.category) + '</span></td><td class="text-right font-mono text-sm text-white">Rp' + (d.price || 0).toLocaleString('id-ID') + '</td><td class="text-center">' + sb + '</td><td class="text-center whitespace-nowrap"><button data-pe="' + k + '" class="text-cyan-400 hover:text-cyan-300 mx-1 p-1"><i class="fas fa-edit"></i></button><button data-pd="' + k + '" class="text-red-400 hover:text-red-300 mx-1 p-1"><i class="fas fa-trash"></i></button></td>'; tb.appendChild(tr); }); }
-      document.getElementById('stat-total').textContent = tp; document.getElementById('stat-stock').textContent = ts; document.getElementById('stat-empty').textContent = te; document.getElementById('stat-cats').textContent = Object.keys(cats).length; updateDash();
-    });
+    /* ORDERS */
+    onValue(ref(db,'orders'),function(s){var tb=document.getElementById('orders-tbody');tb.innerHTML='';var raw=s.val();DD.orders=raw||{};var nr=0;if(!raw){tb.innerHTML='<tr><td colspan="6" class="text-center py-8 text-muted-3">Kosong.</td></tr>';}else{var sorted=Object.keys(raw).map(function(k){return{k:k,val:raw[k]};}).sort(function(a,b){return(b.val.createdAt||0)-(a.val.createdAt||0);});sorted.forEach(function(item){var o=item.val,k=item.k;var last=false;if(o.chat){var ck=Object.keys(o.chat);if(ck.length>0&&o.chat[ck[ck.length-1]].sender==='buyer')last=true;}if(last||!o.chat||Object.keys(o.chat).length===0)nr++;var ss2=SS[o.status]||SS.pending;var bmc=0;if(o.chat)Object.values(o.chat).forEach(function(m){if(m.sender==='buyer')bmc++;});var tr=document.createElement('tr');tr.innerHTML='<td class="font-bold text-sm text-white">'+esc(o.buyerName)+'</td><td class="text-sm text-muted-2">'+esc(o.productTitle)+'</td><td class="text-sm font-mono text-muted-3">'+esc(o.buyerWhatsapp)+'</td><td class="text-center"><span class="status-badge border '+ss2+'">'+(o.status||'pending')+'</span></td><td class="text-center"><button data-oc="'+k+'" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments"></i> Chat'+(bmc?'<span class="w-4 h-4 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center">'+bmc+'</span>':'')+'</button></td><td class="text-center"><button data-od="'+k+'" class="text-red-400 hover:text-red-300 p-1"><i class="fas fa-trash"></i></button></td>';tb.appendChild(tr);});}var bv=nr>99?'99+':String(nr);var bd=document.getElementById('orderBadge'),bm=document.getElementById('orderBadgeMob');if(nr>0){bd.classList.remove('hidden');bd.textContent=bv;bm.classList.remove('hidden');bm.textContent=bv;}else{bd.classList.add('hidden');bm.classList.add('hidden');}updateDash();});
+    document.getElementById('orders-tbody').addEventListener('click',function(e){var cb=e.target.closest('[data-oc]'),db2=e.target.closest('[data-od]');if(cb)openOrderDetail(cb.getAttribute('data-oc'));if(db2){if(!confirm('Hapus?'))return;var k=db2.getAttribute('data-od');if(k===currentChatOrderId)closeOrderDetail();remove(ref(db,'orders/'+k)).then(function(){showToast('Dihapus.');}).catch(function(){showToast('Gagal.','error');});}});
+    window.updateOrderStatusFromPanel=async function(){if(!currentChatOrderId)return;try{await update(ref(db,'orders/'+currentChatOrderId),{status:document.getElementById('detailStatus').value});showToast('Status diupdate!');}catch(e){showToast('Gagal.','error');}};
 
-    /* ═══ PARTNERS ═══ */
-    var eptc = {};
-    window.openPartnerModal = function (isE, data) { document.getElementById('partnerModal').classList.remove('hidden'); document.getElementById('partnerModalTitle').textContent = isE ? 'Edit Partner' : 'Add Partner'; if (isE && data) { eptc[data.id] = data; document.getElementById('ptId').value = data.id; document.getElementById('ptName').value = data.name; document.getElementById('ptLogo').value = data.logo || ''; document.getElementById('ptCat').value = data.category; document.getElementById('ptIcon').value = data.icon || ''; document.getElementById('ptWebsite').value = data.website || ''; document.getElementById('ptDesc').value = data.description || ''; } else { document.getElementById('partnerForm').reset(); document.getElementById('ptId').value = ''; } };
-    window.closePartnerModal = function () { document.getElementById('partnerModal').classList.add('hidden'); };
-    window.handlePartnerSubmit = async function (e) { e.preventDefault(); var id = document.getElementById('ptId').value, cat = document.getElementById('ptCat').value; var d = { name: document.getElementById('ptName').value.trim(), logo: document.getElementById('ptLogo').value.trim(), category: cat, icon: document.getElementById('ptIcon').value.trim() || PCI[cat] || 'fa-star', website: document.getElementById('ptWebsite').value.trim(), description: document.getElementById('ptDesc').value.trim() }; try { if (id) { await update(ref(db, 'partners/' + id), d); showToast('Diupdate!'); } else { await set(push(ref(db, 'partners')), d); showToast('Ditambahkan!'); } closePartnerModal(); } catch (er) { showToast('Gagal.', 'error'); } };
-    window.deletePartner = async function (id) { if (!confirm('Hapus?')) return; try { await remove(ref(db, 'partners/' + id)); showToast('Dihapus.'); } catch (e) { showToast('Gagal.', 'error'); } };
-    document.getElementById('partners-tbody').addEventListener('click', function (e) { var eb = e.target.closest('[data-pce]'), db2 = e.target.closest('[data-pcd]'); if (eb) openPartnerModal(true, eptc[eb.getAttribute('data-pce')]); if (db2) deletePartner(db2.getAttribute('data-pcd')); });
-    onValue(ref(db, 'partners'), function (s) {
-      var tb = document.getElementById('partners-tbody'); tb.innerHTML = ''; var r = s.val(); DD.partners = r || {}; var total = 0, infra = 0, payment = 0, other = 0;
-      if (!r) { tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Kosong.</td></tr>'; }
-      else { Object.keys(r).forEach(function (k) { var p = r[k]; total++; if (p.category === 'infrastructure') infra++; else if (p.category === 'payment') payment++; else other++; eptc[k] = { id: k, name: p.name, logo: p.logo, category: p.category, icon: p.icon, website: p.website, description: p.description }; var color = PCC[p.category] || 'text-muted-2', icon = p.icon || PCI[p.category] || 'fa-star'; var lh = p.logo ? '<img src="' + esc(p.logo) + '" class="partner-logo">' : '<div class="partner-logo flex items-center justify-center"><i class="fas ' + icon + ' ' + color + ' text-sm"></i></div>'; var tr = document.createElement('tr'); tr.innerHTML = '<td><div class="flex items-center gap-3">' + lh + '<div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(p.name) + '</div><div class="text-xs text-muted-3 truncate max-w-[150px]">' + esc(p.description) + '</div></div></div></td><td><span class="px-2 py-0.5 rounded text-[10px] bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(p.category) + '</span></td><td>' + (p.website ? '<a href="' + esc(p.website) + '" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-xs font-mono truncate block max-w-[120px]">' + esc(p.website.replace(/^https?:\/\//, '')) + '</a>' : '<span class="text-muted-4 text-xs">-</span>') + '</td><td class="text-center whitespace-nowrap"><button data-pce="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-pcd="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>'; tb.appendChild(tr); }); }
-      document.getElementById('stat-partners').textContent = total; document.getElementById('stat-infra').textContent = infra; document.getElementById('stat-payment').textContent = payment; document.getElementById('stat-other').textContent = other; updateDash();
-    });
+    /* ORDER CHAT */
+    var currentChatOrderId=null,unsubO=null,unsubC=null,pendingChatImage=null,cachedOD={};
+    window.openOrderDetail=function(orderId){if(unsubO){unsubO();unsubO=null;}if(unsubC){unsubC();unsubC=null;}currentChatOrderId=orderId;cachedOD={};document.getElementById('orderDetailPanel').classList.remove('hidden');document.getElementById('chatMessages').innerHTML='<div class="text-center text-muted-3 text-sm py-8"><i class="fas fa-spinner fa-spin mr-1"></i></div>';document.getElementById('chatInput').value='';clearChatImage();hideDpForm();renderQrisQuickBar();unsubO=onValue(ref(db,'orders/'+orderId),function(snap){var o=snap.val();if(!o){closeOrderDetail();showToast('Order dihapus.','error');return;}cachedOD={buyerName:o.buyerName||'-',productTitle:o.productTitle||'-',price:o.price||0};document.getElementById('detailOrderId').textContent=orderId.slice(-6).toUpperCase();document.getElementById('detailBuyerName').textContent=o.buyerName||'-';document.getElementById('detailProduct').textContent=o.productTitle||'-';document.getElementById('detailPrice').textContent='Rp '+(o.price||0).toLocaleString('id-ID')+'/bln';var wa=o.buyerWhatsapp||'';document.getElementById('detailWaText').textContent=wa;document.getElementById('detailWaText').href='https://wa.me/'+wa;document.getElementById('detailWaLink').href='https://wa.me/'+wa+'?text=Halo%20'+encodeURIComponent(o.buyerName||'');document.getElementById('detailNote').textContent=o.orderNote||'-';document.getElementById('detailDate').textContent=fTime(o.createdAt);document.getElementById('detailStatus').value=o.status||'pending';});unsubC=onValue(ref(db,'orders/'+orderId+'/chat'),function(snap){var c=document.getElementById('chatMessages'),raw=snap.val();c.innerHTML='';if(!raw){c.innerHTML='<div class="text-center text-muted-3 text-sm py-8">Kosong.</div>';return;}var msgs=Object.keys(raw).map(function(mk){return{key:mk,val:raw[mk]};}).sort(function(a,b){return(a.val.timestamp||0)-(b.val.timestamp||0);});msgs.forEach(function(m){var isMe=m.val.sender==='admin',div=document.createElement('div');div.className='flex '+(isMe?'justify-end':'justify-start');var ch='';if(m.val.text)ch+='<p class="text-sm text-gray-200 break-words">'+esc(m.val.text)+'</p>';if(m.val.image){var ik='img_'+m.key;imgStore[ik]=m.val.image;ch+='<img src="'+esc(m.val.image)+'" loading="lazy" class="rounded-lg mt-1.5 max-w-[260px] cursor-pointer hover:brightness-110 transition border border-white/5" onclick="viewImage(\''+ik+'\')">';}ch+='<p class="text-[10px] '+(isMe?'text-red-accent/40':'text-muted-4')+' mt-1 text-right">'+fTime(m.val.timestamp)+'</p>';div.innerHTML='<div class="chat-bubble '+(isMe?'bg-red-accent/8 border-red-accent/15':'bg-dark-card border-dark-border')+' border rounded-2xl '+(isMe?'rounded-br-sm':'rounded-bl-sm')+' px-4 py-2.5">'+ch+'</div>';c.appendChild(div);});requestAnimationFrame(function(){requestAnimationFrame(function(){c.scrollTop=c.scrollHeight;});});});};
+    window.closeOrderDetail=function(){if(unsubO){unsubO();unsubO=null;}if(unsubC){unsubC();unsubC=null;}currentChatOrderId=null;cachedOD={};document.getElementById('orderDetailPanel').classList.add('hidden');hideDpForm();};
+    window.showDpForm=function(){if(!currentChatOrderId)return;document.getElementById('dpFormBar').classList.add('open');document.getElementById('dpChatBuyer').value=cachedOD.buyerName||'';document.getElementById('dpChatProduct').value=cachedOD.productTitle||'';document.getElementById('dpChatPrice').value=cachedOD.price||'';document.getElementById('dpChatPkg').value='1 Bulan';document.getElementById('dpChatVisible').checked=true;document.getElementById('chatInput').value='';};
+    window.hideDpForm=function(){document.getElementById('dpFormBar').classList.remove('open');};
+    window.submitDpFromChat=async function(){if(!currentChatOrderId){showToast('Tidak ada order aktif.','error');return;}var buyer=document.getElementById('dpChatBuyer').value.trim(),product=document.getElementById('dpChatProduct').value.trim(),pkg=document.getElementById('dpChatPkg').value.trim(),price=parseInt(document.getElementById('dpChatPrice').value);if(!buyer||!product||!price||price<=0){showToast('Isi data wajib.','error');return;}try{var d={buyerName:buyer,product:product,pkg:pkg,price:price,visible:document.getElementById('dpChatVisible').checked,orderId:currentChatOrderId,createdAt:serverTimestamp()};await set(push(ref(db,'done_payments')),d);await set(push(ref(db,'orders/'+currentChatOrderId+'/chat')),{sender:'admin',text:'\u2705 Payment dicatat untuk @'+buyer+' \u2014 '+product+' ('+pkg+').',timestamp:serverTimestamp()});hideDpForm();showToast('Done payment disimpan & terhubung!');}catch(e){showToast('Gagal.','error');}};
+    window.sendChat=async function(sender){if(!currentChatOrderId){showToast('Tidak ada order aktif.','error');return;}var input=document.getElementById('chatInput'),text=input.value.trim(),img=pendingChatImage;if(!text&&!img)return;if(text.toLowerCase().trim()==='/donepayment'){input.value='';showDpForm();return;}input.value='';clearChatImage();try{var cmd=text.toLowerCase().trim();if(cmd.startsWith('/')&&qC[cmd]){var q=qC[cmd];if(q&&q.image){await set(push(ref(db,'orders/'+currentChatOrderId+'/chat')),{sender:'admin',text:'\uD83D\uDCB0 Pembayaran via '+(q.label||cmd)+'. Scan QRIS:',image:q.image,timestamp:serverTimestamp()});showToast('QRIS terkirim!');return;}}var md={sender:sender,timestamp:serverTimestamp()};if(text)md.text=text;if(img)md.image=img;await set(push(ref(db,'orders/'+currentChatOrderId+'/chat')),md);}catch(e){showToast('Gagal kirim.','error');}};
+    document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat('admin');}});
+    document.getElementById('chatImageInput').addEventListener('change',async function(e){var f=e.target.files[0];if(!f)return;try{pendingChatImage=await compressImage(f);document.getElementById('chatPreviewImg').src=pendingChatImage;document.getElementById('chatPreviewName').textContent=f.name;document.getElementById('chatImagePreview').classList.remove('hidden');}catch(er){showToast(typeof er==='string'?er:'Gagal.','error');}e.target.value='';});
+    window.clearChatImage=function(){pendingChatImage=null;document.getElementById('chatImagePreview').classList.add('hidden');};
 
-    /* ═══ TESTIMONI ═══ */
-    var cTF = 'all', aTR = {};
-    window.filterTestimoni = function (f) { cTF = f; document.querySelectorAll('.testi-filter').forEach(function (el) { el.className = 'testi-filter px-4 py-2 rounded-lg text-xs font-semibold ' + (el.getAttribute('data-tf') === f ? 'bg-red-accent/10 border border-red-accent/20 text-red-accent' : 'bg-dark-card border border-dark-border text-muted-2') + ' transition'; }); renderTesti(); };
-    function renderTesti() {
-      var tb = document.getElementById('testi-tbody'); tb.innerHTML = ''; var raw = aTR;
-      if (!raw || !Object.keys(raw).length) { tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Kosong.</td></tr>'; return; }
-      var sorted = Object.keys(raw).map(function (k) { return { k: k, v: raw[k] }; }).sort(function (a, b) { return (b.v.createdAt || 0) - (a.v.createdAt || 0); });
-      var filtered = cTF === 'all' ? sorted : cTF === 'pending' ? sorted.filter(function (i) { return i.v.approved === false; }) : sorted.filter(function (i) { return i.v.approved !== false; });
-      if (!filtered.length) { tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Tidak ada.</td></tr>'; return; }
-      filtered.forEach(function (item) {
-        var t = item.v, k = item.k, isA = t.approved !== false; var sH = ''; for (var i = 1; i <= 5; i++) sH += '<i class="fas fa-star text-[10px] ' + (i <= (t.rating || 0) ? 'text-yellow-400' : 'text-muted-4') + '"></i>';
-        var vc = isA ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20', vt = isA ? 'APPROVED' : 'PENDING';
-        var tr = document.createElement('tr'); tr.innerHTML = '<td><div class="min-w-0"><div class="flex items-center gap-2 mb-0.5"><span class="font-bold text-sm text-white truncate">' + esc(t.name || 'Anonim') + '</span><span class="source-badge source-buyer">BUYER</span></div><div class="text-xs text-muted-3 truncate max-w-[260px]">' + esc(t.text) + '</div>' + (t.product ? '<div class="text-[10px] text-muted-4 mt-0.5 font-mono">' + esc(t.product) + '</div>' : '') + '</div></td><td class="text-center"><div class="flex justify-center gap-0.5">' + sH + '</div></td><td class="text-center"><button data-tt="' + k + ',' + isA + '" class="status-badge border ' + vc + ' cursor-pointer hover:opacity-80 transition">' + vt + '</button></td><td class="text-center"><button data-td="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
-        tb.appendChild(tr);
-      });
-    }
-    window.toggleTestiApproval = async function (id, c) { try { await update(ref(db, 'testimonials/' + id), { approved: !c }); showToast(c ? 'Disembunyikan.' : 'Ditampilkan.'); } catch (e) { showToast('Gagal.', 'error'); } };
-    window.deleteTesti = async function (id) { if (!confirm('Hapus?')) return; try { await remove(ref(db, 'testimonials/' + id)); showToast('Dihapus.'); } catch (e) { showToast('Gagal.', 'error'); } };
-    document.getElementById('testi-tbody').addEventListener('click', function (e) { var tb2 = e.target.closest('[data-tt]'), db2 = e.target.closest('[data-td]'); if (tb2) { var p = tb2.getAttribute('data-tt').split(','); toggleTestiApproval(p[0], p[1] === 'true'); } if (db2) deleteTesti(db2.getAttribute('data-td')); });
-    onValue(ref(db, 'testimonials'), function (s) {
-      var raw = s.val(); DD.testimoni = raw || {}; aTR = raw || {}; var total = 0, approved = 0, pending = 0;
-      if (raw) Object.values(raw).forEach(function (t) { total++; if (t.approved !== false) approved++; else pending++; });
-      document.getElementById('stat-testi-total').textContent = total; document.getElementById('stat-testi-approved').textContent = approved; document.getElementById('stat-testi-pending').textContent = pending;
-      var bv = pending > 99 ? '99+' : String(pending); var bd = document.getElementById('testiPendingBadge'), bm = document.getElementById('testiPendingBadgeMob');
-      if (pending > 0) { bd.classList.remove('hidden'); bd.textContent = bv; bm.classList.remove('hidden'); bm.textContent = bv; } else { bd.classList.add('hidden'); bm.classList.add('hidden'); }
-      renderTesti(); updateDash();
-    });
+    /* ADMINS + WARNINGS (gabungan 1 listener) */
+    var eac={},pwVisible={};
+    window.togglePw=function(id){pwVisible[id]=!pwVisible[id];var el=document.querySelector('[data-pw="'+id+'"]');if(el&&eac[id])el.textContent=pwVisible[id]?eac[id].password:'\u2022\u2022\u2022\u2022\u2022\u2022';};
+    window.openAdminModal=function(isE,data){document.getElementById('adminModal').classList.remove('hidden');document.getElementById('adminModalTitle').textContent=isE?'Edit Admin':'Tambah Admin';if(isE&&data){eac[data.id]=data;document.getElementById('admId').value=data.id;document.getElementById('admName').value=data.name;document.getElementById('admAge').value=data.age||'';document.getElementById('admPhoto').value=data.photoUrl||'';document.getElementById('admUsername').value=data.username;document.getElementById('admPassword').value=data.password;}else{document.getElementById('adminForm').reset();document.getElementById('admId').value='';}};
+    window.closeAdminModal=function(){document.getElementById('adminModal').classList.add('hidden');};
+    window.handleAdminSubmit=async function(e){e.preventDefault();var id=document.getElementById('admId').value;var name=document.getElementById('admName').value.trim();var age=parseInt(document.getElementById('admAge').value);var photo=document.getElementById('admPhoto').value.trim();var username=document.getElementById('admUsername').value.trim().toLowerCase();var password=document.getElementById('admPassword').value;if(username.length<3){showToast('Username min. 3 karakter.','error');return;}if(password.length<4){showToast('Password min. 4 karakter.','error');return;}try{var os=await get(ref(db,'owners'));var as=await get(ref(db,'admins'));var dup=false;if(os.exists())Object.entries(os.val()).forEach(function(e){if(e[1].username===username&&e[0]!==id)dup=true;});if(as.exists())Object.entries(as.val()).forEach(function(e){if(e[1].username===username&&e[0]!==id)dup=true;});if(dup){showToast('Username sudah dipakai.','error');return;}var d={name:name,age:age||0,photoUrl:photo,username:username,password:password,disabled:false};if(!id)d.createdAt=Date.now();if(id){await update(ref(db,'admins/'+id),d);showToast('Admin diupdate!');}else{await set(push(ref(db,'admins')),d);showToast('Admin ditambahkan!');}closeAdminModal();}catch(er){showToast('Gagal.','error');}};
+    window.toggleAdminDisabled=async function(id,c){try{await update(ref(db,'admins/'+id),{disabled:!toBool(c)});showToast(!toBool(c)?'Diaktifkan.':'Dinonaktifkan.');}catch(e){showToast('Gagal.','error');}};
+    window.deleteAdmin=async function(id){if(!confirm('Hapus admin ini permanen?'))return;try{await remove(ref(db,'admins/'+id));showToast('Admin dihapus permanen.');}catch(e){showToast('Gagal.','error');}};
+    window.openWarningModal=function(id){var a=eac[id];if(!a)return;document.getElementById('warningModal').classList.remove('hidden');document.getElementById('warnAdminId').value=id;document.getElementById('warningTargetName').textContent='Untuk: '+a.name+' (@'+a.username+')';document.getElementById('warnText').value='';document.getElementById('warnText').focus();};
+    window.closeWarningModal=function(){document.getElementById('warningModal').classList.add('hidden');};
+    window.handleWarningSubmit=async function(e){e.preventDefault();var id=document.getElementById('warnAdminId').value;var text=document.getElementById('warnText').value.trim();if(!text){showToast('Isi peringatan wajib.','error');return;}try{var d={text:text,ownerName:ownerData.name||'Owner',createdAt:serverTimestamp()};await set(push(ref(db,'admins/'+id+'/warnings')),d);closeWarningModal();showToast('Warning terkirim ke admin!');}catch(er){showToast('Gagal.','error');}};
 
-    /* ═══ DONE PAYMENT ═══ */
-    var edc = {};
-    window.openDoneModal = function (isE, data) { document.getElementById('doneModal').classList.remove('hidden'); if (isE && data) { document.getElementById('dpId').value = data.id; document.getElementById('dpBuyer').value = data.buyerName; document.getElementById('dpProduct').value = data.product; document.getElementById('dpPackage').value = data.pkg || ''; document.getElementById('dpPrice').value = data.price; document.getElementById('dpVisible').checked = data.visible !== false; } else { document.getElementById('doneForm').reset(); document.getElementById('dpId').value = ''; document.getElementById('dpVisible').checked = true; } };
-    window.closeDoneModal = function () { document.getElementById('doneModal').classList.add('hidden'); };
-    window.handleDoneSubmit = async function (e) { e.preventDefault(); var id = document.getElementById('dpId').value, price = parseInt(document.getElementById('dpPrice').value); if (!price || price <= 0) { showToast('Harga > 0.', 'error'); return; } var d = { buyerName: document.getElementById('dpBuyer').value.trim(), product: document.getElementById('dpProduct').value.trim(), pkg: document.getElementById('dpPackage').value.trim(), price: price, visible: document.getElementById('dpVisible').checked, manual: true }; try { if (id) { await update(ref(db, 'done_payments/' + id), d); showToast('Diupdate!'); } else { d.createdAt = serverTimestamp(); await set(push(ref(db, 'done_payments')), d); showToast('Ditambahkan (manual).'); } closeDoneModal(); } catch (e) { showToast('Gagal.', 'error'); } };
-    window.toggleDoneVisible = async function (id, c) { try { await update(ref(db, 'done_payments/' + id), { visible: !c }); } catch (e) { showToast('Gagal.', 'error'); } };
-    window.deleteDone = async function (id) { if (!confirm('Hapus?')) return; try { await remove(ref(db, 'done_payments/' + id)); showToast('Dihapus.'); } catch (e) { showToast('Gagal.', 'error'); } };
-    window.openDpChat = function (oId) { switchTab('orders'); setTimeout(function () { openOrderDetail(oId); }, 150); };
-    document.getElementById('dp-tbody').addEventListener('click', function (e) { var eb = e.target.closest('[data-de]'), db2 = e.target.closest('[data-dd]'), tb2 = e.target.closest('[data-dtv]'), cb = e.target.closest('[data-dc]'); if (eb) openDoneModal(true, edc[eb.getAttribute('data-de')]); if (db2) deleteDone(db2.getAttribute('data-dd')); if (tb2) { var p = tb2.getAttribute('data-dtv').split(','); toggleDoneVisible(p[0], p[1] === 'true'); } if (cb) openDpChat(cb.getAttribute('data-dc')); });
-    onValue(ref(db, 'done_payments'), function (s) {
-      var tb = document.getElementById('dp-tbody'); tb.innerHTML = ''; var raw = s.val(); DD.donePayments = raw || {}; var total = 0, revenue = 0, visible = 0;
-      if (!raw) { tb.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Kosong.</td></tr>'; }
-      else { var sorted = Object.keys(raw).map(function (k) { return { k: k, val: raw[k] }; }).sort(function (a, b) { return (b.val.createdAt || 0) - (a.val.createdAt || 0); }); sorted.forEach(function (item) { var d = item.val, k = item.key; total++; revenue += (d.price || 0); var vis = d.visible !== false; if (vis) visible++; edc[k] = { id: k, buyerName: d.buyerName, product: d.product, pkg: d.pkg, price: d.price, visible: vis, orderId: d.orderId }; var hasO = !!d.orderId; var linkH = hasO ? '<button data-dc="' + d.orderId + '" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments text-[10px]"></i> Chat</button>' : '<span class="text-[10px] text-muted-4 font-mono">MANUAL</span>'; var vc = vis ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-muted-4/10 text-muted-3 border-muted-4/20'; var tr = document.createElement('tr'); tr.innerHTML = '<td class="font-bold text-sm text-white">' + esc(d.buyerName) + '</td><td class="text-sm text-muted-1">' + esc(d.product) + '</td><td class="text-right font-mono text-sm text-green-400">Rp' + (d.price || 0).toLocaleString('id-ID') + '</td><td class="text-center">' + linkH + '</td><td class="text-center"><button data-dtv="' + k + ',' + vis + '" class="status-badge border ' + vc + ' cursor-pointer hover:opacity-80 transition">' + (vis ? 'YA' : 'TIDAK') + '</button></td><td class="text-center whitespace-nowrap"><button data-de="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-dd="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>'; tb.appendChild(tr); }); }
-      document.getElementById('stat-dp-total').textContent = total; document.getElementById('stat-dp-revenue').textContent = 'Rp' + revenue.toLocaleString('id-ID'); document.getElementById('stat-dp-visible').textContent = visible; updateDash();
-    });
+    document.getElementById('admins-tbody').addEventListener('click',function(e){var eb=e.target.closest('[data-ae]'),db2=e.target.closest('[data-ad]'),tb2=e.target.closest('[data-at]'),wb=e.target.closest('[data-aw]'),pw=e.target.closest('[data-pw]');if(eb)openAdminModal(true,eac[eb.getAttribute('data-ae')]);if(db2)deleteAdmin(db2.getAttribute('data-ad'));if(tb2){var p=tb2.getAttribute('data-at').split(',');toggleAdminDisabled(p[0],p[1]==='true');}if(wb)openWarningModal(wb.getAttribute('data-aw'));if(pw)togglePw(pw.getAttribute('data-pw'));});
 
-    /* ═══ ORDERS ═══ */
-    onValue(ref(db, 'orders'), function (s) {
-      var tb = document.getElementById('orders-tbody'); tb.innerHTML = ''; var raw = s.val(); DD.orders = raw || {}; var nr = 0;
-      if (!raw) { tb.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Kosong.</td></tr>'; }
-      else { var sorted = Object.keys(raw).map(function (k) { return { k: k, val: raw[k] }; }).sort(function (a, b) { return (b.val.createdAt || 0) - (a.val.createdAt || 0); }); sorted.forEach(function (item) { var o = item.val, k = item.key; var last = false; if (o.chat) { var ck = Object.keys(o.chat); if (ck.length > 0 && o.chat[ck[ck.length - 1]].sender === 'buyer') last = true; } if (last || !o.chat || Object.keys(o.chat).length === 0) nr++; var ss2 = SS[o.status] || SS.pending; var bmc = 0; if (o.chat) Object.values(o.chat).forEach(function (m) { if (m.sender === 'buyer') bmc++; }); var tr = document.createElement('tr'); tr.innerHTML = '<td class="font-bold text-sm text-white">' + esc(o.buyerName) + '</td><td class="text-sm text-muted-2">' + esc(o.productTitle) + '</td><td class="text-sm font-mono text-muted-3">' + esc(o.buyerWhatsapp) + '</td><td class="text-center"><span class="status-badge border ' + ss2 + '">' + (o.status || 'pending') + '</span></td><td class="text-center"><button data-oc="' + k + '" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments"></i> Chat' + (bmc ? '<span class="w-4 h-4 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center">' + bmc + '</span>' : '') + '</button></td><td class="text-center"><button data-od="' + k + '" class="text-red-400 hover:text-red-300 p-1"><i class="fas fa-trash"></i></button></td>'; tb.appendChild(tr); }); }
-      var bv = nr > 99 ? '99+' : String(nr); var bd = document.getElementById('orderBadge'), bm = document.getElementById('orderBadgeMob');
-      if (nr > 0) { bd.classList.remove('hidden'); bd.textContent = bv; bm.classList.remove('hidden'); bm.textContent = bv; } else { bd.classList.add('hidden'); bm.classList.add('hidden'); }
-      updateDash();
-    });
-    document.getElementById('orders-tbody').addEventListener('click', function (e) { var cb = e.target.closest('[data-oc]'), db2 = e.target.closest('[data-od]'); if (cb) openOrderDetail(cb.getAttribute('data-oc')); if (db2) { if (!confirm('Hapus?')) return; var k = db2.getAttribute('data-od'); if (k === currentChatOrderId) closeOrderDetail(); remove(ref(db, 'orders/' + k)).then(function () { showToast('Dihapus.'); }).catch(function () { showToast('Gagal.', 'error'); }); } });
-    window.updateOrderStatusFromPanel = async function () { if (!currentChatOrderId) return; try { await update(ref(db, 'orders/' + currentChatOrderId), { status: document.getElementById('detailStatus').value }); showToast('Status diupdate!'); } catch (e) { showToast('Gagal.', 'error'); } };
-
-    /* ═══ ORDER CHAT ═══ */
-    var currentChatOrderId = null, unsubO = null, unsubC = null, pendingChatImage = null, cachedOD = {};
-    window.openOrderDetail = function (orderId) {
-      if (unsubO) { unsubO(); unsubO = null; } if (unsubC) { unsubC(); unsubC = null; }
-      currentChatOrderId = orderId; cachedOD = {};
-      document.getElementById('orderDetailPanel').classList.remove('hidden');
-      document.getElementById('chatMessages').innerHTML = '<div class="text-center text-muted-3 text-sm py-8"><i class="fas fa-spinner fa-spin mr-1"></i></div>';
-      document.getElementById('chatInput').value = ''; clearChatImage(); hideDpForm(); renderQrisQuickBar();
-      unsubO = onValue(ref(db, 'orders/' + orderId), function (snap) {
-        var o = snap.val(); if (!o) { closeOrderDetail(); showToast('Order dihapus.', 'error'); return; }
-        cachedOD = { buyerName: o.buyerName || '-', productTitle: o.productTitle || '-', price: o.price || 0 };
-        document.getElementById('detailOrderId').textContent = orderId.slice(-6).toUpperCase();
-        document.getElementById('detailBuyerName').textContent = o.buyerName || '-';
-        document.getElementById('detailProduct').textContent = o.productTitle || '-';
-        document.getElementById('detailPrice').textContent = 'Rp ' + (o.price || 0).toLocaleString('id-ID') + '/bln';
-        var wa = o.buyerWhatsapp || '';
-        document.getElementById('detailWaText').textContent = wa; document.getElementById('detailWaText').href = 'https://wa.me/' + wa;
-        document.getElementById('detailWaLink').href = 'https://wa.me/' + wa + '?text=Halo%20' + encodeURIComponent(o.buyerName || '');
-        document.getElementById('detailNote').textContent = o.orderNote || '-';
-        document.getElementById('detailDate').textContent = fTime(o.createdAt);
-        document.getElementById('detailStatus').value = o.status || 'pending';
-      });
-      unsubC = onValue(ref(db, 'orders/' + orderId + '/chat'), function (snap) {
-        var c = document.getElementById('chatMessages'), raw = snap.val(); c.innerHTML = '';
-        if (!raw) { c.innerHTML = '<div class="text-center text-muted-3 text-sm py-8">Kosong.</div>'; return; }
-        var msgs = Object.keys(raw).map(function (mk) { return { key: mk, val: raw[mk] }; }).sort(function (a, b) { return (a.val.timestamp || 0) - (b.val.timestamp || 0); });
-        msgs.forEach(function (m) {
-          var isMe = m.val.sender === 'admin', div = document.createElement('div'); div.className = 'flex ' + (isMe ? 'justify-end' : 'justify-start');
-          var ch = ''; if (m.val.text) ch += '<p class="text-sm text-gray-200 break-words">' + esc(m.val.text) + '</p>';
-          if (m.val.image) { var ik = 'img_' + m.key; imgStore[ik] = m.val.image; ch += '<img src="' + esc(m.val.image) + '" loading="lazy" class="rounded-lg mt-1.5 max-w-[260px] cursor-pointer hover:brightness-110 transition border border-white/5" onclick="viewImage(\'' + ik + '\')">'; }
-          ch += '<p class="text-[10px] ' + (isMe ? 'text-red-accent/40' : 'text-muted-4') + ' mt-1 text-right">' + fTime(m.val.timestamp) + '</p>';
-          div.innerHTML = '<div class="chat-bubble ' + (isMe ? 'bg-red-accent/8 border-red-accent/15' : 'bg-dark-card border-dark-border') + ' border rounded-2xl ' + (isMe ? 'rounded-br-sm' : 'rounded-bl-sm') + ' px-4 py-2.5">' + ch + '</div>';
-          c.appendChild(div);
-        });
-        requestAnimationFrame(function () { requestAnimationFrame(function () { c.scrollTop = c.scrollHeight; }); });
-      });
-    };
-    window.closeOrderDetail = function () { if (unsubO) { unsubO(); unsubO = null; } if (unsubC) { unsubC(); unsubC = null; } currentChatOrderId = null; cachedOD = {}; document.getElementById('orderDetailPanel').classList.add('hidden'); hideDpForm(); };
-    window.showDpForm = function () { if (!currentChatOrderId) return; document.getElementById('dpFormBar').classList.add('open'); document.getElementById('dpChatBuyer').value = cachedOD.buyerName || ''; document.getElementById('dpChatProduct').value = cachedOD.productTitle || ''; document.getElementById('dpChatPrice').value = cachedOD.price || ''; document.getElementById('dpChatPkg').value = '1 Bulan'; document.getElementById('dpChatVisible').checked = true; document.getElementById('chatInput').value = ''; };
-    window.hideDpForm = function () { document.getElementById('dpFormBar').classList.remove('open'); };
-    window.submitDpFromChat = async function () {
-      if (!currentChatOrderId) { showToast('Tidak ada order aktif.', 'error'); return; }
-      var buyer = document.getElementById('dpChatBuyer').value.trim(), product = document.getElementById('dpChatProduct').value.trim(), pkg = document.getElementById('dpChatPkg').value.trim(), price = parseInt(document.getElementById('dpChatPrice').value);
-      if (!buyer || !product || !price || price <= 0) { showToast('Isi data wajib.', 'error'); return; }
-      try {
-        var d = { buyerName: buyer, product: product, pkg: pkg, price: price, visible: document.getElementById('dpChatVisible').checked, orderId: currentChatOrderId, createdAt: serverTimestamp() };
-        await set(push(ref(db, 'done_payments')), d);
-        await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender: 'admin', text: '\u2705 Payment dicatat untuk @' + buyer + ' \u2014 ' + product + ' (' + pkg + ').', timestamp: serverTimestamp() });
-        hideDpForm(); showToast('Done payment disimpan & terhubung!');
-      } catch (e) { showToast('Gagal.', 'error'); }
-    };
-    window.sendChat = async function (sender) {
-      if (!currentChatOrderId) { showToast('Tidak ada order aktif.', 'error'); return; }
-      var input = document.getElementById('chatInput'), text = input.value.trim(), img = pendingChatImage;
-      if (!text && !img) return;
-      if (text.toLowerCase().trim() === '/donepayment') { input.value = ''; showDpForm(); return; }
-      input.value = ''; clearChatImage();
-      try {
-        var cmd = text.toLowerCase().trim();
-        if (cmd.startsWith('/') && qC[cmd]) { var q = qC[cmd]; if (q && q.image) { await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender: 'admin', text: '\uD83D\uDCB0 Pembayaran via ' + (q.label || cmd) + '. Scan QRIS:', image: q.image, timestamp: serverTimestamp() }); showToast('QRIS terkirim!'); return; } }
-        var md = { sender: sender, timestamp: serverTimestamp() }; if (text) md.text = text; if (img) md.image = img;
-        await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), md);
-      } catch (e) { showToast('Gagal kirim.', 'error'); }
-    };
-    document.getElementById('chatInput').addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat('admin'); } });
-    document.getElementById('chatImageInput').addEventListener('change', async function (e) { var f = e.target.files[0]; if (!f) return; try { pendingChatImage = await compressImage(f); document.getElementById('chatPreviewImg').src = pendingChatImage; document.getElementById('chatPreviewName').textContent = f.name; document.getElementById('chatImagePreview').classList.remove('hidden'); } catch (er) { showToast(typeof er === 'string' ? er : 'Gagal.', 'error'); } e.target.value = ''; });
-    window.clearChatImage = function () { pendingChatImage = null; document.getElementById('chatImagePreview').classList.add('hidden'); };
-
-    /* ═══ ADMIN MANAGEMENT ═══ */
-    var eac = {};
-    window.openAdminModal = function (isE, data) { document.getElementById('adminModal').classList.remove('hidden'); document.getElementById('adminModalTitle').textContent = isE ? 'Edit Admin' : 'Tambah Admin'; if (isE && data) { eac[data.id] = data; document.getElementById('admId').value = data.id; document.getElementById('admName').value = data.name; document.getElementById('admAge').value = data.age || ''; document.getElementById('admPhoto').value = data.photoUrl || ''; document.getElementById('admUsername').value = data.username; document.getElementById('admPassword').value = data.password; } else { document.getElementById('adminForm').reset(); document.getElementById('admId').value = ''; } };
-    window.closeAdminModal = function () { document.getElementById('adminModal').classList.add('hidden'); };
-        window.handleAdminSubmit = async function (e) {
-      e.preventDefault();
-      var id = document.getElementById('admId').value;
-      var name = document.getElementById('admName').value.trim();
-      var age = parseInt(document.getElementById('admAge').value);
-      var photo = document.getElementById('admPhoto').value.trim();
-      var username = document.getElementById('admUsername').value.trim().toLowerCase();
-      var password = document.getElementById('admPassword').value;
-      if (username.length < 3) { showToast('Username min. 3 karakter.', 'error'); return; }
-      if (password.length < 4) { showToast('Password min. 4 karakter.', 'error'); return; }
-      try {
-        var os = await get(ref(db, 'owners'));
-        var as = await get(ref(db, 'admins'));
-        var dup = false;
-        if (os.exists()) Object.values(os.val()).forEach(function (o) { if (o.username === username && (!id || id !== Object.keys(os.val()).find(function (k) { return os.val()[k].username === username && k === id; }))) dup = true; });
-        if (as.exists()) Object.keys(as.val()).forEach(function (k) { if (as.val()[k].username === username && k !== id) dup = true; });
-        if (dup) { showToast('Username sudah dipakai.', 'error'); return; }
-        var d = { name: name, age: age || 0, photoUrl: photo, username: username, password: password, disabled: false };
-        if (!id) d.createdAt = Date.now();
-        if (id) { await update(ref(db, 'admins/' + id), d); showToast('Admin diupdate!'); }
-        else { await set(push(ref(db, 'admins')), d); showToast('Admin ditambahkan!'); }
-        closeAdminModal();
-      } catch (er) { console.error(er); showToast('Gagal.', 'error'); }
-    };
-    window.toggleAdminDisabled = async function (id, c) {
-      try { await update(ref(db, 'admins/' + id), { disabled: !c }); showToast(c ? 'Dinonaktifkan.' : 'Diaktifkan.'); }
-      catch (e) { showToast('Gagal.', 'error'); }
-    };
-    window.deleteAdmin = async function (id) {
-      if (!confirm('Hapus admin ini permanen?')) return;
-      try { await remove(ref(db, 'admins/' + id)); showToast('Admin dihapus permanen.'); }
-      catch (e) { showToast('Gagal.', 'error'); }
-    };
-    window.openWarningModal = function (id) {
-      var a = eac[id]; if (!a) return;
-      document.getElementById('warningModal').classList.remove('hidden');
-      document.getElementById('warnAdminId').value = id;
-      document.getElementById('warningTargetName').textContent = 'Untuk: ' + a.name + ' (@' + a.username + ')';
-      document.getElementById('warnText').value = '';
-      document.getElementById('warnText').focus();
-    };
-    window.closeWarningModal = function () { document.getElementById('warningModal').classList.add('hidden'); };
-    window.handleWarningSubmit = async function (e) {
-      e.preventDefault();
-      var id = document.getElementById('warnAdminId').value;
-      var text = document.getElementById('warnText').value.trim();
-      if (!text) { showToast('Isi peringatan wajib.', 'error'); return; }
-      try {
-        var d = { text: text, ownerName: ownerData.name || 'Owner', createdAt: serverTimestamp() };
-        await set(push(ref(db, 'admins/' + id + '/warnings')), d);
-        closeWarningModal();
-        showToast('Warning terkirim ke admin!');
-      } catch (er) { showToast('Gagal.', 'error'); }
-    };
-    var pwVisible = {};
-    window.togglePw = function (id) {
-      pwVisible[id] = !pwVisible[id];
-      var el = document.querySelector('[data-pw="' + id + '"]');
-      if (el && eac[id]) el.textContent = pwVisible[id] ? eac[id].password : '\u2022\u2022\u2022\u2022\u2022\u2022';
-    };
-
-    document.getElementById('admins-tbody').addEventListener('click', function (e) {
-      var eb = e.target.closest('[data-ae]');
-      var db2 = e.target.closest('[data-ad]');
-      var tb2 = e.target.closest('[data-at]');
-      var wb = e.target.closest('[data-aw]');
-      var pw = e.target.closest('[data-pw]');
-      if (eb) openAdminModal(true, eac[eb.getAttribute('data-ae')]);
-      if (db2) deleteAdmin(db2.getAttribute('data-ad'));
-      if (tb2) { var p = tb2.getAttribute('data-at').split(','); toggleAdminDisabled(p[0], p[1] === 'true'); }
-      if (wb) openWarningModal(wb.getAttribute('data-aw'));
-      if (pw) togglePw(pw.getAttribute('data-pw'));
-    });
-
-    onValue(ref(db, 'admins'), function (s) {
-      var tb = document.getElementById('admins-tbody');
-      tb.innerHTML = '';
-      var raw = s.val();
-      DD.admins = raw || {};
-      var total = 0, active = 0, disabled = 0, totalW = 0;
-      if (!raw) {
-        tb.innerHTML = '<tr><td colspan="7" class="text-center py-10 text-muted-3">Belum ada admin.</td></tr>';
-      } else {
-        var sorted = Object.entries(raw).sort(function (a, b) { return (b[1].createdAt || 0) - (a[1].createdAt || 0); });
-        sorted.forEach(function (entry) {
-          var k = entry[0], a = entry[1];
-          total++;
-          if (a.disabled) disabled++; else active++;
-          eac[k] = { id: k, name: a.name, age: a.age, photoUrl: a.photoUrl, username: a.username, password: a.password, disabled: a.disabled };
-          var wc = a.warnings ? Object.keys(a.warnings).length : 0;
-          totalW += wc;
-          var photoH;
-          if (a.photoUrl) {
-            photoH = '<div class="relative flex-shrink-0"><img src="' + esc(a.photoUrl) + '" class="w-9 h-9 rounded-full object-cover border border-dark-border" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="w-9 h-9 rounded-full bg-dark-bg border border-dark-border avatar-circle text-muted-3 text-sm absolute inset-0" style="display:none">' + esc((a.name || '?').charAt(0).toUpperCase()) + '</div></div>';
-          } else {
-            photoH = '<div class="w-9 h-9 rounded-full bg-dark-bg border border-dark-border avatar-circle text-muted-3 text-sm flex-shrink-0">' + esc((a.name || '?').charAt(0).toUpperCase()) + '</div>';
-          }
-          var isDis = a.disabled;
-          var wcHtml = wc > 0
-            ? '<div class="flex items-center gap-1"><div class="warn-dot"></div><span class="text-[10px] font-mono text-yellow-400">' + wc + '</span></div>'
-            : '<span class="text-[10px] text-muted-4">0</span>';
-          var tr = document.createElement('tr');
-          tr.innerHTML =
-            '<td><div class="flex items-center gap-3">' + photoH +
-            '<div class="min-w-0"><div class="font-semibold text-sm text-white truncate">' + esc(a.name || '-') +
-            (isDis ? ' <span class="owner-badge">DISABLED</span>' : '') +
-            '</div></div></div></td>' +
-            '<td class="text-sm text-muted-2 font-mono">' + (a.age || '-') + ' thn</td>' +
-            '<td class="font-mono text-sm text-muted-2">' + esc(a.username) + '</td>' +
-            '<td class="pw-cell text-sm text-muted-1" data-pw="' + k + '">' + (pwVisible[k] ? esc(a.password) : '\u2022\u2022\u2022\u2022\u2022\u2022') + '</td>' +
-            '<td class="text-center">' + wcHtml + '</td>' +
-            '<td class="text-center"><button data-at="' + k + ',' + isDis + '" class="status-badge border ' +
-            (isDis ? 'bg-red-500/10 text-red-400 border-red-500/20' : 'bg-green-500/10 text-green-400 border-green-500/20') +
-            ' cursor-pointer hover:opacity-80 transition">' + (isDis ? 'DISABLED' : 'ACTIVE') + '</button></td>' +
-            '<td class="text-center whitespace-nowrap">' +
-            '<button data-aw="' + k + '" class="text-yellow-400 hover:text-yellow-300 p-1.5 rounded-lg hover:bg-yellow-500/10 transition" title="Kirim Warning"><i class="fas fa-exclamation-triangle"></i></button>' +
-            '<button data-ae="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition" title="Edit"><i class="fas fa-edit"></i></button>' +
-            '<button data-ad="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition" title="Hapus"><i class="fas fa-trash"></i></button></td>';
+    onValue(ref(db,'admins'),function(s){
+      var raw=s.val();DD.admins=raw||{};
+      /* Render Admin Table */
+      var tb=document.getElementById('admins-tbody');tb.innerHTML='';
+      var total=0,active=0,disabled=0,totalW=0;
+      if(!raw){tb.innerHTML='<tr><td colspan="7" class="text-center py-10 text-muted-3">Belum ada admin.</td></tr>';}
+      else{
+        var sorted=Object.entries(raw).sort(function(a,b){return(b[1].createdAt||0)-(a[1].createdAt||0);});
+        sorted.forEach(function(entry){
+          var k=entry[0],a=entry[1];total++;if(a.disabled)disabled++;else active++;
+          eac[k]={id:k,name:a.name,age:a.age,photoUrl:a.photoUrl,username:a.username,password:a.password,disabled:a.disabled};
+          var wc=a.warnings?Object.keys(a.warnings).length:0;totalW+=wc;
+          var photoH;if(a.photoUrl){photoH='<img src="'+esc(a.photoUrl)+'" class="w-9 h-9 rounded-full object-cover border border-dark-border flex-shrink-0" onerror="this.outerHTML=\'<div class=\\'w-9 h-9 rounded-full bg-dark-bg border border-dark-border avatar-circle text-muted-3 text-sm flex-shrink-0\\'>'+esc((a.name||'?').charAt(0).toUpperCase())+'</div>\'">';}else{photoH='<div class="w-9 h-9 rounded-full bg-dark-bg border border-dark-border avatar-circle text-muted-3 text-sm flex-shrink-0">'+esc((a.name||'?').charAt(0).toUpperCase())+'</div>';}
+          var isDis=a.disabled;
+          var wcHtml=wc>0?'<div class="flex items-center gap-1"><div class="warn-dot"></div><span class="text-[10px] font-mono text-yellow-400">'+wc+'</span></div>':'<span class="text-[10px] text-muted-4">0</span>';
+          var tr=document.createElement('tr');
+          tr.innerHTML='<td><div class="flex items-center gap-3">'+photoH+'<div class="min-w-0"><div class="font-semibold text-sm text-white truncate">'+esc(a.name||'-')+(isDis?' <span class="owner-badge">DISABLED</span>':'')+'</div></div></div></td><td class="text-sm text-muted-2 font-mono">'+(a.age||'-')+' thn</td><td class="font-mono text-sm text-muted-2">'+esc(a.username)+'</td><td class="pw-cell text-sm text-muted-1" data-pw="'+k+'">'+(pwVisible[k]?esc(a.password):'\u2022\u2022\u2022\u2022\u2022\u2022')+'</td><td class="text-center">'+wcHtml+'</td><td class="text-center"><button data-at="'+k+','+isDis+'" class="status-badge border '+(isDis?'bg-red-500/10 text-red-400 border-red-500/20':'bg-green-500/10 text-green-400 border-green-500/20')+' cursor-pointer hover:opacity-80 transition">'+(isDis?'DISABLED':'ACTIVE')+'</button></td><td class="text-center whitespace-nowrap"><button data-aw="'+k+'" class="text-yellow-400 hover:text-yellow-300 p-1.5 rounded-lg hover:bg-yellow-500/10 transition" title="Warning"><i class="fas fa-exclamation-triangle"></i></button><button data-ae="'+k+'" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition" title="Edit"><i class="fas fa-edit"></i></button><button data-ad="'+k+'" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition" title="Hapus"><i class="fas fa-trash"></i></button></td>';
           tb.appendChild(tr);
         });
       }
-      document.getElementById('d-stat-admins').textContent = active;
-      document.getElementById('d-stat-warnings').textContent = totalW;
-      document.getElementById('d-stat-disabled').textContent = disabled;
-    });
+      document.getElementById('d-stat-admins').textContent=active;
+      document.getElementById('d-stat-disabled').textContent=disabled;
 
-    /* ═══ WARNINGS LOG ═══ */
-    onValue(ref(db, 'admins'), function (s) {
-      var tb = document.getElementById('warnings-tbody');
-      tb.innerHTML = '';
-      var raw = s.val();
-      if (!raw) {
-        tb.innerHTML = '<tr><td colspan="4" class="text-center py-10 text-muted-3">Belum ada warning.</td></tr>';
-        DD.warnings = {};
-        return;
-      }
-      var allW = [];
-      Object.entries(raw).forEach(function (entry) {
-        var k = entry[0], a = entry[1];
-        if (a.warnings) {
-          Object.entries(a.warnings).forEach(function (wEntry) {
-            allW.push({ key: k + '/' + wEntry[0], adminName: a.name || '-', adminUsername: a.username || '-', data: wEntry[1] });
-          });
-        }
+      /* Render Warnings Table (dari data admin yang sama) */
+      var wtb=document.getElementById('warnings-tbody');wtb.innerHTML='';
+      var allW=[];
+      if(raw)Object.entries(raw).forEach(function(entry){
+        var k=entry[0],a=entry[1];
+        if(a.warnings){Object.entries(a.warnings).forEach(function(wEntry){allW.push({adminName:a.name||'-',adminUsername:a.username||'-',data:wEntry[1]});});}
       });
-      DD.warnings = allW;
-      if (!allW.length) {
-        tb.innerHTML = '<tr><td colspan="4" class="text-center py-10 text-muted-3">Belum ada warning.</td></tr>';
-        return;
+      DD.warnings=allW;
+      if(!allW.length){wtb.innerHTML='<tr><td colspan="4" class="text-center py-10 text-muted-3">Belum ada warning.</td></tr>';}
+      else{
+        allW.sort(function(a,b){return(b.data.createdAt||0)-(a.data.createdAt||0);});
+        allW.forEach(function(w){
+          var tr=document.createElement('tr');
+          tr.innerHTML='<td class="text-xs font-mono text-muted-2 whitespace-nowrap">'+fTime(w.data.createdAt)+'</td><td class="text-sm text-gold-accent font-semibold">'+esc(w.data.ownerName||'Owner')+'</td><td class="text-sm text-muted-1">'+esc(w.adminName)+' <span class="text-muted-4 font-mono">@'+esc(w.adminUsername)+'</span></td><td class="text-sm text-muted-2 max-w-[300px]"><div class="bg-yellow-500/5 border border-yellow-500/10 rounded-lg px-3 py-2">'+esc(w.data.text)+'</div></td>';
+          wtb.appendChild(tr);
+        });
       }
-      allW.sort(function (a, b) { return (b.data.createdAt || 0) - (a.data.createdAt || 0); });
-      allW.forEach(function (w) {
-        var tr = document.createElement('tr');
-        tr.innerHTML =
-          '<td class="text-xs font-mono text-muted-2 whitespace-nowrap">' + fTime(w.data.createdAt) + '</td>' +
-          '<td class="text-sm text-gold-accent font-semibold">' + esc(w.data.ownerName || 'Owner') + '</td>' +
-          '<td class="text-sm text-muted-1">' + esc(w.adminName) + ' <span class="text-muted-4 font-mono">@' + esc(w.adminUsername) + '</span></td>' +
-          '<td class="text-sm text-muted-2 max-w-[300px]"><div class="bg-yellow-500/5 border border-yellow-500/10 rounded-lg px-3 py-2">' + esc(w.data.text) + '</div></td>';
-        tb.appendChild(tr);
-      });
+      document.getElementById('d-stat-warnings').textContent=totalW;
       updateDash();
     });
 
-    /* ═══ SETTINGS ═══ */
-    window.loadSettings = function () {
-      get(ref(db, 'settings/site_info')).then(function (s) {
-        if (s.exists()) {
-          document.getElementById('tos-input').value = s.val().tos || '';
-        }
-      }).catch(function () {
-        document.getElementById('tos-input').value = '';
-      });
-    };
-    window.saveSettings = async function () {
-      try {
-        await update(ref(db, 'settings/site_info'), { tos: document.getElementById('tos-input').value });
-        showToast('Settings disimpan!');
-      } catch (e) { showToast('Gagal.', 'error'); }
-    };
+    /* SETTINGS */
+    window.loadSettings=function(){get(ref(db,'settings/site_info')).then(function(s){if(s.exists()){document.getElementById('tos-input').value=s.val().tos||'';}}).catch(function(){document.getElementById('tos-input').value='';});};
+    window.saveSettings=async function(){try{await update(ref(db,'settings/site_info'),{tos:document.getElementById('tos-input').value});showToast('Settings disimpan!');}catch(e){showToast('Gagal.','error');}};
 
-    /* ═══ INIT ═══ */
+    /* INIT */
     loadQris();
   </script>
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/sw.js').then(function (r) { console.log('[SW] OK'); }).catch(function (e) { console.warn('[SW] Fail:', e); });
-      });
-    }
+    if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').then(function(r){console.log('[SW] OK');}).catch(function(e){console.warn('[SW] Fail:',e);});});}
   </script>
 </body>
 </html>
