@@ -383,3 +383,37 @@
     function hideError() {
       document.getElementById('errorBox').className = 'hidden mb-4';
       document.getElementById('errorBox').innerHTML = '';
+    }
+
+    function markError(id) {
+      document.getElementById(id).classList.add('error');
+    }
+
+    function resetInputStyles() {
+      document.querySelectorAll('.form-input').forEach(function (el) { el.classList.remove('error'); });
+    }
+
+    function resetBtn(btnId, btnText) {
+      var btn = document.getElementById(btnId);
+      btn.disabled = false;
+      btnText.textContent = btnText;
+      btn.querySelector('.spinner').classList.add('hidden');
+    }
+
+    /* Auto focus */
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        document.getElementById('ownerUser').focus();
+      }, 700);
+    });
+
+    /* Enter key */
+    document.getElementById('ownerPass').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); document.getElementById('ownerForm').requestSubmit(); }
+    });
+    document.getElementById('adminPass').addEventListener('keydown', function (e) {
+      if (e.key === 'enter') { e.preventDefault(); document.getElementById('adminForm').requestSubmit(); }
+    });
+  </script>
+</body>
+</html>
