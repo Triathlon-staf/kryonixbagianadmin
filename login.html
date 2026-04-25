@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | KRYONIX</title>
+  <link rel="icon" type="image/png" href="images/icon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script>
+    tailwind.config={darkMode:'class',theme:{extend:{
+      fontFamily:{sans:['Space Grotesk','sans-serif'],mono:['JetBrains Mono','monospace']},
+      colors:{dark:{bg:'#06060a',card:'#0d0d12',border:'#1a1a24'},
+        red:{accent:'#dc2626',bright:'#ef4444',glow:'rgba(220,38,38,.15)',glow2:'rgba(220,38,38,.06)'},
+        gold:{accent:'#d97706',bright:'#f59e0b',glow:'rgba(217,119,6,.15)'},
+        muted:{1:'#a1a1aa',2:'#71717a',3:'#52525b',4:'#3f3f46'}}
+    }}}
+  </script>
+  <style>
+    :root{--bg:#06060a;--card:#0d0d12;--border:#1a1a24;--red:#dc2626;--gold:#d97706}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--bg);color:#e4e4e7;font-family:'Space Grotesk',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow-x:hidden}
+    ::-webkit-scrollbar{width:0}
+
+    .bg-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.35;animation:orbFloat 20s ease-in-out infinite}
+    .bg-orb-1{width:500px;height:500px;background:radial-gradient(circle,rgba(220,38,38,.25),transparent 70%);top:-15%;left:-10%}
+    .bg-orb-2{width:400px;height:400px;background:radial-gradient(circle,rgba(217,119,6,.18),transparent 70%);bottom:-10%;right:-10%;animation-delay:-7s}
+    @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.1)}66%{transform:translate(-20px,15px) scale(.95)}}
+
+    .grid-bg{position:absolute;inset:0;background-image:
+      linear-gradient(rgba(220,38,38,.025) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(220,38,38,.025) 1px,transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse 60% 50% at 50% 50%,black 20%,transparent 70%);
+    -webkit-mask-image:radial-gradient(ellipse 60% 50% at 50% 50%,black 20%,transparent 70%);
+    animation:gridPulse 8s ease-in-out infinite}
+    @keyframes gridPulse{0%,100%{opacity:.4}50%{opacity:.8}}
+
+    .login-card{position:relative;z-index:10;width:100%;max-width:440px;background:rgba(13,13,18,.85);backdrop-filter:blur(40px);border:1px solid rgba(220,38,38,.1);border-radius:24px;box-shadow:0 0 80px rgba(220,38,38,.05),0 0 0 1px rgba(220,38,38,.06);animation:cardIn .8s cubic-bezier(.16,1,.3,1)}
+    @keyframes cardIn{from{opacity:0;transform:translateY(30px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+    .card-glow{position:absolute;top:-1px;left:15%;right:15%;height:2px;border-radius:2px;filter:blur(1px);animation:glowSlide 4s ease-in-out infinite}
+    @keyframes glowSlide{0%,100%{opacity:.3;transform:scaleX(.8)}50%{opacity:1;transform:scaleX(1)}}
+
+    .logo-ring{width:68px;height:68px;border-radius:18px;background:linear-gradient(135deg,rgba(220,38,38,.1),rgba(217,119,6,.06));border:1px solid rgba(220,38,38,.12);display:flex;align-items:center;justify-content:center;position:relative}
+    .logo-ring::before{content:'';position:absolute;inset:-1px;border-radius:18px;background:conic-gradient(from 0deg,transparent,var(--red),var(--gold),transparent);opacity:0;animation:logoSpin 6s linear infinite;mask:linear-gradient(#fff 0 0,#fff 0 0) content-box,linear-gradient(#fff 0 0,#fff 0 0);mask-composite:exclude;padding:1px}
+    @keyframes logoSpin{to{transform:rotate(360deg)}}
+    .logo-ring img{width:40px;height:40px;border-radius:12px;object-fit:contain;position:relative;z-index:1}
+
+    /* Tab Switcher */
+    .tab-switcher{display:flex;background:rgba(6,6,10,.6);border:1px solid var(--border);border-radius:14px;padding:4px;position:relative;gap:4px}
+    .tab-btn{flex:1;padding:11px 0;border-radius:11px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#52525b;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:6px;background:transparent;border:none;position:relative;z-index:1}
+    .tab-btn:hover{color:#a1a1aa}
+    .tab-btn.active-owner{color:#f59e0b;background:rgba(217,119,6,.1);box-shadow:0 0 20px rgba(217,119,6,.08)}
+    .tab-btn.active-admin{color:#ef4444;background:rgba(220,38,38,.1);box-shadow:0 0 20px rgba(220,38,38,.08)}
+    .tab-indicator{position:absolute;top:4px;height:calc(100% - 8px);border-radius:11px;background:transparent;transition:all .35s cubic-bezier(.16,1,.3,1);z-index:0;pointer-events:none}
+    .tab-indicator.owner-pos{left:4px;width:calc(50% - 6px);background:rgba(217,119,6,.12)}
+    .tab-indicator.admin-pos{left:calc(50% + 2px);width:calc(50% - 6px);background:rgba(220,38,38,.12)}
+
+    .form-panel{animation:panelIn .3s ease}
+    @keyframes panelIn{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
+
+    .input-group{position:relative}
+    .input-group .input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#52525b;transition:color .2s;pointer-events:none;font-size:14px}
+    .input-group input:focus~.input-icon{color:var(--red)}
+    .form-input{width:100%;background:rgba(6,6,10,.8);border:1px solid var(--border);border-radius:14px;padding:13px 14px 13px 44px;font-size:14px;color:#e4e4e7;font-family:'Space Grotesk',sans-serif;outline:none;transition:all .25s}
+    .form-input::placeholder{color:#3f3f46}
+    .form-input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(220,38,38,.1),0 0 20px rgba(220,38,38,.06)}
+    .form-input.error{border-color:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.1)}
+
+    .btn-login{width:100%;padding:13px;border:none;border-radius:14px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#fff;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:8px}
+    .btn-login.owner-btn{background:linear-gradient(135deg,#d97706,#b45309)}
+    .btn-login.owner-btn:hover:not(:disabled){box-shadow:0 8px 30px rgba(217,119,6,.25);transform:translateY(-1px)}
+    .btn-login.admin-btn{background:linear-gradient(135deg,#dc2626,#b91c1c)}
+    .btn-login.admin-btn:hover:not(:disabled){box-shadow:0 8px 30px rgba(220,38,38,.25);transform:translateY(-1px)}
+    .btn-login:active:not(:disabled){transform:translateY(0)!important;box-shadow:none!important}
+    .btn-login:disabled{opacity:.65;cursor:not-allowed}
+    .btn-login::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);transform:translateX(-100%);transition:transform .5s}
+    .btn-login:hover:not(:disabled)::after{transform:translateX(100%)}
+
+    .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .error-box{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);border-radius:12px;padding:10px 14px;display:flex;align-items:flex-start;gap:8px;animation:shakeIn .4s ease}
+    @keyframes shakeIn{0%{opacity:0;transform:translateX(-10px)}50%{transform:translateX(5px)}100%{opacity:1;transform:translateX(0)}}
+
+    .role-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:700;padding:3px 10px;border-radius:8px;letter-spacing:.04em;transition:all .3s}
+    .role-badge.owner-badge{background:rgba(217,119,6,.1);color:#f59e0b;border:1px solid rgba(217,119,6,.2)}
+    .role-badge.admin-badge{background:rgba(220,38,38,.1);color:#f87171;border:1px solid rgba(220,38,38,.2)}
+
+    .particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+    .particle{position:absolute;width:2px;height:2px;background:rgba(220,38,38,.35);border-radius:50%;animation:particleRise linear infinite}
+    @keyframes particleRise{0%{opacity:0;transform:translateY(0) scale(0)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(-100vh) scale(1)}}
+
+    .pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#52525b;cursor:pointer;transition:all .15s;background:transparent;border:none}
+    .pw-toggle:hover{color:#a1a1aa;background:rgba(255,255,255,.04)}
+
+    .info-line{display:flex;align-items:center;gap:6px;font-size:11px;color:#3f3f46;margin-top:14px}
+    .info-line i{font-size:10px}
+  </style>
+</head>
+<body>
+
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="grid-bg"></div>
+  <div class="particles" id="particles"></div>
+
+  <div class="login-card mx-4 p-7 md:p-9">
+    <div class="card-glow"></div>
+
+    <!-- Logo -->
+    <div class="flex flex-col items-center mb-6">
+      <div class="logo-ring mb-4">
+        <img src="https://i.pinimg.com/736x/89/75/5d/89755dd7321afe2c3295a39df24e8309.jpg" alt="KRYONIX">
+      </div>
+      <h1 class="text-xl font-extrabold tracking-wider text-white">KRYONIX</h1>
+      <p class="text-[10px] font-mono text-muted-4 tracking-[.2em] uppercase mt-0.5">Authentication System</p>
+    </div>
+
+    <!-- Tab Switcher -->
+    <div class="tab-switcher mb-6" id="tabSwitcher">
+      <button type="button" class="tab-btn active-owner" id="tabOwner" onclick="switchTab('owner')">
+        <i class="fas fa-crown text-[11px]"></i> Owner
+      </button>
+      <button type="button" class="tab-btn" id="tabAdmin" onclick="switchTab('admin')">
+        <i class="fas fa-shield-halved text-[11px]"></i> Admin
+      </button>
+      <div class="tab-indicator owner-pos" id="tabIndicator"></div>
+    </div>
+
+    <!-- Error -->
+    <div id="errorBox" class="hidden mb-4"></div>
+
+    <!-- Owner Form -->
+    <div id="panelOwner" class="form-panel">
+      <form id="ownerForm" onsubmit="handleLogin(event)" autocomplete="off">
+        <div class="flex items-center gap-2 mb-5">
+          <span class="role-badge owner-badge"><i class="fas fa-crown text-[9px]"></i> OWNER ACCESS</span>
+        </div>
+        <div class="space-y-3">
+          <div class="input-group">
+            <i class="fas fa-crown input-icon" style="color:#d9770680"></i>
+            <input type="text" id="ownerUser" class="form-input" placeholder="Username owner" required autocomplete="off" spellcheck="false">
+          </div>
+          <div class="input-group">
+            <i class="fas fa-key input-icon" style="color:#d9770680"></i>
+            <input type="password" id="ownerPass" class="form-input" placeholder="Password" required autocomplete="off">
+            <button type="button" class="pw-toggle" onclick="togglePw('ownerPass',this)"><i class="fas fa-eye text-xs" id="ownerPwIcon"></i></button>
+          </div>
+          <button type="submit" id="btnOwner" class="btn-login owner-btn">
+            <span id="ownerBtnText">Sign In as Owner</span>
+            <div id="ownerSpinner" class="hidden spinner"></div>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Admin Form -->
+    <div id="panelAdmin" class="form-panel hidden">
+      <form id="adminForm" onsubmit="handleLogin(event)" autocomplete="off">
+        <div class="flex items-center gap-2 mb-5">
+          <span class="role-badge admin-badge"><i class="fas fa-shield-halved text-[9px]"></i> ADMIN ACCESS</span>
+        </div>
+        <div class="space-y-3">
+          <div class="input-group">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="adminUser" class="form-input" placeholder="Username admin" required autocomplete="off" spellcheck="false">
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="adminPass" class="form-input" placeholder="Password" required autocomplete="off">
+            <button type="button" class="pw-toggle" onclick="togglePw('adminPass',this)"><i class="fas fa-eye text-xs" id="adminPwIcon"></i></button>
+          </div>
+          <button type="submit" id="btnAdmin" class="btn-login admin-btn">
+            <span id="adminBtnText">Sign In as Admin</span>
+            <div id="adminSpinner" class="hidden spinner"></div>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-6 pt-5 border-t border-dark-border">
+      <div class="flex items-center justify-center gap-2 text-[10px] text-muted-4 font-mono tracking-wider uppercase">
+        <div class="w-1.5 h-1.5 rounded-full bg-green-500/30"></div>
+        <span>Secure Connection</span>
+        <div class="w-1.5 h-1.5 rounded-full bg-green-500/30"></div>
+      </div>
+      <p class="text-center text-[10px] text-muted-4 mt-3">&copy; 2025 KRYONIX. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import { getDatabase, ref, get, set, push, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
+
+    const fc = {
+      apiKey: "AIzaSyBHPvQ6Bt9f6U3wqDz3CG71HNpcFq3RZRI",
+      authDomain: "kryonix-7c55e.firebaseapp.com",
+      databaseURL: "https://kryonix-7c55e-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "kryonix-7c55e",
+      storageBucket: "kryonix-7c55e.firebasestorage.app",
+      messagingSenderId: "917095112473",
+      appId: "1:917095112473:web:dd4120a14724e6a02f88"
+    };
+    const app = initializeApp(fc);
+    const db = getDatabase(app);
+
+    sessionStorage.clear();
+
+    /* Particles */
+    (function () {
+      var c = document.getElementById('particles');
+      if (!c) return;
+      for (var i = 0; i < 18; i++) {
+        var p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.bottom = '-5px';
+        p.style.animationDuration = (8 + Math.random() * 14) + 's';
+        p.style.animationDelay = (Math.random() * 12) + 's';
+        var s = (1 + Math.random() * 2);
+        p.style.width = s + 'px';
+        p.style.height = s + 'px';
+        p.style.opacity = (0.15 + Math.random() * 0.35).toString();
+        c.appendChild(p);
+      }
+    })();
+
+    /* Tab Switching */
+    var currentTab = 'owner';
+    window.switchTab = function (tab) {
+      currentTab = tab;
+      var indicator = document.getElementById('tabIndicator');
+      var ownerBtn = document.getElementById('tabOwner');
+      var adminBtn = document.getElementById('tabAdmin');
+      var ownerPanel = document.getElementById('panelOwner');
+      var adminPanel = document.getElementById('panelAdmin');
+
+      hideError();
+      resetInputStyles();
+
+      if (tab === 'owner') {
+        indicator.className = 'tab-indicator owner-pos';
+        ownerBtn.className = 'tab-btn active-owner';
+        adminBtn.className = 'tab-btn';
+        ownerPanel.className = 'form-panel';
+        adminPanel.className = 'form-panel hidden';
+        ownerPanel.style.animation = 'none';
+        void ownerPanel.offsetWidth;
+        ownerPanel.style.animation = 'panelIn .3s ease';
+      } else {
+        indicator.className = 'tab-indicator admin-pos';
+        adminBtn.className = 'tab-btn active-admin';
+        ownerBtn.className = 'tab-btn';
+        adminPanel.className = 'form-panel';
+        ownerPanel.className = 'form-panel hidden';
+        adminPanel.style.animation = 'none';
+        void adminPanel.offsetWidth;
+        adminPanel.style.animation = 'panelIn .3s ease';
+      }
+    };
+
+    /* Password Toggle */
+    window.togglePw = function (inputId, btn) {
+      var inp = document.getElementById(inputId);
+      var icon = btn.querySelector('i');
+      if (inp.type === 'password') {
+        inp.type = 'text';
+        icon.className = 'fas fa-eye-slash text-xs';
+      } else {
+        inp.type = 'password';
+        icon.className = 'fas fa-eye text-xs';
+      }
+    };
+
+    /* Login Handler */
+    window.handleLogin = async function (e) {
+      e.preventDefault();
+
+      var username, password, btnId, inputIds, errorInputIds, redirectPage, role;
+      if (currentTab === 'owner') {
+        username = document.getElementById('ownerUser').value.trim().toLowerCase();
+        password = document.getElementById('ownerPass').value;
+        btnId = 'btnOwner';
+        inputIds = ['ownerUser', 'ownerPass'];
+        errorInputIds = ['ownerUser', 'ownerPass'];
+        redirectPage = 'owner.html';
+        role = 'owner';
+      } else {
+        username = document.getElementById('adminUser').value.trim().toLowerCase();
+        password = document.getElementById('adminPass').value;
+        btnId = 'btnAdmin';
+        inputIds = ['adminUser', 'adminPass'];
+        errorInputIds = ['adminUser', 'adminPass'];
+        redirectPage = 'admin.html';
+        role = 'admin';
+      }
+
+      var btn = document.getElementById(btnId);
+      var btnText = btn.querySelector('span');
+      var spinner = btn.querySelector('.spinner');
+
+      if (!username) { showError('Masukkan username.'); markError(inputIds[0]); return; }
+      if (!password) { showError('Masukkan password.'); markError(inputIds[1]); return; }
+      if (password.length < 4) { showError('Password minimal 4 karakter.'); markError(inputIds[1]); return; }
+
+      btn.disabled = true;
+      btnText.textContent = 'Verifikasi...';
+      spinner.classList.remove('hidden');
+      hideError();
+      resetInputStyles();
+
+      try {
+        var nodePath = currentTab === 'owner' ? 'owners' : 'admins';
+        var snap = await get(ref(db, nodePath));
+
+        if (!snap.exists()) {
+          showError('Belum ada akun ' + role + ' yang terdaftar.');
+          markError(inputIds[0]);
+          resetBtn(btnId, btnText);
+          return;
+        }
+
+        var users = snap.val();
+        var foundKey = null;
+        var disabledMsg = '';
+
+        for (var k in users) {
+          var u = users[k];
+          if (u.username && u.username.toLowerCase() === username && u.password === password) {
+            foundKey = k;
+            if (u.disabled === true) {
+              disabledMsg = 'Akun ini dinonaktifkan oleh owner.';
+            }
+            break;
+          }
+        }
+
+        if (!foundKey) {
+          showError('Username atau password salah.');
+          markError(errorInputIds[0]);
+          markError(errorInputIds[1]);
+          resetBtn(btnId, btnText);
+          return;
+        }
+
+        if (disabledMsg) {
+          showError(disabledMsg);
+          markError(errorInputIds[0]);
+          resetBtn(btnId, btnText);
+          return;
+        }
+
+        // Success
+        sessionStorage.setItem('kryonix_admin', 'granted');
+        sessionStorage.setItem('kryonix_role', role);
+        sessionStorage.setItem('kryonix_uid', foundKey);
+        sessionStorage.setItem('kryonix_name', users[foundKey].name || '');
+
+        btnText.textContent = 'Berhasil!';
+        spinner.classList.add('hidden');
+
+        setTimeout(function () {
+          window.location.href = redirectPage;
+        }, 400);
+
+      } catch (err) {
+        console.error('Login error:', err);
+        showError('Koneksi gagal. Periksa internet.');
+        resetBtn(btnId, btnText);
+      }
+    };
+
+    function showError(msg) {
+      var box = document.getElementById('errorBox');
+      box.className = 'error-box mb-4 flex items-start gap-3';
+      box.innerHTML = '<i class="fas fa-exclamation-circle text-red-400 mt-0.5 flex-shrink-0"></i><p class="text-sm text-red-300">' + msg + '</p>';
+    }
+
+    function hideError() {
+      document.getElementById('errorBox').className = 'hidden mb-4';
+      document.getElementById('errorBox').innerHTML = '';
