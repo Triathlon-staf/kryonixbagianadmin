@@ -943,6 +943,9 @@
       };
       try {
         if (id) {
+          // Sertakan adminId & adminName saat update agar tidak hilang
+          data.adminId = currentAdminId;
+          data.adminName = currentAdminName;
           await update(ref(db, 'products/' + id), data);
           showToast('Produk diupdate!');
         } else {
@@ -1474,9 +1477,9 @@
       } else {
         Object.keys(raw).forEach(function (key) {
           const product = raw[key] || {};
-          // Hanya tampilkan produk milik admin ini
-          // Produk lama tanpa adminId tetap ditampilkan ke semua admin (backward compat)
-          if (product.adminId && myAdminId && product.adminId !== myAdminId) return;
+          // Hanya tampilkan produk milik admin ini (strict filter)
+          // Produk tanpa adminId TIDAK ditampilkan (admin harus re-assign lewat owner)
+          if (!product.adminId || !myAdminId || product.adminId !== myAdminId) return;
           total += 1;
           stock += Number(product.stock || 0);
           if (Number(product.stock || 0) <= 0) empty += 1;
