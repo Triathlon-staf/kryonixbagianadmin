@@ -329,7 +329,7 @@
             btnText.textContent = 'Berhasil!';
             spinner.style.display = 'none';
             showSuccess('Login berhasil. Mengalihkan...');
-            setTimeout(() => window.location.href = 'admin.html', 600);
+            setTimeout(() => window.location.href = 'owner.html', 600); // Owner → owner.html
           } else {
             showError('Username atau password salah.');
             markError(prefix + 'User');
