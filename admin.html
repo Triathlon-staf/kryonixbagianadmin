@@ -106,7 +106,6 @@
       <button onclick="switchTab('orders');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2 relative" data-mob="orders"><i class="fas fa-receipt w-5"></i> Orders<span id="orderBadgeMob" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center badge-pulse">0</span></button>
       <button onclick="switchTab('testimoni');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2 relative" data-mob="testimoni"><i class="fas fa-star w-5"></i> Testimoni<span id="testiPendingBadgeMob" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">0</span></button>
       <button onclick="switchTab('donepayment');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="donepayment"><i class="fas fa-check-circle w-5"></i> Done Payment</button>
-      <button onclick="switchTab('partners');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="partners"><i class="fas fa-handshake w-5"></i> Partners</button>
       <button onclick="switchTab('settings');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="settings"><i class="fas fa-cog w-5"></i> Settings</button>
     </div>
     <div class="px-3 pt-3 border-t border-dark-border space-y-1">
@@ -126,7 +125,6 @@
       <button onclick="switchTab('orders')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm relative"><i class="fas fa-receipt w-5 nav-icon text-sm"></i> Orders<span id="orderBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center badge-pulse">0</span></button>
       <button onclick="switchTab('testimoni')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm relative"><i class="fas fa-star w-5 nav-icon text-sm"></i> Testimoni<span id="testiPendingBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">0</span></button>
       <button onclick="switchTab('donepayment')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-check-circle w-5 nav-icon text-sm"></i> Done Payment</button>
-      <button onclick="switchTab('partners')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-handshake w-5 nav-icon text-sm"></i> Partners</button>
       <div class="my-3 border-t border-dark-border"></div>
       <button onclick="switchTab('settings')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-cog w-5 nav-icon text-sm"></i> Settings</button>
     </div>
@@ -170,7 +168,6 @@
             <div onclick="switchTab('orders')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/10 flex items-center justify-center"><i class="fas fa-comments text-purple-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Chat Order</span></div>
             <div onclick="switchTab('testimoni')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/10 flex items-center justify-center"><i class="fas fa-clipboard-check text-yellow-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Review Testi</span></div>
             <div onclick="switchTab('donepayment')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/10 flex items-center justify-center"><i class="fas fa-check-circle text-green-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Done Pay</span></div>
-            <div onclick="switchTab('partners')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/10 flex items-center justify-center"><i class="fas fa-handshake text-cyan-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Partners</span></div>
             <div onclick="switchTab('settings')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-muted-4/50 border border-muted-4/30 flex items-center justify-center"><i class="fas fa-cog text-muted-2 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Settings</span></div>
           </div>
         </div>
@@ -427,7 +424,7 @@
     const PCC = { infrastructure: 'text-cyan-400', payment: 'text-green-400', security: 'text-purple-400', cdn: 'text-yellow-400', domain: 'text-blue-400', game: 'text-pink-400', other: 'text-gray-400' };
     const SS = { pending: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20', processing: 'bg-blue-500/10 text-blue-400 border-blue-500/20', completed: 'bg-green-500/10 text-green-400 border-green-500/20', cancelled: 'bg-red-500/10 text-red-400 border-red-500/20' };
     const HT = { dashboard: 'Dashboard', products: 'Product Management', orders: 'Order Management', testimoni: 'Moderasi Testimoni', donepayment: 'Done Payment', partners: 'Partner Management', settings: 'General Settings' };
-    const TAB_KEYS = ['dashboard', 'products', 'orders', 'testimoni', 'donepayment', 'partners', 'settings'];
+    const TAB_KEYS = ['dashboard', 'products', 'orders', 'testimoni', 'donepayment', 'settings'];
 
     let toastTimer = null;
     let imgStore = {};
@@ -920,6 +917,8 @@
       event.preventDefault();
       const id = document.getElementById('prodId').value;
       const cat = document.getElementById('prodCat').value;
+      const currentAdminName = sessionStorage.getItem('kryonix_admin_name') || sessionStorage.getItem('admin_name') || 'Admin';
+      const currentAdminId = sessionStorage.getItem('kryonix_admin_id') || sessionStorage.getItem('admin_id') || 'unknown';
       const data = {
         title: document.getElementById('prodTitle').value.trim(),
         category: cat,
@@ -937,6 +936,8 @@
           showToast('Produk diupdate!');
         } else {
           data.createdAt = serverTimestamp();
+          data.adminId = currentAdminId;
+          data.adminName = currentAdminName;
           await set(push(ref(db, 'products')), data);
           showToast('Produk ditambahkan!');
         }
@@ -1448,6 +1449,8 @@
       DD.products = raw || {};
       epc = {};
 
+      const myAdminId = sessionStorage.getItem('kryonix_admin_id') || sessionStorage.getItem('admin_id') || null;
+
       let total = 0;
       let stock = 0;
       let empty = 0;
@@ -1458,6 +1461,9 @@
       } else {
         Object.keys(raw).forEach(function (key) {
           const product = raw[key] || {};
+          // Hanya tampilkan produk milik admin ini
+          // Produk lama tanpa adminId tetap ditampilkan ke semua admin (backward compat)
+          if (product.adminId && myAdminId && product.adminId !== myAdminId) return;
           total += 1;
           stock += Number(product.stock || 0);
           if (Number(product.stock || 0) <= 0) empty += 1;
