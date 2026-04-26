@@ -896,8 +896,25 @@
           const ss2 = SS[o.status] || SS.pending;
           let bmc = 0;
           if (o.chat) Object.values(o.chat).forEach(function(m){ if (m.sender === 'buyer') bmc++; });
+
+          // Tampilkan info admin penjual (Fitur 4: owner bisa lihat barang milik admin mana)
+          let adminInfoHtml = '';
+          if (o.isMultiProduct && o.adminGroups && o.adminGroups.length) {
+            const groupTags = o.adminGroups.map(function(g) {
+              return '<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono bg-gold-accent/10 border border-gold-accent/20 text-gold-accent/80">' + esc(g.adminName || 'Admin') + ' (' + g.items.length + ' item)</span>';
+            }).join(' ');
+            adminInfoHtml = '<div class="flex flex-wrap gap-1 mt-0.5">' + groupTags + '</div>';
+          } else if (o.adminName) {
+            adminInfoHtml = '<div class="text-[9px] font-mono text-gold-accent/60 mt-0.5"><i class="fas fa-user-shield mr-0.5"></i>' + esc(o.adminName) + '</div>';
+          }
+
           const tr = document.createElement('tr');
-          tr.innerHTML = '<td class="font-bold text-sm text-white">' + esc(o.buyerName) + '</td><td class="text-sm text-muted-2">' + esc(o.productTitle) + '</td><td class="text-sm font-mono text-muted-3">' + esc(o.buyerWhatsapp) + '</td><td class="text-center"><span class="status-badge border ' + ss2 + '">' + (o.status || 'pending') + '</span></td><td class="text-center"><button data-oc="' + k + '" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments"></i> Chat' + (bmc ? '<span class="w-4 h-4 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center">' + bmc + '</span>' : '') + '</button></td><td class="text-center"><button data-od="' + k + '" class="text-red-400 hover:text-red-300 p-1"><i class="fas fa-trash"></i></button></td>';
+          tr.innerHTML = '<td class="font-bold text-sm text-white">' + esc(o.buyerName) + '</td>' +
+            '<td class="text-sm text-muted-2"><div>' + esc(o.productTitle) + '</div>' + adminInfoHtml + '</td>' +
+            '<td class="text-sm font-mono text-muted-3">' + esc(o.buyerWhatsapp) + '</td>' +
+            '<td class="text-center"><span class="status-badge border ' + ss2 + '">' + (o.status || 'pending') + '</span></td>' +
+            '<td class="text-center"><button data-oc="' + k + '" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments"></i> Chat' + (bmc ? '<span class="w-4 h-4 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center">' + bmc + '</span>' : '') + '</button></td>' +
+            '<td class="text-center"><button data-od="' + k + '" class="text-red-400 hover:text-red-300 p-1"><i class="fas fa-trash"></i></button></td>';
           tb.appendChild(tr);
         });
       }
