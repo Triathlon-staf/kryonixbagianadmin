@@ -18,28 +18,10 @@
             mono: ['JetBrains Mono', 'monospace']
           },
           colors: {
-            dark: {
-              bg: '#06060a',
-              card: '#0d0d12',
-              border: '#1a1a24'
-            },
-            red: {
-              accent: '#dc2626',
-              bright: '#ef4444',
-              glow: 'rgba(220,38,38,.15)',
-              glow2: 'rgba(220,38,38,.06)'
-            },
-            gold: {
-              accent: '#d97706',
-              bright: '#f59e0b',
-              glow: 'rgba(217,119,6,.15)'
-            },
-            muted: {
-              1: '#a1a1aa',
-              2: '#71717a',
-              3: '#52525b',
-              4: '#3f3f46'
-            }
+            dark: { bg: '#06060a', card: '#0d0d12', border: '#1a1a24' },
+            red: { accent: '#dc2626', bright: '#ef4444', glow: 'rgba(220,38,38,.15)', glow2: 'rgba(220,38,38,.06)' },
+            gold: { accent: '#d97706', bright: '#f59e0b', glow: 'rgba(217,119,6,.15)' },
+            muted: { 1: '#a1a1aa', 2: '#71717a', 3: '#52525b', 4: '#3f3f46' }
           }
         }
       }
@@ -213,42 +195,29 @@
     const db = getDatabase(app);
 
     const sessionKeys = [
-      'kryonix_admin',
-      'kryonix_role',
-      'kryonix_uid',
-      'kryonix_name',
-      'kryonix_admin_name',
-      'kryonix_admin_role',
-      'admin_name',
-      'admin_role'
+      'kryonix_admin','kryonix_role','kryonix_uid','kryonix_name',
+      'kryonix_admin_name','kryonix_admin_role','admin_name','admin_role'
     ];
+    sessionKeys.forEach(k => sessionStorage.removeItem(k));
 
-    sessionKeys.forEach(function (key) {
-      sessionStorage.removeItem(key);
-    });
-
-    const defaultBtnTexts = {
-      btnOwner: 'Sign In as Owner',
-      btnAdmin: 'Sign In as Admin'
-    };
-
+    const defaultBtnTexts = { btnOwner: 'Sign In as Owner', btnAdmin: 'Sign In as Admin' };
     let currentTab = 'owner';
 
     (function createParticles() {
       const container = document.getElementById('particles');
       if (!container) return;
       for (let i = 0; i < 18; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = (Math.random() * 100) + '%';
-        particle.style.bottom = '-5px';
-        particle.style.animationDuration = (8 + Math.random() * 14) + 's';
-        particle.style.animationDelay = (Math.random() * 12) + 's';
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.bottom = '-5px';
+        p.style.animationDuration = (8 + Math.random() * 14) + 's';
+        p.style.animationDelay = (Math.random() * 12) + 's';
         const size = 1 + Math.random() * 2;
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        particle.style.opacity = (0.15 + Math.random() * 0.35).toString();
-        container.appendChild(particle);
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.opacity = (0.15 + Math.random() * 0.35).toString();
+        container.appendChild(p);
       }
     })();
 
@@ -272,20 +241,18 @@
         adminBtn.className = 'tab-btn';
         ownerPanel.className = 'form-panel';
         adminPanel.className = 'form-panel hidden';
-        cardGlow.style.setProperty('--glow-color', 'rgba(217,119,6,.6)');
         cardGlow.style.background = 'rgba(217,119,6,.6)';
         replayAnim(ownerPanel);
-        setTimeout(function () { document.getElementById('ownerUser').focus(); }, 120);
+        setTimeout(() => document.getElementById('ownerUser').focus(), 120);
       } else {
         indicator.className = 'tab-indicator admin-pos';
         adminBtn.className = 'tab-btn active-admin';
         ownerBtn.className = 'tab-btn';
         adminPanel.className = 'form-panel';
         ownerPanel.className = 'form-panel hidden';
-        cardGlow.style.setProperty('--glow-color', 'rgba(220,38,38,.6)');
         cardGlow.style.background = 'rgba(220,38,38,.6)';
         replayAnim(adminPanel);
-        setTimeout(function () { document.getElementById('adminUser').focus(); }, 120);
+        setTimeout(() => document.getElementById('adminUser').focus(), 120);
       }
     };
 
@@ -316,31 +283,19 @@
       const roleLabel = roleKey.toUpperCase();
       const usernameInput = document.getElementById(prefix + 'User');
       const passwordInput = document.getElementById(prefix + 'Pass');
+
+      // username di-lowercase untuk perbandingan case-insensitive
       const username = usernameInput.value.trim().toLowerCase();
       const password = passwordInput.value;
+
       const btnId = 'btn' + (isOwner ? 'Owner' : 'Admin');
       const btn = document.getElementById(btnId);
       const btnText = document.getElementById(prefix + 'BtnText');
       const spinner = document.getElementById(prefix + 'Spinner');
 
-      if (!username) {
-        showError('Masukkan username.');
-        markError(prefix + 'User');
-        usernameInput.focus();
-        return;
-      }
-      if (!password) {
-        showError('Masukkan password.');
-        markError(prefix + 'Pass');
-        passwordInput.focus();
-        return;
-      }
-      if (password.length < 4) {
-        showError('Password minimal 4 karakter.');
-        markError(prefix + 'Pass');
-        passwordInput.focus();
-        return;
-      }
+      if (!username) { showError('Masukkan username.'); markError(prefix + 'User'); usernameInput.focus(); return; }
+      if (!password) { showError('Masukkan password.'); markError(prefix + 'Pass'); passwordInput.focus(); return; }
+      if (password.length < 4) { showError('Password minimal 4 karakter.'); markError(prefix + 'Pass'); passwordInput.focus(); return; }
 
       btn.disabled = true;
       btnText.textContent = 'Verifikasi...';
@@ -348,17 +303,19 @@
       hideError();
       resetInputStyles();
 
-      // --- LOGIC LOGIN OWNER (HARDCODED DI HTML) ---
+      // ============================================================
+      // LOGIN OWNER — kredensial hardcoded
+      // FIX: ownerUsernameYangBenar disimpan lowercase agar cocok
+      // dengan nilai username yang sudah di-.toLowerCase() di atas.
+      // Sebelumnya "KRYONIX" !== "kryonix" → selalu gagal.
+      // ============================================================
       if (isOwner) {
-        // UBAH USERNAME DAN PASSWORD OWNER DI BAWAH INI
-        const ownerUsernameYangBenar = "KRYONIX"; 
-        const ownerPasswordYangBenar = "ADMINKRYONIXHYUNK";
+        const OWNER_USERNAME = "kryonix";           // lowercase dari "KRYONIX"
+        const OWNER_PASSWORD = "ADMINKRYONIXHYUNK"; // password tetap case-sensitive
 
-        // Simulasi delay biar kelihatan loading dikit
         setTimeout(() => {
-          if (username === ownerUsernameYangBenar && password === ownerPasswordYangBenar) {
+          if (username === OWNER_USERNAME && password === OWNER_PASSWORD) {
             const displayName = "ItzDLP";
-            const redirectPage = 'admin.html';
 
             sessionStorage.setItem('kryonix_admin', 'granted');
             sessionStorage.setItem('kryonix_role', roleKey);
@@ -372,10 +329,7 @@
             btnText.textContent = 'Berhasil!';
             spinner.style.display = 'none';
             showSuccess('Login berhasil. Mengalihkan...');
-
-            setTimeout(function () {
-              window.location.href = redirectPage;
-            }, 600);
+            setTimeout(() => window.location.href = 'admin.html', 600);
           } else {
             showError('Username atau password salah.');
             markError(prefix + 'User');
@@ -383,10 +337,12 @@
             resetBtn(btnId, prefix);
           }
         }, 800);
-        return; 
+        return;
       }
 
-      // --- LOGIC LOGIN ADMIN (NGECEK KE FIREBASE) ---
+      // ============================================================
+      // LOGIN ADMIN — cek ke Firebase Realtime Database
+      // ============================================================
       try {
         const snap = await get(ref(db, 'admins'));
 
@@ -426,7 +382,6 @@
         }
 
         const displayName = foundUser.name || foundUser.username || username;
-        const redirectPage = 'admin.html';
 
         sessionStorage.setItem('kryonix_admin', 'granted');
         sessionStorage.setItem('kryonix_role', roleKey);
@@ -440,10 +395,8 @@
         btnText.textContent = 'Berhasil!';
         spinner.style.display = 'none';
         showSuccess('Login berhasil. Mengalihkan...');
+        setTimeout(() => window.location.href = 'admin.html', 600);
 
-        setTimeout(function () {
-          window.location.href = redirectPage;
-        }, 600);
       } catch (error) {
         console.error('Login error:', error);
         showError('Koneksi gagal. Periksa internet Anda.');
@@ -452,12 +405,9 @@
     };
 
     function resetBtn(btnId, prefix) {
-      const btn = document.getElementById(btnId);
-      const btnText = document.getElementById(prefix + 'BtnText');
-      const spinner = document.getElementById(prefix + 'Spinner');
-      btn.disabled = false;
-      btnText.textContent = defaultBtnTexts[btnId];
-      spinner.style.display = 'none';
+      document.getElementById(btnId).disabled = false;
+      document.getElementById(prefix + 'BtnText').textContent = defaultBtnTexts[btnId];
+      document.getElementById(prefix + 'Spinner').style.display = 'none';
     }
 
     function showError(message) {
@@ -478,27 +428,21 @@
       box.innerHTML = '';
     }
 
-    function markError(id) {
-      document.getElementById(id).classList.add('error');
-    }
+    function markError(id) { document.getElementById(id).classList.add('error'); }
 
     function resetInputStyles() {
-      document.querySelectorAll('.form-input').forEach(function (el) {
-        el.classList.remove('error');
-      });
+      document.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
     }
 
-    ['ownerUser', 'ownerPass', 'adminUser', 'adminPass'].forEach(function (id) {
+    ['ownerUser', 'ownerPass', 'adminUser', 'adminPass'].forEach(id => {
       document.getElementById(id).addEventListener('input', function () {
         this.classList.remove('error');
         hideError();
       });
     });
 
-    window.addEventListener('load', function () {
-      setTimeout(function () {
-        document.getElementById('ownerUser').focus();
-      }, 700);
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('ownerUser').focus(), 700);
     });
   </script>
 </body>
