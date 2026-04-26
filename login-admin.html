@@ -194,7 +194,7 @@
     </div>
   </div>
 
-  <script type="module">
+<script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
     import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
 
@@ -348,12 +348,50 @@
       hideError();
       resetInputStyles();
 
+      // --- LOGIC LOGIN OWNER (HARDCODED DI HTML) ---
+      if (isOwner) {
+        // UBAH USERNAME DAN PASSWORD OWNER DI BAWAH INI
+        const ownerUsernameYangBenar = "dapi"; 
+        const ownerPasswordYangBenar = "rahasia123";
+
+        // Simulasi delay biar kelihatan loading dikit
+        setTimeout(() => {
+          if (username === ownerUsernameYangBenar && password === ownerPasswordYangBenar) {
+            const displayName = "ItzDLP";
+            const redirectPage = 'admin.html';
+
+            sessionStorage.setItem('kryonix_admin', 'granted');
+            sessionStorage.setItem('kryonix_role', roleKey);
+            sessionStorage.setItem('kryonix_uid', 'owner_1');
+            sessionStorage.setItem('kryonix_name', displayName);
+            sessionStorage.setItem('kryonix_admin_name', displayName);
+            sessionStorage.setItem('kryonix_admin_role', roleLabel);
+            sessionStorage.setItem('admin_name', displayName);
+            sessionStorage.setItem('admin_role', roleLabel);
+
+            btnText.textContent = 'Berhasil!';
+            spinner.style.display = 'none';
+            showSuccess('Login berhasil. Mengalihkan...');
+
+            setTimeout(function () {
+              window.location.href = redirectPage;
+            }, 600);
+          } else {
+            showError('Username atau password salah.');
+            markError(prefix + 'User');
+            markError(prefix + 'Pass');
+            resetBtn(btnId, prefix);
+          }
+        }, 800);
+        return; 
+      }
+
+      // --- LOGIC LOGIN ADMIN (NGECEK KE FIREBASE) ---
       try {
-        const nodePath = isOwner ? 'owners' : 'admins';
-        const snap = await get(ref(db, nodePath));
+        const snap = await get(ref(db, 'admins'));
 
         if (!snap.exists()) {
-          showError('Belum ada akun ' + roleKey + ' yang terdaftar.');
+          showError('Belum ada akun admin yang terdaftar.');
           markError(prefix + 'User');
           resetBtn(btnId, prefix);
           return;
