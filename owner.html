@@ -139,6 +139,7 @@
     </header>
 
     <div class="flex-1 overflow-y-auto">
+      <!-- DASHBOARD -->
       <div id="tab-dashboard" class="tab-content p-5 md:p-8">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-3">
           <div><h2 class="text-2xl font-bold text-white">Owner Overview</h2><p class="text-sm text-muted-3 mt-1">Pantau seluruh aktivitas toko dan admin.</p></div>
@@ -181,46 +182,64 @@
         </div>
       </div>
 
+      <!-- PRODUCTS -->
       <div id="tab-products" class="tab-content hidden p-5 md:p-8">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Product Management</h2><p class="text-sm text-muted-3 mt-1">Kelola katalog hosting dan layanan.</p></div><button onclick="openProductModal()" class="bg-red-accent hover:bg-red-bright text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition shadow-lg shadow-red-accent/15 text-sm"><i class="fas fa-plus text-xs"></i> Add Product</button></div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total</div><div id="stat-total" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Stok</div><div id="stat-stock" class="text-2xl font-bold text-green-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Habis</div><div id="stat-empty" class="text-2xl font-bold text-red-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Kategori</div><div id="stat-cats" class="text-2xl font-bold text-cyan-400">0</div></div></div>
-        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Product</th><th>Admin</th><th>Category</th><th class="text-right">Price</th><th class="text-center">Stock</th><th class="text-center">Actions</th></tr></thead><tbody id="products-tbody"><tr><td colspan="5" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
+        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Product</th><th>Admin</th><th>Category</th><th class="text-right">Price</th><th class="text-center">Stock</th><th class="text-center">Actions</th></tr></thead><tbody id="products-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
+      <!-- ORDERS -->
       <div id="tab-orders" class="tab-content hidden p-5 md:p-8">
         <div class="mb-8"><h2 class="text-2xl font-bold text-white">Order Management</h2><p class="text-sm text-muted-3 mt-1">Klik order untuk chat.</p></div>
         <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Buyer</th><th>Product</th><th>WhatsApp</th><th class="text-center">Status</th><th class="text-center">Chat</th><th class="text-center">Del</th></tr></thead><tbody id="orders-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
+      <!-- PARTNERS -->
       <div id="tab-partners" class="tab-content hidden p-5 md:p-8">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Partner Management</h2></div><button onclick="openPartnerModal()" class="bg-red-accent hover:bg-red-bright text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition shadow-lg shadow-red-accent/15 text-sm"><i class="fas fa-plus text-xs"></i> Add Partner</button></div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total</div><div id="stat-partners" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Infra</div><div id="stat-infra" class="text-2xl font-bold text-cyan-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Payment</div><div id="stat-payment" class="text-2xl font-bold text-green-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Lainnya</div><div id="stat-other" class="text-2xl font-bold text-purple-400">0</div></div></div>
         <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Partner</th><th>Category</th><th>Website</th><th class="text-center">Actions</th></tr></thead><tbody id="partners-tbody"><tr><td colspan="4" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
+      <!-- TESTIMONI -->
       <div id="tab-testimoni" class="tab-content hidden p-5 md:p-8">
-        <div class="mb-8"><h2 class="text-2xl font-bold text-white">Moderasi Testimoni</h2><p class="text-sm text-muted-3 mt-1">Hanya approve/reject dari buyer.</p></div>
+        <div class="mb-8"><h2 class="text-2xl font-bold text-white">Moderasi Testimoni</h2></div>
         <div class="flex gap-2 mb-6"><button onclick="filterTestimoni('all')" class="testi-filter active px-4 py-2 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/20 text-red-accent transition" data-tf="all">Semua</button><button onclick="filterTestimoni('pending')" class="testi-filter px-4 py-2 rounded-lg text-xs font-semibold bg-dark-card border border-dark-border text-muted-2 transition" data-tf="pending">Pending</button><button onclick="filterTestimoni('approved')" class="testi-filter px-4 py-2 rounded-lg text-xs font-semibold bg-dark-card border border-dark-border text-muted-2 transition" data-tf="approved">Approved</button></div>
         <div class="grid grid-cols-3 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total</div><div id="stat-testi-total" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Approved</div><div id="stat-testi-approved" class="text-2xl font-bold text-green-400">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Pending</div><div id="stat-testi-pending" class="text-2xl font-bold text-yellow-400">0</div></div></div>
         <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Review</th><th class="text-center">Rating</th><th class="text-center">Status</th><th class="text-center">Del</th></tr></thead><tbody id="testi-tbody"><tr><td colspan="4" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
+      <!-- DONE PAYMENT -->
       <div id="tab-donepayment" class="tab-content hidden p-5 md:p-8">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Done Payment</h2><p class="text-sm text-muted-3 mt-1"><span class="linked-badge">LINKED</span> = dari chat order.</p></div><button onclick="openDoneModal()" class="bg-dark-card border border-dark-border hover:border-muted-4 text-muted-2 hover:text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition text-sm"><i class="fas fa-plus text-xs"></i> Add Manual</button></div>
         <div class="grid grid-cols-3 gap-4 mb-8"><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Transaksi</div><div id="stat-dp-total" class="text-2xl font-bold text-white">0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Revenue</div><div id="stat-dp-revenue" class="text-2xl font-bold text-green-400">Rp0</div></div><div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Publik</div><div id="stat-dp-visible" class="text-2xl font-bold text-cyan-400">0</div></div></div>
         <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Buyer</th><th>Produk</th><th class="text-right">Harga</th><th class="text-center">Link</th><th class="text-center">Tampil</th><th class="text-center">Actions</th></tr></thead><tbody id="dp-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
+      <!-- ADMINS -->
       <div id="tab-admins" class="tab-content hidden p-5 md:p-8">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Kelola Akun Admin</h2><p class="text-sm text-muted-3 mt-1">CRUD admin, lihat username & password, photo profile, umur.</p></div><button onclick="openAdminModal()" class="bg-gold-accent hover:bg-gold-bright text-black font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition shadow-lg shadow-gold-accent/15 text-sm"><i class="fas fa-user-plus text-xs"></i> Tambah Admin</button></div>
         <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Admin</th><th>Umur</th><th>Username</th><th>Password</th><th class="text-center">Warning</th><th class="text-center">Status</th><th class="text-center">Actions</th></tr></thead><tbody id="admins-tbody"><tr><td colspan="7" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
+      <!-- WARNINGS — FIX: tambah kolom hapus -->
       <div id="tab-warnings" class="tab-content hidden p-5 md:p-8">
-        <div class="mb-8"><h2 class="text-2xl font-bold text-white">Riwayat Peringatan</h2><p class="text-sm text-muted-3 mt-1">Semua warning yang pernah dikirim ke admin.</p></div>
-        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Waktu</th><th>Owner</th><th>Kepada Admin</th><th>Isi Peringatan</th></tr></thead><tbody id="warnings-tbody"><tr><td colspan="4" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-white flex items-center gap-3"><i class="fas fa-exclamation-triangle text-yellow-400"></i> Riwayat Peringatan</h2>
+          <p class="text-sm text-muted-3 mt-1">Semua warning yang pernah dikirim ke admin. Klik 🗑️ untuk hapus dari log.</p>
+        </div>
+        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full admin-table">
+              <thead><tr><th>Waktu</th><th>Owner</th><th>Kepada Admin</th><th>Isi Peringatan</th><th class="text-center">Hapus</th></tr></thead>
+              <tbody id="warnings-tbody"><tr><td colspan="5" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
+      <!-- SETTINGS -->
       <div id="tab-settings" class="tab-content hidden p-5 md:p-8">
         <div class="max-w-3xl">
           <h2 class="text-2xl font-bold text-white mb-6">General Settings</h2>
@@ -231,14 +250,15 @@
     </div>
   </main>
 
-  <!-- Modals (sama persis dengan aslinya) -->
+  <!-- MODALS -->
   <div id="productModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeProductModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4 max-h-[90vh] overflow-y-auto"><h3 id="productModalTitle" class="text-xl font-bold text-white mb-6">Add Product</h3><form id="productForm" onsubmit="handleProductSubmit(event)"><input type="hidden" id="prodId"><input type="hidden" id="prodAdminId"><input type="hidden" id="prodAdminName"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Admin Pemilik</label><select id="prodAdminSelect" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="">-- Pilih Admin --</option></select></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Title</label><input type="text" id="prodTitle" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Category</label><select id="prodCat" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="hosting">Hosting</option><option value="vps">VPS</option><option value="domain">Domain</option><option value="game">Game Server</option><option value="dedicated">Dedicated</option><option value="other">Other</option></select></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Price (IDR)</label><input type="number" id="prodPrice" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Stock</label><input type="number" id="prodStock" required min="0" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Image URL</label><input type="url" id="prodImage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Description</label><textarea id="prodDesc" required rows="2" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Features (koma)</label><textarea id="prodFeatures" rows="3" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Icon</label><input type="text" id="prodIcon" placeholder="fa-server" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="flex justify-end gap-3 mt-6"><button type="button" onclick="closeProductModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Cancel</button><button type="submit" class="px-6 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Save</button></div></div></form></div></div></div>
   <div id="partnerModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closePartnerModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4 max-h-[90vh] overflow-y-auto"><h3 id="partnerModalTitle" class="text-xl font-bold text-white mb-6">Add Partner</h3><form id="partnerForm" onsubmit="handlePartnerSubmit(event)"><input type="hidden" id="ptId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nama</label><input type="text" id="ptName" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Logo URL</label><input type="url" id="ptLogo" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Category</label><select id="ptCat" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="infrastructure">Infrastructure</option><option value="payment">Payment</option><option value="security">Security</option><option value="cdn">CDN</option><option value="domain">Domain</option><option value="game">Game Panel</option><option value="other">Other</option></select></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Icon</label><input type="text" id="ptIcon" placeholder="fa-server" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Website</label><input type="url" id="ptWebsite" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Description</label><textarea id="ptDesc" rows="2" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closePartnerModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Cancel</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Save</button></div></div></form></div></div></div>
-  <div id="doneModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeDoneModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 class="text-xl font-bold text-white mb-2">Add Done Payment Manual</h3><p class="text-xs text-muted-3 mb-5"><i class="fas fa-info-circle mr-1"></i>Manual = tanpa link order.</p><form id="doneForm" onsubmit="handleDoneSubmit(event)"><input type="hidden" id="dpId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nick Buyer</label><input type="text" id="dpBuyer" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Produk</label><input type="text" id="dpProduct" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Paket</label><input type="text" id="dpPackage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Harga</label><input type="number" id="dpPrice" required min="1" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div class="flex items-center gap-2"><input type="checkbox" id="dpVisible" checked class="accent-red-500 w-4 h-4"><label for="dpVisible" class="text-sm text-muted-2 cursor-pointer">Publik</label></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeDoneModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div></div></form></div></div></div>
-  <div id="qrisModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeQrisModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 id="qrisModalTitle" class="text-xl font-bold text-white mb-6">Tambah QRIS</h3><form id="qrisForm" onsubmit="handleQrisSubmit(event)"><input type="hidden" id="qrisEditId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Perintah</label><input type="text" id="qrisCommand" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-red-accent font-mono text-lg" placeholder="/pay1"><p class="text-[10px] text-muted-4 mt-1">Harus diawali <code class="text-red-accent/60">/</code></p></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Label</label><input type="text" id="qrisLabel" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Gambar QRIS</label><div id="qrisFormPreview" class="hidden mb-3 p-3 rounded-xl bg-dark-bg border border-dark-border"><img id="qrisFormImg" class="max-h-40 mx-auto rounded-lg" alt="QRIS preview"></div><input type="file" id="qrisFormFile" accept="image/*" class="hidden"><button type="button" onclick="document.getElementById('qrisFormFile').click()" class="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-sm text-muted-2 hover:text-white hover:border-red-accent transition flex items-center justify-center gap-2"><i class="fas fa-upload"></i> Upload</button></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeQrisModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div></div></form></div></div></div>
-  <div id="adminModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeAdminModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 id="adminModalTitle" class="text-xl font-bold text-white mb-6">Tambah Admin</h3><form id="adminForm" onsubmit="handleAdminSubmit(event)"><input type="hidden" id="admId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nama Lengkap</label><input type="text" id="admName" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Umur</label><input type="number" id="admAge" required min="16" max="99" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Photo URL</label><input type="url" id="admPhoto" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><p class="text-[10px] text-muted-4 mt-1">Opsional</p></div></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Username Login</label><input type="text" id="admUsername" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm font-mono" placeholder="admin_raka"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Password Login</label><input type="text" id="admPassword" required minlength="4" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm font-mono" placeholder="passwordnya"></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeAdminModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-gold-accent hover:bg-gold-bright text-black font-bold text-sm">Simpan</button></div></div></form></div></div></div>
+  <div id="doneModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeDoneModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 class="text-xl font-bold text-white mb-2">Add Done Payment Manual</h3><form id="doneForm" onsubmit="handleDoneSubmit(event)"><input type="hidden" id="dpId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nick Buyer</label><input type="text" id="dpBuyer" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Produk</label><input type="text" id="dpProduct" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Paket</label><input type="text" id="dpPackage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Harga</label><input type="number" id="dpPrice" required min="1" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div class="flex items-center gap-2"><input type="checkbox" id="dpVisible" checked class="accent-red-500 w-4 h-4"><label for="dpVisible" class="text-sm text-muted-2 cursor-pointer">Publik</label></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeDoneModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div></div></form></div></div></div>
+  <div id="qrisModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeQrisModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 id="qrisModalTitle" class="text-xl font-bold text-white mb-6">Tambah QRIS</h3><form id="qrisForm" onsubmit="handleQrisSubmit(event)"><input type="hidden" id="qrisEditId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Perintah</label><input type="text" id="qrisCommand" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-red-accent font-mono text-lg" placeholder="/pay1"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Label</label><input type="text" id="qrisLabel" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Gambar QRIS</label><div id="qrisFormPreview" class="hidden mb-3 p-3 rounded-xl bg-dark-bg border border-dark-border"><img id="qrisFormImg" class="max-h-40 mx-auto rounded-lg" alt="QRIS preview"></div><input type="file" id="qrisFormFile" accept="image/*" class="hidden"><button type="button" onclick="document.getElementById('qrisFormFile').click()" class="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-sm text-muted-2 hover:text-white hover:border-red-accent transition flex items-center justify-center gap-2"><i class="fas fa-upload"></i> Upload</button></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeQrisModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div></div></form></div></div></div>
+  <div id="adminModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeAdminModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 id="adminModalTitle" class="text-xl font-bold text-white mb-6">Tambah Admin</h3><form id="adminForm" onsubmit="handleAdminSubmit(event)"><input type="hidden" id="admId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nama Lengkap</label><input type="text" id="admName" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Umur</label><input type="number" id="admAge" required min="16" max="99" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Photo URL</label><input type="url" id="admPhoto" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Username Login</label><input type="text" id="admUsername" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm font-mono"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Password Login</label><input type="text" id="admPassword" required minlength="4" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm font-mono"></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeAdminModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-gold-accent hover:bg-gold-bright text-black font-bold text-sm">Simpan</button></div></div></form></div></div></div>
   <div id="warningModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeWarningModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i>Kirim Peringatan</h3><p id="warningTargetName" class="text-sm text-muted-2 mb-5">Untuk admin: -</p><form id="warningForm" onsubmit="handleWarningSubmit(event)"><input type="hidden" id="warnAdminId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Isi Peringatan</label><textarea id="warnText" required rows="4" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white text-sm resize-none" placeholder="Deskripsikan kesalahan..."></textarea></div><div class="flex justify-end gap-3"><button type="button" onclick="closeWarningModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-sm"><i class="fas fa-exclamation-triangle mr-1"></i>Kirim</button></div></div></form></div></div></div>
 
+  <!-- ORDER DETAIL PANEL -->
   <div id="orderDetailPanel" class="hidden fixed inset-0 z-40">
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeOrderDetail()"></div>
     <div class="absolute right-0 top-0 bottom-0 w-full md:max-w-2xl bg-dark-bg border-l border-dark-border flex flex-col shadow-2xl">
@@ -248,7 +268,6 @@
       </div>
       <div class="flex-1 flex flex-col min-h-0 overflow-hidden">
         <div class="flex-shrink-0 p-4 border-b border-dark-border overflow-y-auto" style="max-height:35vh">
-          <h4 class="text-[10px] font-mono text-muted-3 uppercase tracking-wider mb-3">Rincian</h4>
           <div class="bg-dark-card border border-dark-border rounded-xl p-4 space-y-3 text-sm">
             <div class="flex justify-between"><span class="text-muted-3">Produk</span><span class="font-bold text-white" id="detailProduct">-</span></div>
             <div class="flex justify-between"><span class="text-muted-3">Harga</span><span class="font-mono text-green-400" id="detailPrice">-</span></div>
@@ -260,7 +279,7 @@
         </div>
         <div class="flex-1 min-h-0 flex flex-col overflow-hidden">
           <div class="flex-shrink-0 px-4 pt-3 pb-2"><h4 class="text-[10px] font-mono text-muted-3 uppercase tracking-wider"><i class="fas fa-comments mr-1"></i> Chat</h4></div>
-          <div id="chatMessages" class="flex-1 overflow-y-auto px-4 pb-4 space-y-3"><div class="text-center text-muted-3 text-sm py-8">-</div></div>
+          <div id="chatMessages" class="flex-1 overflow-y-auto px-4 pb-4 space-y-3"></div>
         </div>
       </div>
       <div id="qrisQuickBar" class="hidden flex-shrink-0 border-t border-dark-border px-4 py-2 bg-dark-card/80"><div class="flex items-center gap-2 overflow-x-auto" id="qrisQuickBarInner"><span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span></div></div>
@@ -277,7 +296,7 @@
       <div class="flex-shrink-0 border-t border-dark-border p-4 bg-dark-card space-y-2">
         <div id="chatImagePreview" class="hidden img-preview-bar"><img id="chatPreviewImg" src="" alt="Preview"><div class="flex-1 min-w-0"><div class="text-xs text-muted-2 truncate" id="chatPreviewName">-</div></div><button onclick="clearChatImage()" class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 flex-shrink-0"><i class="fas fa-times text-[10px]"></i></button></div>
         <input type="file" id="chatImageInput" accept="image/*" class="hidden">
-        <div class="flex gap-2"><button onclick="document.getElementById('chatImageInput').click()" class="img-btn"><i class="fas fa-image"></i></button><input type="text" id="chatInput" class="flex-1 bg-dark-bg border border-dark-border rounded-xl px-4 py-2.5 text-white text-sm placeholder-muted-4" placeholder="Ketik pesan atau /donepayment ..."><button onclick="sendChat('admin')" class="px-5 py-2.5 bg-red-accent hover:bg-red-bright text-white font-bold rounded-xl transition flex items-center gap-2 text-sm"><i class="fas fa-paper-plane text-xs"></i><span class="hidden sm:inline">Kirim</span></button></div>
+        <div class="flex gap-2"><button onclick="document.getElementById('chatImageInput').click()" class="img-btn"><i class="fas fa-image"></i></button><input type="text" id="chatInput" class="flex-1 bg-dark-bg border border-dark-border rounded-xl px-4 py-2.5 text-white text-sm placeholder-muted-4" placeholder="Ketik pesan atau /command..."><button onclick="sendChat('admin')" class="px-5 py-2.5 bg-red-accent hover:bg-red-bright text-white font-bold rounded-xl transition flex items-center gap-2 text-sm"><i class="fas fa-paper-plane text-xs"></i><span class="hidden sm:inline">Kirim</span></button></div>
       </div>
     </div>
   </div>
@@ -304,12 +323,6 @@
     const HT = { dashboard:'Owner Overview', products:'Product Management', orders:'Order Management', partners:'Partner Management', testimoni:'Moderasi Testimoni', donepayment:'Done Payment', admins:'Kelola Admin', warnings:'Riwayat Warnings', settings:'General Settings' };
     const TAB_KEYS = ['dashboard','products','orders','partners','testimoni','donepayment',null,'admins','warnings',null,'settings'];
 
-    // ============================================================
-    // PERBAIKAN: Cek session berdasarkan role 'owner'
-    // Owner login hardcoded di login.html — data diambil dari
-    // sessionStorage, BUKAN dari Firebase node 'owners/'
-    // (node itu tidak ada → u = null → kick out)
-    // ============================================================
     if (sessionStorage.getItem('kryonix_role') !== 'owner' || sessionStorage.getItem('kryonix_admin') !== 'granted') {
       window.location.href = 'login-admin.html';
     }
@@ -322,24 +335,20 @@
     let epc = {}, eptc = {}, edc = {}, eac = {}, pwVisible = {}, aTR = {}, cTF = 'all';
     let currentChatOrderId = null, unsubO = null, unsubC = null, pendingChatImage = null, cachedOD = {};
 
-    // Ambil data owner dari sessionStorage (bukan Firebase)
     const ownerUid = sessionStorage.getItem('kryonix_uid');
-    if (!ownerUid) {
-      window.location.href = 'login-admin.html';
-    } else {
+    if (!ownerUid) { window.location.href = 'login-admin.html'; }
+    else {
       const ownerName = sessionStorage.getItem('kryonix_name') || 'Owner';
       ownerData = { name: ownerName };
       document.getElementById('headerName').textContent = ownerName;
-      const av = document.getElementById('headerAvatar');
-      av.textContent = ownerName.charAt(0).toUpperCase();
+      document.getElementById('headerAvatar').textContent = ownerName.charAt(0).toUpperCase();
     }
 
     function showToast(m, t) {
       t = t || 'success';
       if (toastTimer) clearTimeout(toastTimer);
       const el = document.getElementById('toast');
-      el.textContent = m;
-      el.className = 'toast ' + t + ' show';
+      el.textContent = m; el.className = 'toast ' + t + ' show';
       toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 3500);
     }
     function fTime(ts) {
@@ -354,9 +363,7 @@
     }
     function esc(t) {
       if (t === null || t === undefined) return '';
-      const d = document.createElement('div');
-      d.textContent = String(t);
-      return d.innerHTML;
+      const d = document.createElement('div'); d.textContent = String(t); return d.innerHTML;
     }
     function toBool(v) { return v === true || v === 'true'; }
     function cleanWa(value) {
@@ -380,8 +387,7 @@
             let w = img.width, h = img.height;
             if (w > mw) { h = (mw / w) * h; w = mw; }
             if (h > 800) { w = (800 / h) * w; h = 800; }
-            c.width = Math.max(1, Math.round(w));
-            c.height = Math.max(1, Math.round(h));
+            c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h));
             c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
             ok(c.toDataURL('image/jpeg', q));
           };
@@ -402,8 +408,7 @@
       const el = document.getElementById('dashClock');
       if (el) el.textContent = n.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'}) + ' — ' + n.toLocaleDateString('id-ID',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
     }
-    updateClock();
-    setInterval(updateClock, 1000);
+    updateClock(); setInterval(updateClock, 1000);
 
     window.openDrawer = function() { document.getElementById('drawerOverlay').classList.add('open'); document.getElementById('drawerPanel').classList.add('open'); };
     window.closeDrawer = function() { document.getElementById('drawerOverlay').classList.remove('open'); document.getElementById('drawerPanel').classList.remove('open'); };
@@ -423,19 +428,17 @@
     };
     window.doLogout = function() { sessionStorage.clear(); window.location.href = 'login-admin.html'; };
 
+    // ==================== QRIS ====================
     function loadQris() {
-      if (qrisSubscribed) return;
-      qrisSubscribed = true;
+      if (qrisSubscribed) return; qrisSubscribed = true;
       onValue(ref(db, 'settings/qris_commands'), function(s) {
-        const r = s.val();
-        qC = {}; qR = {};
+        const r = s.val(); qC = {}; qR = {};
         if (r) Object.keys(r).forEach(function(id) {
           const q = r[id]; qR[id] = q;
           const c = (q.command || '').toLowerCase().trim();
           if (c) qC[c] = q;
         });
-        renderQrisList();
-        renderQrisQuickBar();
+        renderQrisList(); renderQrisQuickBar();
       });
     }
     function renderQrisList() {
@@ -446,46 +449,36 @@
       ids.sort(function(a,b){ return (qR[a].command || '').localeCompare(qR[b].command || ''); });
       ids.forEach(function(id) {
         const q = qR[id];
-        const c = document.createElement('div');
-        c.className = 'qris-card';
+        const c = document.createElement('div'); c.className = 'qris-card';
         const ih = q.image ? '<img src="' + esc(q.image) + '" alt="' + esc(q.label || q.command || 'QRIS') + '">' : '<div class="w-16 h-16 rounded-lg border border-dark-border flex items-center justify-center text-muted-4 flex-shrink-0"><i class="fas fa-qrcode text-xl"></i></div>';
         c.innerHTML = ih + '<div class="flex-1 min-w-0"><div class="flex items-center gap-2 mb-0.5"><code class="text-sm font-mono text-red-accent font-bold">' + esc(q.command || '-') + '</code><span class="text-muted-4">—</span><span class="text-sm text-muted-1 truncate">' + esc(q.label || '-') + '</span></div></div><div class="flex items-center gap-1 flex-shrink-0"><button data-qe="' + id + '" class="text-cyan-400 hover:text-cyan-300 p-2 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-qd="' + id + '" class="text-red-400 hover:text-red-300 p-2 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></div>';
         l.appendChild(c);
       });
     }
     function renderQrisQuickBar() {
-      const b = document.getElementById('qrisQuickBar');
-      const i = document.getElementById('qrisQuickBarInner');
+      const b = document.getElementById('qrisQuickBar'); const i = document.getElementById('qrisQuickBarInner');
       const cs = Object.keys(qC);
       if (!cs.length) { b.classList.add('hidden'); return; }
       b.classList.remove('hidden');
       i.innerHTML = '<span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span>';
       cs.sort().forEach(function(c) {
-        const ch = document.createElement('button');
-        ch.className = 'qris-cmd-chip';
-        ch.textContent = c;
-        ch.setAttribute('data-qs', c);
-        ch.title = qC[c].label || c;
-        i.appendChild(ch);
+        const ch = document.createElement('button'); ch.className = 'qris-cmd-chip'; ch.textContent = c;
+        ch.setAttribute('data-qs', c); ch.title = qC[c].label || c; i.appendChild(ch);
       });
     }
     document.getElementById('qrisList').addEventListener('click', function(e) {
-      const eb = e.target.closest('[data-qe]');
-      const db2 = e.target.closest('[data-qd]');
+      const eb = e.target.closest('[data-qe]'); const db2 = e.target.closest('[data-qd]');
       if (eb) { const id = eb.getAttribute('data-qe'); if (qR[id]) openQrisModal(true, id, qR[id]); }
       if (db2) deleteQris(db2.getAttribute('data-qd'));
     });
     document.getElementById('qrisQuickBarInner').addEventListener('click', function(e) {
-      const c = e.target.closest('[data-qs]');
-      if (c) quickSendQris(c.getAttribute('data-qs'));
+      const c = e.target.closest('[data-qs]'); if (c) quickSendQris(c.getAttribute('data-qs'));
     });
     window.openQrisModal = function(isE, eId, data) {
       document.getElementById('qrisModal').classList.remove('hidden');
       document.getElementById('qrisModalTitle').textContent = isE ? 'Edit QRIS' : 'Tambah QRIS';
-      document.getElementById('qrisForm').reset();
-      document.getElementById('qrisEditId').value = '';
-      document.getElementById('qrisFormPreview').classList.add('hidden');
-      qFD = { image: null };
+      document.getElementById('qrisForm').reset(); document.getElementById('qrisEditId').value = '';
+      document.getElementById('qrisFormPreview').classList.add('hidden'); qFD = { image: null };
       if (isE && data) {
         document.getElementById('qrisEditId').value = eId || '';
         document.getElementById('qrisCommand').value = data.command || '';
@@ -500,8 +493,7 @@
       catch(e) { showToast('Gagal.', 'error'); }
     };
     document.getElementById('qrisFormFile').addEventListener('change', async function(e) {
-      const f = e.target.files[0];
-      if (!f) return;
+      const f = e.target.files[0]; if (!f) return;
       try { qFD.image = await compressImage(f, 600, 0.6); document.getElementById('qrisFormImg').src = qFD.image; document.getElementById('qrisFormPreview').classList.remove('hidden'); }
       catch(er) { showToast(typeof er === 'string' ? er : 'Gagal.', 'error'); }
       e.target.value = '';
@@ -528,26 +520,24 @@
     };
     window.quickSendQris = async function(cmd) {
       if (!currentChatOrderId) return;
-      const q = qC[cmd];
-      if (!q || !q.image) return;
+      const q = qC[cmd]; if (!q || !q.image) return;
       try {
         await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender:'admin', text:'💰 Pembayaran via ' + (q.label || cmd) + '. Scan QRIS:', image:q.image, timestamp:serverTimestamp() });
         showToast('QRIS terkirim!');
       } catch(e) { showToast('Gagal.', 'error'); }
     };
 
+    // ==================== DASHBOARD ====================
     function updateDash() {
       const p = DD.products, o = DD.orders, pa = DD.partners, t = DD.testimoni, dp = DD.donePayments, a = DD.admins, w = DD.warnings;
-      const tp = Object.keys(p).length;
-      let ts = 0;
+      const tp = Object.keys(p).length; let ts = 0;
       Object.values(p).forEach(function(x){ ts += (x.stock || 0); });
       document.getElementById('d-stat-products').textContent = tp;
       document.getElementById('d-stat-stock').textContent = ts;
-      const to2 = Object.keys(o).length;
-      let nr = 0;
+      const to2 = Object.keys(o).length; let nr = 0;
       Object.values(o).forEach(function(x) {
         let last = false;
-        if (x.chat) { const ck = Object.keys(x.chat); if (ck.length > 0 && x.chat[ck[ck.length - 1]].sender === 'buyer') last = true; }
+        if (x.chat) { const ck = Object.keys(x.chat); if (ck.length > 0 && x.chat[ck[ck.length-1]].sender === 'buyer') last = true; }
         if (last || !x.chat || Object.keys(x.chat).length === 0) nr++;
       });
       document.getElementById('d-stat-orders').textContent = to2;
@@ -556,19 +546,16 @@
       Object.values(dp).forEach(function(x){ rev += (x.price || 0); dc++; });
       document.getElementById('d-stat-revenue').textContent = 'Rp' + rev.toLocaleString('id-ID');
       document.getElementById('d-stat-dpcount').textContent = dc;
-      const tt = Object.keys(t).length;
-      let sr = 0, pn = 0;
+      const tt = Object.keys(t).length; let sr = 0, pn = 0;
       Object.values(t).forEach(function(x){ sr += (x.rating || 0); if (x.approved === false) pn++; });
       document.getElementById('d-stat-rating').textContent = tt > 0 ? (sr / tt).toFixed(1) : '0.0';
       document.getElementById('d-stat-testicount').textContent = tt;
       document.getElementById('d-stat-testi-pending').textContent = pn;
-      const pc = Object.keys(pa).length;
-      const pcc = {};
+      const pc = Object.keys(pa).length; const pcc = {};
       Object.values(pa).forEach(function(x){ if (x.category) pcc[x.category] = (pcc[x.category] || 0) + 1; });
       document.getElementById('d-stat-partners').textContent = pc;
       document.getElementById('d-stat-partner-cats').textContent = Object.keys(pcc).map(function(c){ return c + ': ' + pcc[c]; }).join(', ') || '-';
-      const ac = Object.keys(a).length;
-      let ad = 0, totalW = 0;
+      const ac = Object.keys(a).length; let ad = 0, totalW = 0;
       Object.values(a).forEach(function(x){ if (x.disabled) ad++; if (x.warnings) totalW += Object.keys(x.warnings).length; });
       document.getElementById('d-stat-admins').textContent = ac;
       document.getElementById('d-stat-warnings').textContent = Array.isArray(w) ? w.length : totalW;
@@ -577,30 +564,26 @@
       const re = document.getElementById('dashRecentOrders');
       if (!Object.keys(o).length) re.innerHTML = '<div class="px-5 py-8 text-center text-muted-3 text-sm">Belum ada order.</div>';
       else {
-        const so = Object.keys(o).map(function(k){ return {k:k,v:o[k]}; }).sort(function(a,b){ return (b.v.createdAt || 0) - (a.v.createdAt || 0); }).slice(0,5);
+        const so = Object.keys(o).map(function(k){ return {k:k,v:o[k]}; }).sort(function(a,b){ return (b.v.createdAt||0)-(a.v.createdAt||0); }).slice(0,5);
         re.innerHTML = '';
         so.forEach(function(i) {
-          const x = i.v;
-          const ss2 = SS[x.status] || SS.pending;
-          const dot = x.status === 'completed' ? 'green' : x.status === 'cancelled' ? 'red' : x.status === 'processing' ? 'yellow' : 'gray';
+          const x = i.v; const ss2 = SS[x.status] || SS.pending;
+          const dot = x.status==='completed'?'green':x.status==='cancelled'?'red':x.status==='processing'?'yellow':'gray';
           const r = document.createElement('div');
-          r.className = 'dash-recent-row px-5 py-3 flex items-center gap-4 cursor-pointer';
-          r.setAttribute('data-do', i.k);
-          r.innerHTML = '<div class="glow-dot ' + dot + '"></div><div class="flex-1 min-w-0"><div class="text-sm font-semibold text-white truncate">' + esc(x.buyerName || '-') + '</div><div class="text-xs text-muted-3 truncate">' + esc(x.productTitle || '-') + '</div></div><span class="status-badge border ' + ss2 + ' flex-shrink-0">' + (x.status || 'pending') + '</span><span class="text-[10px] text-muted-3 font-mono flex-shrink-0 hidden sm:block">' + fTimeS(x.createdAt) + '</span>';
+          r.className = 'dash-recent-row px-5 py-3 flex items-center gap-4 cursor-pointer'; r.setAttribute('data-do', i.k);
+          r.innerHTML = '<div class="glow-dot ' + dot + '"></div><div class="flex-1 min-w-0"><div class="text-sm font-semibold text-white truncate">' + esc(x.buyerName||'-') + '</div><div class="text-xs text-muted-3 truncate">' + esc(x.productTitle||'-') + '</div></div><span class="status-badge border ' + ss2 + ' flex-shrink-0">' + (x.status||'pending') + '</span><span class="text-[10px] text-muted-3 font-mono flex-shrink-0 hidden sm:block">' + fTimeS(x.createdAt) + '</span>';
           re.appendChild(r);
         });
       }
       const se = document.getElementById('dashStockAlert');
-      const ls = Object.keys(p).filter(function(k){ return (p[k].stock || 0) <= 5; }).map(function(k){ return {k:k,v:p[k]}; });
+      const ls = Object.keys(p).filter(function(k){ return (p[k].stock||0) <= 5; }).map(function(k){ return {k:k,v:p[k]}; });
       if (!ls.length) se.innerHTML = '<div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-check-circle text-green-500 mr-1"></i>Semua stok aman</div>';
       else {
         se.innerHTML = '';
         ls.slice(0,5).forEach(function(i) {
-          const x = i.v;
-          const isO = (x.stock || 0) <= 0;
-          const r = document.createElement('div');
-          r.className = 'flex items-center gap-3 py-2';
-          r.innerHTML = '<div class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (CC[x.category] || '') + ' flex-shrink-0"><i class="fas ' + (x.icon || 'fa-box') + ' text-[10px]"></i></div><div class="flex-1 min-w-0"><div class="text-xs text-white truncate">' + esc(x.title) + '</div></div><span class="text-xs font-mono font-bold ' + (isO ? 'text-red-400' : 'text-yellow-400') + ' flex-shrink-0">' + (isO ? 'HABIS' : x.stock) + '</span>';
+          const x = i.v; const isO = (x.stock||0) <= 0;
+          const r = document.createElement('div'); r.className = 'flex items-center gap-3 py-2';
+          r.innerHTML = '<div class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (CC[x.category]||'') + ' flex-shrink-0"><i class="fas ' + (x.icon||'fa-box') + ' text-[10px]"></i></div><div class="flex-1 min-w-0"><div class="text-xs text-white truncate">' + esc(x.title) + '</div></div><span class="text-xs font-mono font-bold ' + (isO?'text-red-400':'text-yellow-400') + ' flex-shrink-0">' + (isO?'HABIS':x.stock) + '</span>';
           se.appendChild(r);
         });
       }
@@ -610,55 +593,33 @@
       if (r) { switchTab('orders'); setTimeout(function(){ openOrderDetail(r.getAttribute('data-do')); }, 100); }
     });
 
+    // ==================== PRODUCTS ====================
     window.openProductModal = function(isE, data) {
       document.getElementById('productModal').classList.remove('hidden');
       document.getElementById('productModalTitle').textContent = isE ? 'Edit Product' : 'Add New Product';
-      // Populate admin select from loaded admins
       var sel = document.getElementById('prodAdminSelect');
       sel.innerHTML = '<option value="">-- Pilih Admin --</option>';
-      var admins = DD.admins || {};
-      Object.keys(admins).forEach(function(aId) {
-        var a = admins[aId];
-        var opt = document.createElement('option');
-        opt.value = aId;
-        opt.dataset.name = a.name || 'Admin';
-        opt.textContent = (a.name || 'Admin') + ' (' + (a.username || aId) + ')';
-        sel.appendChild(opt);
+      Object.keys(DD.admins || {}).forEach(function(aId) {
+        var a = DD.admins[aId]; var opt = document.createElement('option');
+        opt.value = aId; opt.dataset.name = a.name || 'Admin';
+        opt.textContent = (a.name || 'Admin') + ' (' + (a.username || aId) + ')'; sel.appendChild(opt);
       });
       if (isE && data) {
-        document.getElementById('prodId').value = data.id;
-        document.getElementById('prodTitle').value = data.title;
-        document.getElementById('prodCat').value = data.category;
-        document.getElementById('prodPrice').value = data.price;
-        document.getElementById('prodStock').value = data.stock;
-        document.getElementById('prodImage').value = data.image || '';
-        document.getElementById('prodDesc').value = data.description;
-        document.getElementById('prodFeatures').value = (data.features || []).join(', ');
-        document.getElementById('prodIcon').value = data.icon || '';
-        document.getElementById('prodAdminId').value = data.adminId || '';
-        document.getElementById('prodAdminName').value = data.adminName || '';
-        sel.value = data.adminId || '';
-      } else {
-        document.getElementById('productForm').reset();
-        document.getElementById('prodId').value = '';
-        document.getElementById('prodAdminId').value = '';
-        document.getElementById('prodAdminName').value = '';
-      }
+        document.getElementById('prodId').value = data.id; document.getElementById('prodTitle').value = data.title;
+        document.getElementById('prodCat').value = data.category; document.getElementById('prodPrice').value = data.price;
+        document.getElementById('prodStock').value = data.stock; document.getElementById('prodImage').value = data.image || '';
+        document.getElementById('prodDesc').value = data.description; document.getElementById('prodFeatures').value = (data.features || []).join(', ');
+        document.getElementById('prodIcon').value = data.icon || ''; sel.value = data.adminId || '';
+      } else { document.getElementById('productForm').reset(); document.getElementById('prodId').value = ''; }
     };
     window.closeProductModal = function() { document.getElementById('productModal').classList.add('hidden'); };
     window.handleProductSubmit = async function(e) {
       e.preventDefault();
-      const id = document.getElementById('prodId').value;
-      const cat = document.getElementById('prodCat').value;
+      const id = document.getElementById('prodId').value; const cat = document.getElementById('prodCat').value;
       const feat = document.getElementById('prodFeatures').value.split(',').map(function(f){ return f.trim(); }).filter(Boolean);
-      // Resolve admin from select
-      var sel = document.getElementById('prodAdminSelect');
-      var selAdminId = sel.value;
-      var selAdminName = '';
-      if (sel.selectedIndex > 0) {
-        selAdminName = sel.options[sel.selectedIndex].dataset.name || '';
-      }
-      const d = { title:document.getElementById('prodTitle').value, category:cat, price:parseInt(document.getElementById('prodPrice').value, 10), stock:parseInt(document.getElementById('prodStock').value, 10), image:document.getElementById('prodImage').value || DI[cat], description:document.getElementById('prodDesc').value, features:feat, icon:document.getElementById('prodIcon').value || 'fa-box', color:CC[cat] || 'text-purple-400', adminId:selAdminId, adminName:selAdminName };
+      var sel = document.getElementById('prodAdminSelect'); var selAdminId = sel.value; var selAdminName = '';
+      if (sel.selectedIndex > 0) selAdminName = sel.options[sel.selectedIndex].dataset.name || '';
+      const d = { title:document.getElementById('prodTitle').value, category:cat, price:parseInt(document.getElementById('prodPrice').value,10), stock:parseInt(document.getElementById('prodStock').value,10), image:document.getElementById('prodImage').value || DI[cat], description:document.getElementById('prodDesc').value, features:feat, icon:document.getElementById('prodIcon').value || 'fa-box', color:CC[cat] || 'text-purple-400', adminId:selAdminId, adminName:selAdminName };
       try {
         if (id) { await update(ref(db, 'products/' + id), d); showToast('Diupdate!'); }
         else { d.createdAt = serverTimestamp(); await set(push(ref(db, 'products')), d); showToast('Ditambahkan!'); }
@@ -670,37 +631,29 @@
       try { await remove(ref(db, 'products/' + id)); showToast('Dihapus.'); } catch(e) { showToast('Gagal.', 'error'); }
     };
     window.quickStock = async function(id, c, d2) {
-      const n = c + d2;
-      if (n < 0) return;
+      const n = c + d2; if (n < 0) return;
       try { await update(ref(db, 'products/' + id), { stock:n }); showToast('Stok → ' + n); } catch(e) { showToast('Gagal.', 'error'); }
     };
     document.getElementById('products-tbody').addEventListener('click', function(e) {
-      const eb = e.target.closest('[data-pe]');
-      const db2 = e.target.closest('[data-pd]');
-      const sb = e.target.closest('[data-ps]');
+      const eb = e.target.closest('[data-pe]'); const db2 = e.target.closest('[data-pd]'); const sb = e.target.closest('[data-ps]');
       if (eb) openProductModal(true, epc[eb.getAttribute('data-pe')]);
       if (db2) deleteProduct(db2.getAttribute('data-pd'));
-      if (sb) { const p = sb.getAttribute('data-ps').split(','); quickStock(p[0], parseInt(p[1], 10), parseInt(p[2], 10)); }
+      if (sb) { const p = sb.getAttribute('data-ps').split(','); quickStock(p[0], parseInt(p[1],10), parseInt(p[2],10)); }
     });
     onValue(ref(db, 'products'), function(s) {
-      const tb = document.getElementById('products-tbody');
-      tb.innerHTML = '';
-      const r = s.val();
-      DD.products = r || {};
-      let tp = 0, ts = 0, te = 0;
-      const cats = {};
-      epc = {};
-      if (!r) tb.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-muted-3">Belum ada produk.</td></tr>';
+      const tb = document.getElementById('products-tbody'); tb.innerHTML = '';
+      const r = s.val(); DD.products = r || {};
+      let tp = 0, ts = 0, te = 0; const cats = {}; epc = {};
+      if (!r) tb.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Belum ada produk.</td></tr>';
       else {
         Object.keys(r).forEach(function(k) {
-          const d = r[k];
-          tp++; ts += (d.stock || 0); if ((d.stock || 0) <= 0) te++; if (d.category) cats[d.category] = true;
-          epc[k] = { id:k, title:d.title, category:d.category, price:d.price, stock:d.stock, image:d.image, description:d.description, features:d.features || [], icon:d.icon, color:d.color, adminId:d.adminId||'', adminName:d.adminName||'' };
-          const oos = (d.stock || 0) <= 0;
+          const d = r[k]; tp++; ts += (d.stock||0); if ((d.stock||0) <= 0) te++; if (d.category) cats[d.category] = true;
+          epc[k] = { id:k, title:d.title, category:d.category, price:d.price, stock:d.stock, image:d.image, description:d.description, features:d.features||[], icon:d.icon, color:d.color, adminId:d.adminId||'', adminName:d.adminName||'' };
+          const oos = (d.stock||0) <= 0;
           const sb = oos ? '<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold text-red-400 bg-red-500/10 border border-red-500/20">HABIS <button data-ps="' + k + ',0,1" class="hover:text-white ml-1"><i class="fas fa-plus text-[10px]"></i></button></span>' : '<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold text-green-400 bg-green-500/10 border border-green-500/20">' + d.stock + ' <button data-ps="' + k + ',' + d.stock + ',-1" class="hover:text-white"><i class="fas fa-minus text-[10px]"></i></button> <button data-ps="' + k + ',' + d.stock + ',1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>';
           const adminBadge = d.adminId ? '<div class="text-[10px] font-mono" style="color:#d4a017"><i class="fas fa-user-shield" style="font-size:9px;margin-right:3px"></i>' + esc(d.adminName||'Unknown') + '</div>' : '<div class="text-[10px]" style="color:#5a6a80">—</div>';
           const tr = document.createElement('tr');
-          tr.innerHTML = '<td><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (d.color || '') + ' flex-shrink-0"><i class="fas ' + (d.icon || 'fa-box') + '"></i></div><div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(d.title) + '</div><div class="text-xs text-muted-3 truncate max-w-[180px]">' + esc(d.description) + '</div></div></div></td><td>' + adminBadge + '</td><td><span class="px-2 py-1 rounded text-xs bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(d.category) + '</span></td><td class="text-right font-mono text-sm text-white">Rp' + (d.price || 0).toLocaleString('id-ID') + '</td><td class="text-center">' + sb + '</td><td class="text-center whitespace-nowrap"><button data-pe="' + k + '" class="text-cyan-400 hover:text-cyan-300 mx-1 p-1"><i class="fas fa-edit"></i></button><button data-pd="' + k + '" class="text-red-400 hover:text-red-300 mx-1 p-1"><i class="fas fa-trash"></i></button></td>';
+          tr.innerHTML = '<td><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ' + (d.color||'') + ' flex-shrink-0"><i class="fas ' + (d.icon||'fa-box') + '"></i></div><div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(d.title) + '</div><div class="text-xs text-muted-3 truncate max-w-[180px]">' + esc(d.description) + '</div></div></div></td><td>' + adminBadge + '</td><td><span class="px-2 py-1 rounded text-xs bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(d.category) + '</span></td><td class="text-right font-mono text-sm text-white">Rp' + (d.price||0).toLocaleString('id-ID') + '</td><td class="text-center">' + sb + '</td><td class="text-center whitespace-nowrap"><button data-pe="' + k + '" class="text-cyan-400 hover:text-cyan-300 mx-1 p-1"><i class="fas fa-edit"></i></button><button data-pd="' + k + '" class="text-red-400 hover:text-red-300 mx-1 p-1"><i class="fas fa-trash"></i></button></td>';
           tb.appendChild(tr);
         });
       }
@@ -708,27 +661,35 @@
       document.getElementById('stat-stock').textContent = ts;
       document.getElementById('stat-empty').textContent = te;
       document.getElementById('stat-cats').textContent = Object.keys(cats).length;
+      // Sync admin dropdown
+      var sel = document.getElementById('prodAdminSelect');
+      if (sel) {
+        var prevVal = sel.value; sel.innerHTML = '<option value="">-- Pilih Admin --</option>';
+        Object.keys(DD.admins || {}).forEach(function(aId) {
+          var a = DD.admins[aId]; var opt = document.createElement('option');
+          opt.value = aId; opt.dataset.name = a.name || 'Admin';
+          opt.textContent = (a.name || 'Admin') + ' (' + (a.username || aId) + ')'; sel.appendChild(opt);
+        });
+        if (prevVal) sel.value = prevVal;
+      }
       updateDash();
     });
 
+    // ==================== PARTNERS ====================
     window.openPartnerModal = function(isE, data) {
       document.getElementById('partnerModal').classList.remove('hidden');
       document.getElementById('partnerModalTitle').textContent = isE ? 'Edit Partner' : 'Add Partner';
       if (isE && data) {
-        document.getElementById('ptId').value = data.id;
-        document.getElementById('ptName').value = data.name;
-        document.getElementById('ptLogo').value = data.logo || '';
-        document.getElementById('ptCat').value = data.category;
-        document.getElementById('ptIcon').value = data.icon || '';
-        document.getElementById('ptWebsite').value = data.website || '';
+        document.getElementById('ptId').value = data.id; document.getElementById('ptName').value = data.name;
+        document.getElementById('ptLogo').value = data.logo || ''; document.getElementById('ptCat').value = data.category;
+        document.getElementById('ptIcon').value = data.icon || ''; document.getElementById('ptWebsite').value = data.website || '';
         document.getElementById('ptDesc').value = data.description || '';
       } else { document.getElementById('partnerForm').reset(); document.getElementById('ptId').value = ''; }
     };
     window.closePartnerModal = function() { document.getElementById('partnerModal').classList.add('hidden'); };
     window.handlePartnerSubmit = async function(e) {
       e.preventDefault();
-      const id = document.getElementById('ptId').value;
-      const cat = document.getElementById('ptCat').value;
+      const id = document.getElementById('ptId').value; const cat = document.getElementById('ptCat').value;
       const d = { name:document.getElementById('ptName').value.trim(), logo:document.getElementById('ptLogo').value.trim(), category:cat, icon:document.getElementById('ptIcon').value.trim() || PCI[cat] || 'fa-star', website:document.getElementById('ptWebsite').value.trim(), description:document.getElementById('ptDesc').value.trim() };
       try {
         if (id) { await update(ref(db, 'partners/' + id), d); showToast('Diupdate!'); }
@@ -741,32 +702,22 @@
       try { await remove(ref(db, 'partners/' + id)); showToast('Dihapus.'); } catch(e) { showToast('Gagal.', 'error'); }
     };
     document.getElementById('partners-tbody').addEventListener('click', function(e) {
-      const eb = e.target.closest('[data-pce]');
-      const db2 = e.target.closest('[data-pcd]');
+      const eb = e.target.closest('[data-pce]'); const db2 = e.target.closest('[data-pcd]');
       if (eb) openPartnerModal(true, eptc[eb.getAttribute('data-pce')]);
       if (db2) deletePartner(db2.getAttribute('data-pcd'));
     });
     onValue(ref(db, 'partners'), function(s) {
-      const tb = document.getElementById('partners-tbody');
-      tb.innerHTML = '';
-      const r = s.val();
-      DD.partners = r || {};
-      let total = 0, infra = 0, payment = 0, other = 0;
-      eptc = {};
+      const tb = document.getElementById('partners-tbody'); tb.innerHTML = '';
+      const r = s.val(); DD.partners = r || {}; let total = 0, infra = 0, payment = 0, other = 0; eptc = {};
       if (!r) tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Belum ada partner.</td></tr>';
       else {
         Object.keys(r).forEach(function(k) {
-          const p = r[k];
-          total++;
-          if (p.category === 'infrastructure') infra++;
-          else if (p.category === 'payment') payment++;
-          else other++;
+          const p = r[k]; total++; if (p.category==='infrastructure') infra++; else if (p.category==='payment') payment++; else other++;
           eptc[k] = { id:k, name:p.name, logo:p.logo, category:p.category, icon:p.icon, website:p.website, description:p.description };
-          const color = PCC[p.category] || 'text-muted-2';
-          const icon = p.icon || PCI[p.category] || 'fa-star';
-          const lh = p.logo ? '<img src="' + esc(p.logo) + '" class="partner-logo" alt="' + esc(p.name || 'Partner') + '">' : '<div class="partner-logo flex items-center justify-center"><i class="fas ' + icon + ' ' + color + ' text-sm"></i></div>';
+          const color = PCC[p.category] || 'text-muted-2'; const icon = p.icon || PCI[p.category] || 'fa-star';
+          const lh = p.logo ? '<img src="' + esc(p.logo) + '" class="partner-logo" alt="' + esc(p.name||'Partner') + '">' : '<div class="partner-logo flex items-center justify-center"><i class="fas ' + icon + ' ' + color + ' text-sm"></i></div>';
           const tr = document.createElement('tr');
-          tr.innerHTML = '<td><div class="flex items-center gap-3">' + lh + '<div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(p.name) + '</div><div class="text-xs text-muted-3 truncate max-w-[150px]">' + esc(p.description) + '</div></div></div></td><td><span class="px-2 py-0.5 rounded text-[10px] bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(p.category) + '</span></td><td>' + (p.website ? '<a href="' + esc(p.website) + '" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-xs font-mono truncate block max-w-[120px]">' + esc(p.website.replace(/^https?:\/\//, '')) + '</a>' : '<span class="text-muted-4 text-xs">-</span>') + '</td><td class="text-center whitespace-nowrap"><button data-pce="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-pcd="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
+          tr.innerHTML = '<td><div class="flex items-center gap-3">' + lh + '<div class="min-w-0"><div class="font-bold text-sm text-white truncate">' + esc(p.name) + '</div><div class="text-xs text-muted-3 truncate max-w-[150px]">' + esc(p.description) + '</div></div></div></td><td><span class="px-2 py-0.5 rounded text-[10px] bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">' + esc(p.category) + '</span></td><td>' + (p.website ? '<a href="' + esc(p.website) + '" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-xs font-mono truncate block max-w-[120px]">' + esc(p.website.replace(/^https?:\/\//,'')) + '</a>' : '<span class="text-muted-4 text-xs">-</span>') + '</td><td class="text-center whitespace-nowrap"><button data-pce="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-pcd="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
           tb.appendChild(tr);
         });
       }
@@ -777,6 +728,7 @@
       updateDash();
     });
 
+    // ==================== TESTIMONI ====================
     window.filterTestimoni = function(f) {
       cTF = f;
       document.querySelectorAll('.testi-filter').forEach(function(el) {
@@ -785,21 +737,17 @@
       renderTesti();
     };
     function renderTesti() {
-      const tb = document.getElementById('testi-tbody');
-      tb.innerHTML = '';
+      const tb = document.getElementById('testi-tbody'); tb.innerHTML = '';
       if (!aTR || !Object.keys(aTR).length) { tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Belum ada testimoni.</td></tr>'; return; }
-      const sorted = Object.keys(aTR).map(function(k){ return {k:k,v:aTR[k]}; }).sort(function(a,b){ return (b.v.createdAt || 0) - (a.v.createdAt || 0); });
-      const filtered = cTF === 'all' ? sorted : cTF === 'pending' ? sorted.filter(function(i){ return i.v.approved === false; }) : sorted.filter(function(i){ return i.v.approved !== false; });
+      const sorted = Object.keys(aTR).map(function(k){ return {k:k,v:aTR[k]}; }).sort(function(a,b){ return (b.v.createdAt||0)-(a.v.createdAt||0); });
+      const filtered = cTF==='all' ? sorted : cTF==='pending' ? sorted.filter(function(i){ return i.v.approved===false; }) : sorted.filter(function(i){ return i.v.approved!==false; });
       if (!filtered.length) { tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Tidak ada data.</td></tr>'; return; }
       filtered.forEach(function(item) {
-        const t = item.v; const k = item.k;
-        const isA = t.approved !== false;
-        let sH = '';
-        for (let i = 1; i <= 5; i++) sH += '<i class="fas fa-star text-[10px] ' + (i <= (t.rating || 0) ? 'text-yellow-400' : 'text-muted-4') + '"></i>';
+        const t = item.v; const k = item.k; const isA = t.approved !== false;
+        let sH = ''; for (let i = 1; i <= 5; i++) sH += '<i class="fas fa-star text-[10px] ' + (i <= (t.rating||0) ? 'text-yellow-400' : 'text-muted-4') + '"></i>';
         const vc = isA ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20';
-        const vt = isA ? 'APPROVED' : 'PENDING';
         const tr = document.createElement('tr');
-        tr.innerHTML = '<td><div class="min-w-0"><div class="flex items-center gap-2 mb-0.5"><span class="font-bold text-sm text-white truncate">' + esc(t.name || 'Anonim') + '</span><span class="source-badge source-buyer">BUYER</span></div><div class="text-xs text-muted-3 truncate max-w-[260px]">' + esc(t.text) + '</div>' + (t.product ? '<div class="text-[10px] text-muted-4 mt-0.5 font-mono">' + esc(t.product) + '</div>' : '') + '</div></td><td class="text-center"><div class="flex justify-center gap-0.5">' + sH + '</div></td><td class="text-center"><button data-tt="' + k + ',' + isA + '" class="status-badge border ' + vc + ' cursor-pointer hover:opacity-80 transition">' + vt + '</button></td><td class="text-center"><button data-td="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
+        tr.innerHTML = '<td><div class="min-w-0"><div class="flex items-center gap-2 mb-0.5"><span class="font-bold text-sm text-white truncate">' + esc(t.name||'Anonim') + '</span><span class="source-badge source-buyer">BUYER</span></div><div class="text-xs text-muted-3 truncate max-w-[260px]">' + esc(t.text) + '</div></div></td><td class="text-center"><div class="flex justify-center gap-0.5">' + sH + '</div></td><td class="text-center"><button data-tt="' + k + ',' + isA + '" class="status-badge border ' + vc + ' cursor-pointer hover:opacity-80 transition">' + (isA?'APPROVED':'PENDING') + '</button></td><td class="text-center"><button data-td="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
         tb.appendChild(tr);
       });
     }
@@ -812,50 +760,42 @@
       try { await remove(ref(db, 'testimonials/' + id)); showToast('Dihapus.'); } catch(e) { showToast('Gagal.', 'error'); }
     };
     document.getElementById('testi-tbody').addEventListener('click', function(e) {
-      const tb2 = e.target.closest('[data-tt]');
-      const db2 = e.target.closest('[data-td]');
-      if (tb2) { const p = tb2.getAttribute('data-tt').split(','); toggleTestiApproval(p[0], p[1] === 'true'); }
+      const tb2 = e.target.closest('[data-tt]'); const db2 = e.target.closest('[data-td]');
+      if (tb2) { const p = tb2.getAttribute('data-tt').split(','); toggleTestiApproval(p[0], p[1]==='true'); }
       if (db2) deleteTesti(db2.getAttribute('data-td'));
     });
     onValue(ref(db, 'testimonials'), function(s) {
-      const raw = s.val();
-      DD.testimoni = raw || {};
-      aTR = raw || {};
+      const raw = s.val(); DD.testimoni = raw || {}; aTR = raw || {};
       let total = 0, approved = 0, pending = 0;
-      if (raw) Object.values(raw).forEach(function(t){ total++; if (t.approved !== false) approved++; else pending++; });
+      if (raw) Object.values(raw).forEach(function(t){ total++; if (t.approved!==false) approved++; else pending++; });
       document.getElementById('stat-testi-total').textContent = total;
       document.getElementById('stat-testi-approved').textContent = approved;
       document.getElementById('stat-testi-pending').textContent = pending;
       const bv = pending > 99 ? '99+' : String(pending);
-      const bd = document.getElementById('testiPendingBadge');
-      const bm = document.getElementById('testiPendingBadgeMob');
+      const bd = document.getElementById('testiPendingBadge'); const bm = document.getElementById('testiPendingBadgeMob');
       if (pending > 0) { bd.classList.remove('hidden'); bd.textContent = bv; bm.classList.remove('hidden'); bm.textContent = bv; }
       else { bd.classList.add('hidden'); bm.classList.add('hidden'); }
-      renderTesti();
-      updateDash();
+      renderTesti(); updateDash();
     });
 
+    // ==================== DONE PAYMENT ====================
     window.openDoneModal = function(isE, data) {
       document.getElementById('doneModal').classList.remove('hidden');
       if (isE && data) {
-        document.getElementById('dpId').value = data.id;
-        document.getElementById('dpBuyer').value = data.buyerName;
-        document.getElementById('dpProduct').value = data.product;
-        document.getElementById('dpPackage').value = data.pkg || '';
-        document.getElementById('dpPrice').value = data.price;
-        document.getElementById('dpVisible').checked = data.visible !== false;
+        document.getElementById('dpId').value = data.id; document.getElementById('dpBuyer').value = data.buyerName;
+        document.getElementById('dpProduct').value = data.product; document.getElementById('dpPackage').value = data.pkg || '';
+        document.getElementById('dpPrice').value = data.price; document.getElementById('dpVisible').checked = data.visible !== false;
       } else { document.getElementById('doneForm').reset(); document.getElementById('dpId').value = ''; document.getElementById('dpVisible').checked = true; }
     };
     window.closeDoneModal = function() { document.getElementById('doneModal').classList.add('hidden'); };
     window.handleDoneSubmit = async function(e) {
       e.preventDefault();
-      const id = document.getElementById('dpId').value;
-      const price = parseInt(document.getElementById('dpPrice').value, 10);
+      const id = document.getElementById('dpId').value; const price = parseInt(document.getElementById('dpPrice').value, 10);
       if (!price || price <= 0) { showToast('Harga harus > 0.', 'error'); return; }
       const d = { buyerName:document.getElementById('dpBuyer').value.trim(), product:document.getElementById('dpProduct').value.trim(), pkg:document.getElementById('dpPackage').value.trim(), price:price, visible:document.getElementById('dpVisible').checked, manual:true };
       try {
         if (id) { await update(ref(db, 'done_payments/' + id), d); showToast('Diupdate!'); }
-        else { d.createdAt = serverTimestamp(); await set(push(ref(db, 'done_payments')), d); showToast('Ditambahkan (manual).'); }
+        else { d.createdAt = serverTimestamp(); await set(push(ref(db, 'done_payments')), d); showToast('Ditambahkan.'); }
         closeDoneModal();
       } catch(e2) { showToast('Gagal.', 'error'); }
     };
@@ -868,36 +808,28 @@
     };
     window.openDpChat = function(oId) { switchTab('orders'); setTimeout(function(){ openOrderDetail(oId); }, 150); };
     document.getElementById('dp-tbody').addEventListener('click', function(e) {
-      const eb = e.target.closest('[data-de]');
-      const db2 = e.target.closest('[data-dd]');
-      const tb2 = e.target.closest('[data-dtv]');
-      const cb = e.target.closest('[data-dc]');
+      const eb = e.target.closest('[data-de]'); const db2 = e.target.closest('[data-dd]');
+      const tb2 = e.target.closest('[data-dtv]'); const cb = e.target.closest('[data-dc]');
       if (eb) openDoneModal(true, edc[eb.getAttribute('data-de')]);
       if (db2) deleteDone(db2.getAttribute('data-dd'));
-      if (tb2) { const p = tb2.getAttribute('data-dtv').split(','); toggleDoneVisible(p[0], p[1] === 'true'); }
+      if (tb2) { const p = tb2.getAttribute('data-dtv').split(','); toggleDoneVisible(p[0], p[1]==='true'); }
       if (cb) openDpChat(cb.getAttribute('data-dc'));
     });
     onValue(ref(db, 'done_payments'), function(s) {
-      const tb = document.getElementById('dp-tbody');
-      tb.innerHTML = '';
-      const raw = s.val();
-      DD.donePayments = raw || {};
-      let total = 0, revenue = 0, visible = 0;
-      edc = {};
+      const tb = document.getElementById('dp-tbody'); tb.innerHTML = '';
+      const raw = s.val(); DD.donePayments = raw || {}; let total = 0, revenue = 0, visible = 0; edc = {};
       if (!raw) tb.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Belum ada data.</td></tr>';
       else {
-        const sorted = Object.keys(raw).map(function(k){ return {k:k,val:raw[k]}; }).sort(function(a,b){ return (b.val.createdAt || 0) - (a.val.createdAt || 0); });
+        const sorted = Object.keys(raw).map(function(k){ return {k:k,val:raw[k]}; }).sort(function(a,b){ return (b.val.createdAt||0)-(a.val.createdAt||0); });
         sorted.forEach(function(item) {
-          const d = item.val; const k = item.k;
-          total++; revenue += (d.price || 0);
-          const vis = d.visible !== false;
-          if (vis) visible++;
+          const d = item.val; const k = item.k; total++; revenue += (d.price||0);
+          const vis = d.visible !== false; if (vis) visible++;
           edc[k] = { id:k, buyerName:d.buyerName, product:d.product, pkg:d.pkg, price:d.price, visible:vis, orderId:d.orderId };
           const hasO = !!d.orderId;
           const linkH = hasO ? '<button data-dc="' + d.orderId + '" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments text-[10px]"></i> Chat</button>' : '<span class="text-[10px] text-muted-4 font-mono">MANUAL</span>';
           const vc = vis ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-muted-4/10 text-muted-3 border-muted-4/20';
           const tr = document.createElement('tr');
-          tr.innerHTML = '<td class="font-bold text-sm text-white">' + esc(d.buyerName) + '</td><td class="text-sm text-muted-1">' + esc(d.product) + '</td><td class="text-right font-mono text-sm text-green-400">Rp' + (d.price || 0).toLocaleString('id-ID') + '</td><td class="text-center">' + linkH + '</td><td class="text-center"><button data-dtv="' + k + ',' + vis + '" class="status-badge border ' + vc + ' cursor-pointer hover:opacity-80 transition">' + (vis ? 'YA' : 'TIDAK') + '</button></td><td class="text-center whitespace-nowrap"><button data-de="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-dd="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
+          tr.innerHTML = '<td class="font-bold text-sm text-white">' + esc(d.buyerName) + '</td><td class="text-sm text-muted-1">' + esc(d.product) + '</td><td class="text-right font-mono text-sm text-green-400">Rp' + (d.price||0).toLocaleString('id-ID') + '</td><td class="text-center">' + linkH + '</td><td class="text-center"><button data-dtv="' + k + ',' + vis + '" class="status-badge border ' + vc + ' cursor-pointer hover:opacity-80 transition">' + (vis?'YA':'TIDAK') + '</button></td><td class="text-center whitespace-nowrap"><button data-de="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-dd="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>';
           tb.appendChild(tr);
         });
       }
@@ -907,60 +839,36 @@
       updateDash();
     });
 
+    // ==================== ORDERS ====================
     onValue(ref(db, 'orders'), function(s) {
-      const tb = document.getElementById('orders-tbody');
-      tb.innerHTML = '';
-      const raw = s.val();
-      DD.orders = raw || {};
-      let nr = 0;
+      const tb = document.getElementById('orders-tbody'); tb.innerHTML = '';
+      const raw = s.val(); DD.orders = raw || {}; let nr = 0;
       if (!raw) tb.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Belum ada order.</td></tr>';
       else {
-        const sorted = Object.keys(raw).map(function(k){ return {k:k,val:raw[k]}; }).sort(function(a,b){ return (b.val.createdAt || 0) - (a.val.createdAt || 0); });
+        const sorted = Object.keys(raw).map(function(k){ return {k:k,val:raw[k]}; }).sort(function(a,b){ return (b.val.createdAt||0)-(a.val.createdAt||0); });
         sorted.forEach(function(item) {
-          const o = item.val; const k = item.k;
-          let last = false;
-          if (o.chat) { const ck = Object.keys(o.chat); if (ck.length > 0 && o.chat[ck[ck.length - 1]].sender === 'buyer') last = true; }
+          const o = item.val; const k = item.k; let last = false;
+          if (o.chat) { const ck = Object.keys(o.chat); if (ck.length > 0 && o.chat[ck[ck.length-1]].sender === 'buyer') last = true; }
           if (last || !o.chat || Object.keys(o.chat).length === 0) nr++;
-          const ss2 = SS[o.status] || SS.pending;
-          let bmc = 0;
-          if (o.chat) Object.values(o.chat).forEach(function(m){ if (m.sender === 'buyer') bmc++; });
-
-          // Tampilkan info admin penjual (Fitur 4: owner bisa lihat barang milik admin mana)
-          let adminInfoHtml = '';
-          if (o.isMultiProduct && o.adminGroups && o.adminGroups.length) {
-            const groupTags = o.adminGroups.map(function(g) {
-              return '<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono bg-gold-accent/10 border border-gold-accent/20 text-gold-accent/80">' + esc(g.adminName || 'Admin') + ' (' + g.items.length + ' item)</span>';
-            }).join(' ');
-            adminInfoHtml = '<div class="flex flex-wrap gap-1 mt-0.5">' + groupTags + '</div>';
-          } else if (o.adminName) {
-            adminInfoHtml = '<div class="text-[9px] font-mono text-gold-accent/60 mt-0.5"><i class="fas fa-user-shield mr-0.5"></i>' + esc(o.adminName) + '</div>';
-          }
-
+          const ss2 = SS[o.status] || SS.pending; let bmc = 0;
+          if (o.chat) Object.values(o.chat).forEach(function(m){ if (m.sender==='buyer') bmc++; });
           const tr = document.createElement('tr');
-          tr.innerHTML = '<td class="font-bold text-sm text-white">' + esc(o.buyerName) + '</td>' +
-            '<td class="text-sm text-muted-2"><div>' + esc(o.productTitle) + '</div>' + adminInfoHtml + '</td>' +
-            '<td class="text-sm font-mono text-muted-3">' + esc(o.buyerWhatsapp) + '</td>' +
-            '<td class="text-center"><span class="status-badge border ' + ss2 + '">' + (o.status || 'pending') + '</span></td>' +
-            '<td class="text-center"><button data-oc="' + k + '" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments"></i> Chat' + (bmc ? '<span class="w-4 h-4 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center">' + bmc + '</span>' : '') + '</button></td>' +
-            '<td class="text-center"><button data-od="' + k + '" class="text-red-400 hover:text-red-300 p-1"><i class="fas fa-trash"></i></button></td>';
+          tr.innerHTML = '<td class="font-bold text-sm text-white">' + esc(o.buyerName) + '</td><td class="text-sm text-muted-2">' + esc(o.productTitle) + '</td><td class="text-sm font-mono text-muted-3">' + esc(o.buyerWhatsapp) + '</td><td class="text-center"><span class="status-badge border ' + ss2 + '">' + (o.status||'pending') + '</span></td><td class="text-center"><button data-oc="' + k + '" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments"></i> Chat' + (bmc ? '<span class="w-4 h-4 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center">' + bmc + '</span>' : '') + '</button></td><td class="text-center"><button data-od="' + k + '" class="text-red-400 hover:text-red-300 p-1"><i class="fas fa-trash"></i></button></td>';
           tb.appendChild(tr);
         });
       }
       const bv = nr > 99 ? '99+' : String(nr);
-      const bd = document.getElementById('orderBadge');
-      const bm = document.getElementById('orderBadgeMob');
+      const bd = document.getElementById('orderBadge'); const bm = document.getElementById('orderBadgeMob');
       if (nr > 0) { bd.classList.remove('hidden'); bd.textContent = bv; bm.classList.remove('hidden'); bm.textContent = bv; }
       else { bd.classList.add('hidden'); bm.classList.add('hidden'); }
       updateDash();
     });
     document.getElementById('orders-tbody').addEventListener('click', function(e) {
-      const cb = e.target.closest('[data-oc]');
-      const db2 = e.target.closest('[data-od]');
+      const cb = e.target.closest('[data-oc]'); const db2 = e.target.closest('[data-od]');
       if (cb) openOrderDetail(cb.getAttribute('data-oc'));
       if (db2) {
         if (!confirm('Hapus order ini?')) return;
-        const k = db2.getAttribute('data-od');
-        if (k === currentChatOrderId) closeOrderDetail();
+        const k = db2.getAttribute('data-od'); if (k === currentChatOrderId) closeOrderDetail();
         remove(ref(db, 'orders/' + k)).then(function(){ showToast('Dihapus.'); }).catch(function(){ showToast('Gagal.', 'error'); });
       }
     });
@@ -969,64 +877,47 @@
       try { await update(ref(db, 'orders/' + currentChatOrderId), { status:document.getElementById('detailStatus').value }); showToast('Status diupdate!'); }
       catch(e) { showToast('Gagal.', 'error'); }
     };
-
     window.openOrderDetail = function(orderId) {
-      if (unsubO) { unsubO(); unsubO = null; }
-      if (unsubC) { unsubC(); unsubC = null; }
-      currentChatOrderId = orderId;
-      cachedOD = {};
+      if (unsubO) { unsubO(); unsubO = null; } if (unsubC) { unsubC(); unsubC = null; }
+      currentChatOrderId = orderId; cachedOD = {};
       document.getElementById('orderDetailPanel').classList.remove('hidden');
       document.getElementById('chatMessages').innerHTML = '<div class="text-center text-muted-3 text-sm py-8"><i class="fas fa-spinner fa-spin mr-1"></i></div>';
-      document.getElementById('chatInput').value = '';
-      clearChatImage();
-      hideDpForm();
-      renderQrisQuickBar();
+      document.getElementById('chatInput').value = ''; clearChatImage(); hideDpForm(); renderQrisQuickBar();
       unsubO = onValue(ref(db, 'orders/' + orderId), function(snap) {
-        const o = snap.val();
-        if (!o) { closeOrderDetail(); showToast('Order dihapus.', 'error'); return; }
-        cachedOD = { buyerName:o.buyerName || '-', productTitle:o.productTitle || '-', price:o.price || 0 };
+        const o = snap.val(); if (!o) { closeOrderDetail(); showToast('Order dihapus.', 'error'); return; }
+        cachedOD = { buyerName:o.buyerName||'-', productTitle:o.productTitle||'-', price:o.price||0 };
         document.getElementById('detailOrderId').textContent = orderId.slice(-6).toUpperCase();
-        document.getElementById('detailBuyerName').textContent = o.buyerName || '-';
-        document.getElementById('detailProduct').textContent = o.productTitle || '-';
-        document.getElementById('detailPrice').textContent = 'Rp ' + (o.price || 0).toLocaleString('id-ID') + '/bln';
-        const wa = cleanWa(o.buyerWhatsapp || '');
-        document.getElementById('detailWaText').textContent = wa || '-';
-        document.getElementById('detailWaText').href = wa ? 'https://wa.me/' + wa : '#';
-        document.getElementById('detailWaLink').href = wa ? 'https://wa.me/' + wa + '?text=Halo%20' + encodeURIComponent(o.buyerName || '') : '#';
-        document.getElementById('detailNote').textContent = o.orderNote || '-';
+        document.getElementById('detailBuyerName').textContent = o.buyerName||'-';
+        document.getElementById('detailProduct').textContent = o.productTitle||'-';
+        document.getElementById('detailPrice').textContent = 'Rp ' + (o.price||0).toLocaleString('id-ID');
+        const wa = cleanWa(o.buyerWhatsapp||'');
+        document.getElementById('detailWaText').textContent = wa||'-'; document.getElementById('detailWaText').href = wa ? 'https://wa.me/' + wa : '#';
+        document.getElementById('detailWaLink').href = wa ? 'https://wa.me/' + wa + '?text=Halo%20' + encodeURIComponent(o.buyerName||'') : '#';
+        document.getElementById('detailNote').textContent = o.orderNote||'-';
         document.getElementById('detailDate').textContent = fTime(o.createdAt);
-        document.getElementById('detailStatus').value = o.status || 'pending';
+        document.getElementById('detailStatus').value = o.status||'pending';
       });
       unsubC = onValue(ref(db, 'orders/' + orderId + '/chat'), function(snap) {
-        const c = document.getElementById('chatMessages');
-        const raw = snap.val();
-        c.innerHTML = '';
+        const c = document.getElementById('chatMessages'); const raw = snap.val(); c.innerHTML = '';
         if (!raw) { c.innerHTML = '<div class="text-center text-muted-3 text-sm py-8">Belum ada pesan.</div>'; return; }
-        const msgs = Object.keys(raw).map(function(mk){ return {key:mk,val:raw[mk]}; }).sort(function(a,b){ return (a.val.timestamp || 0) - (b.val.timestamp || 0); });
+        const msgs = Object.keys(raw).map(function(mk){ return {key:mk,val:raw[mk]}; }).sort(function(a,b){ return (a.val.timestamp||0)-(b.val.timestamp||0); });
         msgs.forEach(function(m) {
           const isMe = m.val.sender === 'admin';
-          const div = document.createElement('div');
-          div.className = 'flex ' + (isMe ? 'justify-end' : 'justify-start');
+          const div = document.createElement('div'); div.className = 'flex ' + (isMe ? 'justify-end' : 'justify-start');
           let ch = '';
           if (m.val.text) ch += '<p class="text-sm text-gray-200 break-words">' + esc(m.val.text) + '</p>';
-          if (m.val.image) {
-            const ik = 'img_' + m.key;
-            imgStore[ik] = m.val.image;
-            ch += '<img src="' + esc(m.val.image) + '" loading="lazy" class="rounded-lg mt-1.5 max-w-[260px] cursor-pointer hover:brightness-110 transition border border-white/5" onclick="viewImage(\'' + ik + '\')">';
-          }
-          ch += '<p class="text-[10px] ' + (isMe ? 'text-red-accent/40' : 'text-muted-4') + ' mt-1 text-right">' + fTime(m.val.timestamp) + '</p>';
-          div.innerHTML = '<div class="chat-bubble ' + (isMe ? 'bg-red-accent/8 border-red-accent/15' : 'bg-dark-card border-dark-border') + ' border rounded-2xl ' + (isMe ? 'rounded-br-sm' : 'rounded-bl-sm') + ' px-4 py-2.5">' + ch + '</div>';
+          if (m.val.image) { const ik = 'img_' + m.key; imgStore[ik] = m.val.image; ch += '<img src="' + esc(m.val.image) + '" loading="lazy" class="rounded-lg mt-1.5 max-w-[260px] cursor-pointer hover:brightness-110 transition border border-white/5" onclick="viewImage(\'' + ik + '\')">'; }
+          ch += '<p class="text-[10px] ' + (isMe?'text-red-accent/40':'text-muted-4') + ' mt-1 text-right">' + fTime(m.val.timestamp) + '</p>';
+          div.innerHTML = '<div class="chat-bubble ' + (isMe?'bg-red-accent/8 border-red-accent/15':'bg-dark-card border-dark-border') + ' border rounded-2xl ' + (isMe?'rounded-br-sm':'rounded-bl-sm') + ' px-4 py-2.5">' + ch + '</div>';
           c.appendChild(div);
         });
         requestAnimationFrame(function(){ requestAnimationFrame(function(){ c.scrollTop = c.scrollHeight; }); });
       });
     };
     window.closeOrderDetail = function() {
-      if (unsubO) { unsubO(); unsubO = null; }
-      if (unsubC) { unsubC(); unsubC = null; }
+      if (unsubO) { unsubO(); unsubO = null; } if (unsubC) { unsubC(); unsubC = null; }
       currentChatOrderId = null; cachedOD = {};
-      document.getElementById('orderDetailPanel').classList.add('hidden');
-      hideDpForm();
+      document.getElementById('orderDetailPanel').classList.add('hidden'); hideDpForm();
     };
     window.showDpForm = function() {
       if (!currentChatOrderId) return;
@@ -1034,9 +925,7 @@
       document.getElementById('dpChatBuyer').value = cachedOD.buyerName || '';
       document.getElementById('dpChatProduct').value = cachedOD.productTitle || '';
       document.getElementById('dpChatPrice').value = cachedOD.price || '';
-      document.getElementById('dpChatPkg').value = '1 Bulan';
-      document.getElementById('dpChatVisible').checked = true;
-      document.getElementById('chatInput').value = '';
+      document.getElementById('dpChatPkg').value = '1 Bulan'; document.getElementById('dpChatVisible').checked = true;
     };
     window.hideDpForm = function() { document.getElementById('dpFormBar').classList.add('hidden'); };
     window.submitDpFromChat = async function() {
@@ -1051,55 +940,37 @@
         const d = { buyerName:buyer, product:product, pkg:pkg, price:price, visible:document.getElementById('dpChatVisible').checked, orderId:currentChatOrderId, createdAt:serverTimestamp(), manual:false };
         await set(newRef, d);
         await update(ref(db, 'orders/' + currentChatOrderId), { status:'completed', donePaymentId:newRef.key });
-        await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender:'admin', text:'✅ Payment dicatat untuk @' + buyer + ' — ' + product + (pkg ? ' (' + pkg + ')' : '.') + '.', timestamp:serverTimestamp() });
-        hideDpForm();
-        showToast('Done payment disimpan & terhubung!');
+        await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender:'admin', text:'✅ Payment dicatat untuk @' + buyer + ' — ' + product + (pkg ? ' (' + pkg + ')' : '.'), timestamp:serverTimestamp() });
+        hideDpForm(); showToast('Done payment disimpan & terhubung!');
       } catch(e) { showToast('Gagal.', 'error'); }
     };
     window.sendChat = async function(sender) {
       if (!currentChatOrderId) { showToast('Tidak ada order aktif.', 'error'); return; }
-      const input = document.getElementById('chatInput');
-      const text = input.value.trim();
-      const img = pendingChatImage;
+      const input = document.getElementById('chatInput'); const text = input.value.trim(); const img = pendingChatImage;
       if (!text && !img) return;
       if (text.toLowerCase().trim() === '/donepayment') { input.value = ''; showDpForm(); return; }
       try {
         const cmd = text.toLowerCase().trim();
         if (cmd.startsWith('/') && qC[cmd]) {
           const q = qC[cmd];
-          if (q && q.image) {
-            await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender:'admin', text:'💰 Pembayaran via ' + (q.label || cmd) + '. Scan QRIS:', image:q.image, timestamp:serverTimestamp() });
-            input.value = ''; clearChatImage(); showToast('QRIS terkirim!'); return;
-          }
+          if (q && q.image) { await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender:'admin', text:'💰 Pembayaran via ' + (q.label||cmd) + '. Scan QRIS:', image:q.image, timestamp:serverTimestamp() }); input.value = ''; clearChatImage(); showToast('QRIS terkirim!'); return; }
         }
         const md = { sender:sender, timestamp:serverTimestamp() };
-        if (text) md.text = text;
-        if (img) md.image = img;
+        if (text) md.text = text; if (img) md.image = img;
         await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), md);
         input.value = ''; clearChatImage();
       } catch(e) { showToast('Gagal kirim.', 'error'); }
     };
-    document.getElementById('chatInput').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat('admin'); }
-    });
+    document.getElementById('chatInput').addEventListener('keydown', function(e) { if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); sendChat('admin'); } });
     document.getElementById('chatImageInput').addEventListener('change', async function(e) {
-      const f = e.target.files[0];
-      if (!f) return;
-      try {
-        pendingChatImage = await compressImage(f);
-        document.getElementById('chatPreviewImg').src = pendingChatImage;
-        document.getElementById('chatPreviewName').textContent = f.name;
-        document.getElementById('chatImagePreview').classList.remove('hidden');
-      } catch(er) { showToast(typeof er === 'string' ? er : 'Gagal.', 'error'); }
+      const f = e.target.files[0]; if (!f) return;
+      try { pendingChatImage = await compressImage(f); document.getElementById('chatPreviewImg').src = pendingChatImage; document.getElementById('chatPreviewName').textContent = f.name; document.getElementById('chatImagePreview').classList.remove('hidden'); }
+      catch(er) { showToast(typeof er==='string'?er:'Gagal.', 'error'); }
       e.target.value = '';
     });
-    window.clearChatImage = function() {
-      pendingChatImage = null;
-      document.getElementById('chatImagePreview').classList.add('hidden');
-      document.getElementById('chatPreviewImg').src = '';
-      document.getElementById('chatPreviewName').textContent = '-';
-    };
+    window.clearChatImage = function() { pendingChatImage = null; document.getElementById('chatImagePreview').classList.add('hidden'); document.getElementById('chatPreviewImg').src = ''; document.getElementById('chatPreviewName').textContent = '-'; };
 
+    // ==================== ADMINS ====================
     window.togglePw = function(id) {
       pwVisible[id] = !pwVisible[id];
       const el = document.querySelector('[data-pw="' + id + '"]');
@@ -1109,12 +980,9 @@
       document.getElementById('adminModal').classList.remove('hidden');
       document.getElementById('adminModalTitle').textContent = isE ? 'Edit Admin' : 'Tambah Admin';
       if (isE && data) {
-        document.getElementById('admId').value = data.id;
-        document.getElementById('admName').value = data.name;
-        document.getElementById('admAge').value = data.age;
-        document.getElementById('admPhoto').value = data.photoUrl || '';
-        document.getElementById('admUsername').value = data.username;
-        document.getElementById('admPassword').value = data.password;
+        document.getElementById('admId').value = data.id; document.getElementById('admName').value = data.name;
+        document.getElementById('admAge').value = data.age; document.getElementById('admPhoto').value = data.photoUrl || '';
+        document.getElementById('admUsername').value = data.username; document.getElementById('admPassword').value = data.password;
       } else { document.getElementById('adminForm').reset(); document.getElementById('admId').value = ''; }
     };
     window.closeAdminModal = function() { document.getElementById('adminModal').classList.add('hidden'); };
@@ -1124,13 +992,12 @@
       const username = document.getElementById('admUsername').value.trim();
       const password = document.getElementById('admPassword').value.trim();
       if (!username || !password) { showToast('Username & password wajib.', 'error'); return; }
-      const snap = await get(ref(db, 'admins'));
-      const existing = snap.val() || {};
+      const snap = await get(ref(db, 'admins')); const existing = snap.val() || {};
       for (const k in existing) {
         if (k === id) continue;
         if ((existing[k].username || '').toLowerCase() === username.toLowerCase()) { showToast('Username sudah digunakan.', 'error'); return; }
       }
-      const d = { name:document.getElementById('admName').value.trim(), age:parseInt(document.getElementById('admAge').value, 10), photoUrl:document.getElementById('admPhoto').value.trim() || null, username:username, password:password, disabled:false };
+      const d = { name:document.getElementById('admName').value.trim(), age:parseInt(document.getElementById('admAge').value,10), photoUrl:document.getElementById('admPhoto').value.trim() || null, username:username, password:password, disabled:false };
       try {
         if (id) { await update(ref(db, 'admins/' + id), d); showToast('Admin diupdate!'); }
         else { d.createdAt = serverTimestamp(); await set(push(ref(db, 'admins')), d); showToast('Admin ditambahkan!'); }
@@ -1139,9 +1006,8 @@
     };
     window.toggleAdminStatus = async function(id, isDis) {
       const newStatus = !toBool(isDis);
-      const label = newStatus ? 'nonaktifkan' : 'aktifkan kembali';
-      if (!confirm('Yakin ' + label + ' admin ini?')) return;
-      try { await update(ref(db, 'admins/' + id), { disabled:newStatus }); showToast('Status admin diupdate.'); }
+      if (!confirm('Yakin ' + (newStatus?'nonaktifkan':'aktifkan kembali') + ' admin ini?')) return;
+      try { await update(ref(db, 'admins/' + id), { disabled:newStatus }); showToast('Status diupdate.'); }
       catch(e) { showToast('Gagal.', 'error'); }
     };
     window.deleteAdmin = async function(id) {
@@ -1149,54 +1015,44 @@
       try { await remove(ref(db, 'admins/' + id)); showToast('Admin dihapus.'); } catch(e) { showToast('Gagal.', 'error'); }
     };
     document.getElementById('admins-tbody').addEventListener('click', function(e) {
-      const at = e.target.closest('[data-at]');
-      const ae = e.target.closest('[data-ae]');
-      const ad = e.target.closest('[data-ad]');
-      const aw = e.target.closest('[data-aw]');
-      const pw = e.target.closest('[data-pw]');
-      if (at) { const p = at.getAttribute('data-at').split(','); toggleAdminStatus(p[0], p[1] === 'true'); }
+      const at = e.target.closest('[data-at]'); const ae = e.target.closest('[data-ae]');
+      const ad = e.target.closest('[data-ad]'); const aw = e.target.closest('[data-aw]'); const pw = e.target.closest('[data-pw]');
+      if (at) { const p = at.getAttribute('data-at').split(','); toggleAdminStatus(p[0], p[1]==='true'); }
       if (ae) { const id = ae.getAttribute('data-ae'); if (eac[id]) openAdminModal(true, eac[id]); }
       if (ad) deleteAdmin(ad.getAttribute('data-ad'));
       if (aw) { const id2 = aw.getAttribute('data-aw'); if (eac[id2]) openWarningModal(id2, eac[id2].name); }
       if (pw) togglePw(pw.getAttribute('data-pw'));
     });
     onValue(ref(db, 'admins'), function(s) {
-      const raw = s.val();
-      DD.admins = raw || {};
-      // Sync admin dropdown in product modal
+      const raw = s.val(); DD.admins = raw || {};
       var sel = document.getElementById('prodAdminSelect');
-      if(sel) {
-        var prevVal = sel.value;
-        sel.innerHTML = '<option value="">-- Pilih Admin --</option>';
-        Object.keys(raw || {}).forEach(function(aId){
-          var a = raw[aId];
-          var opt = document.createElement('option');
-          opt.value = aId;
-          opt.dataset.name = a.name || 'Admin';
-          opt.textContent = (a.name || 'Admin') + ' (' + (a.username || aId) + ')';
-          sel.appendChild(opt);
+      if (sel) {
+        var prevVal = sel.value; sel.innerHTML = '<option value="">-- Pilih Admin --</option>';
+        Object.keys(raw || {}).forEach(function(aId) {
+          var a = raw[aId]; var opt = document.createElement('option');
+          opt.value = aId; opt.dataset.name = a.name || 'Admin';
+          opt.textContent = (a.name||'Admin') + ' (' + (a.username||aId) + ')'; sel.appendChild(opt);
         });
-        if(prevVal) sel.value = prevVal;
+        if (prevVal) sel.value = prevVal;
       }
-      const tb = document.getElementById('admins-tbody');
-      tb.innerHTML = '';
-      eac = {};
+      const tb = document.getElementById('admins-tbody'); tb.innerHTML = ''; eac = {};
       if (!raw || !Object.keys(raw).length) { tb.innerHTML = '<tr><td colspan="7" class="text-center py-10 text-muted-3">Belum ada admin.</td></tr>'; updateDash(); return; }
-      const sorted = Object.entries(raw).sort(function(a,b){ return (b[1].createdAt || 0) - (a[1].createdAt || 0); });
+      const sorted = Object.entries(raw).sort(function(a,b){ return (b[1].createdAt||0)-(a[1].createdAt||0); });
       sorted.forEach(function(entry) {
         const k = entry[0]; const a = entry[1];
         eac[k] = { id:k, name:a.name, age:a.age, photoUrl:a.photoUrl, username:a.username, password:a.password, disabled:a.disabled };
         const wc = a.warnings ? Object.keys(a.warnings).length : 0;
-        const photoH = a.photoUrl ? '<div class="relative flex-shrink-0"><img src="' + esc(a.photoUrl) + '" class="w-9 h-9 rounded-full object-cover border border-dark-border" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" alt="Admin"><div class="w-9 h-9 rounded-full bg-dark-bg border border-dark-border avatar-circle text-muted-3 text-sm absolute inset-0" style="display:none">' + esc((a.name || '?').charAt(0).toUpperCase()) + '</div></div>' : '<div class="w-9 h-9 rounded-full bg-dark-bg border border-dark-border avatar-circle text-muted-3 text-sm flex-shrink-0">' + esc((a.name || '?').charAt(0).toUpperCase()) + '</div>';
+        const photoH = a.photoUrl ? '<div class="relative flex-shrink-0"><img src="' + esc(a.photoUrl) + '" class="w-9 h-9 rounded-full object-cover border border-dark-border" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" alt="Admin"><div class="w-9 h-9 rounded-full bg-dark-bg border border-dark-border avatar-circle text-muted-3 text-sm absolute inset-0" style="display:none">' + esc((a.name||'?').charAt(0).toUpperCase()) + '</div></div>' : '<div class="w-9 h-9 rounded-full bg-dark-bg border border-dark-border avatar-circle text-muted-3 text-sm flex-shrink-0">' + esc((a.name||'?').charAt(0).toUpperCase()) + '</div>';
         const isDis = !!a.disabled;
         const wcHtml = wc > 0 ? '<div class="flex items-center justify-center gap-1"><div class="warn-dot"></div><span class="text-[10px] font-mono text-yellow-400">' + wc + '</span></div>' : '<span class="text-[10px] text-muted-4">0</span>';
         const tr = document.createElement('tr');
-        tr.innerHTML = '<td><div class="flex items-center gap-3">' + photoH + '<div class="min-w-0"><div class="font-semibold text-sm text-white truncate">' + esc(a.name || '-') + (isDis ? ' <span class="owner-badge">DISABLED</span>' : '') + '</div></div></div></td><td class="text-sm text-muted-2 font-mono">' + (a.age || '-') + ' thn</td><td class="font-mono text-sm text-muted-2">' + esc(a.username || '-') + '</td><td class="pw-cell text-sm text-muted-1" data-pw="' + k + '" title="Klik untuk tampil/sembunyikan">' + (pwVisible[k] ? esc(a.password) : '••••••') + '</td><td class="text-center">' + wcHtml + '</td><td class="text-center"><button data-at="' + k + ',' + isDis + '" class="status-badge border cursor-pointer hover:opacity-80 transition ' + (isDis ? 'bg-red-500/10 text-red-400 border-red-500/20' : 'bg-green-500/10 text-green-400 border-green-500/20') + '">' + (isDis ? 'DISABLED' : 'ACTIVE') + '</button></td><td class="text-center whitespace-nowrap"><button data-aw="' + k + '" class="text-yellow-400 hover:text-yellow-300 p-1.5 rounded-lg hover:bg-yellow-500/10 transition" title="Kirim warning"><i class="fas fa-exclamation-triangle text-[11px]"></i></button><button data-ae="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition" title="Edit"><i class="fas fa-edit"></i></button><button data-ad="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition" title="Hapus"><i class="fas fa-trash"></i></button></td>';
+        tr.innerHTML = '<td><div class="flex items-center gap-3">' + photoH + '<div class="min-w-0"><div class="font-semibold text-sm text-white truncate">' + esc(a.name||'-') + (isDis ? ' <span class="owner-badge">DISABLED</span>' : '') + '</div></div></div></td><td class="text-sm text-muted-2 font-mono">' + (a.age||'-') + ' thn</td><td class="font-mono text-sm text-muted-2">' + esc(a.username||'-') + '</td><td class="pw-cell text-sm text-muted-1" data-pw="' + k + '" title="Klik untuk tampil/sembunyikan">' + (pwVisible[k] ? esc(a.password) : '••••••') + '</td><td class="text-center">' + wcHtml + '</td><td class="text-center"><button data-at="' + k + ',' + isDis + '" class="status-badge border cursor-pointer hover:opacity-80 transition ' + (isDis?'bg-red-500/10 text-red-400 border-red-500/20':'bg-green-500/10 text-green-400 border-green-500/20') + '">' + (isDis?'DISABLED':'ACTIVE') + '</button></td><td class="text-center whitespace-nowrap"><button data-aw="' + k + '" class="text-yellow-400 hover:text-yellow-300 p-1.5 rounded-lg hover:bg-yellow-500/10 transition" title="Kirim warning"><i class="fas fa-exclamation-triangle text-[11px]"></i></button><button data-ae="' + k + '" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition" title="Edit"><i class="fas fa-edit"></i></button><button data-ad="' + k + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition" title="Hapus"><i class="fas fa-trash"></i></button></td>';
         tb.appendChild(tr);
       });
       updateDash();
     });
 
+    // ==================== WARNINGS (FIX: delete + Object.entries) ====================
     window.openWarningModal = function(adminId, adminName) {
       document.getElementById('warningModal').classList.remove('hidden');
       document.getElementById('warnAdminId').value = adminId;
@@ -1212,29 +1068,57 @@
       const ownerName = ownerData.name || sessionStorage.getItem('kryonix_name') || 'Owner';
       const adminName = eac[adminId] ? eac[adminId].name : '-';
       try {
+        // Simpan ke node admin (agar admin bisa lihat)
         await set(push(ref(db, 'admins/' + adminId + '/warnings')), { text:text, from:ownerName, timestamp:serverTimestamp() });
+        // Simpan ke global log (untuk owner)
         await set(push(ref(db, 'warnings_log')), { adminId:adminId, adminName:adminName, ownerName:ownerName, text:text, timestamp:serverTimestamp() });
         showToast('Peringatan terkirim!');
         closeWarningModal();
       } catch(er) { showToast('Gagal kirim.', 'error'); }
     };
+
+    // FIX: Gunakan Object.entries agar punya key untuk delete
     onValue(ref(db, 'warnings_log'), function(s) {
       const raw = s.val();
       DD.warnings = raw ? Object.values(raw) : [];
-      const tb = document.getElementById('warnings-tbody');
-      tb.innerHTML = '';
-      if (!raw || !Object.keys(raw).length) { tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Belum ada warning.</td></tr>'; updateDash(); return; }
-      const sorted = Object.values(raw).sort(function(a,b){ return (b.timestamp || 0) - (a.timestamp || 0); });
-      sorted.forEach(function(w) {
+      const tb = document.getElementById('warnings-tbody'); tb.innerHTML = '';
+      if (!raw || !Object.keys(raw).length) {
+        tb.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-muted-3">Belum ada warning.</td></tr>';
+        updateDash(); return;
+      }
+      // FIX: pakai entries bukan values supaya punya key
+      const sorted = Object.entries(raw).map(function(e){ return {k:e[0], v:e[1]}; }).sort(function(a,b){ return (b.v.timestamp||0)-(a.v.timestamp||0); });
+      sorted.forEach(function(item) {
+        const w = item.v; const wKey = item.k;
         const tr = document.createElement('tr');
-        tr.innerHTML = '<td class="font-mono text-xs text-muted-3 whitespace-nowrap">' + fTime(w.timestamp) + '</td><td class="text-sm text-gold-accent font-semibold">' + esc(w.ownerName || '-') + '</td><td class="text-sm text-white font-bold">' + esc(w.adminName || '-') + '</td><td class="text-sm text-muted-1 max-w-xs">' + esc(w.text || '-') + '</td>';
+        tr.innerHTML = '<td class="font-mono text-xs text-muted-3 whitespace-nowrap">' + fTime(w.timestamp) + '</td>' +
+          '<td class="text-sm font-semibold" style="color:#d97706">' + esc(w.ownerName||'-') + '</td>' +
+          '<td class="text-sm text-white font-bold">' + esc(w.adminName||'-') + '</td>' +
+          '<td class="text-sm text-muted-1 max-w-xs">' + esc(w.text||'-') + '</td>' +
+          '<td class="text-center"><button data-wd="' + wKey + '" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition" title="Hapus dari log"><i class="fas fa-trash text-xs"></i></button></td>';
         tb.appendChild(tr);
       });
       updateDash();
     });
 
+    // FIX: event listener delete warning
+    document.getElementById('warnings-tbody').addEventListener('click', function(e) {
+      const db2 = e.target.closest('[data-wd]');
+      if (db2) deleteWarning(db2.getAttribute('data-wd'));
+    });
+
+    // FIX: fungsi delete warning dari log
+    window.deleteWarning = async function(wKey) {
+      if (!confirm('Hapus warning ini dari log?')) return;
+      try {
+        await remove(ref(db, 'warnings_log/' + wKey));
+        showToast('Warning dihapus dari log.');
+      } catch(e) { showToast('Gagal hapus.', 'error'); }
+    };
+
+    // ==================== SETTINGS ====================
     function loadSettings() {
-      get(ref(db, 'settings/tos')).then(function(s) { document.getElementById('tos-input').value = s.val() || ''; }).catch(function(){});
+      get(ref(db, 'settings/tos')).then(function(s){ document.getElementById('tos-input').value = s.val() || ''; }).catch(function(){});
     }
     window.saveSettings = async function() {
       const tos = document.getElementById('tos-input').value.trim();
