@@ -19,10 +19,7 @@
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Space Grotesk', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
-          },
+          fontFamily: { sans: ['Space Grotesk', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
           colors: {
             dark: { bg: '#07070a', card: '#0e0e13', card2: '#131318', border: '#1c1c26', hover: '#191920' },
             red: { accent: '#dc2626', bright: '#ef4444', dim: '#991b1b', glow: 'rgba(220,38,38,.12)', glow2: 'rgba(220,38,38,.06)' },
@@ -33,7 +30,7 @@
     };
   </script>
   <style>
-    :root{--bg:#07070a;--card:#0e0e13;--border:#1c1c26;--red:#dc2626;--red-bright:#ef4444;--red-glow:rgba(220,38,38,.12);--red-glow2:rgba(220,38,38,.06);--yellow:#eab308;--yellow-glow:rgba(234,179,8,.12)}
+    :root{--bg:#07070a;--card:#0e0e13;--border:#1c1c26;--red:#dc2626;--red-bright:#ef4444;--red-glow:rgba(220,38,38,.12);--red-glow2:rgba(220,38,38,.06)}
     *{scrollbar-width:thin;scrollbar-color:#1c1c26 transparent}
     body{background:var(--bg);color:#e4e4e7;font-family:'Space Grotesk',sans-serif}
     ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#1c1c26;border-radius:4px}
@@ -65,29 +62,23 @@
     @keyframes pulse-red{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{box-shadow:0 0 0 8px rgba(220,38,38,0)}}.badge-pulse{animation:pulse-red 2s infinite}
     @keyframes pulse-yellow{0%,100%{box-shadow:0 0 0 0 rgba(234,179,8,.5)}50%{box-shadow:0 0 0 10px rgba(234,179,8,0)}}.warn-badge-pulse{animation:pulse-yellow 2s infinite}
     @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}.shake{animation:shake 0.5s ease}
-    @keyframes slideInRight{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-    @keyframes slideOutRight{from{transform:translateX(0);opacity:1}to{transform:translateX(100%);opacity:0}}
     @keyframes warningPulse{0%,100%{border-color:rgba(234,179,8,.2)}50%{border-color:rgba(234,179,8,.6)}}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
     .dash-recent-row{transition:all .15s}.dash-recent-row:hover{background:var(--red-glow2)}
     .glow-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
     .glow-dot.green{background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.5)}.glow-dot.yellow{background:#eab308;box-shadow:0 0 8px rgba(234,179,8,.5)}.glow-dot.red{background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.5)}.glow-dot.gray{background:#52525b}
     input[type="text"]:focus,input[type="url"]:focus,input[type="number"]:focus,textarea:focus{border-color:var(--red)!important;outline:none}
     .linked-badge{display:inline-flex;align-items:center;gap:4px;font-size:.6rem;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-weight:600;background:rgba(220,38,38,.08);color:#fca5a5;border:1px solid rgba(220,38,38,.15)}
 
-    /* ============ WARNING SYSTEM STYLES ============ */
-    /* Warning Panel Slide */
+    /* ===== WARNING SYSTEM ===== */
     #warningPanel{position:fixed;top:0;right:0;bottom:0;width:100%;max-width:420px;background:var(--card);border-left:1px solid rgba(234,179,8,.2);z-index:60;transform:translateX(100%);transition:transform .35s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,.5)}
     #warningPanel.open{transform:translateX(0)}
     #warningPanelOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:59;backdrop-filter:blur(4px)}
     #warningPanelOverlay.open{display:block}
-
-    /* Warning items */
     .warning-item{background:var(--bg);border:1px solid rgba(234,179,8,.15);border-radius:12px;padding:14px;position:relative;transition:all .2s;animation:warningPulse 3s ease-in-out infinite}
     .warning-item:hover{border-color:rgba(234,179,8,.35);background:rgba(234,179,8,.03)}
     .warning-item.read{animation:none;border-color:var(--border);opacity:.65}
     .warning-item.read:hover{opacity:1;border-color:rgba(234,179,8,.2)}
-
-    /* Warning popup modal */
     #warningPopupModal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:1rem}
     #warningPopupModal.show{display:flex}
     .warning-popup-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px)}
@@ -95,697 +86,1154 @@
     .warning-popup-header{background:linear-gradient(135deg,rgba(234,179,8,.08),rgba(220,38,38,.06));border-bottom:1px solid rgba(234,179,8,.2);padding:20px 24px}
     .warning-marquee{overflow:hidden;position:relative;height:28px;border-top:1px solid rgba(234,179,8,.15);background:rgba(234,179,8,.03)}
     .warning-marquee-inner{display:flex;gap:40px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(234,179,8,.5);letter-spacing:.1em;position:absolute;white-space:nowrap;animation:marquee 12s linear infinite}
-    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-    /* Nav warning button */
     .nav-item.warn-nav:hover{background:rgba(234,179,8,.08);color:#fbbf24}
     .nav-item.warn-nav.has-warn{background:rgba(234,179,8,.06);border-left-color:rgba(234,179,8,.4)}
-
-    /* Warning notification banner in sidebar */
     .warn-banner{background:linear-gradient(135deg,rgba(234,179,8,.08),rgba(234,179,8,.04));border:1px solid rgba(234,179,8,.2);border-radius:10px;padding:10px 12px;margin:8px 12px;cursor:pointer;transition:all .2s}
     .warn-banner:hover{background:rgba(234,179,8,.12);border-color:rgba(234,179,8,.35)}
     .warn-banner-count{background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.3);color:#fbbf24;font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;border-radius:6px;padding:2px 8px}
   </style>
 </head>
 <body class="flex h-screen overflow-hidden">
-  <div id="drawerOverlay" class="drawer-overlay" onclick="closeDrawer()"></div>
-  <div id="drawerPanel" class="drawer-panel md:hidden">
-    <div class="h-14 flex items-center justify-between px-4 border-b border-dark-border">
+
+<!-- ===== MOBILE DRAWER OVERLAY ===== -->
+<div id="drawerOverlay" class="drawer-overlay" onclick="closeDrawer()"></div>
+<div id="drawerPanel" class="drawer-panel md:hidden">
+  <div class="h-14 flex items-center justify-between px-4 border-b border-dark-border">
+    <div class="flex items-center gap-2">
+      <img src="https://i.pinimg.com/736x/89/75/5d/89755dd7321afe2c3295a39df24e8309.jpg" alt="" class="w-6 h-6 rounded object-contain">
+      <span class="font-bold text-sm tracking-wide text-red-accent">KRYONIX</span>
+    </div>
+    <button onclick="closeDrawer()" class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-2 hover:text-white transition"><i class="fas fa-times text-sm"></i></button>
+  </div>
+  <div class="py-4 space-y-1 px-3">
+    <button onclick="switchTab('dashboard');closeDrawer()" class="mob-nav active w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="dashboard"><i class="fas fa-th-large w-5"></i> Dashboard</button>
+    <button onclick="switchTab('products');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="products"><i class="fas fa-box w-5"></i> Products</button>
+    <button onclick="switchTab('orders');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2 relative" data-mob="orders"><i class="fas fa-receipt w-5"></i> Orders<span id="orderBadgeMob" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center badge-pulse">0</span></button>
+    <button onclick="switchTab('testimoni');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2 relative" data-mob="testimoni"><i class="fas fa-star w-5"></i> Testimoni<span id="testiPendingBadgeMob" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">0</span></button>
+    <button onclick="switchTab('donepayment');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="donepayment"><i class="fas fa-check-circle w-5"></i> Done Payment</button>
+    <button onclick="switchTab('settings');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="settings"><i class="fas fa-cog w-5"></i> Settings</button>
+    <button onclick="openWarningPanel();closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-yellow-400" data-mob="warnings"><i class="fas fa-exclamation-triangle w-5"></i> Peringatan<span id="warnBadgeMob" class="hidden ml-auto w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center warn-badge-pulse">0</span></button>
+  </div>
+  <div class="px-3 pt-3 border-t border-dark-border space-y-1">
+    <button onclick="doLogout()" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-400 hover:text-red-bright hover:bg-red-accent/10 transition text-sm w-full"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-3 hover:text-white transition text-sm"><i class="fas fa-home"></i> Home</a>
+  </div>
+</div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="w-[260px] bg-dark-card border-r border-dark-border hidden md:flex flex-col z-20 flex-shrink-0">
+  <div class="h-[72px] flex items-center px-6 border-b border-dark-border">
+    <div class="w-9 h-9 rounded-xl bg-red-accent/10 border border-red-accent/20 flex items-center justify-center mr-3 flex-shrink-0"><img src="https://i.pinimg.com/736x/89/75/5d/89755dd7321afe2c3295a39df24e8309.jpg" alt="KRYONIX" class="w-6 h-6 rounded object-contain"></div>
+    <div><span class="font-bold text-base tracking-wide block leading-tight">KRYONIX</span><span class="text-[10px] font-mono text-muted-3 tracking-widest">ADMIN PANEL</span></div>
+  </div>
+  <div class="flex-1 py-5 space-y-1 px-3 overflow-y-auto">
+    <button onclick="switchTab('dashboard')" class="nav-item active w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-th-large w-5 nav-icon text-sm"></i> Dashboard</button>
+    <button onclick="switchTab('products')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-box w-5 nav-icon text-sm"></i> Products</button>
+    <button onclick="switchTab('orders')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm relative"><i class="fas fa-receipt w-5 nav-icon text-sm"></i> Orders<span id="orderBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center badge-pulse">0</span></button>
+    <button onclick="switchTab('testimoni')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm relative"><i class="fas fa-star w-5 nav-icon text-sm"></i> Testimoni<span id="testiPendingBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">0</span></button>
+    <button onclick="switchTab('donepayment')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-check-circle w-5 nav-icon text-sm"></i> Done Payment</button>
+    <div class="my-3 border-t border-dark-border"></div>
+    <button onclick="switchTab('settings')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-cog w-5 nav-icon text-sm"></i> Settings</button>
+    <div class="my-3 border-t border-dark-border"></div>
+    <button id="warnNavBtn" onclick="openWarningPanel()" class="nav-item warn-nav w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-yellow-500/70 transition text-sm relative">
+      <i class="fas fa-exclamation-triangle w-5 text-sm"></i><span>Peringatan</span>
+      <span id="warnNavBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center warn-badge-pulse">0</span>
+    </button>
+  </div>
+  <div id="warnSidebarBanner" class="hidden warn-banner" onclick="openWarningPanel()">
+    <div class="flex items-center gap-2 mb-1">
+      <i class="fas fa-exclamation-triangle text-yellow-400 text-xs"></i>
+      <span class="text-xs font-bold text-yellow-400">Peringatan Baru!</span>
+      <span id="warnBannerCount" class="warn-banner-count ml-auto">0</span>
+    </div>
+    <div class="text-[11px] text-muted-3">Klik untuk lihat detail dari Owner.</div>
+  </div>
+  <div class="p-3 border-t border-dark-border space-y-1">
+    <button onclick="doLogout()" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-red-400 hover:text-red-bright transition text-sm"><i class="fas fa-sign-out-alt w-5 text-sm"></i> Logout</button>
+    <a href="index.html" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-3 hover:text-white transition text-sm cursor-pointer"><i class="fas fa-home w-5 text-sm"></i> Back to Home</a>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<main class="flex-1 flex flex-col relative z-10 overflow-hidden">
+  <header class="h-14 border-b border-dark-border flex items-center justify-between px-5 bg-dark-bg/80 backdrop-blur-sm flex-shrink-0">
+    <div class="flex items-center gap-3">
+      <button onclick="openDrawer()" class="md:hidden w-9 h-9 rounded-lg bg-dark-card border border-dark-border flex items-center justify-center text-muted-2 hover:text-white transition"><i class="fas fa-bars text-sm"></i></button>
+      <h1 id="headerTitle" class="text-sm font-semibold text-white hidden md:block">Dashboard</h1>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="hidden sm:flex items-center gap-2 text-xs text-muted-3"><div class="glow-dot green"></div><span class="font-mono">ONLINE</span></div>
+      <button id="headerWarnBtn" onclick="openWarningPanel()" class="hidden relative w-9 h-9 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 hover:bg-yellow-500/15 transition">
+        <i class="fas fa-bell text-sm"></i>
+        <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-yellow-400 rounded-full border-2 border-dark-bg warn-badge-pulse"></span>
+      </button>
+      <div class="flex items-center gap-2.5 bg-dark-card border border-dark-border rounded-lg px-3 py-1.5">
+        <div id="headerAvatar" class="w-7 h-7 rounded-full bg-red-accent/15 border border-red-accent/20 text-red-accent text-[10px] font-bold flex items-center justify-center">A</div>
+        <div class="hidden sm:block"><div id="headerName" class="text-xs font-semibold text-white leading-tight">Admin</div><div id="headerRole" class="text-[9px] font-mono text-muted-4 tracking-wider">ADMIN</div></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex-1 overflow-y-auto">
+
+    <!-- ===== TAB: DASHBOARD ===== -->
+    <div id="tab-dashboard" class="tab-content p-5 md:p-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-3">
+        <div><h2 class="text-2xl font-bold text-white">Overview</h2><p class="text-sm text-muted-3 mt-1">Pemantauan singkat semua aktivitas toko.</p></div>
+        <div class="text-xs font-mono text-muted-3 bg-dark-card border border-dark-border px-3 py-1.5 rounded-lg" id="dashClock">--:--:--</div>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-red-accent/10 border border-red-accent/15 flex items-center justify-center"><i class="fas fa-box text-red-accent text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Products</span></div><div class="text-3xl font-bold text-white" id="d-stat-products">0</div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-stock" class="text-red-bright font-mono">0</span> total stok</div></div>
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/15 flex items-center justify-center"><i class="fas fa-receipt text-yellow-500 text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Orders</span></div><div class="text-3xl font-bold text-white" id="d-stat-orders">0</div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-pending" class="text-yellow-400 font-mono">0</span> perlu balas</div></div>
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/15 flex items-center justify-center"><i class="fas fa-money-bill-wave text-green-500 text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Revenue</span></div><div class="text-2xl font-bold text-white" id="d-stat-revenue">Rp0</div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-dpcount" class="text-green-400 font-mono">0</span> transaksi done</div></div>
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/15 flex items-center justify-center"><i class="fas fa-star text-cyan-400 text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Reviews</span></div><div class="flex items-end gap-2"><div class="text-3xl font-bold text-white" id="d-stat-rating">0.0</div><div class="text-yellow-400 text-sm mb-1"><i class="fas fa-star"></i></div></div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-testicount" class="text-cyan-400 font-mono">0</span> testimoni total</div></div>
+      </div>
+      <div class="mb-8">
+        <h3 class="text-xs font-mono text-muted-3 uppercase tracking-wider mb-4">Navigasi Cepat</h3>
+        <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
+          <div onclick="switchTab('products')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-red-accent/10 border border-red-accent/10 flex items-center justify-center"><i class="fas fa-box text-red-accent text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Products</span></div>
+          <div onclick="switchTab('orders')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/10 flex items-center justify-center"><i class="fas fa-comments text-purple-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Chat Order</span></div>
+          <div onclick="switchTab('testimoni')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/10 flex items-center justify-center"><i class="fas fa-clipboard-check text-yellow-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Review Testi</span></div>
+          <div onclick="switchTab('donepayment')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/10 flex items-center justify-center"><i class="fas fa-check-circle text-green-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Done Pay</span></div>
+          <div onclick="openWarningPanel()" class="quick-action bg-dark-card border border-yellow-500/15 rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/10 flex items-center justify-center relative"><i class="fas fa-exclamation-triangle text-yellow-400 text-sm"></i><span id="dashWarnBadge" class="hidden absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 text-black text-[9px] font-bold rounded-full flex items-center justify-center">0</span></div><span class="text-[11px] text-muted-1 font-medium">Peringatan</span></div>
+          <div onclick="switchTab('settings')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-muted-4/50 border border-muted-4/30 flex items-center justify-center"><i class="fas fa-cog text-muted-2 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Settings</span></div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div class="lg:col-span-2 bg-dark-card border border-dark-border rounded-xl overflow-hidden">
+          <div class="px-5 py-4 border-b border-dark-border flex items-center justify-between"><h3 class="text-sm font-semibold text-white flex items-center gap-2"><i class="fas fa-receipt text-red-accent text-xs"></i> Pesanan Terbaru</h3><button onclick="switchTab('orders')" class="text-[11px] text-muted-3 hover:text-red-accent transition font-mono">VIEW ALL →</button></div>
+          <div id="dashRecentOrders" class="divide-y divide-dark-border"><div class="px-5 py-8 text-center text-muted-3 text-sm"><i class="fas fa-spinner fa-spin mr-2"></i>Memuat...</div></div>
+        </div>
+        <div class="space-y-5">
+          <div class="bg-dark-card border border-dark-border rounded-xl p-5"><h3 class="text-sm font-semibold text-white flex items-center gap-2 mb-4"><i class="fas fa-exclamation-triangle text-yellow-500 text-xs"></i> Stok Alert</h3><div id="dashStockAlert" class="space-y-2"><div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-spinner fa-spin mr-1"></i>Memuat...</div></div></div>
+          <!-- WARNING CARD -->
+          <div id="dashWarnCard" class="hidden bg-dark-card border border-yellow-500/20 rounded-xl p-5 cursor-pointer hover:border-yellow-500/40 transition" onclick="openWarningPanel()">
+            <h3 class="text-sm font-semibold text-yellow-400 flex items-center gap-2 mb-3"><i class="fas fa-exclamation-triangle text-xs"></i> Peringatan dari Owner</h3>
+            <div class="text-3xl font-bold text-white mb-1" id="dashWarnCount">0</div>
+            <p class="text-xs text-muted-3">peringatan diterima</p>
+            <div id="dashWarnPreview" class="mt-3 space-y-2"></div>
+            <div class="mt-3 text-[11px] text-yellow-500/60 font-mono">LIHAT SEMUA →</div>
+          </div>
+          <div class="bg-dark-card border border-dark-border rounded-xl p-5"><h3 class="text-sm font-semibold text-white flex items-center gap-2 mb-4"><i class="fas fa-clock text-yellow-400 text-xs"></i> Testimoni Pending</h3><div class="text-3xl font-bold text-white mb-1" id="d-stat-testi-pending">0</div><button onclick="switchTab('testimoni')" class="text-[11px] text-muted-3 hover:text-red-accent transition font-mono mt-2">REVIEW NOW →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB: PRODUCTS ===== -->
+    <div id="tab-products" class="tab-content hidden p-5 md:p-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Product Management</h2><p class="text-sm text-muted-3 mt-1">Kelola katalog hosting dan layanan.</p></div><button onclick="openProductModal()" class="bg-red-accent hover:bg-red-bright text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition shadow-lg shadow-red-accent/15 text-sm"><i class="fas fa-plus text-xs"></i> Add Product</button></div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total Produk</div><div id="stat-total" class="text-2xl font-bold text-white">0</div></div>
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total Stok</div><div id="stat-stock" class="text-2xl font-bold text-green-400">0</div></div>
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Stok Habis</div><div id="stat-empty" class="text-2xl font-bold text-red-400">0</div></div>
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Kategori</div><div id="stat-cats" class="text-2xl font-bold text-cyan-400">0</div></div>
+      </div>
+      <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Product Info</th><th>Category</th><th class="text-right">Price</th><th class="text-center">Stock</th><th class="text-center">Actions</th></tr></thead><tbody id="products-tbody"><tr><td colspan="5" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</td></tr></tbody></table></div></div>
+    </div>
+
+    <!-- ===== TAB: ORDERS ===== -->
+    <div id="tab-orders" class="tab-content hidden p-5 md:p-8">
+      <div class="mb-8"><h2 class="text-2xl font-bold text-white">Order Management</h2><p class="text-sm text-muted-3 mt-1">Klik order untuk chat. Gunakan tombol <span class="inline-flex items-center gap-1 text-green-400/80 bg-green-500/10 px-2 py-0.5 rounded text-[11px] font-mono font-bold"><i class="fas fa-check-circle text-[10px]"></i> Done Pay</span> atau ketik <code class="text-red-accent/80 bg-red-accent/10 px-1.5 py-0.5 rounded text-[11px] font-mono">/donepayment</code>.</p></div>
+      <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Buyer</th><th>Product</th><th>WhatsApp</th><th class="text-center">Status</th><th class="text-center">Chat</th><th class="text-center">Actions</th></tr></thead><tbody id="orders-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</td></tr></tbody></table></div></div>
+    </div>
+
+    <!-- ===== TAB: TESTIMONI ===== -->
+    <div id="tab-testimoni" class="tab-content hidden p-5 md:p-8">
+      <div class="mb-8"><h2 class="text-2xl font-bold text-white">Moderasi Testimoni</h2><p class="text-sm text-muted-3 mt-1">Hanya approve/reject dari buyer.</p></div>
+      <div class="flex gap-2 mb-6">
+        <button onclick="filterTestimoni('all')" class="testi-filter active px-4 py-2 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/20 text-red-accent transition" data-tf="all">Semua</button>
+        <button onclick="filterTestimoni('pending')" class="testi-filter px-4 py-2 rounded-lg text-xs font-semibold bg-dark-card border border-dark-border text-muted-2 transition" data-tf="pending">Pending</button>
+        <button onclick="filterTestimoni('approved')" class="testi-filter px-4 py-2 rounded-lg text-xs font-semibold bg-dark-card border border-dark-border text-muted-2 transition" data-tf="approved">Approved</button>
+      </div>
+      <div class="grid grid-cols-3 gap-4 mb-8">
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Total Masuk</div><div id="stat-testi-total" class="text-2xl font-bold text-white">0</div></div>
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Disetujui</div><div id="stat-testi-approved" class="text-2xl font-bold text-green-400">0</div></div>
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Menunggu</div><div id="stat-testi-pending" class="text-2xl font-bold text-yellow-400">0</div></div>
+      </div>
+      <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Review</th><th class="text-center">Rating</th><th class="text-center">Status</th><th class="text-center">Actions</th></tr></thead><tbody id="testi-tbody"><tr><td colspan="4" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</td></tr></tbody></table></div></div>
+    </div>
+
+    <!-- ===== TAB: DONE PAYMENT ===== -->
+    <div id="tab-donepayment" class="tab-content hidden p-5 md:p-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Done Payment</h2><p class="text-sm text-muted-3 mt-1"><span class="linked-badge">LINKED</span> = dari chat order.</p></div><button onclick="openDoneModal()" class="bg-dark-card border border-dark-border hover:border-muted-4 text-muted-2 hover:text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition text-sm"><i class="fas fa-plus text-xs"></i> Add Manual</button></div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Transaksi</div><div id="stat-dp-total" class="text-2xl font-bold text-white">0</div></div>
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Revenue</div><div id="stat-dp-revenue" class="text-2xl font-bold text-green-400">Rp0</div></div>
+        <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-4"><div class="text-[10px] text-muted-3 font-mono uppercase mb-1">Publik</div><div id="stat-dp-visible" class="text-2xl font-bold text-cyan-400">0</div></div>
+      </div>
+      <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Buyer</th><th>Produk</th><th class="text-right">Harga</th><th class="text-center">Link</th><th class="text-center">Tampil</th><th class="text-center">Actions</th></tr></thead><tbody id="dp-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i>Loading...</td></tr></tbody></table></div></div>
+    </div>
+
+    <!-- ===== TAB: SETTINGS ===== -->
+    <div id="tab-settings" class="tab-content hidden p-5 md:p-8">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-bold text-white mb-6">General Settings</h2>
+        <div class="bg-dark-card border border-dark-border rounded-xl p-6 mb-6"><h3 class="text-lg font-bold mb-4 text-red-accent">Terms of Service (ToS)</h3><textarea id="tos-input" class="w-full bg-dark-bg border border-dark-border rounded-lg p-4 text-sm text-muted-1 font-mono h-48 resize-none" placeholder="Masukkan text ToS..."></textarea><button onclick="saveSettings()" class="mt-4 px-6 py-2.5 bg-red-accent hover:bg-red-bright text-white rounded-lg transition font-bold text-sm">Save Changes</button></div>
+        <div class="bg-dark-card border border-dark-border rounded-xl p-6">
+          <div class="flex items-center justify-between mb-2"><h3 class="text-lg font-bold text-red-accent"><i class="fas fa-qrcode mr-2"></i>QRIS Payment Commands</h3><button onclick="openQrisModal()" class="px-3 py-1.5 bg-red-accent hover:bg-red-bright text-white font-bold rounded-lg text-xs transition"><i class="fas fa-plus mr-1"></i>Tambah</button></div>
+          <p class="text-sm text-muted-3 mb-5">Ketik perintah di chat order untuk auto-kirim gambar QRIS.</p>
+          <div id="qrisList" class="space-y-3"><div class="text-center py-6 text-muted-3 text-sm"><i class="fas fa-spinner fa-spin mr-1"></i>Memuat...</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end scroll -->
+</main>
+
+<!-- ===== MODALS ===== -->
+<!-- Product Modal -->
+<div id="productModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeProductModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg"><div class="bg-dark-card border border-dark-border rounded-2xl shadow-2xl p-6 m-4 max-h-[90vh] overflow-y-auto"><h3 id="productModalTitle" class="text-xl font-bold text-white mb-6">Add New Product</h3><form id="productForm" onsubmit="handleProductSubmit(event)"><input type="hidden" id="prodId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Title</label><input type="text" id="prodTitle" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Category</label><select id="prodCat" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="hosting">Hosting</option><option value="vps">VPS</option><option value="domain">Domain</option><option value="game">Game Server</option><option value="dedicated">Dedicated</option><option value="other">Other</option></select></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Price (IDR)</label><input type="number" id="prodPrice" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Stock</label><input type="number" id="prodStock" required min="0" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Image URL</label><input type="url" id="prodImage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><p class="text-[10px] text-muted-4 mt-1">Kosongkan = default.</p></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Description</label><textarea id="prodDesc" required rows="2" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Features (koma)</label><textarea id="prodFeatures" rows="3" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Icon</label><input type="text" id="prodIcon" placeholder="fa-server" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="flex justify-end gap-3 mt-6"><button type="button" onclick="closeProductModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Cancel</button><button type="submit" class="px-6 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Save</button></div></div></form></div></div></div>
+
+<!-- Done Payment Modal -->
+<div id="doneModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeDoneModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 class="text-xl font-bold text-white mb-2">Add Done Payment Manual</h3><p class="text-xs text-muted-3 mb-5"><i class="fas fa-info-circle mr-1"></i>Manual = tanpa link order.</p><form id="doneForm" onsubmit="handleDoneSubmit(event)"><input type="hidden" id="dpId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nick Buyer</label><input type="text" id="dpBuyer" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Produk</label><input type="text" id="dpProduct" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Paket</label><input type="text" id="dpPackage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Harga</label><input type="number" id="dpPrice" required min="1" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div class="flex items-center gap-2"><input type="checkbox" id="dpVisible" checked class="accent-red-500 w-4 h-4"><label for="dpVisible" class="text-sm text-muted-2 cursor-pointer">Publik</label></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeDoneModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div></div></form></div></div></div>
+
+<!-- QRIS Modal -->
+<div id="qrisModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeQrisModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl shadow-2xl p-6 m-4"><h3 id="qrisModalTitle" class="text-xl font-bold text-white mb-6">Tambah QRIS</h3><form id="qrisForm" onsubmit="handleQrisSubmit(event)"><input type="hidden" id="qrisEditId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Perintah</label><input type="text" id="qrisCommand" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-red-accent font-mono text-lg" placeholder="/pay1"><p class="text-[10px] text-muted-4 mt-1">Harus diawali <code class="text-red-accent/60">/</code></p></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Label</label><input type="text" id="qrisLabel" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Gambar QRIS</label><div id="qrisFormPreview" class="hidden mb-3 p-3 rounded-xl bg-dark-bg border border-dark-border"><img id="qrisFormImg" class="max-h-40 mx-auto rounded-lg" alt="QRIS preview"></div><input type="file" id="qrisFormFile" accept="image/*" class="hidden"><button type="button" onclick="document.getElementById('qrisFormFile').click()" class="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-sm text-muted-2 hover:text-white hover:border-red-accent transition flex items-center justify-center gap-2"><i class="fas fa-upload"></i> Upload</button></div></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeQrisModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div></form></div></div></div>
+
+<!-- Order Detail Panel -->
+<div id="orderDetailPanel" class="hidden fixed inset-0 z-40">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeOrderDetail()"></div>
+  <div class="absolute right-0 top-0 bottom-0 w-full md:max-w-2xl bg-dark-bg border-l border-dark-border flex flex-col shadow-2xl">
+    <div class="flex-shrink-0 border-b border-dark-border p-4 flex items-center justify-between bg-dark-card">
+      <div><div class="text-[10px] font-mono text-muted-3 tracking-wider">ORDER #<span id="detailOrderId">-</span></div><div class="font-bold text-base mt-0.5 text-white" id="detailBuyerName">-</div></div>
       <div class="flex items-center gap-2">
-        <img src="https://i.pinimg.com/736x/89/75/5d/89755dd7321afe2c3295a39df24e8309.jpg" alt="" class="w-6 h-6 rounded object-contain">
-        <span class="font-bold text-sm tracking-wide text-red-accent">KRYONIX</span>
-      </div>
-      <button onclick="closeDrawer()" class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-2 hover:text-white transition">
-        <i class="fas fa-times text-sm"></i>
-      </button>
-    </div>
-    <div class="py-4 space-y-1 px-3">
-      <button onclick="switchTab('dashboard');closeDrawer()" class="mob-nav active w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="dashboard"><i class="fas fa-th-large w-5"></i> Dashboard</button>
-      <button onclick="switchTab('products');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="products"><i class="fas fa-box w-5"></i> Products</button>
-      <button onclick="switchTab('orders');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2 relative" data-mob="orders"><i class="fas fa-receipt w-5"></i> Orders<span id="orderBadgeMob" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center badge-pulse">0</span></button>
-      <button onclick="switchTab('testimoni');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2 relative" data-mob="testimoni"><i class="fas fa-star w-5"></i> Testimoni<span id="testiPendingBadgeMob" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">0</span></button>
-      <button onclick="switchTab('donepayment');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="donepayment"><i class="fas fa-check-circle w-5"></i> Done Payment</button>
-      <button onclick="switchTab('settings');closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-muted-2" data-mob="settings"><i class="fas fa-cog w-5"></i> Settings</button>
-      <!-- Mobile warning button -->
-      <button onclick="openWarningPanel();closeDrawer()" class="mob-nav w-full flex items-center gap-3 px-4 py-3 rounded-lg text-yellow-400" data-mob="warnings">
-        <i class="fas fa-exclamation-triangle w-5"></i> Peringatan
-        <span id="warnBadgeMob" class="hidden ml-auto w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center warn-badge-pulse">0</span>
-      </button>
-    </div>
-    <div class="px-3 pt-3 border-t border-dark-border space-y-1">
-      <button onclick="doLogout()" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-400 hover:text-red-bright hover:bg-red-accent/10 transition text-sm w-full"><i class="fas fa-sign-out-alt"></i> Logout</button>
-      <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-3 hover:text-white hover:bg-red-glow2 transition text-sm"><i class="fas fa-home"></i> Home</a>
-    </div>
-  </div>
-
-  <aside class="w-[260px] bg-dark-card border-r border-dark-border hidden md:flex flex-col z-20 flex-shrink-0">
-    <div class="h-[72px] flex items-center px-6 border-b border-dark-border">
-      <div class="w-9 h-9 rounded-xl bg-red-accent/10 border border-red-accent/20 flex items-center justify-center mr-3 flex-shrink-0"><img src="https://i.pinimg.com/736x/89/75/5d/89755dd7321afe2c3295a39df24e8309.jpg" alt="KRYONIX" class="w-6 h-6 rounded object-contain"></div>
-      <div><span class="font-bold text-base tracking-wide block leading-tight">KRYONIX</span><span class="text-[10px] font-mono text-muted-3 tracking-widest">ADMIN PANEL</span></div>
-    </div>
-    <div class="flex-1 py-5 space-y-1 px-3 overflow-y-auto">
-      <button onclick="switchTab('dashboard')" class="nav-item active w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-th-large w-5 nav-icon text-sm"></i> Dashboard</button>
-      <button onclick="switchTab('products')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-box w-5 nav-icon text-sm"></i> Products</button>
-      <button onclick="switchTab('orders')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm relative"><i class="fas fa-receipt w-5 nav-icon text-sm"></i> Orders<span id="orderBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center badge-pulse">0</span></button>
-      <button onclick="switchTab('testimoni')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm relative"><i class="fas fa-star w-5 nav-icon text-sm"></i> Testimoni<span id="testiPendingBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center">0</span></button>
-      <button onclick="switchTab('donepayment')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-check-circle w-5 nav-icon text-sm"></i> Done Payment</button>
-      <div class="my-3 border-t border-dark-border"></div>
-      <button onclick="switchTab('settings')" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-2 transition text-sm"><i class="fas fa-cog w-5 nav-icon text-sm"></i> Settings</button>
-      <div class="my-3 border-t border-dark-border"></div>
-      <!-- ⚠️ WARNING PANEL BUTTON -->
-      <button id="warnNavBtn" onclick="openWarningPanel()" class="nav-item warn-nav w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-yellow-500/70 transition text-sm relative">
-        <i class="fas fa-exclamation-triangle w-5 text-sm"></i>
-        <span>Peringatan</span>
-        <span id="warnNavBadge" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-yellow-500 text-black text-[10px] font-bold rounded-full flex items-center justify-center warn-badge-pulse">0</span>
-      </button>
-    </div>
-
-    <!-- ⚠️ WARNING BANNER (muncul jika ada warning baru) -->
-    <div id="warnSidebarBanner" class="hidden warn-banner" onclick="openWarningPanel()">
-      <div class="flex items-center gap-2 mb-1">
-        <i class="fas fa-exclamation-triangle text-yellow-400 text-xs"></i>
-        <span class="text-xs font-bold text-yellow-400">Peringatan Baru!</span>
-        <span id="warnBannerCount" class="warn-banner-count ml-auto">0</span>
-      </div>
-      <div class="text-[11px] text-muted-3">Klik untuk lihat detail peringatan dari Owner.</div>
-    </div>
-
-    <div class="p-3 border-t border-dark-border space-y-1">
-      <button onclick="doLogout()" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-red-400 hover:text-red-bright transition text-sm"><i class="fas fa-sign-out-alt w-5 text-sm"></i> Logout</button>
-      <a href="index.html" class="nav-item w-full flex items-center gap-3 px-4 py-2.5 rounded-r-lg text-muted-3 hover:text-white transition text-sm cursor-pointer"><i class="fas fa-home w-5 text-sm"></i> Back to Home</a>
-    </div>
-  </aside>
-
-  <main class="flex-1 flex flex-col relative z-10 overflow-hidden">
-    <header class="h-14 border-b border-dark-border flex items-center justify-between px-5 bg-dark-bg/80 backdrop-blur-sm flex-shrink-0">
-      <div class="flex items-center gap-3">
-        <button onclick="openDrawer()" class="md:hidden w-9 h-9 rounded-lg bg-dark-card border border-dark-border flex items-center justify-center text-muted-2 hover:text-white transition"><i class="fas fa-bars text-sm"></i></button>
-        <h1 id="headerTitle" class="text-sm font-semibold text-white hidden md:block">Dashboard</h1>
-      </div>
-      <div class="flex items-center gap-3">
-        <div class="hidden sm:flex items-center gap-2 text-xs text-muted-3"><div class="glow-dot green"></div><span class="font-mono">ONLINE</span></div>
-        <!-- ⚠️ Header warning bell button -->
-        <button id="headerWarnBtn" onclick="openWarningPanel()" class="hidden relative w-9 h-9 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 hover:bg-yellow-500/15 transition">
-          <i class="fas fa-bell text-sm"></i>
-          <span id="headerWarnDot" class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-yellow-400 rounded-full border-2 border-dark-bg warn-badge-pulse"></span>
-        </button>
-        <div class="flex items-center gap-2.5 bg-dark-card border border-dark-border rounded-lg px-3 py-1.5">
-          <div id="headerAvatar" class="w-7 h-7 rounded-full bg-red-accent/15 border border-red-accent/20 text-red-accent text-[10px] font-bold flex items-center justify-center">A</div>
-          <div class="hidden sm:block"><div id="headerName" class="text-xs font-semibold text-white leading-tight">Admin</div><div id="headerRole" class="text-[9px] font-mono text-muted-4 tracking-wider">ADMIN</div></div>
-        </div>
-      </div>
-    </header>
-
-    <div class="flex-1 overflow-y-auto">
-      <!-- TABS: Dashboard, Products, Orders, Testimoni, DonePayment, Settings -->
-      <!-- (semua tab sama dengan sebelumnya, hanya ditampilkan dashboard sebagai contoh) -->
-      <div id="tab-dashboard" class="tab-content p-5 md:p-8">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-3">
-          <div><h2 class="text-2xl font-bold text-white">Overview</h2><p class="text-sm text-muted-3 mt-1">Pemantauan singkat semua aktivitas toko.</p></div>
-          <div class="text-xs font-mono text-muted-3 bg-dark-card border border-dark-border px-3 py-1.5 rounded-lg" id="dashClock">--:--:--</div>
-        </div>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-red-accent/10 border border-red-accent/15 flex items-center justify-center"><i class="fas fa-box text-red-accent text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Products</span></div><div class="text-3xl font-bold text-white" id="d-stat-products">0</div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-stock" class="text-red-bright font-mono">0</span> total stok</div></div>
-          <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/15 flex items-center justify-center"><i class="fas fa-receipt text-yellow-500 text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Orders</span></div><div class="text-3xl font-bold text-white" id="d-stat-orders">0</div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-pending" class="text-yellow-400 font-mono">0</span> perlu balas</div></div>
-          <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/15 flex items-center justify-center"><i class="fas fa-money-bill-wave text-green-500 text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Revenue</span></div><div class="text-2xl font-bold text-white" id="d-stat-revenue">Rp0</div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-dpcount" class="text-green-400 font-mono">0</span> transaksi done</div></div>
-          <div class="stat-card bg-dark-card border border-dark-border rounded-xl p-5"><div class="flex items-center justify-between mb-3"><div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/15 flex items-center justify-center"><i class="fas fa-star text-cyan-400 text-sm"></i></div><span class="text-[10px] font-mono text-muted-3 uppercase">Reviews</span></div><div class="flex items-end gap-2"><div class="text-3xl font-bold text-white" id="d-stat-rating">0.0</div><div class="text-yellow-400 text-sm mb-1"><i class="fas fa-star"></i></div></div><div class="text-xs text-muted-3 mt-1"><span id="d-stat-testicount" class="text-cyan-400 font-mono">0</span> testimoni total</div></div>
-        </div>
-        <div class="mb-8">
-          <h3 class="text-xs font-mono text-muted-3 uppercase tracking-wider mb-4">Navigasi Cepat</h3>
-          <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
-            <div onclick="switchTab('products')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-red-accent/10 border border-red-accent/10 flex items-center justify-center"><i class="fas fa-box text-red-accent text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Products</span></div>
-            <div onclick="switchTab('orders')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/10 flex items-center justify-center"><i class="fas fa-comments text-purple-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Chat Order</span></div>
-            <div onclick="switchTab('testimoni')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/10 flex items-center justify-center"><i class="fas fa-clipboard-check text-yellow-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Review Testi</span></div>
-            <div onclick="switchTab('donepayment')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/10 flex items-center justify-center"><i class="fas fa-check-circle text-green-400 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Done Pay</span></div>
-            <div onclick="openWarningPanel()" class="quick-action bg-dark-card border border-yellow-500/15 rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/10 flex items-center justify-center relative"><i class="fas fa-exclamation-triangle text-yellow-400 text-sm"></i><span id="dashWarnBadge" class="hidden absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 text-black text-[9px] font-bold rounded-full flex items-center justify-center">0</span></div><span class="text-[11px] text-muted-1 font-medium">Peringatan</span></div>
-            <div onclick="switchTab('settings')" class="quick-action bg-dark-card border border-dark-border rounded-xl p-4 flex flex-col items-center gap-2 text-center"><div class="w-10 h-10 rounded-xl bg-muted-4/50 border border-muted-4/30 flex items-center justify-center"><i class="fas fa-cog text-muted-2 text-sm"></i></div><span class="text-[11px] text-muted-1 font-medium">Settings</span></div>
-          </div>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          <div class="lg:col-span-2 bg-dark-card border border-dark-border rounded-xl overflow-hidden">
-            <div class="px-5 py-4 border-b border-dark-border flex items-center justify-between"><h3 class="text-sm font-semibold text-white flex items-center gap-2"><i class="fas fa-receipt text-red-accent text-xs"></i> Pesanan Terbaru</h3><button onclick="switchTab('orders')" class="text-[11px] text-muted-3 hover:text-red-accent transition font-mono">VIEW ALL -&gt;</button></div>
-            <div id="dashRecentOrders" class="divide-y divide-dark-border"><div class="px-5 py-8 text-center text-muted-3 text-sm"><i class="fas fa-spinner fa-spin mr-2"></i>Memuat...</div></div>
-          </div>
-          <div class="space-y-5">
-            <div class="bg-dark-card border border-dark-border rounded-xl p-5"><h3 class="text-sm font-semibold text-white flex items-center gap-2 mb-4"><i class="fas fa-exclamation-triangle text-yellow-500 text-xs"></i> Stok Alert</h3><div id="dashStockAlert" class="space-y-2"><div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-spinner fa-spin mr-1"></i>Memuat...</div></div></div>
-            <!-- ⚠️ WARNING CARD di dashboard -->
-            <div id="dashWarnCard" class="hidden bg-dark-card border border-yellow-500/20 rounded-xl p-5 cursor-pointer hover:border-yellow-500/40 transition" onclick="openWarningPanel()">
-              <h3 class="text-sm font-semibold text-yellow-400 flex items-center gap-2 mb-3"><i class="fas fa-exclamation-triangle text-xs"></i> Peringatan dari Owner</h3>
-              <div class="text-3xl font-bold text-white mb-1" id="dashWarnCount">0</div>
-              <p class="text-xs text-muted-3">peringatan diterima</p>
-              <div id="dashWarnPreview" class="mt-3 space-y-2"></div>
-              <div class="mt-3 text-[11px] text-yellow-500/60 font-mono hover:text-yellow-400 transition">LIHAT SEMUA →</div>
-            </div>
-            <div class="bg-dark-card border border-dark-border rounded-xl p-5"><h3 class="text-sm font-semibold text-white flex items-center gap-2 mb-4"><i class="fas fa-clock text-yellow-400 text-xs"></i> Testimoni Pending</h3><div class="text-3xl font-bold text-white mb-1" id="d-stat-testi-pending">0</div><button onclick="switchTab('testimoni')" class="text-[11px] text-muted-3 hover:text-red-accent transition font-mono mt-2">REVIEW NOW -&gt;</button></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Other tabs remain the same as original -->
-      <div id="tab-products" class="tab-content hidden p-5 md:p-8">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"><div><h2 class="text-2xl font-bold text-white">Product Management</h2></div><button onclick="openProductModal()" class="bg-red-accent hover:bg-red-bright text-white font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition text-sm"><i class="fas fa-plus text-xs"></i> Add Product</button></div>
-        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Product Info</th><th>Category</th><th class="text-right">Price</th><th class="text-center">Stock</th><th class="text-center">Actions</th></tr></thead><tbody id="products-tbody"><tr><td colspan="5" class="text-center py-10 text-muted-3">Loading...</td></tr></tbody></table></div></div>
-      </div>
-      <div id="tab-orders" class="tab-content hidden p-5 md:p-8">
-        <div class="mb-8"><h2 class="text-2xl font-bold text-white">Order Management</h2></div>
-        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Buyer</th><th>Product</th><th>WhatsApp</th><th class="text-center">Status</th><th class="text-center">Chat</th><th class="text-center">Actions</th></tr></thead><tbody id="orders-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3">Loading...</td></tr></tbody></table></div></div>
-      </div>
-      <div id="tab-testimoni" class="tab-content hidden p-5 md:p-8">
-        <div class="mb-8"><h2 class="text-2xl font-bold text-white">Moderasi Testimoni</h2></div>
-        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Review</th><th class="text-center">Rating</th><th class="text-center">Status</th><th class="text-center">Actions</th></tr></thead><tbody id="testi-tbody"><tr><td colspan="4" class="text-center py-10 text-muted-3">Loading...</td></tr></tbody></table></div></div>
-      </div>
-      <div id="tab-donepayment" class="tab-content hidden p-5 md:p-8">
-        <div class="mb-8"><h2 class="text-2xl font-bold text-white">Done Payment</h2></div>
-        <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Buyer</th><th>Produk</th><th class="text-right">Harga</th><th class="text-center">Link</th><th class="text-center">Tampil</th><th class="text-center">Actions</th></tr></thead><tbody id="dp-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3">Loading...</td></tr></tbody></table></div></div>
-      </div>
-      <div id="tab-settings" class="tab-content hidden p-5 md:p-8">
-        <div class="max-w-3xl">
-          <h2 class="text-2xl font-bold text-white mb-6">General Settings</h2>
-          <div class="bg-dark-card border border-dark-border rounded-xl p-6 mb-6"><h3 class="text-lg font-bold mb-4 text-red-accent">Terms of Service (ToS)</h3><textarea id="tos-input" class="w-full bg-dark-bg border border-dark-border rounded-lg p-4 text-sm text-muted-1 font-mono h-48 resize-none" placeholder="Masukkan text ToS..."></textarea><button onclick="saveSettings()" class="mt-4 px-6 py-2.5 bg-red-accent hover:bg-red-bright text-white rounded-lg transition font-bold text-sm">Save Changes</button></div>
-        </div>
+        <button onclick="showDpForm()" class="h-9 px-3 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 hover:bg-green-500/20 transition text-xs font-semibold gap-1.5"><i class="fas fa-check-circle"></i><span class="hidden sm:inline">Done Pay</span></button>
+        <a id="detailWaLink" href="#" target="_blank" class="w-9 h-9 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400"><i class="fab fa-whatsapp text-lg"></i></a>
+        <button onclick="closeOrderDetail()" class="w-9 h-9 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-2"><i class="fas fa-times"></i></button>
       </div>
     </div>
-  </main>
-
-  <!-- ============================================================ -->
-  <!-- ⚠️ WARNING POPUP MODAL — muncul otomatis saat ada warning baru -->
-  <!-- ============================================================ -->
-  <div id="warningPopupModal" class="warning-popup-modal">
-    <div class="warning-popup-backdrop" onclick="dismissWarningPopup()"></div>
-    <div class="warning-popup-box">
-      <!-- Animated marquee header -->
-      <div class="warning-marquee">
-        <div class="warning-marquee-inner" id="warnMarquee">
-          <span>⚠ PERINGATAN DARI OWNER ⚠</span><span>⚠ PERINGATAN DARI OWNER ⚠</span>
-          <span>⚠ PERINGATAN DARI OWNER ⚠</span><span>⚠ PERINGATAN DARI OWNER ⚠</span>
-          <span>⚠ PERINGATAN DARI OWNER ⚠</span><span>⚠ PERINGATAN DARI OWNER ⚠</span>
-        </div>
+    <div class="flex-shrink-0 p-4 border-b border-dark-border overflow-y-auto" style="max-height:35vh">
+      <h4 class="text-[10px] font-mono text-muted-3 uppercase tracking-wider mb-3">Rincian</h4>
+      <div class="bg-dark-card border border-dark-border rounded-xl p-4 space-y-3 text-sm">
+        <div class="flex justify-between"><span class="text-muted-3">Produk</span><span class="font-bold text-white" id="detailProduct">-</span></div>
+        <div class="flex justify-between"><span class="text-muted-3">Harga</span><span class="font-mono text-green-400" id="detailPrice">-</span></div>
+        <div class="flex justify-between"><span class="text-muted-3">WhatsApp</span><a id="detailWaText" href="#" target="_blank" class="font-mono text-cyan-400 hover:underline">-</a></div>
+        <div class="flex justify-between"><span class="text-muted-3">Catatan</span><span class="text-muted-1 text-right max-w-[60%]" id="detailNote">-</span></div>
+        <div class="flex justify-between"><span class="text-muted-3">Tanggal</span><span class="font-mono text-muted-2" id="detailDate">-</span></div>
+        <div class="flex justify-between items-center"><span class="text-muted-3">Status</span><select id="detailStatus" onchange="updateOrderStatusFromPanel()" class="text-xs font-mono px-3 py-1 rounded-lg border border-dark-border bg-dark-bg text-white outline-none cursor-pointer"><option value="pending">Pending</option><option value="processing">Processing</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></div>
       </div>
-      <div class="warning-popup-header">
-        <div class="flex items-center gap-3 mb-3">
-          <div class="w-12 h-12 rounded-xl bg-yellow-500/15 border border-yellow-500/30 flex items-center justify-center flex-shrink-0">
-            <i class="fas fa-exclamation-triangle text-yellow-400 text-xl"></i>
-          </div>
-          <div>
-            <div class="text-xs font-mono text-yellow-500/60 tracking-widest uppercase">KRYONIX OWNER PANEL</div>
-            <h3 class="text-lg font-bold text-white leading-tight">Peringatan Diterima</h3>
-          </div>
-          <button onclick="dismissWarningPopup()" class="ml-auto w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-2 hover:text-white transition flex-shrink-0">
-            <i class="fas fa-times text-xs"></i>
-          </button>
-        </div>
-        <div id="popupWarnFrom" class="text-xs font-mono text-muted-3">Dari: <span class="text-yellow-400">Owner</span></div>
+    </div>
+    <div class="flex-1 min-h-0 flex flex-col overflow-hidden">
+      <div class="flex-shrink-0 px-4 pt-3 pb-2"><h4 class="text-[10px] font-mono text-muted-3 uppercase tracking-wider"><i class="fas fa-comments mr-1"></i> Chat</h4></div>
+      <div id="chatMessages" class="flex-1 overflow-y-auto px-4 pb-4 space-y-3"><div class="text-center text-muted-3 text-sm py-8">Kosong.</div></div>
+    </div>
+    <div id="qrisQuickBar" class="hidden flex-shrink-0 border-t border-dark-border px-4 py-2 bg-dark-card/80">
+      <div class="flex items-center gap-2 overflow-x-auto" id="qrisQuickBarInner"><span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span></div>
+    </div>
+    <div id="dpFormBar" class="dp-form-bar flex-shrink-0">
+      <div class="px-4 pt-3 pb-1 flex items-center gap-2"><i class="fas fa-check-circle text-green-400 text-sm"></i><span class="text-xs font-bold text-green-400 font-mono">DONE PAYMENT</span><span class="text-[10px] text-muted-4 font-mono ml-1">→ Otomatis terhubung ke order ini</span><button onclick="hideDpForm()" class="ml-auto w-7 h-7 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-3 text-xs"><i class="fas fa-times"></i></button></div>
+      <div class="px-4 pb-3 grid grid-cols-2 gap-3">
+        <div><label>Nick</label><input type="text" id="dpChatBuyer" class="text-sm"></div>
+        <div><label>Produk</label><input type="text" id="dpChatProduct" class="text-sm"></div>
+        <div><label>Paket</label><input type="text" id="dpChatPkg" class="text-sm" placeholder="1 Bulan"></div>
+        <div><label>Harga</label><input type="number" id="dpChatPrice" class="text-sm"></div>
       </div>
-      <div class="p-6">
-        <div id="popupWarnList" class="space-y-3 max-h-[280px] overflow-y-auto pr-1">
-          <!-- Populated by JS -->
-        </div>
-        <div class="flex gap-3 mt-5">
-          <button onclick="markAllWarningsRead(); dismissWarningPopup();" class="flex-1 py-2.5 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 font-bold rounded-xl text-sm hover:bg-yellow-500/20 transition">
-            <i class="fas fa-check mr-2"></i>Tandai Sudah Baca
-          </button>
-          <button onclick="openWarningPanel(); dismissWarningPopup();" class="flex-1 py-2.5 bg-dark-card border border-dark-border text-muted-2 font-bold rounded-xl text-sm hover:text-white hover:border-muted-3 transition">
-            <i class="fas fa-list mr-2"></i>Lihat Semua
-          </button>
-        </div>
+      <div class="px-4 pb-3 flex items-center gap-3">
+        <label class="flex items-center gap-2 text-xs text-muted-2 cursor-pointer"><input type="checkbox" id="dpChatVisible" checked class="accent-red-500 w-3.5 h-3.5">Publik</label>
+        <button onclick="submitDpFromChat()" class="ml-auto px-4 py-1.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg text-xs transition"><i class="fas fa-check mr-1"></i>Simpan &amp; Link</button>
+      </div>
+    </div>
+    <div class="flex-shrink-0 border-t border-dark-border p-4 bg-dark-card space-y-2">
+      <div id="chatImagePreview" class="hidden img-preview-bar"><img id="chatPreviewImg" src="" alt="Preview"><div class="flex-1 min-w-0"><div class="text-xs text-muted-2 truncate" id="chatPreviewName">-</div></div><button onclick="clearChatImage()" class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 flex-shrink-0"><i class="fas fa-times text-[10px]"></i></button></div>
+      <input type="file" id="chatImageInput" accept="image/*" class="hidden">
+      <div class="flex gap-2">
+        <button onclick="document.getElementById('chatImageInput').click()" class="img-btn"><i class="fas fa-image"></i></button>
+        <input type="text" id="chatInput" class="flex-1 bg-dark-bg border border-dark-border rounded-xl px-4 py-2.5 text-white text-sm placeholder-muted-4" placeholder="Ketik pesan atau /command...">
+        <button onclick="sendChat('admin')" class="px-5 py-2.5 bg-red-accent hover:bg-red-bright text-white font-bold rounded-xl transition flex items-center gap-2 text-sm"><i class="fas fa-paper-plane text-xs"></i><span class="hidden sm:inline">Kirim</span></button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ============================================================ -->
-  <!-- ⚠️ WARNING PANEL — slide dari kanan, tampilkan semua warnings -->
-  <!-- ============================================================ -->
-  <div id="warningPanelOverlay" onclick="closeWarningPanel()"></div>
-  <div id="warningPanel">
-    <!-- Header -->
-    <div class="flex-shrink-0 border-b border-yellow-500/20 bg-dark-card">
-      <div style="background:linear-gradient(135deg,rgba(234,179,8,.06),rgba(220,38,38,.04));padding:20px 20px 16px">
-        <div class="flex items-center justify-between mb-4">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-yellow-500/15 border border-yellow-500/25 flex items-center justify-center">
-              <i class="fas fa-exclamation-triangle text-yellow-400"></i>
-            </div>
-            <div>
-              <h2 class="font-bold text-white text-base leading-tight">Peringatan</h2>
-              <div class="text-[10px] font-mono text-muted-3 tracking-wider">dari Owner Panel</div>
-            </div>
-          </div>
-          <button onclick="closeWarningPanel()" class="w-9 h-9 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-2 hover:text-white transition">
-            <i class="fas fa-times text-sm"></i>
-          </button>
-        </div>
-        <!-- Stats row -->
-        <div class="grid grid-cols-3 gap-2">
-          <div class="bg-dark-bg/60 border border-dark-border rounded-lg p-2.5 text-center">
-            <div id="warnPanelTotal" class="text-lg font-bold text-white">0</div>
-            <div class="text-[9px] font-mono text-muted-4 uppercase">Total</div>
-          </div>
-          <div class="bg-yellow-500/06 border border-yellow-500/15 rounded-lg p-2.5 text-center">
-            <div id="warnPanelUnread" class="text-lg font-bold text-yellow-400">0</div>
-            <div class="text-[9px] font-mono text-muted-4 uppercase">Belum Baca</div>
-          </div>
-          <div class="bg-dark-bg/60 border border-dark-border rounded-lg p-2.5 text-center">
-            <div id="warnPanelRead" class="text-lg font-bold text-muted-3">0</div>
-            <div class="text-[9px] font-mono text-muted-4 uppercase">Sudah Baca</div>
-          </div>
-        </div>
+<!-- Lightbox -->
+<div id="imageLightbox" class="hidden fixed inset-0 z-[999] bg-black/95 flex items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
+  <button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white"><i class="fas fa-times"></i></button>
+  <img id="lightboxImg" class="max-w-full max-h-[90vh] rounded-xl object-contain" onclick="event.stopPropagation()" alt="">
+</div>
+
+<!-- ===== WARNING POPUP MODAL ===== -->
+<div id="warningPopupModal">
+  <div class="warning-popup-backdrop" onclick="dismissWarningPopup()"></div>
+  <div class="warning-popup-box">
+    <div class="warning-marquee"><div class="warning-marquee-inner"><span>⚠ PERINGATAN DARI OWNER ⚠</span><span>⚠ PERINGATAN DARI OWNER ⚠</span><span>⚠ PERINGATAN DARI OWNER ⚠</span><span>⚠ PERINGATAN DARI OWNER ⚠</span><span>⚠ PERINGATAN DARI OWNER ⚠</span><span>⚠ PERINGATAN DARI OWNER ⚠</span></div></div>
+    <div class="warning-popup-header">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-12 h-12 rounded-xl bg-yellow-500/15 border border-yellow-500/30 flex items-center justify-center flex-shrink-0"><i class="fas fa-exclamation-triangle text-yellow-400 text-xl"></i></div>
+        <div><div class="text-xs font-mono text-yellow-500/60 tracking-widest uppercase">KRYONIX OWNER PANEL</div><h3 class="text-lg font-bold text-white leading-tight">Peringatan Diterima</h3></div>
+        <button onclick="dismissWarningPopup()" class="ml-auto w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-2 hover:text-white transition flex-shrink-0"><i class="fas fa-times text-xs"></i></button>
       </div>
-      <!-- Action buttons -->
-      <div class="px-4 pb-3 flex gap-2">
-        <button onclick="markAllWarningsRead()" class="flex-1 py-2 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 font-bold rounded-lg text-xs hover:bg-yellow-500/20 transition">
-          <i class="fas fa-check-double mr-1.5"></i>Tandai Semua Baca
-        </button>
-        <button onclick="deleteAllReadWarnings()" class="py-2 px-3 bg-dark-bg border border-dark-border text-muted-3 font-bold rounded-lg text-xs hover:text-white hover:border-muted-3 transition">
-          <i class="fas fa-broom mr-1"></i>Bersihkan
-        </button>
-      </div>
+      <div id="popupWarnFrom" class="text-xs font-mono text-muted-3">Dari: <span class="text-yellow-400">Owner</span></div>
     </div>
-
-    <!-- Warning list -->
-    <div class="flex-1 overflow-y-auto p-4" id="warningPanelList">
-      <div class="text-center py-12 text-muted-3">
-        <i class="fas fa-spinner fa-spin text-xl mb-3 block"></i>
-        <div class="text-sm">Memuat peringatan...</div>
+    <div class="p-6">
+      <div id="popupWarnList" class="space-y-3 max-h-[280px] overflow-y-auto pr-1"></div>
+      <div class="flex gap-3 mt-5">
+        <button onclick="markAllWarningsRead();dismissWarningPopup();" class="flex-1 py-2.5 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 font-bold rounded-xl text-sm hover:bg-yellow-500/20 transition"><i class="fas fa-check mr-2"></i>Tandai Sudah Baca</button>
+        <button onclick="openWarningPanel();dismissWarningPopup();" class="flex-1 py-2.5 bg-dark-card border border-dark-border text-muted-2 font-bold rounded-xl text-sm hover:text-white transition"><i class="fas fa-list mr-2"></i>Lihat Semua</button>
       </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="flex-shrink-0 border-t border-yellow-500/10 p-4 bg-dark-card/80">
-      <div class="text-[10px] font-mono text-muted-4 text-center">Peringatan disimpan secara permanen oleh Owner.</div>
     </div>
   </div>
+</div>
 
-  <!-- Toast -->
-  <div id="toast" class="toast"></div>
+<!-- ===== WARNING PANEL (slide kanan) ===== -->
+<div id="warningPanelOverlay" onclick="closeWarningPanel()"></div>
+<div id="warningPanel">
+  <div class="flex-shrink-0 border-b border-yellow-500/20 bg-dark-card">
+    <div style="background:linear-gradient(135deg,rgba(234,179,8,.06),rgba(220,38,38,.04));padding:20px 20px 16px">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-yellow-500/15 border border-yellow-500/25 flex items-center justify-center"><i class="fas fa-exclamation-triangle text-yellow-400"></i></div><div><h2 class="font-bold text-white text-base leading-tight">Peringatan</h2><div class="text-[10px] font-mono text-muted-3 tracking-wider">dari Owner Panel</div></div></div>
+        <button onclick="closeWarningPanel()" class="w-9 h-9 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-2 hover:text-white transition"><i class="fas fa-times text-sm"></i></button>
+      </div>
+      <div class="grid grid-cols-3 gap-2">
+        <div class="bg-dark-bg/60 border border-dark-border rounded-lg p-2.5 text-center"><div id="warnPanelTotal" class="text-lg font-bold text-white">0</div><div class="text-[9px] font-mono text-muted-4 uppercase">Total</div></div>
+        <div class="border border-yellow-500/15 rounded-lg p-2.5 text-center" style="background:rgba(234,179,8,.04)"><div id="warnPanelUnread" class="text-lg font-bold text-yellow-400">0</div><div class="text-[9px] font-mono text-muted-4 uppercase">Belum Baca</div></div>
+        <div class="bg-dark-bg/60 border border-dark-border rounded-lg p-2.5 text-center"><div id="warnPanelRead" class="text-lg font-bold text-muted-3">0</div><div class="text-[9px] font-mono text-muted-4 uppercase">Sudah Baca</div></div>
+      </div>
+    </div>
+    <div class="px-4 pb-3 flex gap-2">
+      <button onclick="markAllWarningsRead()" class="flex-1 py-2 bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 font-bold rounded-lg text-xs hover:bg-yellow-500/20 transition"><i class="fas fa-check-double mr-1.5"></i>Tandai Semua Baca</button>
+      <button onclick="deleteAllReadWarnings()" class="py-2 px-3 bg-dark-bg border border-dark-border text-muted-3 font-bold rounded-lg text-xs hover:text-white hover:border-muted-3 transition"><i class="fas fa-broom mr-1"></i>Bersihkan</button>
+    </div>
+  </div>
+  <div class="flex-1 overflow-y-auto p-4" id="warningPanelList"><div class="text-center py-12 text-muted-3"><i class="fas fa-spinner fa-spin text-xl mb-3 block"></i><div class="text-sm">Memuat peringatan...</div></div></div>
+  <div class="flex-shrink-0 border-t border-yellow-500/10 p-4 bg-dark-card/80"><div class="text-[10px] font-mono text-muted-4 text-center">Peringatan disimpan secara permanen oleh Owner.</div></div>
+</div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
-    import { getDatabase, ref, onValue, update, get, serverTimestamp, set } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
+<div id="toast" class="toast"></div>
 
-    const fc = {
-      apiKey: "AIzaSyBHPvQ6Bt9f6U3wqDz3CG71HNpcFq3RZRI",
-      authDomain: "kryonix-7c55e.firebaseapp.com",
-      databaseURL: "https://kryonix-7c55e-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "kryonix-7c55e",
-      storageBucket: "kryonix-7c55e.firebasestorage.app",
-      messagingSenderId: "917095112473",
-      appId: "1:917095112473:web:dd4120a14724e6e6a02f88"
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+import { getDatabase, ref, push, set, update, remove, onValue, get, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-database.js";
+
+const fc = {
+  apiKey:"AIzaSyBHPvQ6Bt9f6U3wqDz3CG71HNpcFq3RZRI",
+  authDomain:"kryonix-7c55e.firebaseapp.com",
+  databaseURL:"https://kryonix-7c55e-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:"kryonix-7c55e",
+  storageBucket:"kryonix-7c55e.firebasestorage.app",
+  messagingSenderId:"917095112473",
+  appId:"1:917095112473:web:dd4120a14724e6e6a02f88"
+};
+const app = initializeApp(fc);
+const db = getDatabase(app);
+
+if (sessionStorage.getItem('kryonix_admin') !== 'granted') { window.location.href = 'login-admin.html'; }
+
+const myAdminUid = sessionStorage.getItem('kryonix_uid') || null;
+
+// ===== CONSTANTS =====
+const DI = { hosting:'https://picsum.photos/seed/kry-hosting/600/400', vps:'https://picsum.photos/seed/kry-vps/600/400', domain:'https://picsum.photos/seed/kry-domain/600/400', game:'https://picsum.photos/seed/kry-game/600/400', dedicated:'https://picsum.photos/seed/kry-dedi/600/400', other:'https://picsum.photos/seed/kry-other/600/400' };
+const CC = { hosting:'text-green-400', vps:'text-cyan-400', domain:'text-purple-400', game:'text-green-400', dedicated:'text-cyan-400', other:'text-purple-400' };
+const SS = { pending:'bg-yellow-500/10 text-yellow-400 border-yellow-500/20', processing:'bg-blue-500/10 text-blue-400 border-blue-500/20', completed:'bg-green-500/10 text-green-400 border-green-500/20', cancelled:'bg-red-500/10 text-red-400 border-red-500/20' };
+const HT = { dashboard:'Dashboard', products:'Product Management', orders:'Order Management', testimoni:'Moderasi Testimoni', donepayment:'Done Payment', settings:'General Settings' };
+const TAB_KEYS = ['dashboard','products','orders','testimoni','donepayment',null,'settings'];
+
+// ===== STATE =====
+let toastTimer = null;
+let imgStore = {};
+let epc = {}, aTR = {}, cTF = 'all', edc = {};
+let qC = {}, qR = {}, qFD = { image: null };
+let currentChatOrderId = null, currentChatImage = null;
+let DD = { products:{}, orders:{}, testimoni:{}, donePayments:{} };
+let warningsData = {};
+let popupShownThisSession = false;
+const READ_KEY = 'kryonix_warn_read_' + (myAdminUid || 'admin');
+
+// ===== HELPERS =====
+function showToast(msg, type='success') {
+  if (toastTimer) clearTimeout(toastTimer);
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = 'toast ' + type + ' show';
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
+}
+function esc(t) {
+  if (t == null) return '';
+  const d = document.createElement('div'); d.textContent = String(t); return d.innerHTML;
+}
+function escLines(t) { return esc(t).replace(/\n/g,'<br>'); }
+function nTs(v) { return typeof v === 'number' ? v : 0; }
+function fTime(ts) {
+  if (!ts || typeof ts !== 'number') return '-';
+  const d = new Date(ts);
+  return d.toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'}) + ' ' + d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+}
+function fTimeS(ts) {
+  if (!ts || typeof ts !== 'number') return '-';
+  const d = new Date(ts);
+  return d.toLocaleDateString('id-ID',{day:'2-digit',month:'short'}) + ' ' + d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+}
+function formatCurrency(v) { return 'Rp' + (Number(v)||0).toLocaleString('id-ID'); }
+function cleanWa(v) {
+  const d = String(v||'').replace(/\D/g,'');
+  if (!d) return '';
+  if (d.startsWith('62')) return d;
+  if (d.startsWith('0')) return '62' + d.slice(1);
+  if (d.startsWith('8')) return '62' + d;
+  return d;
+}
+function getWaLink(v) { const c = cleanWa(v); return c ? 'https://wa.me/' + c : '#'; }
+function getOrderPrice(o) {
+  for (const k of [o?.price, o?.totalPrice, o?.productPrice, o?.amount]) { const n = Number(k); if (n > 0) return n; }
+  return 0;
+}
+function getOrderNote(o) { return o && (o.note || o.notes || o.message || o.requirement || o.requirements || o.description || '-'); }
+function getMsgEntries(chat) {
+  return Object.keys(chat||{}).map(k => ({id:k,data:chat[k]||{}})).sort((a,b) => nTs(a.data.timestamp)-nTs(b.data.timestamp));
+}
+function findDpByOrderId(orderId) {
+  for (const id in DD.donePayments) { if (DD.donePayments[id]?.orderId === orderId) return Object.assign({id}, DD.donePayments[id]); }
+  return null;
+}
+function compressImage(file, maxW=800, q=0.7) {
+  return new Promise((ok, no) => {
+    if (!file) { no('No file'); return; }
+    if (file.size > 8*1024*1024) { no('Max 8MB'); return; }
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (w > maxW) { h = (maxW/w)*h; w = maxW; }
+        if (h > 900) { w = (900/h)*w; h = 900; }
+        const c = document.createElement('canvas');
+        c.width = Math.max(1,Math.round(w)); c.height = Math.max(1,Math.round(h));
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        ok(c.toDataURL('image/jpeg', q));
+      };
+      img.onerror = () => no('Gagal load gambar');
+      img.src = e.target.result;
     };
+    reader.onerror = () => no('Gagal baca file');
+    reader.readAsDataURL(file);
+  });
+}
 
-    const app = initializeApp(fc);
-    const db = getDatabase(app);
+// ===== CLOCK =====
+function updateClock() {
+  const n = new Date();
+  const el = document.getElementById('dashClock');
+  if (el) el.textContent = n.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'}) + ' — ' + n.toLocaleDateString('id-ID',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+}
+updateClock(); setInterval(updateClock, 1000);
 
-    // =================== SESSION CHECK ===================
-    if (sessionStorage.getItem('kryonix_admin') !== 'granted') {
-      window.location.href = 'login-admin.html';
+// ===== HEADER =====
+function initHeader() {
+  const name = sessionStorage.getItem('kryonix_admin_name') || sessionStorage.getItem('admin_name') || 'Admin';
+  const role = (sessionStorage.getItem('kryonix_admin_role') || 'ADMIN').toUpperCase();
+  document.getElementById('headerName').textContent = name;
+  document.getElementById('headerRole').textContent = role;
+  document.getElementById('headerAvatar').textContent = name.charAt(0).toUpperCase();
+}
+initHeader();
+
+// ===== NAVIGATION =====
+window.viewImage = k => { if (imgStore[k]) { document.getElementById('lightboxImg').src = imgStore[k]; document.getElementById('imageLightbox').classList.remove('hidden'); } };
+window.closeLightbox = () => document.getElementById('imageLightbox').classList.add('hidden');
+window.openDrawer = () => { document.getElementById('drawerOverlay').classList.add('open'); document.getElementById('drawerPanel').classList.add('open'); };
+window.closeDrawer = () => { document.getElementById('drawerOverlay').classList.remove('open'); document.getElementById('drawerPanel').classList.remove('open'); };
+window.doLogout = () => { sessionStorage.clear(); window.location.href = 'login-admin.html'; };
+window.switchTab = function(tab) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+  const el = document.getElementById('tab-' + tab);
+  if (el) el.classList.remove('hidden');
+  document.querySelectorAll('aside .nav-item').forEach(el => el.classList.remove('active'));
+  const idx = TAB_KEYS.indexOf(tab);
+  const navItems = document.querySelectorAll('aside .nav-item');
+  if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
+  document.querySelectorAll('.mob-nav').forEach(el => el.classList.remove('active'));
+  const mb = document.querySelector('[data-mob="' + tab + '"]');
+  if (mb) mb.classList.add('active');
+  document.getElementById('headerTitle').textContent = HT[tab] || 'Admin';
+  if (tab === 'settings') loadSettings();
+};
+
+// ===== DASHBOARD =====
+function updateDash() {
+  const p = DD.products, o = DD.orders, t = DD.testimoni, dp = DD.donePayments;
+  let tp = 0, ts = 0;
+  Object.values(p).forEach(x => { tp++; ts += Number(x.stock||0); });
+  document.getElementById('d-stat-products').textContent = tp;
+  document.getElementById('d-stat-stock').textContent = ts;
+  let to = 0, nr = 0;
+  Object.values(o).forEach(x => { to++; const e = getMsgEntries(x.chat||{}); const last = e.length ? e[e.length-1].data : null; if (!last || last.sender==='buyer') nr++; });
+  document.getElementById('d-stat-orders').textContent = to;
+  document.getElementById('d-stat-pending').textContent = nr;
+  let rev = 0, dc = 0;
+  Object.values(dp).forEach(x => { rev += Number(x.price||0); dc++; });
+  document.getElementById('d-stat-revenue').textContent = formatCurrency(rev);
+  document.getElementById('d-stat-dpcount').textContent = dc;
+  let tt = 0, pn = 0, sr = 0;
+  Object.values(t).forEach(x => { tt++; sr += Number(x.rating||0); if (x.approved===false) pn++; });
+  document.getElementById('d-stat-rating').textContent = tt ? (sr/tt).toFixed(1) : '0.0';
+  document.getElementById('d-stat-testicount').textContent = tt;
+  document.getElementById('d-stat-testi-pending').textContent = pn;
+  // Recent orders
+  const re = document.getElementById('dashRecentOrders');
+  const so = Object.keys(o).map(k => ({k,v:o[k]})).sort((a,b) => nTs(b.v.createdAt)-nTs(a.v.createdAt)).slice(0,5);
+  if (!so.length) { re.innerHTML = '<div class="px-5 py-8 text-center text-muted-3 text-sm">Belum ada pesanan.</div>'; }
+  else {
+    re.innerHTML = '';
+    so.forEach(({k,v}) => {
+      const dot = v.status==='completed'?'green':v.status==='cancelled'?'red':v.status==='processing'?'yellow':'gray';
+      const row = document.createElement('div');
+      row.className = 'dash-recent-row px-5 py-3 flex items-center gap-4 cursor-pointer';
+      row.setAttribute('data-do', k);
+      row.innerHTML = `<div class="glow-dot ${dot}"></div><div class="flex-1 min-w-0"><div class="text-sm font-semibold text-white truncate">${esc(v.buyerName||'-')}</div><div class="text-xs text-muted-3 truncate">${esc(v.productTitle||'-')}</div></div><span class="status-badge border ${SS[v.status]||SS.pending} flex-shrink-0">${esc(v.status||'pending')}</span><span class="text-[10px] text-muted-3 font-mono flex-shrink-0 hidden sm:block">${fTimeS(v.createdAt)}</span>`;
+      re.appendChild(row);
+    });
+  }
+  // Stock alert
+  const se = document.getElementById('dashStockAlert');
+  const ls = Object.keys(p).filter(k => Number(p[k].stock||0) <= 5).map(k => ({k,v:p[k]}));
+  if (!ls.length) { se.innerHTML = '<div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-check-circle text-green-500 mr-1"></i>Semua stok aman.</div>'; }
+  else {
+    se.innerHTML = '';
+    ls.slice(0,5).forEach(({k,v}) => {
+      const isO = Number(v.stock||0) <= 0;
+      const row = document.createElement('div');
+      row.className = 'flex items-center gap-3 py-2';
+      row.innerHTML = `<div class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ${CC[v.category]||''} flex-shrink-0"><i class="fas ${v.icon||'fa-box'} text-[10px]"></i></div><div class="flex-1 min-w-0"><div class="text-xs text-white truncate">${esc(v.title)}</div></div><span class="text-xs font-mono font-bold ${isO?'text-red-400':'text-yellow-400'} flex-shrink-0">${isO?'HABIS':esc(v.stock)}</span>`;
+      se.appendChild(row);
+    });
+  }
+}
+document.getElementById('dashRecentOrders').addEventListener('click', function(e) {
+  const row = e.target.closest('[data-do]');
+  if (row) { switchTab('orders'); setTimeout(() => openOrderDetail(row.getAttribute('data-do')), 150); }
+});
+
+// ===== PRODUCTS =====
+window.openProductModal = function(isEdit, data) {
+  document.getElementById('productModal').classList.remove('hidden');
+  document.getElementById('productModalTitle').textContent = isEdit ? 'Edit Product' : 'Add New Product';
+  if (isEdit && data) {
+    document.getElementById('prodId').value = data.id;
+    document.getElementById('prodTitle').value = data.title||'';
+    document.getElementById('prodCat').value = data.category||'other';
+    document.getElementById('prodPrice').value = data.price||'';
+    document.getElementById('prodStock').value = data.stock||0;
+    document.getElementById('prodImage').value = data.image||'';
+    document.getElementById('prodDesc').value = data.description||'';
+    document.getElementById('prodFeatures').value = (data.features||[]).join(', ');
+    document.getElementById('prodIcon').value = data.icon||'';
+  } else { document.getElementById('productForm').reset(); document.getElementById('prodId').value = ''; }
+};
+window.closeProductModal = () => document.getElementById('productModal').classList.add('hidden');
+window.handleProductSubmit = async function(e) {
+  e.preventDefault();
+  const id = document.getElementById('prodId').value;
+  const cat = document.getElementById('prodCat').value;
+  const adminId = sessionStorage.getItem('kryonix_uid') || 'unknown';
+  const adminName = sessionStorage.getItem('kryonix_admin_name') || sessionStorage.getItem('admin_name') || 'Admin';
+  const data = {
+    title: document.getElementById('prodTitle').value.trim(),
+    category: cat, price: parseInt(document.getElementById('prodPrice').value,10)||0,
+    stock: parseInt(document.getElementById('prodStock').value,10)||0,
+    image: document.getElementById('prodImage').value.trim() || DI[cat],
+    description: document.getElementById('prodDesc').value.trim(),
+    features: document.getElementById('prodFeatures').value.split(',').map(f=>f.trim()).filter(Boolean),
+    icon: document.getElementById('prodIcon').value.trim() || 'fa-box',
+    color: CC[cat]||'text-purple-400', adminId, adminName
+  };
+  try {
+    if (id) { await update(ref(db,'products/'+id), data); showToast('Produk diupdate!'); }
+    else { data.createdAt = serverTimestamp(); await set(push(ref(db,'products')), data); showToast('Produk ditambahkan!'); }
+    closeProductModal();
+  } catch(err) { showToast('Gagal simpan produk.','error'); }
+};
+window.deleteProduct = async function(id) {
+  if (!confirm('Hapus produk ini?')) return;
+  try { await remove(ref(db,'products/'+id)); showToast('Produk dihapus.'); } catch(e) { showToast('Gagal.','error'); }
+};
+window.quickStock = async function(id, current, delta) {
+  const next = Number(current||0) + Number(delta||0);
+  if (next < 0) return;
+  try { await update(ref(db,'products/'+id), {stock:next}); showToast('Stok → ' + next); } catch(e) { showToast('Gagal.','error'); }
+};
+document.getElementById('products-tbody').addEventListener('click', function(e) {
+  const eb = e.target.closest('[data-pe]'), db2 = e.target.closest('[data-pd]'), sb = e.target.closest('[data-ps]');
+  if (eb) openProductModal(true, epc[eb.getAttribute('data-pe')]);
+  if (db2) deleteProduct(db2.getAttribute('data-pd'));
+  if (sb) { const p = sb.getAttribute('data-ps').split(','); quickStock(p[0], parseInt(p[1],10), parseInt(p[2],10)); }
+});
+onValue(ref(db,'products'), snap => {
+  const raw = snap.val(); DD.products = raw||{};
+  const tbody = document.getElementById('products-tbody'); tbody.innerHTML = '';
+  epc = {};
+  const myAdminId = sessionStorage.getItem('kryonix_uid') || null;
+  const myAdminName = sessionStorage.getItem('kryonix_admin_name') || sessionStorage.getItem('admin_name') || '';
+  let total=0, stock=0, empty=0; const cats={};
+  if (!raw) { tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-muted-3">Belum ada produk.</td></tr>'; }
+  else {
+    Object.keys(raw).forEach(k => {
+      const d = raw[k]||{};
+      const matchById = myAdminId && d.adminId && d.adminId === myAdminId;
+      const matchByName = myAdminName && d.adminName && d.adminName.toLowerCase() === myAdminName.toLowerCase();
+      if ((d.adminId||d.adminName) && !matchById && !matchByName) return;
+      total++; stock += Number(d.stock||0); if (Number(d.stock||0)<=0) empty++; if (d.category) cats[d.category]=true;
+      epc[k] = Object.assign({id:k}, d);
+      const oos = Number(d.stock||0) <= 0;
+      const stockBadge = oos
+        ? `<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold text-red-400 bg-red-500/10 border border-red-500/20">HABIS <button data-ps="${k},0,1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>`
+        : `<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold text-green-400 bg-green-500/10 border border-green-500/20">${esc(d.stock)} <button data-ps="${k},${Number(d.stock||0)},-1" class="hover:text-white"><i class="fas fa-minus text-[10px]"></i></button> <button data-ps="${k},${Number(d.stock||0)},1" class="hover:text-white"><i class="fas fa-plus text-[10px]"></i></button></span>`;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center ${d.color||''} flex-shrink-0"><i class="fas ${d.icon||'fa-box'}"></i></div><div class="min-w-0"><div class="font-bold text-sm text-white truncate">${esc(d.title||'-')}</div><div class="text-xs text-muted-3 truncate max-w-[180px]">${esc(d.description||'')}</div></div></div></td><td><span class="px-2 py-1 rounded text-xs bg-dark-bg border border-dark-border text-muted-2 uppercase font-mono">${esc(d.category||'-')}</span></td><td class="text-right font-mono text-sm text-white">${formatCurrency(d.price||0)}</td><td class="text-center">${stockBadge}</td><td class="text-center whitespace-nowrap"><button data-pe="${k}" class="text-cyan-400 hover:text-cyan-300 p-1"><i class="fas fa-edit"></i></button> <button data-pd="${k}" class="text-red-400 hover:text-red-300 p-1"><i class="fas fa-trash"></i></button></td>`;
+      tbody.appendChild(tr);
+    });
+    if (total === 0) tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-muted-3">Belum ada produk untuk akun ini.</td></tr>';
+  }
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-stock').textContent = stock;
+  document.getElementById('stat-empty').textContent = empty;
+  document.getElementById('stat-cats').textContent = Object.keys(cats).length;
+  updateDash();
+});
+
+// ===== TESTIMONI =====
+window.filterTestimoni = function(f) {
+  cTF = f;
+  document.querySelectorAll('.testi-filter').forEach(el => {
+    el.className = 'testi-filter px-4 py-2 rounded-lg text-xs font-semibold ' + (el.getAttribute('data-tf')===f ? 'bg-red-accent/10 border border-red-accent/20 text-red-accent' : 'bg-dark-card border border-dark-border text-muted-2') + ' transition';
+  });
+  renderTesti();
+};
+function renderTesti() {
+  const tbody = document.getElementById('testi-tbody'); tbody.innerHTML = '';
+  const raw = aTR||{};
+  if (!Object.keys(raw).length) { tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Belum ada testimoni.</td></tr>'; return; }
+  let items = Object.keys(raw).map(k => ({k,v:raw[k]})).sort((a,b) => nTs(b.v.createdAt)-nTs(a.v.createdAt));
+  if (cTF==='pending') items = items.filter(i => i.v.approved===false);
+  if (cTF==='approved') items = items.filter(i => i.v.approved!==false);
+  if (!items.length) { tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Tidak ada data.</td></tr>'; return; }
+  items.forEach(({k,v}) => {
+    const isA = v.approved !== false;
+    let stars = '';
+    for (let i=1;i<=5;i++) stars += `<i class="fas fa-star text-[10px] ${i<=Number(v.rating||0)?'text-yellow-400':'text-muted-4'}"></i>`;
+    const sc = isA ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td><div class="min-w-0"><div class="flex items-center gap-2 mb-0.5"><span class="font-bold text-sm text-white truncate">${esc(v.name||'Anonim')}</span><span class="source-badge source-buyer">BUYER</span></div><div class="text-xs text-muted-3 truncate max-w-[260px]">${esc(v.text||'')}</div></div></td><td class="text-center"><div class="flex justify-center gap-0.5">${stars}</div></td><td class="text-center"><button data-tt="${k},${isA}" class="status-badge border ${sc} cursor-pointer hover:opacity-80 transition">${isA?'APPROVED':'PENDING'}</button></td><td class="text-center"><button data-td="${k}" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>`;
+    tbody.appendChild(tr);
+  });
+}
+window.toggleTestiApproval = async function(id, current) {
+  try { await update(ref(db,'testimonials/'+id), {approved:!current}); showToast(current?'Disembunyikan.':'Ditampilkan.'); } catch(e) { showToast('Gagal.','error'); }
+};
+window.deleteTesti = async function(id) {
+  if (!confirm('Hapus testimoni?')) return;
+  try { await remove(ref(db,'testimonials/'+id)); showToast('Dihapus.'); } catch(e) { showToast('Gagal.','error'); }
+};
+document.getElementById('testi-tbody').addEventListener('click', function(e) {
+  const tb = e.target.closest('[data-tt]'), db2 = e.target.closest('[data-td]');
+  if (tb) { const p = tb.getAttribute('data-tt').split(','); toggleTestiApproval(p[0], p[1]==='true'); }
+  if (db2) deleteTesti(db2.getAttribute('data-td'));
+});
+onValue(ref(db,'testimonials'), snap => {
+  const raw = snap.val(); DD.testimoni = raw||{}; aTR = raw||{};
+  let total=0, approved=0, pending=0;
+  if (raw) Object.values(raw).forEach(t => { total++; if (t.approved!==false) approved++; else pending++; });
+  document.getElementById('stat-testi-total').textContent = total;
+  document.getElementById('stat-testi-approved').textContent = approved;
+  document.getElementById('stat-testi-pending').textContent = pending;
+  const bv = pending>99?'99+':String(pending);
+  const bd = document.getElementById('testiPendingBadge'), bm = document.getElementById('testiPendingBadgeMob');
+  if (pending>0) { bd.textContent=bv; bd.classList.remove('hidden'); bm.textContent=bv; bm.classList.remove('hidden'); }
+  else { bd.classList.add('hidden'); bm.classList.add('hidden'); }
+  renderTesti(); updateDash();
+});
+
+// ===== DONE PAYMENT =====
+window.openDoneModal = function(isEdit, data) {
+  document.getElementById('doneModal').classList.remove('hidden');
+  if (isEdit && data) {
+    document.getElementById('dpId').value = data.id;
+    document.getElementById('dpBuyer').value = data.buyerName||'';
+    document.getElementById('dpProduct').value = data.product||'';
+    document.getElementById('dpPackage').value = data.pkg||'';
+    document.getElementById('dpPrice').value = data.price||'';
+    document.getElementById('dpVisible').checked = data.visible!==false;
+  } else { document.getElementById('doneForm').reset(); document.getElementById('dpId').value = ''; document.getElementById('dpVisible').checked = true; }
+};
+window.closeDoneModal = () => document.getElementById('doneModal').classList.add('hidden');
+window.handleDoneSubmit = async function(e) {
+  e.preventDefault();
+  const id = document.getElementById('dpId').value;
+  const price = parseInt(document.getElementById('dpPrice').value,10);
+  if (!price||price<=0) { showToast('Harga harus lebih dari 0.','error'); return; }
+  const data = { buyerName:document.getElementById('dpBuyer').value.trim(), product:document.getElementById('dpProduct').value.trim(), pkg:document.getElementById('dpPackage').value.trim(), price, visible:document.getElementById('dpVisible').checked, manual:true };
+  try {
+    if (id) { await update(ref(db,'done_payments/'+id), data); showToast('Diupdate!'); }
+    else { data.createdAt = serverTimestamp(); await set(push(ref(db,'done_payments')), data); showToast('Ditambahkan!'); }
+    closeDoneModal();
+  } catch(e) { showToast('Gagal.','error'); }
+};
+window.toggleDoneVisible = async function(id, current) {
+  try { await update(ref(db,'done_payments/'+id), {visible:!current}); } catch(e) { showToast('Gagal.','error'); }
+};
+window.deleteDone = async function(id) {
+  if (!confirm('Hapus data done payment ini?')) return;
+  try { await remove(ref(db,'done_payments/'+id)); showToast('Dihapus.'); } catch(e) { showToast('Gagal.','error'); }
+};
+window.openDpChat = function(orderId) { switchTab('orders'); setTimeout(() => openOrderDetail(orderId), 150); };
+document.getElementById('dp-tbody').addEventListener('click', function(e) {
+  const eb = e.target.closest('[data-de]'), db2 = e.target.closest('[data-dd]');
+  const tb = e.target.closest('[data-dtv]'), cb = e.target.closest('[data-dc]');
+  if (eb) openDoneModal(true, edc[eb.getAttribute('data-de')]);
+  if (db2) deleteDone(db2.getAttribute('data-dd'));
+  if (tb) { const p = tb.getAttribute('data-dtv').split(','); toggleDoneVisible(p[0], p[1]==='true'); }
+  if (cb) openDpChat(cb.getAttribute('data-dc'));
+});
+onValue(ref(db,'done_payments'), snap => {
+  const raw = snap.val(); DD.donePayments = raw||{};
+  const tbody = document.getElementById('dp-tbody'); tbody.innerHTML = '';
+  edc = {}; let total=0, revenue=0, visible=0;
+  if (!raw) { tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Belum ada data.</td></tr>'; }
+  else {
+    Object.keys(raw).map(k => ({k,v:raw[k]})).sort((a,b) => nTs(b.v.createdAt)-nTs(a.v.createdAt)).forEach(({k,v}) => {
+      total++; revenue += Number(v.price||0); if (v.visible!==false) visible++;
+      edc[k] = Object.assign({id:k}, v);
+      const linked = !!v.orderId;
+      const linkH = linked ? `<button data-dc="${v.orderId}" class="inline-flex items-center gap-1.5 px-2.5 rounded-lg text-[11px] font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments text-[10px]"></i> Chat</button>` : '<span class="text-[10px] text-muted-4 font-mono">MANUAL</span>';
+      const vis = v.visible !== false;
+      const vc = vis ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-muted-4/10 text-muted-3 border-muted-4/20';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="font-bold text-sm text-white">${esc(v.buyerName||'-')}</td><td class="text-sm text-muted-1">${esc(v.product||'-')}</td><td class="text-right font-mono text-sm text-green-400">${formatCurrency(v.price||0)}</td><td class="text-center">${linkH}</td><td class="text-center"><button data-dtv="${k},${vis}" class="status-badge border ${vc} cursor-pointer hover:opacity-80 transition">${vis?'YA':'TIDAK'}</button></td><td class="text-center whitespace-nowrap"><button data-de="${k}" class="text-cyan-400 hover:text-cyan-300 p-1.5 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button> <button data-dd="${k}" class="text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></td>`;
+      tbody.appendChild(tr);
+    });
+  }
+  document.getElementById('stat-dp-total').textContent = total;
+  document.getElementById('stat-dp-revenue').textContent = formatCurrency(revenue);
+  document.getElementById('stat-dp-visible').textContent = visible;
+  updateDash();
+});
+
+// ===== ORDERS =====
+onValue(ref(db,'orders'), snap => {
+  const raw = snap.val(); DD.orders = raw||{};
+  const tbody = document.getElementById('orders-tbody'); tbody.innerHTML = '';
+  let nr = 0;
+  if (!raw) { tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-muted-3">Belum ada pesanan.</td></tr>'; }
+  else {
+    Object.keys(raw).map(k => ({k,v:raw[k]})).sort((a,b) => nTs(b.v.createdAt)-nTs(a.v.createdAt)).forEach(({k,v}) => {
+      const msgs = getMsgEntries(v.chat||{});
+      const last = msgs.length ? msgs[msgs.length-1].data : null;
+      if (!last || last.sender==='buyer') nr++;
+      let bmc = 0; msgs.forEach(m => { if (m.data.sender==='buyer') bmc++; });
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="font-bold text-sm text-white">${esc(v.buyerName||'-')}</td><td class="text-sm text-muted-2">${esc(v.productTitle||'-')}</td><td class="text-sm font-mono text-muted-3">${esc(v.buyerWhatsapp||'-')}</td><td class="text-center"><span class="status-badge border ${SS[v.status]||SS.pending}">${esc(v.status||'pending')}</span></td><td class="text-center"><button data-oc="${k}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-accent/10 border border-red-accent/15 text-red-accent hover:bg-red-accent/15 transition"><i class="fas fa-comments"></i> Chat${bmc?`<span class="w-4 h-4 bg-red-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center">${bmc}</span>`:''}</button></td><td class="text-center whitespace-nowrap"><button data-odp="${k}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-500/10 border border-green-500/20 text-green-400 hover:bg-green-500/20 transition mr-1"><i class="fas fa-check-circle"></i> Done</button><button data-od="${k}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 transition"><i class="fas fa-trash"></i></button></td>`;
+      tbody.appendChild(tr);
+    });
+  }
+  const bv = nr>99?'99+':String(nr);
+  const b = document.getElementById('orderBadge'), bm = document.getElementById('orderBadgeMob');
+  if (nr>0) { b.textContent=bv; b.classList.remove('hidden'); bm.textContent=bv; bm.classList.remove('hidden'); }
+  else { b.classList.add('hidden'); bm.classList.add('hidden'); }
+  updateDash();
+  if (currentChatOrderId) {
+    if (DD.orders[currentChatOrderId]) updateOrderDetailView(currentChatOrderId);
+    else closeOrderDetail();
+  }
+});
+document.getElementById('orders-tbody').addEventListener('click', function(e) {
+  const cb = e.target.closest('[data-oc]'), dp = e.target.closest('[data-odp]'), db2 = e.target.closest('[data-od]');
+  if (cb) openOrderDetail(cb.getAttribute('data-oc'));
+  if (dp) { const id = dp.getAttribute('data-odp'); openOrderDetail(id); setTimeout(() => showDpForm(), 120); }
+  if (db2) deleteOrder(db2.getAttribute('data-od'));
+});
+
+// ===== ORDER DETAIL =====
+function renderChatMessages(chat) {
+  const wrap = document.getElementById('chatMessages');
+  const entries = getMsgEntries(chat);
+  if (!entries.length) { wrap.innerHTML = '<div class="text-center text-muted-3 text-sm py-8">Kosong.</div>'; return; }
+  wrap.innerHTML = '';
+  entries.forEach(({id,data:msg}) => {
+    const isAdmin = msg.sender === 'admin';
+    const key = currentChatOrderId + '-' + id;
+    if (msg.image) imgStore[key] = msg.image;
+    const row = document.createElement('div');
+    row.className = 'flex ' + (isAdmin?'justify-end':'justify-start');
+    let imgH = '';
+    if (msg.image) imgH = `<div class="mt-2"><img src="${esc(msg.image)}" class="rounded-xl border border-dark-border max-w-[220px] cursor-zoom-in" onclick="viewImage('${esc(key)}')"></div>`;
+    row.innerHTML = `<div class="chat-bubble rounded-2xl px-4 py-3 border ${isAdmin?'bg-red-accent/10 border-red-accent/20 text-white':'bg-dark-card border-dark-border text-muted-1'}"><div class="flex items-center gap-2 mb-1.5"><span class="source-badge ${isAdmin?'source-admin':'source-buyer'}">${isAdmin?'ADMIN':'BUYER'}</span><span class="text-[10px] font-mono text-muted-3">${fTimeS(msg.timestamp)}</span></div>${msg.text?`<div class="text-sm leading-relaxed whitespace-normal break-words">${escLines(msg.text)}</div>`:''}${imgH}</div>`;
+    wrap.appendChild(row);
+  });
+  wrap.scrollTop = wrap.scrollHeight;
+}
+function updateOrderDetailView(orderId) {
+  const order = DD.orders[orderId];
+  if (!order) { closeOrderDetail(); return; }
+  document.getElementById('detailOrderId').textContent = orderId.slice(-6).toUpperCase();
+  document.getElementById('detailBuyerName').textContent = order.buyerName||'-';
+  document.getElementById('detailProduct').textContent = order.productTitle||'-';
+  document.getElementById('detailPrice').textContent = formatCurrency(getOrderPrice(order));
+  document.getElementById('detailNote').textContent = getOrderNote(order);
+  document.getElementById('detailDate').textContent = fTime(order.createdAt);
+  document.getElementById('detailStatus').value = order.status||'pending';
+  const wa = cleanWa(order.buyerWhatsapp||'');
+  document.getElementById('detailWaText').textContent = wa||'-';
+  document.getElementById('detailWaText').href = wa ? getWaLink(wa) : '#';
+  document.getElementById('detailWaLink').href = wa ? getWaLink(wa) : '#';
+  renderChatMessages(order.chat||{});
+  renderQrisQuickBar();
+}
+window.openOrderDetail = function(orderId) {
+  if (!DD.orders[orderId]) { showToast('Order tidak ditemukan.','error'); return; }
+  currentChatOrderId = orderId;
+  document.getElementById('orderDetailPanel').classList.remove('hidden');
+  clearChatImage(); hideDpForm();
+  updateOrderDetailView(orderId);
+  setTimeout(() => document.getElementById('chatInput').focus(), 100);
+};
+window.closeOrderDetail = function() {
+  currentChatOrderId = null;
+  document.getElementById('orderDetailPanel').classList.add('hidden');
+  hideDpForm(); clearChatImage();
+  document.getElementById('chatInput').value = '';
+};
+window.updateOrderStatusFromPanel = async function() {
+  if (!currentChatOrderId) return;
+  try { await update(ref(db,'orders/'+currentChatOrderId), {status:document.getElementById('detailStatus').value}); showToast('Status diupdate.'); }
+  catch(e) { showToast('Gagal.','error'); }
+};
+window.deleteOrder = async function(id) {
+  if (!confirm('Hapus order ini?')) return;
+  try { await remove(ref(db,'orders/'+id)); if (currentChatOrderId===id) closeOrderDetail(); showToast('Order dihapus.'); }
+  catch(e) { showToast('Gagal.','error'); }
+};
+window.showDpForm = function() {
+  if (!currentChatOrderId) return;
+  const order = DD.orders[currentChatOrderId]||{};
+  const existing = findDpByOrderId(currentChatOrderId);
+  document.getElementById('dpChatBuyer').value = existing?(existing.buyerName||''):(order.buyerName||'');
+  document.getElementById('dpChatProduct').value = existing?(existing.product||''):(order.productTitle||'');
+  document.getElementById('dpChatPkg').value = existing?(existing.pkg||''):(order.package||order.plan||'');
+  document.getElementById('dpChatPrice').value = existing?(existing.price||0):getOrderPrice(order);
+  document.getElementById('dpChatVisible').checked = existing?existing.visible!==false:true;
+  document.getElementById('dpFormBar').classList.add('open');
+};
+window.hideDpForm = () => document.getElementById('dpFormBar').classList.remove('open');
+window.submitDpFromChat = async function() {
+  if (!currentChatOrderId) return;
+  const buyerName = document.getElementById('dpChatBuyer').value.trim();
+  const product = document.getElementById('dpChatProduct').value.trim();
+  const pkg = document.getElementById('dpChatPkg').value.trim();
+  const price = parseInt(document.getElementById('dpChatPrice').value,10);
+  const visible = document.getElementById('dpChatVisible').checked;
+  if (!buyerName||!product||!price||price<=0) { showToast('Lengkapi buyer, produk, dan harga.','error'); return; }
+  const existing = findDpByOrderId(currentChatOrderId);
+  try {
+    let doneId = existing?existing.id:'';
+    const data = { buyerName, product, pkg, price, visible, orderId:currentChatOrderId, manual:false, linkedAt:serverTimestamp() };
+    if (existing) { await update(ref(db,'done_payments/'+existing.id), data); }
+    else { const nr = push(ref(db,'done_payments')); doneId = nr.key; data.createdAt = serverTimestamp(); await set(nr, data); }
+    await update(ref(db,'orders/'+currentChatOrderId), {status:'completed', donePaymentId:doneId});
+    await set(push(ref(db,'orders/'+currentChatOrderId+'/chat')), {sender:'admin', text:'Pembayaran sudah dikonfirmasi. Terima kasih!', timestamp:serverTimestamp()});
+    hideDpForm(); showToast('Done payment berhasil ditautkan.');
+  } catch(e) { showToast('Gagal.','error'); }
+};
+window.clearChatImage = function() {
+  currentChatImage = null;
+  document.getElementById('chatImagePreview').classList.add('hidden');
+  document.getElementById('chatPreviewImg').src = '';
+  document.getElementById('chatPreviewName').textContent = '-';
+};
+window.sendChat = async function(sender='admin') {
+  if (!currentChatOrderId) { showToast('Pilih order dulu.','error'); return; }
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  const normalized = text.toLowerCase();
+  if (!text && !currentChatImage) { showToast('Tulis pesan atau pilih gambar.','error'); return; }
+  if (sender==='admin' && !currentChatImage) {
+    if (normalized==='/donepayment') { input.value=''; showDpForm(); return; }
+    if (qC[normalized]) { input.value=''; await quickSendQris(normalized); return; }
+  }
+  try {
+    const adminId = sessionStorage.getItem('kryonix_uid') || '';
+    const payload = {sender, text:text||'', timestamp:serverTimestamp(), adminId};
+    if (currentChatImage) { payload.image = currentChatImage.data; if (!payload.text) payload.text = sender==='admin'?'Mengirim gambar.':'Gambar'; }
+    await set(push(ref(db,'orders/'+currentChatOrderId+'/chat')), payload);
+    if (sender==='admin') {
+      const cur = DD.orders[currentChatOrderId];
+      if (!cur||!cur.status||cur.status==='pending') await update(ref(db,'orders/'+currentChatOrderId), {status:'processing'});
     }
+    input.value=''; clearChatImage();
+  } catch(e) { showToast('Gagal kirim chat.','error'); }
+};
+document.getElementById('chatImageInput').addEventListener('change', async function(e) {
+  const file = e.target.files[0]; if (!file) return;
+  try { const img = await compressImage(file, 900, 0.72); currentChatImage = {data:img, name:file.name}; document.getElementById('chatPreviewImg').src = img; document.getElementById('chatPreviewName').textContent = file.name; document.getElementById('chatImagePreview').classList.remove('hidden'); }
+  catch(err) { showToast(typeof err==='string'?err:'Gagal upload gambar.','error'); }
+  e.target.value = '';
+});
+document.getElementById('chatInput').addEventListener('keydown', e => { if (e.key==='Enter') { e.preventDefault(); sendChat('admin'); } });
 
-    const myAdminUid = sessionStorage.getItem('kryonix_uid') || null;
+// ===== QRIS =====
+function renderQrisQuickBar() {
+  const bar = document.getElementById('qrisQuickBar'), inner = document.getElementById('qrisQuickBarInner');
+  const cmds = Object.keys(qC);
+  if (!cmds.length) { bar.classList.add('hidden'); return; }
+  bar.classList.remove('hidden');
+  inner.innerHTML = '<span class="text-[10px] text-muted-3 font-mono flex-shrink-0">QRIS:</span>';
+  cmds.sort().forEach(cmd => {
+    const btn = document.createElement('button');
+    btn.className = 'qris-cmd-chip'; btn.textContent = cmd; btn.setAttribute('data-qs', cmd); btn.title = qC[cmd].label||cmd;
+    inner.appendChild(btn);
+  });
+}
+function renderQrisList() {
+  const list = document.getElementById('qrisList');
+  const ids = Object.keys(qR);
+  if (!ids.length) { list.innerHTML = '<div class="text-center py-8 text-muted-3"><i class="fas fa-qrcode text-3xl mb-3 text-muted-4 block"></i><p class="text-sm">Belum ada QRIS.</p></div>'; return; }
+  list.innerHTML = '';
+  ids.sort((a,b) => (qR[a].command||'').localeCompare(qR[b].command||'')).forEach(id => {
+    const q = qR[id];
+    const card = document.createElement('div'); card.className = 'qris-card';
+    const imgH = q.image ? `<img src="${esc(q.image)}" alt="${esc(q.label||q.command||'QRIS')}">` : '<div class="w-16 h-16 rounded-lg border border-dark-border flex items-center justify-center text-muted-4 flex-shrink-0"><i class="fas fa-qrcode text-xl"></i></div>';
+    card.innerHTML = `${imgH}<div class="flex-1 min-w-0"><div class="flex items-center gap-2 mb-0.5"><code class="text-sm font-mono text-red-accent font-bold">${esc(q.command||'-')}</code><span class="text-muted-4">-</span><span class="text-sm text-muted-1 truncate">${esc(q.label||'-')}</span></div></div><div class="flex items-center gap-1 flex-shrink-0"><button data-qe="${id}" class="text-cyan-400 hover:text-cyan-300 p-2 rounded-lg hover:bg-cyan-500/10 transition"><i class="fas fa-edit"></i></button><button data-qd="${id}" class="text-red-400 hover:text-red-300 p-2 rounded-lg hover:bg-red-500/10 transition"><i class="fas fa-trash"></i></button></div>`;
+    list.appendChild(card);
+  });
+}
+document.getElementById('qrisList').addEventListener('click', function(e) {
+  const eb = e.target.closest('[data-qe]'), db2 = e.target.closest('[data-qd]');
+  if (eb) { const id = eb.getAttribute('data-qe'); if (qR[id]) openQrisModal(true, id, qR[id]); }
+  if (db2) deleteQris(db2.getAttribute('data-qd'));
+});
+document.getElementById('qrisQuickBarInner').addEventListener('click', function(e) {
+  const btn = e.target.closest('[data-qs]'); if (btn) quickSendQris(btn.getAttribute('data-qs'));
+});
+window.openQrisModal = function(isEdit=false, editId='', data={}) {
+  document.getElementById('qrisModal').classList.remove('hidden');
+  document.getElementById('qrisModalTitle').textContent = isEdit?'Edit QRIS':'Tambah QRIS';
+  document.getElementById('qrisForm').reset(); document.getElementById('qrisEditId').value = '';
+  document.getElementById('qrisFormPreview').classList.add('hidden'); qFD = {image:null};
+  if (isEdit && data) {
+    document.getElementById('qrisEditId').value = editId||'';
+    document.getElementById('qrisCommand').value = data.command||'';
+    document.getElementById('qrisLabel').value = data.label||'';
+    if (data.image) { qFD.image=data.image; document.getElementById('qrisFormImg').src=data.image; document.getElementById('qrisFormPreview').classList.remove('hidden'); }
+  }
+};
+window.closeQrisModal = () => document.getElementById('qrisModal').classList.add('hidden');
+window.deleteQris = async function(id) {
+  if (!confirm('Hapus QRIS ini?')) return;
+  try { await remove(ref(db,'settings/qris_commands/'+id)); showToast('QRIS dihapus.'); } catch(e) { showToast('Gagal.','error'); }
+};
+window.handleQrisSubmit = async function(e) {
+  e.preventDefault();
+  const id = document.getElementById('qrisEditId').value;
+  const cmd = document.getElementById('qrisCommand').value.trim().toLowerCase();
+  const lbl = document.getElementById('qrisLabel').value.trim();
+  if (!cmd.startsWith('/')) { showToast('Perintah harus diawali /','error'); return; }
+  if (!qFD.image && !id) { showToast('Upload gambar QRIS dulu.','error'); return; }
+  let dup = false;
+  Object.keys(qR).forEach(qId => { if ((qR[qId].command||'').toLowerCase()===cmd && qId!==id) dup=true; });
+  if (dup) { showToast('Perintah QRIS sudah ada.','error'); return; }
+  try {
+    const data = {command:cmd, label:lbl};
+    if (qFD.image) data.image = qFD.image;
+    if (id) { await update(ref(db,'settings/qris_commands/'+id), data); showToast('QRIS diupdate!'); }
+    else { data.createdAt = serverTimestamp(); await set(push(ref(db,'settings/qris_commands')), data); showToast('QRIS ditambahkan!'); }
+    closeQrisModal();
+  } catch(e) { showToast('Gagal.','error'); }
+};
+window.quickSendQris = async function(cmd) {
+  if (!currentChatOrderId) return;
+  const q = qC[cmd]; if (!q||!q.image) return;
+  try {
+    await set(push(ref(db,'orders/'+currentChatOrderId+'/chat')), {sender:'admin', text:'Pembayaran via '+(q.label||cmd)+'. Scan QRIS berikut:', image:q.image, timestamp:serverTimestamp()});
+    showToast('QRIS terkirim!');
+  } catch(e) { showToast('Gagal.','error'); }
+};
+document.getElementById('qrisFormFile').addEventListener('change', async function(e) {
+  const file = e.target.files[0]; if (!file) return;
+  try { qFD.image = await compressImage(file, 700, 0.68); document.getElementById('qrisFormImg').src = qFD.image; document.getElementById('qrisFormPreview').classList.remove('hidden'); }
+  catch(err) { showToast(typeof err==='string'?err:'Gagal upload QRIS.','error'); }
+  e.target.value = '';
+});
+onValue(ref(db,'settings/qris_commands'), snap => {
+  const raw = snap.val(); qC={}; qR={};
+  if (raw) Object.keys(raw).forEach(id => { qR[id]=raw[id]; const cmd=String(raw[id].command||'').toLowerCase().trim(); if (cmd) qC[cmd]=raw[id]; });
+  renderQrisList(); renderQrisQuickBar();
+});
 
-    // =================== HELPERS ===================
-    let toastTimer = null;
-    function showToast(msg, type = 'success') {
-      if (toastTimer) clearTimeout(toastTimer);
-      const el = document.getElementById('toast');
-      el.textContent = msg; el.className = 'toast ' + type + ' show';
-      toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
-    }
-    function esc(t) {
-      if (t == null) return '';
-      const d = document.createElement('div'); d.textContent = String(t); return d.innerHTML;
-    }
-    function fTime(ts) {
-      if (!ts || typeof ts !== 'number') return '-';
-      const d = new Date(ts);
-      return d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) + ' ' + d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-    }
-    function updateClock() {
-      const n = new Date();
-      const el = document.getElementById('dashClock');
-      if (el) el.textContent = n.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' – ' + n.toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
-    }
-    updateClock(); setInterval(updateClock, 1000);
+// ===== SETTINGS =====
+async function loadSettings() {
+  try { const s = await get(ref(db,'settings/tos')); document.getElementById('tos-input').value = s.val()||''; } catch(e) {}
+}
+window.saveSettings = async function() {
+  try { await set(ref(db,'settings/tos'), document.getElementById('tos-input').value.trim()); showToast('Settings disimpan!'); }
+  catch(e) { showToast('Gagal.','error'); }
+};
 
-    function initHeader() {
-      const name = sessionStorage.getItem('kryonix_admin_name') || sessionStorage.getItem('admin_name') || 'Admin';
-      const role = (sessionStorage.getItem('kryonix_admin_role') || 'ADMIN').toUpperCase();
-      document.getElementById('headerName').textContent = name;
-      document.getElementById('headerRole').textContent = role;
-      document.getElementById('headerAvatar').textContent = name.charAt(0).toUpperCase();
-    }
-    initHeader();
+// ============================================================
+// ⚠️ WARNING SYSTEM
+// ============================================================
+function getReadSet() { try { return new Set(JSON.parse(localStorage.getItem(READ_KEY)||'[]')); } catch(e) { return new Set(); } }
+function saveReadSet(s) { try { localStorage.setItem(READ_KEY, JSON.stringify([...s])); } catch(e) {} }
 
-    const HT = { dashboard: 'Dashboard', products: 'Products', orders: 'Orders', testimoni: 'Testimoni', donepayment: 'Done Payment', settings: 'Settings' };
-    window.switchTab = function (tab) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      const el = document.getElementById('tab-' + tab);
-      if (el) el.classList.remove('hidden');
-      document.querySelectorAll('aside .nav-item').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.mob-nav').forEach(el => el.classList.remove('active'));
-      const mb = document.querySelector('[data-mob="' + tab + '"]');
-      if (mb) mb.classList.add('active');
-      document.getElementById('headerTitle').textContent = HT[tab] || 'Admin';
-      if (tab === 'settings') loadSettings();
-    };
-    window.openDrawer = () => { document.getElementById('drawerOverlay').classList.add('open'); document.getElementById('drawerPanel').classList.add('open'); };
-    window.closeDrawer = () => { document.getElementById('drawerOverlay').classList.remove('open'); document.getElementById('drawerPanel').classList.remove('open'); };
-    window.doLogout = () => { sessionStorage.clear(); window.location.href = 'login-admin.html'; };
-    window.saveSettings = async () => {
-      try { await set(ref(db, 'settings/tos'), document.getElementById('tos-input').value.trim()); showToast('Tersimpan!'); }
-      catch (e) { showToast('Gagal.', 'error'); }
-    };
-    async function loadSettings() {
-      try { const s = await get(ref(db, 'settings/tos')); document.getElementById('tos-input').value = s.val() || ''; }
-      catch (e) { }
-    }
+if (myAdminUid) {
+  onValue(ref(db, 'admins/' + myAdminUid + '/warnings'), snap => {
+    warningsData = snap.val() || {};
+    processWarnings();
+  });
+}
 
-    // =========================================================
-    // ⚠️ WARNING SYSTEM — Core Logic
-    // =========================================================
+function processWarnings() {
+  const readSet = getReadSet();
+  const allIds = Object.keys(warningsData);
+  const unreadIds = allIds.filter(id => !readSet.has(id));
+  const unread = unreadIds.length, total = allIds.length;
+  updateWarningBadges(unread);
+  document.getElementById('warnPanelTotal').textContent = total;
+  document.getElementById('warnPanelUnread').textContent = unread;
+  document.getElementById('warnPanelRead').textContent = total - unread;
+  renderWarningPanelList(readSet);
+  renderDashWarnCard(total, readSet);
+  const prevCount = parseInt(sessionStorage.getItem('kryonix_warn_seen')||'0');
+  if (unread > 0 && !popupShownThisSession) {
+    popupShownThisSession = true;
+    sessionStorage.setItem('kryonix_warn_seen', String(unread));
+    setTimeout(() => showWarningPopup(unreadIds), 1200);
+  } else if (unread > prevCount) {
+    sessionStorage.setItem('kryonix_warn_seen', String(unread));
+    showWarningPopup(unreadIds);
+  } else {
+    sessionStorage.setItem('kryonix_warn_seen', String(unread));
+  }
+}
 
-    let warningsData = {}; // { warnId: { text, from, timestamp, read? } }
-    let popupShownThisSession = false;
-    const READ_KEY = 'kryonix_warn_read_' + (myAdminUid || 'admin');
+function updateWarningBadges(unread) {
+  const nb = document.getElementById('warnNavBadge'), nbtn = document.getElementById('warnNavBtn');
+  const mb = document.getElementById('warnBadgeMob');
+  const hb = document.getElementById('headerWarnBtn');
+  const banner = document.getElementById('warnSidebarBanner');
+  const bc = document.getElementById('warnBannerCount');
+  const db2 = document.getElementById('dashWarnBadge');
+  if (unread > 0) {
+    const v = unread>99?'99+':String(unread);
+    nb.textContent=v; nb.classList.remove('hidden');
+    nbtn.classList.add('has-warn'); nbtn.style.color='#fbbf24';
+    mb.textContent=v; mb.classList.remove('hidden');
+    hb.classList.remove('hidden');
+    banner.classList.remove('hidden'); bc.textContent=unread;
+    if (db2) { db2.textContent=v; db2.classList.remove('hidden'); }
+  } else {
+    nb.classList.add('hidden'); nbtn.classList.remove('has-warn'); nbtn.style.color='';
+    mb.classList.add('hidden'); hb.classList.add('hidden'); banner.classList.add('hidden');
+    if (db2) db2.classList.add('hidden');
+  }
+}
 
-    function getReadSet() {
-      try { return new Set(JSON.parse(localStorage.getItem(READ_KEY) || '[]')); }
-      catch (e) { return new Set(); }
-    }
-    function saveReadSet(s) {
-      try { localStorage.setItem(READ_KEY, JSON.stringify([...s])); }
-      catch (e) { }
-    }
+function renderDashWarnCard(total, readSet) {
+  const card = document.getElementById('dashWarnCard');
+  const countEl = document.getElementById('dashWarnCount');
+  const preview = document.getElementById('dashWarnPreview');
+  if (!total) { card.classList.add('hidden'); return; }
+  card.classList.remove('hidden'); countEl.textContent = total;
+  const sorted = Object.keys(warningsData).map(id => ({id,...warningsData[id]})).sort((a,b) => (b.timestamp||0)-(a.timestamp||0)).slice(0,2);
+  preview.innerHTML = sorted.map(w => {
+    const isUnread = !readSet.has(w.id);
+    return `<div class="rounded-lg p-2.5 text-xs ${isUnread?'border border-yellow-500/15':'bg-dark-bg border border-dark-border opacity-60'}" style="${isUnread?'background:rgba(234,179,8,.04)':''}">
+      <div class="flex items-center gap-1.5 mb-1">${isUnread?'<div class="w-1.5 h-1.5 rounded-full bg-yellow-400 flex-shrink-0"></div>':''}<span class="font-mono text-[10px] text-muted-4">${fTime(w.timestamp)}</span></div>
+      <div class="text-muted-2 leading-relaxed" style="overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${esc(w.text)}</div>
+    </div>`;
+  }).join('');
+}
 
-    // Listen to warnings for THIS admin only (stored under admins/{uid}/warnings)
-    if (myAdminUid) {
-      onValue(ref(db, 'admins/' + myAdminUid + '/warnings'), function (snap) {
-        const raw = snap.val() || {};
-        warningsData = raw;
-        processWarnings();
-      });
-    }
-
-    function processWarnings() {
-      const readSet = getReadSet();
-      const allIds = Object.keys(warningsData);
-      const unreadIds = allIds.filter(id => !readSet.has(id));
-      const total = allIds.length;
-      const unread = unreadIds.length;
-      const read = total - unread;
-
-      // Update all badges
-      updateWarningBadges(unread, total);
-
-      // Update panel stats
-      document.getElementById('warnPanelTotal').textContent = total;
-      document.getElementById('warnPanelUnread').textContent = unread;
-      document.getElementById('warnPanelRead').textContent = read;
-
-      // Render panel list
-      renderWarningPanelList(readSet);
-
-      // Render dashboard card
-      renderDashboardWarnCard(total, unread);
-
-      // Show popup for new unread warnings (once per session)
-      if (unread > 0 && !popupShownThisSession) {
-        popupShownThisSession = true;
-        setTimeout(() => showWarningPopup(unreadIds, readSet), 1200);
-      } else if (unread > 0) {
-        // For new warnings that arrive while panel is open — show popup again
-        // (track last seen count)
-        const prevCount = parseInt(sessionStorage.getItem('kryonix_warn_seen') || '0');
-        if (unread > prevCount) {
-          sessionStorage.setItem('kryonix_warn_seen', String(unread));
-          if (popupShownThisSession) {
-            // Only show popup for the truly NEW ones
-            const newIds = unreadIds.slice(0, unread - prevCount);
-            if (newIds.length > 0) showWarningPopup(newIds, readSet);
-          }
-        }
-      }
-      sessionStorage.setItem('kryonix_warn_seen', String(unread));
-    }
-
-    function updateWarningBadges(unread, total) {
-      // Sidebar nav badge
-      const navBadge = document.getElementById('warnNavBadge');
-      const navBtn = document.getElementById('warnNavBtn');
-      if (unread > 0) {
-        navBadge.textContent = unread > 99 ? '99+' : String(unread);
-        navBadge.classList.remove('hidden');
-        navBtn.classList.add('has-warn');
-        navBtn.style.color = '#fbbf24';
-      } else {
-        navBadge.classList.add('hidden');
-        navBtn.classList.remove('has-warn');
-        navBtn.style.color = '';
-      }
-
-      // Mobile badge
-      const mobBadge = document.getElementById('warnBadgeMob');
-      if (mobBadge) {
-        if (unread > 0) { mobBadge.textContent = unread; mobBadge.classList.remove('hidden'); }
-        else mobBadge.classList.add('hidden');
-      }
-
-      // Header bell
-      const headerBtn = document.getElementById('headerWarnBtn');
-      if (unread > 0) headerBtn.classList.remove('hidden');
-      else headerBtn.classList.add('hidden');
-
-      // Sidebar banner
-      const banner = document.getElementById('warnSidebarBanner');
-      const bannerCount = document.getElementById('warnBannerCount');
-      if (unread > 0) {
-        banner.classList.remove('hidden');
-        bannerCount.textContent = unread;
-      } else {
-        banner.classList.add('hidden');
-      }
-
-      // Dashboard quick action badge
-      const dashBadge = document.getElementById('dashWarnBadge');
-      if (dashBadge) {
-        if (unread > 0) { dashBadge.textContent = unread; dashBadge.classList.remove('hidden'); }
-        else dashBadge.classList.add('hidden');
-      }
-    }
-
-    function renderDashboardWarnCard(total, unread) {
-      const card = document.getElementById('dashWarnCard');
-      const countEl = document.getElementById('dashWarnCount');
-      const preview = document.getElementById('dashWarnPreview');
-      if (total === 0) { card.classList.add('hidden'); return; }
-      card.classList.remove('hidden');
-      countEl.textContent = total;
-      const readSet = getReadSet();
-
-      // Show last 2 warnings as preview
-      const sorted = Object.keys(warningsData)
-        .map(id => ({ id, ...warningsData[id] }))
-        .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
-        .slice(0, 2);
-
-      preview.innerHTML = sorted.map(w => {
-        const isUnread = !readSet.has(w.id);
-        return `<div class="rounded-lg p-2.5 text-xs ${isUnread ? 'bg-yellow-500/06 border border-yellow-500/15' : 'bg-dark-bg border border-dark-border opacity-60'}">
-          <div class="flex items-center gap-1.5 mb-1">
-            ${isUnread ? '<div class="w-1.5 h-1.5 rounded-full bg-yellow-400 flex-shrink-0"></div>' : ''}
-            <span class="font-mono text-[10px] text-muted-4">${fTime(w.timestamp)}</span>
-          </div>
-          <div class="text-muted-2 line-clamp-2 leading-relaxed">${esc(w.text)}</div>
-        </div>`;
-      }).join('');
-    }
-
-    function renderWarningPanelList(readSet) {
-      const container = document.getElementById('warningPanelList');
-      const ids = Object.keys(warningsData);
-      if (!ids.length) {
-        container.innerHTML = `<div class="text-center py-16">
-          <div class="w-16 h-16 rounded-2xl bg-dark-card border border-dark-border flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-shield-alt text-2xl text-muted-4"></i>
-          </div>
-          <div class="text-muted-3 text-sm font-semibold">Tidak ada peringatan</div>
-          <div class="text-muted-4 text-xs mt-1">Semua berjalan dengan baik!</div>
-        </div>`;
-        return;
-      }
-
-      const sorted = ids
-        .map(id => ({ id, ...warningsData[id] }))
-        .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-
-      container.innerHTML = '';
-      sorted.forEach(w => {
-        const isUnread = !readSet.has(w.id);
-        const item = document.createElement('div');
-        item.className = 'warning-item mb-3' + (isUnread ? '' : ' read');
-        item.innerHTML = `
-          <div class="flex items-start gap-3">
-            <div class="w-8 h-8 rounded-lg ${isUnread ? 'bg-yellow-500/15 border border-yellow-500/30' : 'bg-dark-card border border-dark-border'} flex items-center justify-center flex-shrink-0 mt-0.5">
-              <i class="fas fa-exclamation-triangle ${isUnread ? 'text-yellow-400' : 'text-muted-4'} text-xs"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-                ${isUnread ? '<span class="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-2 py-0.5 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>BARU</span>' : '<span class="text-[10px] font-mono text-muted-4 bg-dark-bg px-2 py-0.5 rounded-full border border-dark-border">DIBACA</span>'}
-                <span class="text-[10px] font-mono text-muted-4">${fTime(w.timestamp)}</span>
-                ${w.from ? `<span class="text-[10px] text-muted-4">dari <span class="text-yellow-500/70">${esc(w.from)}</span></span>` : ''}
-              </div>
-              <p class="text-sm text-muted-1 leading-relaxed break-words">${esc(w.text)}</p>
-            </div>
-            ${isUnread ? `<button onclick="markWarningRead('${w.id}')" class="w-7 h-7 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-4 hover:text-yellow-400 hover:border-yellow-500/30 transition flex-shrink-0" title="Tandai sudah baca"><i class="fas fa-check text-[10px]"></i></button>` : ''}
-          </div>`;
-        container.appendChild(item);
-      });
-    }
-
-    function showWarningPopup(unreadIds, readSet) {
-      const modal = document.getElementById('warningPopupModal');
-      const list = document.getElementById('popupWarnList');
-
-      const warnings = unreadIds
-        .map(id => ({ id, ...warningsData[id] }))
-        .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
-        .slice(0, 5); // show max 5 in popup
-
-      const fromName = warnings[0]?.from || 'Owner';
-      document.getElementById('popupWarnFrom').innerHTML = `Dari: <span class="text-yellow-400">${esc(fromName)}</span> &nbsp;·&nbsp; <span class="text-muted-3">${unreadIds.length} peringatan baru</span>`;
-
-      list.innerHTML = warnings.map((w, i) => `
-        <div class="rounded-xl p-3.5 border border-yellow-500/20 bg-yellow-500/04" style="animation-delay:${i * 80}ms">
-          <div class="flex items-center gap-2 mb-2">
-            <div class="w-1.5 h-1.5 rounded-full bg-yellow-400 flex-shrink-0"></div>
+function renderWarningPanelList(readSet) {
+  const container = document.getElementById('warningPanelList');
+  const ids = Object.keys(warningsData);
+  if (!ids.length) {
+    container.innerHTML = `<div class="text-center py-16"><div class="w-16 h-16 rounded-2xl bg-dark-card border border-dark-border flex items-center justify-center mx-auto mb-4"><i class="fas fa-shield-alt text-2xl text-muted-4"></i></div><div class="text-muted-3 text-sm font-semibold">Tidak ada peringatan</div><div class="text-muted-4 text-xs mt-1">Semua berjalan dengan baik!</div></div>`;
+    return;
+  }
+  container.innerHTML = '';
+  ids.map(id => ({id,...warningsData[id]})).sort((a,b) => (b.timestamp||0)-(a.timestamp||0)).forEach(w => {
+    const isUnread = !readSet.has(w.id);
+    const item = document.createElement('div');
+    item.className = 'warning-item mb-3' + (isUnread?'':' read');
+    item.innerHTML = `
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg ${isUnread?'bg-yellow-500/15 border border-yellow-500/30':'bg-dark-card border border-dark-border'} flex items-center justify-center flex-shrink-0 mt-0.5">
+          <i class="fas fa-exclamation-triangle ${isUnread?'text-yellow-400':'text-muted-4'} text-xs"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+            ${isUnread?'<span class="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-2 py-0.5 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>BARU</span>':'<span class="text-[10px] font-mono text-muted-4 bg-dark-bg px-2 py-0.5 rounded-full border border-dark-border">DIBACA</span>'}
             <span class="text-[10px] font-mono text-muted-4">${fTime(w.timestamp)}</span>
-            <div class="ml-auto text-[9px] font-mono text-yellow-500/50 uppercase tracking-wider">Peringatan</div>
+            ${w.from?`<span class="text-[10px] text-muted-4">dari <span class="text-yellow-500/70">${esc(w.from)}</span></span>`:''}
           </div>
           <p class="text-sm text-muted-1 leading-relaxed break-words">${esc(w.text)}</p>
         </div>
-      `).join('');
+        ${isUnread?`<button onclick="markWarningRead('${w.id}')" class="w-7 h-7 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-muted-4 hover:text-yellow-400 hover:border-yellow-500/30 transition flex-shrink-0" title="Tandai sudah baca"><i class="fas fa-check text-[10px]"></i></button>`:''}
+      </div>`;
+    container.appendChild(item);
+  });
+}
 
-      if (unreadIds.length > 5) {
-        list.innerHTML += `<div class="text-center py-2 text-xs text-muted-4 font-mono">... dan ${unreadIds.length - 5} peringatan lainnya</div>`;
-      }
+function showWarningPopup(unreadIds) {
+  const modal = document.getElementById('warningPopupModal');
+  const list = document.getElementById('popupWarnList');
+  const warnings = unreadIds.map(id => ({id,...warningsData[id]})).sort((a,b) => (b.timestamp||0)-(a.timestamp||0)).slice(0,5);
+  const fromName = warnings[0]?.from || 'Owner';
+  document.getElementById('popupWarnFrom').innerHTML = `Dari: <span class="text-yellow-400">${esc(fromName)}</span> &nbsp;·&nbsp; <span class="text-muted-3">${unreadIds.length} peringatan baru</span>`;
+  list.innerHTML = warnings.map((w,i) => `
+    <div class="rounded-xl p-3.5 border border-yellow-500/20" style="animation-delay:${i*80}ms;background:rgba(234,179,8,.03)">
+      <div class="flex items-center gap-2 mb-2"><div class="w-1.5 h-1.5 rounded-full bg-yellow-400 flex-shrink-0"></div><span class="text-[10px] font-mono text-muted-4">${fTime(w.timestamp)}</span><div class="ml-auto text-[9px] font-mono text-yellow-500/50 uppercase tracking-wider">Peringatan</div></div>
+      <p class="text-sm text-muted-1 leading-relaxed break-words">${esc(w.text)}</p>
+    </div>`).join('');
+  if (unreadIds.length > 5) list.innerHTML += `<div class="text-center py-2 text-xs text-muted-4 font-mono">... dan ${unreadIds.length-5} peringatan lainnya</div>`;
+  modal.style.display = 'flex';
+  setTimeout(() => modal.classList.add('show'), 10);
+  setTimeout(() => {
+    const btn = document.getElementById('warnNavBtn');
+    if (btn) { btn.classList.add('shake'); setTimeout(() => btn.classList.remove('shake'), 600); }
+  }, 300);
+}
 
-      modal.style.display = 'flex';
-      setTimeout(() => modal.classList.add('show'), 10);
+window.dismissWarningPopup = function() {
+  const m = document.getElementById('warningPopupModal');
+  m.classList.remove('show'); setTimeout(() => { m.style.display='none'; }, 300);
+};
+window.markWarningRead = function(id) {
+  const s = getReadSet(); s.add(id); saveReadSet(s); processWarnings();
+};
+window.markAllWarningsRead = function() {
+  const s = getReadSet();
+  Object.keys(warningsData).forEach(id => s.add(id));
+  saveReadSet(s); processWarnings(); showToast('Semua peringatan ditandai sudah dibaca.');
+};
+window.deleteAllReadWarnings = function() {
+  const s = getReadSet();
+  const unread = Object.keys(warningsData).filter(id => !s.has(id));
+  if (unread.length > 0) { showToast('Ada '+unread.length+' peringatan belum dibaca.','error'); return; }
+  const allIds = Object.keys(warningsData);
+  saveReadSet(new Set(allIds));
+  processWarnings(); showToast('Tampilan peringatan dibersihkan.');
+};
+window.openWarningPanel = function() {
+  document.getElementById('warningPanel').classList.add('open');
+  document.getElementById('warningPanelOverlay').classList.add('open');
+};
+window.closeWarningPanel = function() {
+  document.getElementById('warningPanel').classList.remove('open');
+  document.getElementById('warningPanelOverlay').classList.remove('open');
+};
 
-      // Shake the warning button in sidebar
-      setTimeout(() => {
-        const btn = document.getElementById('warnNavBtn');
-        if (btn) { btn.classList.add('shake'); setTimeout(() => btn.classList.remove('shake'), 600); }
-      }, 300);
-    }
+// ===== KEYBOARD SHORTCUTS =====
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    if (!document.getElementById('imageLightbox').classList.contains('hidden')) { closeLightbox(); return; }
+    if (document.getElementById('warningPopupModal').classList.contains('show')) { dismissWarningPopup(); return; }
+    if (document.getElementById('warningPanel').classList.contains('open')) { closeWarningPanel(); return; }
+    if (!document.getElementById('productModal').classList.contains('hidden')) { closeProductModal(); return; }
+    if (!document.getElementById('doneModal').classList.contains('hidden')) { closeDoneModal(); return; }
+    if (!document.getElementById('qrisModal').classList.contains('hidden')) { closeQrisModal(); return; }
+    if (!document.getElementById('orderDetailPanel').classList.contains('hidden')) { closeOrderDetail(); return; }
+    if (document.getElementById('drawerPanel').classList.contains('open')) closeDrawer();
+  }
+});
 
-    window.dismissWarningPopup = function () {
-      const modal = document.getElementById('warningPopupModal');
-      modal.classList.remove('show');
-      setTimeout(() => { modal.style.display = 'none'; }, 300);
-    };
-
-    window.markWarningRead = function (id) {
-      const readSet = getReadSet();
-      readSet.add(id);
-      saveReadSet(readSet);
-      processWarnings(); // re-render
-    };
-
-    window.markAllWarningsRead = function () {
-      const readSet = getReadSet();
-      Object.keys(warningsData).forEach(id => readSet.add(id));
-      saveReadSet(readSet);
-      processWarnings();
-      showToast('Semua peringatan ditandai sudah dibaca.');
-    };
-
-    window.deleteAllReadWarnings = function () {
-      const readSet = getReadSet();
-      // Only clear from localStorage — the actual data stays in Firebase (owner keeps it)
-      const unreadIds = Object.keys(warningsData).filter(id => !readSet.has(id));
-      if (unreadIds.length > 0) {
-        showToast('Ada ' + unreadIds.length + ' peringatan belum dibaca. Tandai baca dulu.', 'error');
-        return;
-      }
-      // Clear read tracking for already-read items
-      saveReadSet(new Set());
-      // This just resets so they show as unread again — 
-      // actually delete means mark all as permanently dismissed from view
-      // We'll mark all as read to "clear" the visual
-      const allIds = Object.keys(warningsData);
-      const newSet = new Set(allIds);
-      saveReadSet(newSet);
-      processWarnings();
-      showToast('Semua peringatan dibersihkan dari tampilan.');
-    };
-
-    window.openWarningPanel = function () {
-      document.getElementById('warningPanel').classList.add('open');
-      document.getElementById('warningPanelOverlay').classList.add('open');
-      // Mark as seen when opening
-    };
-
-    window.closeWarningPanel = function () {
-      document.getElementById('warningPanel').classList.remove('open');
-      document.getElementById('warningPanelOverlay').classList.remove('open');
-    };
-
-    // Keyboard ESC
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        const modal = document.getElementById('warningPopupModal');
-        if (modal.classList.contains('show')) { window.dismissWarningPopup(); return; }
-        if (document.getElementById('warningPanel').classList.contains('open')) { window.closeWarningPanel(); return; }
-      }
-    });
-
-    // =================== OTHER DATA (placeholder) ===================
-    onValue(ref(db, 'orders'), function (snap) {
-      const raw = snap.val() || {};
-      let nr = 0;
-      Object.values(raw).forEach(o => {
-        if (!o.chat || Object.keys(o.chat).length === 0) nr++;
-        else {
-          const keys = Object.keys(o.chat);
-          if (o.chat[keys[keys.length - 1]].sender === 'buyer') nr++;
-        }
-      });
-      document.getElementById('d-stat-orders').textContent = Object.keys(raw).length;
-      document.getElementById('d-stat-pending').textContent = nr;
-      const b = document.getElementById('orderBadge'), bm = document.getElementById('orderBadgeMob');
-      if (nr > 0) { b.textContent = nr; b.classList.remove('hidden'); bm.textContent = nr; bm.classList.remove('hidden'); }
-      else { b.classList.add('hidden'); bm.classList.add('hidden'); }
-    });
-
-    onValue(ref(db, 'products'), function (snap) {
-      const raw = snap.val() || {};
-      let ts = 0;
-      Object.values(raw).forEach(p => ts += (p.stock || 0));
-      document.getElementById('d-stat-products').textContent = Object.keys(raw).length;
-      document.getElementById('d-stat-stock').textContent = ts;
-    });
-
-    onValue(ref(db, 'done_payments'), function (snap) {
-      const raw = snap.val() || {};
-      let rev = 0;
-      Object.values(raw).forEach(d => rev += (d.price || 0));
-      document.getElementById('d-stat-revenue').textContent = 'Rp' + rev.toLocaleString('id-ID');
-      document.getElementById('d-stat-dpcount').textContent = Object.keys(raw).length;
-    });
-
-    onValue(ref(db, 'testimonials'), function (snap) {
-      const raw = snap.val() || {};
-      let sr = 0, pn = 0, tt = 0;
-      Object.values(raw).forEach(t => { tt++; sr += (t.rating || 0); if (t.approved === false) pn++; });
-      document.getElementById('d-stat-rating').textContent = tt ? (sr / tt).toFixed(1) : '0.0';
-      document.getElementById('d-stat-testicount').textContent = tt;
-      document.getElementById('d-stat-testi-pending').textContent = pn;
-      const bd = document.getElementById('testiPendingBadge'), bm = document.getElementById('testiPendingBadgeMob');
-      if (pn > 0) { bd.textContent = pn; bd.classList.remove('hidden'); bm.textContent = pn; bm.classList.remove('hidden'); }
-      else { bd.classList.add('hidden'); bm.classList.add('hidden'); }
-    });
-
-    switchTab('dashboard');
-  </script>
+switchTab('dashboard');
+</script>
 </body>
 </html>
