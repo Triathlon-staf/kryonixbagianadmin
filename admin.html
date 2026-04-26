@@ -917,8 +917,6 @@
       event.preventDefault();
       const id = document.getElementById('prodId').value;
       const cat = document.getElementById('prodCat').value;
-      const currentAdminName = sessionStorage.getItem('kryonix_admin_name') || sessionStorage.getItem('admin_name') || 'Admin';
-      const currentAdminId = sessionStorage.getItem('kryonix_admin_id') || sessionStorage.getItem('admin_id') || 'unknown';
       const data = {
         title: document.getElementById('prodTitle').value.trim(),
         category: cat,
@@ -935,9 +933,10 @@
           await update(ref(db, 'products/' + id), data);
           showToast('Produk diupdate!');
         } else {
+          // Saat tambah baru: simpan adminId (kryonix_uid = Firebase push key admin)
           data.createdAt = serverTimestamp();
-          data.adminId = currentAdminId;
-          data.adminName = currentAdminName;
+          data.adminId = sessionStorage.getItem('kryonix_uid') || '';
+          data.adminName = sessionStorage.getItem('kryonix_admin_name') || sessionStorage.getItem('kryonix_name') || 'Admin';
           await set(push(ref(db, 'products')), data);
           showToast('Produk ditambahkan!');
         }
@@ -1449,7 +1448,8 @@
       DD.products = raw || {};
       epc = {};
 
-      const myAdminId = sessionStorage.getItem('kryonix_admin_id') || sessionStorage.getItem('admin_id') || null;
+      // kryonix_uid = Firebase push key admin (set saat login di login-admin.html)
+      const myAdminId = sessionStorage.getItem('kryonix_uid') || '';
 
       let total = 0;
       let stock = 0;
@@ -1461,9 +1461,11 @@
       } else {
         Object.keys(raw).forEach(function (key) {
           const product = raw[key] || {};
-          // Hanya tampilkan produk milik admin ini
-          // Produk lama tanpa adminId tetap ditampilkan ke semua admin (backward compat)
-          if (product.adminId && myAdminId && product.adminId !== myAdminId) return;
+
+          // Produk lama tanpa adminId: tampilkan ke semua (backward compat)
+          // Produk baru dengan adminId: hanya tampilkan ke pemiliknya
+          if (product.adminId && product.adminId !== myAdminId) return;
+
           total += 1;
           stock += Number(product.stock || 0);
           if (Number(product.stock || 0) <= 0) empty += 1;
