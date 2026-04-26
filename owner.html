@@ -188,7 +188,7 @@
       </div>
 
       <div id="tab-orders" class="tab-content hidden p-5 md:p-8">
-        <div class="mb-8"><h2 class="text-2xl font-bold text-white">Order Management</h2><p class="text-sm text-muted-3 mt-1">Klik order untuk chat. Gunakan tombol <span class="inline-flex items-center gap-1 text-green-400/80 bg-green-500/8 px-2 py-0.5 rounded text-[11px] font-mono font-bold"><i class="fas fa-check-circle text-[10px]"></i> Done Pay</span> atau ketik <code class="text-red-accent/80 bg-red-accent/8 px-1.5 py-0.5 rounded text-[11px] font-mono">/donepayment</code>.</p></div>
+        <div class="mb-8"><h2 class="text-2xl font-bold text-white">Order Management</h2><p class="text-sm text-muted-3 mt-1">Klik order untuk chat.</p></div>
         <div class="bg-dark-card border border-dark-border rounded-xl overflow-hidden"><div class="overflow-x-auto"><table class="w-full admin-table"><thead><tr><th>Buyer</th><th>Product</th><th>WhatsApp</th><th class="text-center">Status</th><th class="text-center">Chat</th><th class="text-center">Del</th></tr></thead><tbody id="orders-tbody"><tr><td colspan="6" class="text-center py-10 text-muted-3"><i class="fas fa-spinner fa-spin mr-2"></i></td></tr></tbody></table></div></div>
       </div>
 
@@ -231,121 +231,13 @@
     </div>
   </main>
 
-  <div id="productModal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 modal-backdrop" onclick="closeProductModal()"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg">
-      <div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4 max-h-[90vh] overflow-y-auto">
-        <h3 id="productModalTitle" class="text-xl font-bold text-white mb-6">Add Product</h3>
-        <form id="productForm" onsubmit="handleProductSubmit(event)">
-          <input type="hidden" id="prodId">
-          <div class="space-y-4">
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Title</label><input type="text" id="prodTitle" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Category</label><select id="prodCat" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="hosting">Hosting</option><option value="vps">VPS</option><option value="domain">Domain</option><option value="game">Game Server</option><option value="dedicated">Dedicated</option><option value="other">Other</option></select></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Price (IDR)</label><input type="number" id="prodPrice" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Stock</label><input type="number" id="prodStock" required min="0" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Image URL</label><input type="url" id="prodImage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Description</label><textarea id="prodDesc" required rows="2" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Features (koma)</label><textarea id="prodFeatures" rows="3" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Icon</label><input type="text" id="prodIcon" placeholder="fa-server" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div class="flex justify-end gap-3 mt-6"><button type="button" onclick="closeProductModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Cancel</button><button type="submit" class="px-6 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Save</button></div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div id="partnerModal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 modal-backdrop" onclick="closePartnerModal()"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg">
-      <div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4 max-h-[90vh] overflow-y-auto">
-        <h3 id="partnerModalTitle" class="text-xl font-bold text-white mb-6">Add Partner</h3>
-        <form id="partnerForm" onsubmit="handlePartnerSubmit(event)">
-          <input type="hidden" id="ptId">
-          <div class="space-y-4">
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nama</label><input type="text" id="ptName" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Logo URL</label><input type="url" id="ptLogo" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Category</label><select id="ptCat" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="infrastructure">Infrastructure</option><option value="payment">Payment</option><option value="security">Security</option><option value="cdn">CDN</option><option value="domain">Domain</option><option value="game">Game Panel</option><option value="other">Other</option></select></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Icon</label><input type="text" id="ptIcon" placeholder="fa-server" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Website</label><input type="url" id="ptWebsite" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Description</label><textarea id="ptDesc" rows="2" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div>
-            <div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closePartnerModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Cancel</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Save</button></div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div id="doneModal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 modal-backdrop" onclick="closeDoneModal()"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-      <div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4">
-        <h3 class="text-xl font-bold text-white mb-2">Add Done Payment Manual</h3>
-        <p class="text-xs text-muted-3 mb-5"><i class="fas fa-info-circle mr-1"></i>Manual = tanpa link order.</p>
-        <form id="doneForm" onsubmit="handleDoneSubmit(event)">
-          <input type="hidden" id="dpId">
-          <div class="space-y-4">
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nick Buyer</label><input type="text" id="dpBuyer" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Produk</label><input type="text" id="dpProduct" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Paket</label><input type="text" id="dpPackage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Harga</label><input type="number" id="dpPrice" required min="1" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div>
-            <div class="flex items-center gap-2"><input type="checkbox" id="dpVisible" checked class="accent-red-500 w-4 h-4"><label for="dpVisible" class="text-sm text-muted-2 cursor-pointer">Publik</label></div>
-            <div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeDoneModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div id="qrisModal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 modal-backdrop" onclick="closeQrisModal()"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-      <div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4">
-        <h3 id="qrisModalTitle" class="text-xl font-bold text-white mb-6">Tambah QRIS</h3>
-        <form id="qrisForm" onsubmit="handleQrisSubmit(event)">
-          <input type="hidden" id="qrisEditId">
-          <div class="space-y-4">
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Perintah</label><input type="text" id="qrisCommand" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-red-accent font-mono text-lg" placeholder="/pay1"><p class="text-[10px] text-muted-4 mt-1">Harus diawali <code class="text-red-accent/60">/</code></p></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Label</label><input type="text" id="qrisLabel" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Gambar QRIS</label><div id="qrisFormPreview" class="hidden mb-3 p-3 rounded-xl bg-dark-bg border border-dark-border"><img id="qrisFormImg" class="max-h-40 mx-auto rounded-lg" alt="QRIS preview"></div><input type="file" id="qrisFormFile" accept="image/*" class="hidden"><button type="button" onclick="document.getElementById('qrisFormFile').click()" class="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-sm text-muted-2 hover:text-white hover:border-red-accent transition flex items-center justify-center gap-2"><i class="fas fa-upload"></i> Upload</button></div>
-            <div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeQrisModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div id="adminModal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 modal-backdrop" onclick="closeAdminModal()"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-      <div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4">
-        <h3 id="adminModalTitle" class="text-xl font-bold text-white mb-6">Tambah Admin</h3>
-        <form id="adminForm" onsubmit="handleAdminSubmit(event)">
-          <input type="hidden" id="admId">
-          <div class="space-y-4">
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nama Lengkap</label><input type="text" id="admName" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div>
-            <div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Umur</label><input type="number" id="admAge" required min="16" max="99" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Photo URL</label><input type="url" id="admPhoto" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><p class="text-[10px] text-muted-4 mt-1">Opsional</p></div></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Username Login</label><input type="text" id="admUsername" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm font-mono" placeholder="admin_raka"></div>
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Password Login</label><input type="text" id="admPassword" required minlength="4" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm font-mono" placeholder="passwordnya"></div>
-            <div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeAdminModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-gold-accent hover:bg-gold-bright text-black font-bold text-sm">Simpan</button></div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div id="warningModal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 modal-backdrop" onclick="closeWarningModal()"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-      <div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4">
-        <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i>Kirim Peringatan</h3>
-        <p id="warningTargetName" class="text-sm text-muted-2 mb-5">Untuk admin: -</p>
-        <form id="warningForm" onsubmit="handleWarningSubmit(event)">
-          <input type="hidden" id="warnAdminId">
-          <div class="space-y-4">
-            <div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Isi Peringatan</label><textarea id="warnText" required rows="4" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white text-sm resize-none" placeholder="Deskripsikan kesalahan..."></textarea></div>
-            <div class="flex justify-end gap-3"><button type="button" onclick="closeWarningModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-sm"><i class="fas fa-exclamation-triangle mr-1"></i>Kirim</button></div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  <!-- Modals (sama persis dengan aslinya) -->
+  <div id="productModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeProductModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4 max-h-[90vh] overflow-y-auto"><h3 id="productModalTitle" class="text-xl font-bold text-white mb-6">Add Product</h3><form id="productForm" onsubmit="handleProductSubmit(event)"><input type="hidden" id="prodId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Title</label><input type="text" id="prodTitle" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Category</label><select id="prodCat" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="hosting">Hosting</option><option value="vps">VPS</option><option value="domain">Domain</option><option value="game">Game Server</option><option value="dedicated">Dedicated</option><option value="other">Other</option></select></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Price (IDR)</label><input type="number" id="prodPrice" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Stock</label><input type="number" id="prodStock" required min="0" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Image URL</label><input type="url" id="prodImage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Description</label><textarea id="prodDesc" required rows="2" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Features (koma)</label><textarea id="prodFeatures" rows="3" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Icon</label><input type="text" id="prodIcon" placeholder="fa-server" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="flex justify-end gap-3 mt-6"><button type="button" onclick="closeProductModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Cancel</button><button type="submit" class="px-6 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Save</button></div></div></form></div></div></div>
+  <div id="partnerModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closePartnerModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4 max-h-[90vh] overflow-y-auto"><h3 id="partnerModalTitle" class="text-xl font-bold text-white mb-6">Add Partner</h3><form id="partnerForm" onsubmit="handlePartnerSubmit(event)"><input type="hidden" id="ptId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nama</label><input type="text" id="ptName" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Logo URL</label><input type="url" id="ptLogo" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Category</label><select id="ptCat" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><option value="infrastructure">Infrastructure</option><option value="payment">Payment</option><option value="security">Security</option><option value="cdn">CDN</option><option value="domain">Domain</option><option value="game">Game Panel</option><option value="other">Other</option></select></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Icon</label><input type="text" id="ptIcon" placeholder="fa-server" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Website</label><input type="url" id="ptWebsite" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Description</label><textarea id="ptDesc" rows="2" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm resize-none"></textarea></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closePartnerModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Cancel</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Save</button></div></div></form></div></div></div>
+  <div id="doneModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeDoneModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 class="text-xl font-bold text-white mb-2">Add Done Payment Manual</h3><p class="text-xs text-muted-3 mb-5"><i class="fas fa-info-circle mr-1"></i>Manual = tanpa link order.</p><form id="doneForm" onsubmit="handleDoneSubmit(event)"><input type="hidden" id="dpId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nick Buyer</label><input type="text" id="dpBuyer" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Produk</label><input type="text" id="dpProduct" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Paket</label><input type="text" id="dpPackage" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Harga</label><input type="number" id="dpPrice" required min="1" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div></div><div class="flex items-center gap-2"><input type="checkbox" id="dpVisible" checked class="accent-red-500 w-4 h-4"><label for="dpVisible" class="text-sm text-muted-2 cursor-pointer">Publik</label></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeDoneModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div></div></form></div></div></div>
+  <div id="qrisModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeQrisModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 id="qrisModalTitle" class="text-xl font-bold text-white mb-6">Tambah QRIS</h3><form id="qrisForm" onsubmit="handleQrisSubmit(event)"><input type="hidden" id="qrisEditId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Perintah</label><input type="text" id="qrisCommand" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-red-accent font-mono text-lg" placeholder="/pay1"><p class="text-[10px] text-muted-4 mt-1">Harus diawali <code class="text-red-accent/60">/</code></p></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Label</label><input type="text" id="qrisLabel" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Gambar QRIS</label><div id="qrisFormPreview" class="hidden mb-3 p-3 rounded-xl bg-dark-bg border border-dark-border"><img id="qrisFormImg" class="max-h-40 mx-auto rounded-lg" alt="QRIS preview"></div><input type="file" id="qrisFormFile" accept="image/*" class="hidden"><button type="button" onclick="document.getElementById('qrisFormFile').click()" class="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-sm text-muted-2 hover:text-white hover:border-red-accent transition flex items-center justify-center gap-2"><i class="fas fa-upload"></i> Upload</button></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeQrisModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-red-accent hover:bg-red-bright text-white font-bold text-sm">Simpan</button></div></div></form></div></div></div>
+  <div id="adminModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeAdminModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 id="adminModalTitle" class="text-xl font-bold text-white mb-6">Tambah Admin</h3><form id="adminForm" onsubmit="handleAdminSubmit(event)"><input type="hidden" id="admId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Nama Lengkap</label><input type="text" id="admName" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div class="grid grid-cols-2 gap-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Umur</label><input type="number" id="admAge" required min="16" max="99" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Photo URL</label><input type="url" id="admPhoto" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm"><p class="text-[10px] text-muted-4 mt-1">Opsional</p></div></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Username Login</label><input type="text" id="admUsername" required class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm font-mono" placeholder="admin_raka"></div><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Password Login</label><input type="text" id="admPassword" required minlength="4" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-2.5 text-white text-sm font-mono" placeholder="passwordnya"></div><div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeAdminModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-gold-accent hover:bg-gold-bright text-black font-bold text-sm">Simpan</button></div></div></form></div></div></div>
+  <div id="warningModal" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 modal-backdrop" onclick="closeWarningModal()"></div><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md"><div class="bg-dark-card border border-dark-border rounded-2xl p-6 m-4"><h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i>Kirim Peringatan</h3><p id="warningTargetName" class="text-sm text-muted-2 mb-5">Untuk admin: -</p><form id="warningForm" onsubmit="handleWarningSubmit(event)"><input type="hidden" id="warnAdminId"><div class="space-y-4"><div><label class="block text-[10px] font-mono text-muted-3 mb-1 uppercase">Isi Peringatan</label><textarea id="warnText" required rows="4" class="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white text-sm resize-none" placeholder="Deskripsikan kesalahan..."></textarea></div><div class="flex justify-end gap-3"><button type="button" onclick="closeWarningModal()" class="px-4 py-2 rounded-lg border border-dark-border text-muted-2 text-sm">Batal</button><button type="submit" class="px-5 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-sm"><i class="fas fa-exclamation-triangle mr-1"></i>Kirim</button></div></div></form></div></div></div>
 
   <div id="orderDetailPanel" class="hidden fixed inset-0 z-40">
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeOrderDetail()"></div>
@@ -412,6 +304,12 @@
     const HT = { dashboard:'Owner Overview', products:'Product Management', orders:'Order Management', partners:'Partner Management', testimoni:'Moderasi Testimoni', donepayment:'Done Payment', admins:'Kelola Admin', warnings:'Riwayat Warnings', settings:'General Settings' };
     const TAB_KEYS = ['dashboard','products','orders','partners','testimoni','donepayment',null,'admins','warnings',null,'settings'];
 
+    // ============================================================
+    // PERBAIKAN: Cek session berdasarkan role 'owner'
+    // Owner login hardcoded di login.html — data diambil dari
+    // sessionStorage, BUKAN dari Firebase node 'owners/'
+    // (node itu tidak ada → u = null → kick out)
+    // ============================================================
     if (sessionStorage.getItem('kryonix_role') !== 'owner' || sessionStorage.getItem('kryonix_admin') !== 'granted') {
       window.location.href = 'login-admin.html';
     }
@@ -423,6 +321,18 @@
     let ownerData = {};
     let epc = {}, eptc = {}, edc = {}, eac = {}, pwVisible = {}, aTR = {}, cTF = 'all';
     let currentChatOrderId = null, unsubO = null, unsubC = null, pendingChatImage = null, cachedOD = {};
+
+    // Ambil data owner dari sessionStorage (bukan Firebase)
+    const ownerUid = sessionStorage.getItem('kryonix_uid');
+    if (!ownerUid) {
+      window.location.href = 'login-admin.html';
+    } else {
+      const ownerName = sessionStorage.getItem('kryonix_name') || 'Owner';
+      ownerData = { name: ownerName };
+      document.getElementById('headerName').textContent = ownerName;
+      const av = document.getElementById('headerAvatar');
+      av.textContent = ownerName.charAt(0).toUpperCase();
+    }
 
     function showToast(m, t) {
       t = t || 'success';
@@ -513,32 +423,14 @@
     };
     window.doLogout = function() { sessionStorage.clear(); window.location.href = 'login-admin.html'; };
 
-    const ownerUid = sessionStorage.getItem('kryonix_uid');
-    if (!ownerUid) {
-      window.location.href = 'login-admin.html';
-    } else {
-      document.getElementById('headerName').textContent = sessionStorage.getItem('kryonix_name') || 'Owner';
-      onValue(ref(db, 'owners/' + ownerUid), function(s) {
-        const u = s.val();
-        if (!u) { showToast('Akun tidak ditemukan.', 'error'); setTimeout(function(){ window.location.href = 'login-admin.html'; }, 1500); return; }
-        ownerData = u;
-        const av = document.getElementById('headerAvatar');
-        if (u.photoUrl) av.innerHTML = '<img src="' + esc(u.photoUrl) + '" class="w-full h-full rounded-full object-cover" alt="Owner">';
-        else av.textContent = (u.name || '?').charAt(0).toUpperCase();
-        document.getElementById('headerName').textContent = u.name || '-';
-      });
-    }
-
     function loadQris() {
       if (qrisSubscribed) return;
       qrisSubscribed = true;
       onValue(ref(db, 'settings/qris_commands'), function(s) {
         const r = s.val();
-        qC = {};
-        qR = {};
+        qC = {}; qR = {};
         if (r) Object.keys(r).forEach(function(id) {
-          const q = r[id];
-          qR[id] = q;
+          const q = r[id]; qR[id] = q;
           const c = (q.command || '').toLowerCase().trim();
           if (c) qC[c] = q;
         });
@@ -598,11 +490,7 @@
         document.getElementById('qrisEditId').value = eId || '';
         document.getElementById('qrisCommand').value = data.command || '';
         document.getElementById('qrisLabel').value = data.label || '';
-        if (data.image) {
-          qFD.image = data.image;
-          document.getElementById('qrisFormImg').src = data.image;
-          document.getElementById('qrisFormPreview').classList.remove('hidden');
-        }
+        if (data.image) { qFD.image = data.image; document.getElementById('qrisFormImg').src = data.image; document.getElementById('qrisFormPreview').classList.remove('hidden'); }
       }
     };
     window.closeQrisModal = function() { document.getElementById('qrisModal').classList.add('hidden'); };
@@ -614,11 +502,8 @@
     document.getElementById('qrisFormFile').addEventListener('change', async function(e) {
       const f = e.target.files[0];
       if (!f) return;
-      try {
-        qFD.image = await compressImage(f, 600, 0.6);
-        document.getElementById('qrisFormImg').src = qFD.image;
-        document.getElementById('qrisFormPreview').classList.remove('hidden');
-      } catch(er) { showToast(typeof er === 'string' ? er : 'Gagal.', 'error'); }
+      try { qFD.image = await compressImage(f, 600, 0.6); document.getElementById('qrisFormImg').src = qFD.image; document.getElementById('qrisFormPreview').classList.remove('hidden'); }
+      catch(er) { showToast(typeof er === 'string' ? er : 'Gagal.', 'error'); }
       e.target.value = '';
     });
     window.handleQrisSubmit = async function(e) {
@@ -658,38 +543,30 @@
       Object.values(p).forEach(function(x){ ts += (x.stock || 0); });
       document.getElementById('d-stat-products').textContent = tp;
       document.getElementById('d-stat-stock').textContent = ts;
-
       const to2 = Object.keys(o).length;
       let nr = 0;
       Object.values(o).forEach(function(x) {
         let last = false;
-        if (x.chat) {
-          const ck = Object.keys(x.chat);
-          if (ck.length > 0 && x.chat[ck[ck.length - 1]].sender === 'buyer') last = true;
-        }
+        if (x.chat) { const ck = Object.keys(x.chat); if (ck.length > 0 && x.chat[ck[ck.length - 1]].sender === 'buyer') last = true; }
         if (last || !x.chat || Object.keys(x.chat).length === 0) nr++;
       });
       document.getElementById('d-stat-orders').textContent = to2;
       document.getElementById('d-stat-pending').textContent = nr;
-
       let rev = 0, dc = 0;
       Object.values(dp).forEach(function(x){ rev += (x.price || 0); dc++; });
       document.getElementById('d-stat-revenue').textContent = 'Rp' + rev.toLocaleString('id-ID');
       document.getElementById('d-stat-dpcount').textContent = dc;
-
       const tt = Object.keys(t).length;
       let sr = 0, pn = 0;
       Object.values(t).forEach(function(x){ sr += (x.rating || 0); if (x.approved === false) pn++; });
       document.getElementById('d-stat-rating').textContent = tt > 0 ? (sr / tt).toFixed(1) : '0.0';
       document.getElementById('d-stat-testicount').textContent = tt;
       document.getElementById('d-stat-testi-pending').textContent = pn;
-
       const pc = Object.keys(pa).length;
       const pcc = {};
       Object.values(pa).forEach(function(x){ if (x.category) pcc[x.category] = (pcc[x.category] || 0) + 1; });
       document.getElementById('d-stat-partners').textContent = pc;
       document.getElementById('d-stat-partner-cats').textContent = Object.keys(pcc).map(function(c){ return c + ': ' + pcc[c]; }).join(', ') || '-';
-
       const ac = Object.keys(a).length;
       let ad = 0, totalW = 0;
       Object.values(a).forEach(function(x){ if (x.disabled) ad++; if (x.warnings) totalW += Object.keys(x.warnings).length; });
@@ -713,7 +590,6 @@
           re.appendChild(r);
         });
       }
-
       const se = document.getElementById('dashStockAlert');
       const ls = Object.keys(p).filter(function(k){ return (p[k].stock || 0) <= 5; }).map(function(k){ return {k:k,v:p[k]}; });
       if (!ls.length) se.innerHTML = '<div class="text-center text-muted-3 text-sm py-4"><i class="fas fa-check-circle text-green-500 mr-1"></i>Semua stok aman</div>';
@@ -747,10 +623,7 @@
         document.getElementById('prodDesc').value = data.description;
         document.getElementById('prodFeatures').value = (data.features || []).join(', ');
         document.getElementById('prodIcon').value = data.icon || '';
-      } else {
-        document.getElementById('productForm').reset();
-        document.getElementById('prodId').value = '';
-      }
+      } else { document.getElementById('productForm').reset(); document.getElementById('prodId').value = ''; }
     };
     window.closeProductModal = function() { document.getElementById('productModal').classList.add('hidden'); };
     window.handleProductSubmit = async function(e) {
@@ -767,14 +640,12 @@
     };
     window.deleteProduct = async function(id) {
       if (!confirm('Hapus produk ini?')) return;
-      try { await remove(ref(db, 'products/' + id)); showToast('Dihapus.'); }
-      catch(e) { showToast('Gagal.', 'error'); }
+      try { await remove(ref(db, 'products/' + id)); showToast('Dihapus.'); } catch(e) { showToast('Gagal.', 'error'); }
     };
     window.quickStock = async function(id, c, d2) {
       const n = c + d2;
       if (n < 0) return;
-      try { await update(ref(db, 'products/' + id), { stock:n }); showToast('Stok → ' + n); }
-      catch(e) { showToast('Gagal.', 'error'); }
+      try { await update(ref(db, 'products/' + id), { stock:n }); showToast('Stok → ' + n); } catch(e) { showToast('Gagal.', 'error'); }
     };
     document.getElementById('products-tbody').addEventListener('click', function(e) {
       const eb = e.target.closest('[data-pe]');
@@ -823,10 +694,7 @@
         document.getElementById('ptIcon').value = data.icon || '';
         document.getElementById('ptWebsite').value = data.website || '';
         document.getElementById('ptDesc').value = data.description || '';
-      } else {
-        document.getElementById('partnerForm').reset();
-        document.getElementById('ptId').value = '';
-      }
+      } else { document.getElementById('partnerForm').reset(); document.getElementById('ptId').value = ''; }
     };
     window.closePartnerModal = function() { document.getElementById('partnerModal').classList.add('hidden'); };
     window.handlePartnerSubmit = async function(e) {
@@ -842,8 +710,7 @@
     };
     window.deletePartner = async function(id) {
       if (!confirm('Hapus partner ini?')) return;
-      try { await remove(ref(db, 'partners/' + id)); showToast('Dihapus.'); }
-      catch(e) { showToast('Gagal.', 'error'); }
+      try { await remove(ref(db, 'partners/' + id)); showToast('Dihapus.'); } catch(e) { showToast('Gagal.', 'error'); }
     };
     document.getElementById('partners-tbody').addEventListener('click', function(e) {
       const eb = e.target.closest('[data-pce]');
@@ -897,8 +764,7 @@
       const filtered = cTF === 'all' ? sorted : cTF === 'pending' ? sorted.filter(function(i){ return i.v.approved === false; }) : sorted.filter(function(i){ return i.v.approved !== false; });
       if (!filtered.length) { tb.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-muted-3">Tidak ada data.</td></tr>'; return; }
       filtered.forEach(function(item) {
-        const t = item.v;
-        const k = item.k;
+        const t = item.v; const k = item.k;
         const isA = t.approved !== false;
         let sH = '';
         for (let i = 1; i <= 5; i++) sH += '<i class="fas fa-star text-[10px] ' + (i <= (t.rating || 0) ? 'text-yellow-400' : 'text-muted-4') + '"></i>';
@@ -915,8 +781,7 @@
     };
     window.deleteTesti = async function(id) {
       if (!confirm('Hapus testimoni ini?')) return;
-      try { await remove(ref(db, 'testimonials/' + id)); showToast('Dihapus.'); }
-      catch(e) { showToast('Gagal.', 'error'); }
+      try { await remove(ref(db, 'testimonials/' + id)); showToast('Dihapus.'); } catch(e) { showToast('Gagal.', 'error'); }
     };
     document.getElementById('testi-tbody').addEventListener('click', function(e) {
       const tb2 = e.target.closest('[data-tt]');
@@ -951,11 +816,7 @@
         document.getElementById('dpPackage').value = data.pkg || '';
         document.getElementById('dpPrice').value = data.price;
         document.getElementById('dpVisible').checked = data.visible !== false;
-      } else {
-        document.getElementById('doneForm').reset();
-        document.getElementById('dpId').value = '';
-        document.getElementById('dpVisible').checked = true;
-      }
+      } else { document.getElementById('doneForm').reset(); document.getElementById('dpId').value = ''; document.getElementById('dpVisible').checked = true; }
     };
     window.closeDoneModal = function() { document.getElementById('doneModal').classList.add('hidden'); };
     window.handleDoneSubmit = async function(e) {
@@ -971,13 +832,11 @@
       } catch(e2) { showToast('Gagal.', 'error'); }
     };
     window.toggleDoneVisible = async function(id, c) {
-      try { await update(ref(db, 'done_payments/' + id), { visible:!toBool(c) }); }
-      catch(e) { showToast('Gagal.', 'error'); }
+      try { await update(ref(db, 'done_payments/' + id), { visible:!toBool(c) }); } catch(e) { showToast('Gagal.', 'error'); }
     };
     window.deleteDone = async function(id) {
       if (!confirm('Hapus data ini?')) return;
-      try { await remove(ref(db, 'done_payments/' + id)); showToast('Dihapus.'); }
-      catch(e) { showToast('Gagal.', 'error'); }
+      try { await remove(ref(db, 'done_payments/' + id)); showToast('Dihapus.'); } catch(e) { showToast('Gagal.', 'error'); }
     };
     window.openDpChat = function(oId) { switchTab('orders'); setTimeout(function(){ openOrderDetail(oId); }, 150); };
     document.getElementById('dp-tbody').addEventListener('click', function(e) {
@@ -1001,8 +860,7 @@
       else {
         const sorted = Object.keys(raw).map(function(k){ return {k:k,val:raw[k]}; }).sort(function(a,b){ return (b.val.createdAt || 0) - (a.val.createdAt || 0); });
         sorted.forEach(function(item) {
-          const d = item.val;
-          const k = item.k;
+          const d = item.val; const k = item.k;
           total++; revenue += (d.price || 0);
           const vis = d.visible !== false;
           if (vis) visible++;
@@ -1031,8 +889,7 @@
       else {
         const sorted = Object.keys(raw).map(function(k){ return {k:k,val:raw[k]}; }).sort(function(a,b){ return (b.val.createdAt || 0) - (a.val.createdAt || 0); });
         sorted.forEach(function(item) {
-          const o = item.val;
-          const k = item.k;
+          const o = item.val; const k = item.k;
           let last = false;
           if (o.chat) { const ck = Object.keys(o.chat); if (ck.length > 0 && o.chat[ck[ck.length - 1]].sender === 'buyer') last = true; }
           if (last || !o.chat || Object.keys(o.chat).length === 0) nr++;
@@ -1079,7 +936,6 @@
       clearChatImage();
       hideDpForm();
       renderQrisQuickBar();
-
       unsubO = onValue(ref(db, 'orders/' + orderId), function(snap) {
         const o = snap.val();
         if (!o) { closeOrderDetail(); showToast('Order dihapus.', 'error'); return; }
@@ -1096,7 +952,6 @@
         document.getElementById('detailDate').textContent = fTime(o.createdAt);
         document.getElementById('detailStatus').value = o.status || 'pending';
       });
-
       unsubC = onValue(ref(db, 'orders/' + orderId + '/chat'), function(snap) {
         const c = document.getElementById('chatMessages');
         const raw = snap.val();
@@ -1124,8 +979,7 @@
     window.closeOrderDetail = function() {
       if (unsubO) { unsubO(); unsubO = null; }
       if (unsubC) { unsubC(); unsubC = null; }
-      currentChatOrderId = null;
-      cachedOD = {};
+      currentChatOrderId = null; cachedOD = {};
       document.getElementById('orderDetailPanel').classList.add('hidden');
       hideDpForm();
     };
@@ -1170,18 +1024,14 @@
           const q = qC[cmd];
           if (q && q.image) {
             await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), { sender:'admin', text:'💰 Pembayaran via ' + (q.label || cmd) + '. Scan QRIS:', image:q.image, timestamp:serverTimestamp() });
-            input.value = '';
-            clearChatImage();
-            showToast('QRIS terkirim!');
-            return;
+            input.value = ''; clearChatImage(); showToast('QRIS terkirim!'); return;
           }
         }
         const md = { sender:sender, timestamp:serverTimestamp() };
         if (text) md.text = text;
         if (img) md.image = img;
         await set(push(ref(db, 'orders/' + currentChatOrderId + '/chat')), md);
-        input.value = '';
-        clearChatImage();
+        input.value = ''; clearChatImage();
       } catch(e) { showToast('Gagal kirim.', 'error'); }
     };
     document.getElementById('chatInput').addEventListener('keydown', function(e) {
@@ -1220,10 +1070,7 @@
         document.getElementById('admPhoto').value = data.photoUrl || '';
         document.getElementById('admUsername').value = data.username;
         document.getElementById('admPassword').value = data.password;
-      } else {
-        document.getElementById('adminForm').reset();
-        document.getElementById('admId').value = '';
-      }
+      } else { document.getElementById('adminForm').reset(); document.getElementById('admId').value = ''; }
     };
     window.closeAdminModal = function() { document.getElementById('adminModal').classList.add('hidden'); };
     window.handleAdminSubmit = async function(e) {
@@ -1232,14 +1079,12 @@
       const username = document.getElementById('admUsername').value.trim();
       const password = document.getElementById('admPassword').value.trim();
       if (!username || !password) { showToast('Username & password wajib.', 'error'); return; }
-
       const snap = await get(ref(db, 'admins'));
       const existing = snap.val() || {};
       for (const k in existing) {
         if (k === id) continue;
         if ((existing[k].username || '').toLowerCase() === username.toLowerCase()) { showToast('Username sudah digunakan.', 'error'); return; }
       }
-
       const d = { name:document.getElementById('admName').value.trim(), age:parseInt(document.getElementById('admAge').value, 10), photoUrl:document.getElementById('admPhoto').value.trim() || null, username:username, password:password, disabled:false };
       try {
         if (id) { await update(ref(db, 'admins/' + id), d); showToast('Admin diupdate!'); }
@@ -1256,8 +1101,7 @@
     };
     window.deleteAdmin = async function(id) {
       if (!confirm('Hapus admin ini secara permanen?')) return;
-      try { await remove(ref(db, 'admins/' + id)); showToast('Admin dihapus.'); }
-      catch(e) { showToast('Gagal.', 'error'); }
+      try { await remove(ref(db, 'admins/' + id)); showToast('Admin dihapus.'); } catch(e) { showToast('Gagal.', 'error'); }
     };
     document.getElementById('admins-tbody').addEventListener('click', function(e) {
       const at = e.target.closest('[data-at]');
@@ -1280,8 +1124,7 @@
       if (!raw || !Object.keys(raw).length) { tb.innerHTML = '<tr><td colspan="7" class="text-center py-10 text-muted-3">Belum ada admin.</td></tr>'; updateDash(); return; }
       const sorted = Object.entries(raw).sort(function(a,b){ return (b[1].createdAt || 0) - (a[1].createdAt || 0); });
       sorted.forEach(function(entry) {
-        const k = entry[0];
-        const a = entry[1];
+        const k = entry[0]; const a = entry[1];
         eac[k] = { id:k, name:a.name, age:a.age, photoUrl:a.photoUrl, username:a.username, password:a.password, disabled:a.disabled };
         const wc = a.warnings ? Object.keys(a.warnings).length : 0;
         const photoH = a.photoUrl ? '<div class="relative flex-shrink-0"><img src="' + esc(a.photoUrl) + '" class="w-9 h-9 rounded-full object-cover border border-dark-border" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" alt="Admin"><div class="w-9 h-9 rounded-full bg-dark-bg border border-dark-border avatar-circle text-muted-3 text-sm absolute inset-0" style="display:none">' + esc((a.name || '?').charAt(0).toUpperCase()) + '</div></div>' : '<div class="w-9 h-9 rounded-full bg-dark-bg border border-dark-border avatar-circle text-muted-3 text-sm flex-shrink-0">' + esc((a.name || '?').charAt(0).toUpperCase()) + '</div>';
