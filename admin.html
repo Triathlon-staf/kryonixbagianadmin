@@ -507,9 +507,20 @@
       return order && (order.note || order.notes || order.message || order.requirement || order.requirements || order.description || '-');
     }
 
-    function getMessageEntries(chat) {
+    function getMessageEntries(chat, filterAdminId) {
+      var myId = filterAdminId || sessionStorage.getItem('kryonix_admin_id') || sessionStorage.getItem('admin_id') || null;
       return Object.keys(chat || {})
         .map(function (key) { return { id: key, data: chat[key] || {} }; })
+        .filter(function(e){
+          // Tampilkan semua pesan dari buyer + pesan yang memang untuk admin ini
+          var d = e.data;
+          if(d.sender === 'buyer'){
+            // Pesan buyer: tampilkan jika tidak ada targetAdminId, atau targetAdminId cocok
+            return !d.targetAdminId || !myId || d.targetAdminId === myId;
+          }
+          // Pesan dari admin: tampilkan semua (admin bisa lihat semua balasannya sendiri)
+          return true;
+        })
         .sort(function (a, b) { return nTs(a.data.timestamp) - nTs(b.data.timestamp); });
     }
 
@@ -633,7 +644,7 @@
       Object.keys(orders).forEach(function (key) {
         totalOrders += 1;
         const order = orders[key] || {};
-        const entries = getMessageEntries(order.chat);
+        const entries = getMessageEntries(order.chat); // filtered by current admin
         const last = entries.length ? entries[entries.length - 1].data : null;
         if (!last || last.sender === 'buyer') needReply += 1;
       });
@@ -917,6 +928,8 @@
       event.preventDefault();
       const id = document.getElementById('prodId').value;
       const cat = document.getElementById('prodCat').value;
+      const currentAdminName = sessionStorage.getItem('kryonix_admin_name') || sessionStorage.getItem('admin_name') || 'Admin';
+      const currentAdminId = sessionStorage.getItem('kryonix_admin_id') || sessionStorage.getItem('admin_id') || 'unknown';
       const data = {
         title: document.getElementById('prodTitle').value.trim(),
         category: cat,
@@ -933,10 +946,9 @@
           await update(ref(db, 'products/' + id), data);
           showToast('Produk diupdate!');
         } else {
-          // Saat tambah baru: simpan adminId (kryonix_uid = Firebase push key admin)
           data.createdAt = serverTimestamp();
-          data.adminId = sessionStorage.getItem('kryonix_uid') || '';
-          data.adminName = sessionStorage.getItem('kryonix_admin_name') || sessionStorage.getItem('kryonix_name') || 'Admin';
+          data.adminId = currentAdminId;
+          data.adminName = currentAdminName;
           await set(push(ref(db, 'products')), data);
           showToast('Produk ditambahkan!');
         }
@@ -1166,7 +1178,7 @@
 
     function renderChatMessages(chat) {
       const wrap = document.getElementById('chatMessages');
-      const entries = getMessageEntries(chat);
+      const entries = getMessageEntries(chat); // already filtered by admin ID inside getMessageEntries
       if (!entries.length) {
         wrap.innerHTML = '<div class="text-center text-muted-3 text-sm py-8">Kosong.</div>';
         return;
@@ -1362,10 +1374,12 @@
       }
 
       try {
+        const _myAdminId = sessionStorage.getItem('kryonix_admin_id') || sessionStorage.getItem('admin_id') || '';
         const payload = {
           sender: sender,
           text: text || '',
-          timestamp: serverTimestamp()
+          timestamp: serverTimestamp(),
+          adminId: _myAdminId
         };
         if (currentChatImage) {
           payload.image = currentChatImage.data;
@@ -1448,8 +1462,7 @@
       DD.products = raw || {};
       epc = {};
 
-      // kryonix_uid = Firebase push key admin (set saat login di login-admin.html)
-      const myAdminId = sessionStorage.getItem('kryonix_uid') || '';
+      const myAdminId = sessionStorage.getItem('kryonix_admin_id') || sessionStorage.getItem('admin_id') || null;
 
       let total = 0;
       let stock = 0;
@@ -1461,11 +1474,9 @@
       } else {
         Object.keys(raw).forEach(function (key) {
           const product = raw[key] || {};
-
-          // Produk lama tanpa adminId: tampilkan ke semua (backward compat)
-          // Produk baru dengan adminId: hanya tampilkan ke pemiliknya
-          if (product.adminId && product.adminId !== myAdminId) return;
-
+          // Hanya tampilkan produk milik admin ini
+          // Produk lama tanpa adminId tetap ditampilkan ke semua admin (backward compat)
+          if (product.adminId && myAdminId && product.adminId !== myAdminId) return;
           total += 1;
           stock += Number(product.stock || 0);
           if (Number(product.stock || 0) <= 0) empty += 1;
